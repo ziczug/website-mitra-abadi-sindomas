@@ -1,0 +1,13 @@
+id,name,category,brand,image,desc,origin,weight,cert
+1,Super Ring,snack,Oriental,assets/images/products/super-ring.png,"Makanan ringan berbentuk cincin dengan rasa keju yang gurih dan renyah. Favorit anak-anak dan dewasa.",Malaysia,60g,"Halal, BPOM"
+2,Cheese Balls,snack,Oriental,assets/images/products/cheese-balls.png,"Puff balls dengan rasa keju yang lezat, tekstur ringan dan crunchy. Snack populer dari Malaysia.",Malaysia,60g,"Halal, BPOM"
+3,Prawn Crackers,snack,Oriental,assets/images/products/prawn-crackers.png,"Kerupuk udang renyah dengan rasa seafood autentik. Cocok untuk camilan sehari-hari.",Malaysia,60g,"Halal, BPOM"
+4,Green Pea Snack,snack,Oriental,assets/images/products/green-pea.png,"Snack kacang polong hijau yang renyah dan gurih. Camilan sehat dan lezat.",Malaysia,60g,"Halal, BPOM"
+5,Potato Chips,snack,Jacker,assets/images/products/potato-chips.png,"Keripik kentang premium dengan bumbu original yang gurih. Dipotong tipis dan digoreng sempurna.",Malaysia,100g,"Halal, BPOM"
+6,Butter Cookies,biskuit,Zess,assets/images/products/butter-cookies.png,"Biskuit mentega premium dalam kemasan kaleng elegan. Berbagai bentuk dan varian rasa.",Malaysia,454g,"Halal, BPOM"
+7,Cream Crackers,biskuit,Zess,assets/images/products/cream-crackers.png,"Biskuit cream cracker klasik yang renyah dan gurih. Cocok untuk sarapan dan camilan.",Malaysia,350g,"Halal, BPOM"
+8,Chocolate Wafer,wafer,Jacker,assets/images/products/chocolate-wafer.png,"Wafer berlapis dengan krim coklat premium. Tekstur renyah dengan rasa coklat yang kaya.",Malaysia,150g,"Halal, BPOM"
+9,Vanilla Wafer Rolls,wafer,Jacker,assets/images/products/vanilla-wafer.png,"Wafer roll renyah dengan isian krim vanilla yang lembut. Bentuk stick yang mudah dinikmati.",Malaysia,120g,"Halal, BPOM"
+10,Swiss Roll Chocolate,kue,Fudo,assets/images/products/swiss-roll.png,"Swiss roll lembut dengan lapisan krim coklat. Kue gulung premium dengan tekstur moist.",Malaysia,18g x 24,"Halal, BPOM"
+11,Layer Cake Strawberry,kue,Fudo,assets/images/products/layer-cake.png,"Layer cake dengan krim strawberry yang lezat. Lapisan sponge cake lembut berlapis krim.",Malaysia,18g x 24,"Halal, BPOM"
+12,Tropical Fruit Juice,minuman,Oriental,assets/images/products/fruit-juice.png,"Jus buah tropis segar dengan rasa mangga alami. Dibuat dari konsentrat buah pilihan.",Malaysia,250ml,"Halal, BPOM"
