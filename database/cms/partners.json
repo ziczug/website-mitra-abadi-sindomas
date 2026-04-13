@@ -1,0 +1,527 @@
+[
+  {
+    "id": 1,
+    "name": "INDOGROSIR",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "FOODHALL",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "INDOMARET FRESH",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 4,
+    "name": "KLIK INDOMARET",
+    "category": "E-COMMERCE PLATFORM",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 5,
+    "name": "HYPERMART",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 6,
+    "name": "GRANDLUCKY",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 7,
+    "name": "INDOMARET POINT",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 8,
+    "name": "ALFA GIFT",
+    "category": "E-COMMERCE PLATFORM",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 9,
+    "name": "HERO",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 10,
+    "name": "BRASTAGI",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 11,
+    "name": "ALFAMART",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 12,
+    "name": "SHOPEE",
+    "category": "E-COMMERCE PLATFORM",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 13,
+    "name": "RAMAYANA",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 14,
+    "name": "HOKKY",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 15,
+    "name": "FAMILYMART",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 16,
+    "name": "TOKOPEDIA",
+    "category": "E-COMMERCE PLATFORM",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 17,
+    "name": "AZKO",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 18,
+    "name": "NAGA SWALAYAN",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 19,
+    "name": "LAWSON",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 20,
+    "name": "TIKTOK SHOP",
+    "category": "E-COMMERCE PLATFORM",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 21,
+    "name": "AEON",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 22,
+    "name": "SUZUYA",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 23,
+    "name": "CIRCLE K",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 24,
+    "name": "MR D.I.Y",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 25,
+    "name": "MAJU BERSAMA",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 26,
+    "name": "YOMART",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 27,
+    "name": "TIMEZONE",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 28,
+    "name": "BK",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 29,
+    "name": "K LIFE",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 30,
+    "name": "CINEMA XXI",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 31,
+    "name": "HARI HARI SWALAYAN",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 32,
+    "name": "K3 MART",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 33,
+    "name": "FLIX CINEMA",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 34,
+    "name": "IRIAN SUPERMARKET",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 35,
+    "name": "K STOP",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 36,
+    "name": "OH SOME",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 37,
+    "name": "BRAVO SUPERMARKET",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 38,
+    "name": "7 SEVEN DAYS",
+    "category": "CONVENIENCE STORE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 39,
+    "name": "KKV",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 40,
+    "name": "SAMUDRA SUPERMARKET",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 41,
+    "name": "MUMOSO",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 42,
+    "name": "CHANDRA SUPERMARKET",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 43,
+    "name": "FUN WORLD",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 44,
+    "name": "JM GROUP",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 45,
+    "name": "SANFU",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 46,
+    "name": "HAPPY HARVEST",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 47,
+    "name": "MINISO",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 48,
+    "name": "YOGYA GROUP",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 49,
+    "name": "IKEA",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 50,
+    "name": "DIAMOND",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 51,
+    "name": "RANCH MARKET",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 52,
+    "name": "RITA",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 53,
+    "name": "FARMERS MARKET",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 54,
+    "name": "HAPIMART",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 55,
+    "name": "YUMGO",
+    "category": "NATIONAL KEY ACCOUNT",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 56,
+    "name": "BORMA",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 57,
+    "name": "GRIYA",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 58,
+    "name": "MARKET CITY",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 59,
+    "name": "RUMAH BUAH",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 60,
+    "name": "TOTAL BUAH",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 61,
+    "name": "JAKARTA FRUIT MARKET",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 62,
+    "name": "ISTANA BUAH",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 63,
+    "name": "GRAND SWALAYAN",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 64,
+    "name": "ASIA TOSERBA",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 65,
+    "name": "ERAMART",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 66,
+    "name": "THE FRESH MARKET",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 67,
+    "name": "DUTA BUAH",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 68,
+    "name": "AEON HEALTH & BEAUTY",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 69,
+    "name": "SUPERHIRO",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 70,
+    "name": "BUDIMAN",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 71,
+    "name": "ASIEN",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 72,
+    "name": "MAXIM",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 73,
+    "name": "LOKA",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 74,
+    "name": "TOP BUAH SEGAR",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 75,
+    "name": "ALL FRESH",
+    "category": "MODERN TRADE",
+    "image": "",
+    "active": true
+  }
+]

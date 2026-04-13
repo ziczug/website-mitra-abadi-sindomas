@@ -1,0 +1,82 @@
+[
+  {
+    "key": "snack",
+    "title": "Makanan Ringan",
+    "icon": "fas fa-cookie-bite",
+    "desc": "Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring,",
+    "image": "assets/images/snacks.png",
+    "imageData": ""
+  },
+  {
+    "key": "biskuit",
+    "title": "Biskuit & Cookies",
+    "icon": "fas fa-cookie",
+    "desc": "Beragam biskuit, cream crackers, dan cookies premium dari brand internasional.",
+    "image": "assets/images/biscuits.png",
+    "imageData": ""
+  },
+  {
+    "key": "wafer",
+    "title": "Wafer",
+    "icon": "fas fa-bread-slice",
+    "desc": "Wafer coklat, vanilla, dan berbagai varian rasa dari produsen berkualitas.",
+    "image": "assets/images/wafers.png",
+    "imageData": ""
+  },
+  {
+    "key": "kue",
+    "title": "Kue & Pastry",
+    "icon": "fas fa-cake-candles",
+    "desc": "Swiss roll, layer cake, muffin dan berbagai kue kemasan premium.",
+    "image": "assets/images/cakes.png",
+    "imageData": ""
+  },
+  {
+    "key": "minuman",
+    "title": "Minuman",
+    "icon": "fas fa-glass-water",
+    "desc": "Berbagai minuman berkualitas termasuk yogurt, dan minuman rasa buah.",
+    "image": "assets/images/beverages.png",
+    "imageData": ""
+  },
+  {
+    "key": "permen",
+    "title": "Permen",
+    "icon": "fas fa-candy-cane",
+    "desc": "Berbagai macam permen dan manisan dengan rasa yang menyegarkan.",
+    "image": "assets/images/permen.png",
+    "imageData": ""
+  },
+  {
+    "key": "condiments",
+    "title": "Condiments & Sauces",
+    "icon": "fas fa-bottle-droplet",
+    "desc": "Saus, bumbu, dan bahan pelengkap makanan untuk menambah citarasa.",
+    "image": "assets/images/condiments.png",
+    "imageData": ""
+  },
+  {
+    "key": "noodle",
+    "title": "Instant Noodle",
+    "icon": "fas fa-bowl-food",
+    "desc": "Mie instan dengan berbagai pilihan rasa dari brand internasional terbaik.",
+    "image": "assets/images/noodle.png",
+    "imageData": ""
+  },
+  {
+    "key": "vegelicious",
+    "title": "Vegelicious",
+    "icon": "fas fa-leaf",
+    "desc": "Pilihan makanan sehat dan bernutrisi tinggi berbasis sayuran berkualitas.",
+    "image": "assets/images/vegelicious.png",
+    "imageData": ""
+  },
+  {
+    "key": "pudding",
+    "title": "Pudding",
+    "icon": "fas fa-ice-cream",
+    "desc": "Berbagai produk pudding premium dengan rasa yang lezat dan menyegarkan.",
+    "image": "assets/images/pudding.png",
+    "imageData": ""
+  }
+]

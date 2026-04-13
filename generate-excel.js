@@ -10,18 +10,48 @@ const path = require('path');
 // DATA PRODUK
 // ==========================================
 const products = [
-  { id: 1, name: "Super Ring", category: "snack", brand: "Oriental", image: "assets/images/products/super-ring.png", desc: "Makanan ringan berbentuk cincin dengan rasa keju yang gurih dan renyah. Favorit anak-anak dan dewasa.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 2, name: "Cheese Balls", category: "snack", brand: "Oriental", image: "assets/images/products/cheese-balls.png", desc: "Puff balls dengan rasa keju yang lezat, tekstur ringan dan crunchy. Snack populer dari Malaysia.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 3, name: "Prawn Crackers", category: "snack", brand: "Oriental", image: "assets/images/products/prawn-crackers.png", desc: "Kerupuk udang renyah dengan rasa seafood autentik. Cocok untuk camilan sehari-hari.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 4, name: "Green Pea Snack", category: "snack", brand: "Oriental", image: "assets/images/products/green-pea.png", desc: "Snack kacang polong hijau yang renyah dan gurih. Camilan sehat dan lezat.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 5, name: "Potato Chips", category: "snack", brand: "Jacker", image: "assets/images/products/potato-chips.png", desc: "Keripik kentang premium dengan bumbu original yang gurih. Dipotong tipis dan digoreng sempurna.", origin: "Malaysia", weight: "100g", cert: "Halal, BPOM" },
-  { id: 6, name: "Butter Cookies", category: "biskuit", brand: "Zess", image: "assets/images/products/butter-cookies.png", desc: "Biskuit mentega premium dalam kemasan kaleng elegan. Berbagai bentuk dan varian rasa.", origin: "Malaysia", weight: "454g", cert: "Halal, BPOM" },
-  { id: 7, name: "Cream Crackers", category: "biskuit", brand: "Zess", image: "assets/images/products/cream-crackers.png", desc: "Biskuit cream cracker klasik yang renyah dan gurih. Cocok untuk sarapan dan camilan.", origin: "Malaysia", weight: "350g", cert: "Halal, BPOM" },
-  { id: 8, name: "Chocolate Wafer", category: "wafer", brand: "Jacker", image: "assets/images/products/chocolate-wafer.png", desc: "Wafer berlapis dengan krim coklat premium. Tekstur renyah dengan rasa coklat yang kaya.", origin: "Malaysia", weight: "150g", cert: "Halal, BPOM" },
-  { id: 9, name: "Vanilla Wafer Rolls", category: "wafer", brand: "Jacker", image: "assets/images/products/vanilla-wafer.png", desc: "Wafer roll renyah dengan isian krim vanilla yang lembut. Bentuk stick yang mudah dinikmati.", origin: "Malaysia", weight: "120g", cert: "Halal, BPOM" },
-  { id: 10, name: "Swiss Roll Chocolate", category: "kue", brand: "Fudo", image: "assets/images/products/swiss-roll.png", desc: "Swiss roll lembut dengan lapisan krim coklat. Kue gulung premium dengan tekstur moist.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM" },
-  { id: 11, name: "Layer Cake Strawberry", category: "kue", brand: "Fudo", image: "assets/images/products/layer-cake.png", desc: "Layer cake dengan krim strawberry yang lezat. Lapisan sponge cake lembut berlapis krim.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM" },
-  { id: 12, name: "Tropical Fruit Juice", category: "minuman", brand: "Oriental", image: "assets/images/products/fruit-juice.png", desc: "Jus buah tropis segar dengan rasa mangga alami. Dibuat dari konsentrat buah pilihan.", origin: "Malaysia", weight: "250ml", cert: "Halal, BPOM" }
+  { id: 1, name: "Super Ring", category: "snack", brand: "Oriental", brand_logo: "assets/images/brands/oriental.png", image: "assets/images/products/super-ring.png", desc: "Snack Makanan ringan berbentuk cincin dengan rasa keju premium renyah di mulut. Snack keju yang gurih dan renyah.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 2, name: "Cheese Balls", category: "snack", brand: "Oriental", brand_logo: "assets/images/brands/oriental.png", image: "assets/images/products/cheese-balls.png", desc: "Puff balls dengan rasa keju yang lezat, tekstur ringan and crunchy. Snack populer dari Malaysia.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 3, name: "Prawn Crackers", category: "snack", brand: "Oriental", brand_logo: "assets/images/brands/oriental.png", image: "assets/images/products/prawn-crackers.png", desc: "Kerupuk udang renyah dengan rasa seafood autentik. Cocok untuk camilan sehari-hari.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 4, name: "Green Pea Snack", category: "snack", brand: "Oriental", brand_logo: "assets/images/brands/oriental.png", image: "assets/images/products/green-pea.png", desc: "Snack kacang polong hijau yang renyah dan gurih. Camilan sehat dan lezat.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 5, name: "Potato Chips", category: "snack", brand: "Jacker", brand_logo: "assets/images/brands/jacker.png", image: "assets/images/products/potato-chips.png", desc: "Keripik kentang premium dengan bumbu original yang gurih. Dipotong tipis dan digoreng sempurna.", origin: "Malaysia", weight: "100g", cert: "Halal, BPOM", info: "100g x 12 Cans | QTY: 12 Pcs | 0.054 m³/Ctn" },
+  { id: 6, name: "Butter Cookies", category: "biskuit", brand: "Zess", brand_logo: "assets/images/brands/zess.png", image: "assets/images/products/butter-cookies.png", desc: "Biskuit mentega premium dalam kemasan kaleng elegan. Berbagai bentuk dan varian rasa.", origin: "Malaysia", weight: "454g", cert: "Halal, BPOM", info: "454g x 12 Tins | QTY: 12 Pcs | 0.082 m³/Ctn" },
+  { id: 7, name: "Cream Crackers", category: "biskuit", brand: "Zess", brand_logo: "assets/images/brands/zess.png", image: "assets/images/products/cream-crackers.png", desc: "Biskuit cream cracker klasik yang renyah dan gurih. Cocok untuk sarapan dan camilan.", origin: "Malaysia", weight: "350g", cert: "Halal, BPOM", info: "350g x 24 Packs | QTY: 24 Pcs | 0.095 m³/Ctn" },
+  { id: 8, name: "Chocolate Wafer", category: "wafer", brand: "Jacker", brand_logo: "assets/images/brands/jacker.png", image: "assets/images/products/chocolate-wafer.png", desc: "Wafer berlapis dengan krim coklat premium. Tekstur renyah dengan rasa coklat yang kaya.", origin: "Malaysia", weight: "150g", cert: "Halal, BPOM", info: "150g x 24 Packs | QTY: 24 Pcs | 0.076 m³/Ctn" },
+  { id: 9, name: "Vanilla Wafer Rolls", category: "wafer", brand: "Jacker", brand_logo: "assets/images/brands/jacker.png", image: "assets/images/products/vanilla-wafer.png", desc: "Wafer roll renyah dengan isian krim vanilla yang lembut. Bentuk stick yang mudah dinikmati.", origin: "Malaysia", weight: "120g", cert: "Halal, BPOM", info: "120g x 24 Packs | QTY: 24 Pcs | 0.068 m³/Ctn" },
+  { id: 10, name: "Swiss Roll Chocolate", category: "kue", brand: "Fudo", brand_logo: "assets/images/brands/fudo.png", image: "assets/images/products/swiss-roll.png", desc: "Swiss roll lembut dengan lapisan krim coklat. Kue gulung premium dengan tekstur moist.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM", info: "432g (18g x 24) x 12 Boxes | QTY: 288 Pcs | 0.045 m³/Ctn" },
+  { id: 11, name: "Layer Cake Strawberry", category: "kue", brand: "Fudo", brand_logo: "assets/images/brands/fudo.png", image: "assets/images/products/layer-cake.png", desc: "Layer cake dengan krim strawberry yang lezat. Lapisan sponge cake lembut berlapis krim.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM", info: "432g (18g x 24) x 12 Boxes | QTY: 288 Pcs | 0.045 m³/Ctn" },
+  { id: 12, name: "Tropical Fruit Juice", category: "minuman", brand: "Oriental", brand_logo: "assets/images/brands/oriental.png", image: "assets/images/products/fruit-juice.png", desc: "Jus buah tropis segar dengan rasa mangga alami. Dibuat dari konsentrat buah pilihan.", origin: "Malaysia", weight: "250ml", cert: "Halal, BPOM", info: "250ml x 24 Tins | QTY: 24 Pcs | 0.032 m³/Ctn" }
+];
+
+// ==========================================
+// DATA MEREK (BRANDS) dengan Kategori
+// ==========================================
+const brands = [
+  { id: 1, name: "ORIENTAL", category: "snack,minuman", logo: "assets/logobrands/oriental.jpg" },
+  { id: 2, name: "JACKER", category: "snack,wafer", logo: "assets/logobrands/jacker.jpg" },
+  { id: 3, name: "FUDO", category: "kue", logo: "assets/logobrands/fudo.jpg" },
+  { id: 4, name: "ZESS", category: "biskuit", logo: "assets/logobrands/zess.jpg" },
+  { id: 5, name: "WIN2", category: "snack", logo: "assets/logobrands/win2.jpg" },
+  { id: 6, name: "KOLAKIDS", category: "snack", logo: "assets/logobrands/kolakids.jpg" },
+  { id: 7, name: "POTATO CRIPS", category: "snack", logo: "assets/logobrands/potato-crips.jpg" },
+  { id: 8, name: "BAKE STORY", category: "biskuit", logo: "assets/logobrands/bake-story.jpg" },
+  { id: 9, name: "TOMO", category: "snack", logo: "assets/logobrands/tomo.jpg" },
+  { id: 10, name: "IBUMIE", category: "snack", logo: "assets/logobrands/ibumie.jpg" },
+  { id: 11, name: "TELLY", category: "snack", logo: "assets/logobrands/telly.jpg" },
+  { id: 12, name: "VEGGILICIOUS", category: "snack", logo: "assets/logobrands/veggilicious.jpg" },
+  { id: 13, name: "A-TASTE", category: "biskuit", logo: "assets/logobrands/a-taste.jpg" },
+  { id: 14, name: "HUANG XIAO GU!", category: "snack", logo: "assets/logobrands/huang-xiao-gu.jpg" },
+  { id: 15, name: "VETRUE", category: "biskuit", logo: "assets/logobrands/vetrue.jpg" },
+  { id: 16, name: "HUI XIANG ZHAI ZI", category: "snack", logo: "assets/logobrands/hui-xiang-zhai-zi.jpg" },
+  { id: 17, name: "KISS DELICIAS", category: "snack", logo: "assets/logobrands/kiss-delicias.jpg" },
+  { id: 18, name: "YAMAMOTO KAWAHIRO", category: "snack", logo: "assets/logobrands/yamamoto-kawahiro.jpg" },
+  { id: 19, name: "MIKKU", category: "snack", logo: "assets/logobrands/mikku.jpg" },
+  { id: 20, name: "TAWANDANG", category: "snack", logo: "assets/logobrands/tawandang.jpg" },
+  { id: 21, name: "SWECCO", category: "biskuit", logo: "assets/logobrands/swecco.jpg" },
+  { id: 22, name: "XIDUODONG", category: "snack", logo: "assets/logobrands/xiduodong.jpg" },
+  { id: 23, name: "SHUANG-JIAO", category: "snack", logo: "assets/logobrands/shuang-jiao.jpg" },
+  { id: 24, name: "MASTER JH", category: "snack", logo: "assets/logobrands/master-jh.jpg" }
 ];
 
 // ==========================================
@@ -30,141 +60,76 @@ const products = [
 const wb = XLSX.utils.book_new();
 
 // ----- SHEET 1: DATA PRODUK -----
-const headers = ['id', 'name', 'category', 'brand', 'image', 'desc', 'origin', 'weight', 'cert'];
-const headerLabels = ['ID', 'Nama Produk', 'Kategori', 'Brand', 'Path Gambar', 'Deskripsi', 'Asal Negara', 'Berat/Ukuran', 'Sertifikasi'];
+const headers = ['id', 'name', 'category', 'brand', 'brand_logo', 'image', 'desc', 'origin', 'weight', 'cert', 'info'];
+const headerLabels = ['ID', 'Nama Produk', 'Kategori', 'Brand', 'Logo Brand (Path)', 'Path Gambar', 'Deskripsi', 'Asal Negara', 'Berat/Ukuran', 'Sertifikasi', 'Informasi Tambahan'];
 
 const wsData = [headerLabels];
 products.forEach(p => {
-  wsData.push([p.id, p.name, p.category, p.brand, p.image, p.desc, p.origin, p.weight, p.cert]);
+  wsData.push([p.id, p.name, p.category, p.brand, p.brand_logo, p.image, p.desc, p.origin, p.weight, p.cert, p.info]);
 });
 
 const ws = XLSX.utils.aoa_to_sheet(wsData);
-
-// Set column widths
 ws['!cols'] = [
-  { wch: 5 },   // ID
-  { wch: 24 },  // Nama Produk
-  { wch: 14 },  // Kategori
-  { wch: 14 },  // Brand
-  { wch: 45 },  // Path Gambar
-  { wch: 70 },  // Deskripsi
-  { wch: 14 },  // Asal Negara
-  { wch: 14 },  // Berat
-  { wch: 16 },  // Sertifikasi
+  { wch: 5 }, { wch: 24 }, { wch: 14 }, { wch: 14 }, { wch: 30 }, 
+  { wch: 45 }, { wch: 70 }, { wch: 14 }, { wch: 14 }, { wch: 16 }, { wch: 50 },
 ];
-
 XLSX.utils.book_append_sheet(wb, ws, 'Data Produk');
 
-// ----- SHEET 2: PANDUAN -----
+// ----- SHEET 2: DATA MEREK -----
+const brandHeaders = ['id', 'name', 'category', 'logo'];
+const brandHeaderLabels = ['ID', 'Nama Brand', 'Kategori Terkait', 'Logo Brand (Path)'];
+const wsBrandData = [brandHeaderLabels];
+brands.forEach(b => {
+  wsBrandData.push([b.id, b.name, b.category, b.logo]);
+});
+const wsBrands = XLSX.utils.aoa_to_sheet(wsBrandData);
+wsBrands['!cols'] = [
+  { wch: 5 }, { wch: 30 }, { wch: 20 }, { wch: 50 }
+];
+XLSX.utils.book_append_sheet(wb, wsBrands, 'Data Merek');
+
+// ----- SHEET 3: PANDUAN -----
 const guideData = [
-  ['📊 PANDUAN CMS PRODUK - PT MITRA ABADI SINDOMAS'],
+  ['📊 PANDUAN CMS - PT MITRA ABADI SINDOMAS'],
   [''],
-  ['CARA UPDATE PRODUK:'],
-  ['1. Edit data di sheet "Data Produk"'],
+  ['CARA UPDATE DATA:'],
+  ['1. Edit data di sheet "Data Produk" atau "Data Merek"'],
   ['2. Simpan file ini (Ctrl+S)'],
-  ['3. Buka file ini lagi, lalu Save As → CSV UTF-8 (Comma delimited) (*.csv)'],
-  ['4. Simpan dengan nama "produk.csv" di folder "database/"'],
-  ['5. Refresh halaman website untuk melihat perubahan'],
-  [''],
-  ['ALTERNATIF: Upload langsung di website'],
-  ['1. Buka halaman produk di browser'],
-  ['2. Klik tombol CSV (📊) di pojok kanan bawah'],
-  ['3. Pilih file CSV yang sudah di-export dari Excel'],
-  [''],
-  ['KOLOM YANG TERSEDIA:'],
-  ['Kolom', 'Keterangan', 'Contoh', 'Wajib?'],
-  ['id', 'Nomor urut unik produk', '1, 2, 3, ...', 'YA'],
-  ['name', 'Nama produk', 'Super Ring', 'YA'],
-  ['category', 'Kategori produk (huruf kecil)', 'snack, biskuit, wafer, kue, minuman', 'YA'],
-  ['brand', 'Nama brand/merek', 'Oriental, Jacker, Zess, Fudo', 'YA'],
-  ['image', 'Path file gambar (relatif)', 'assets/images/products/nama-file.png', 'YA'],
-  ['desc', 'Deskripsi produk', 'Makanan ringan yang lezat...', 'YA'],
-  ['origin', 'Negara asal produk', 'Malaysia', 'TIDAK'],
-  ['weight', 'Berat atau ukuran produk', '60g, 250ml, 18g x 24', 'TIDAK'],
-  ['cert', 'Sertifikasi produk', 'Halal, BPOM', 'TIDAK'],
-  [''],
-  ['KATEGORI YANG TERSEDIA:'],
-  ['Kode Kategori', 'Label di Website'],
-  ['snack', 'Makanan Ringan'],
-  ['biskuit', 'Biskuit'],
-  ['wafer', 'Wafer'],
-  ['kue', 'Kue & Pastry'],
-  ['minuman', 'Minuman'],
-  [''],
-  ['TIPS GAMBAR:'],
-  ['- Format: PNG dengan background transparan (direkomendasikan)'],
-  ['- Ukuran ideal: 500x500 pixel'],
-  ['- Simpan di folder: assets/images/products/'],
-  ['- Nama file: huruf kecil, gunakan strip (-) untuk spasi'],
-  ['  Contoh: cheese-balls.png, swiss-roll.png'],
+  ['3. Export sheet ke CSV:'],
+  ['   a. Sheet "Data Produk" -> Save As CSV UTF-8 dengan nama "produk.csv"'],
+  ['   b. Sheet "Data Merek" -> Save As CSV UTF-8 dengan nama "brands.csv"'],
+  ['4. Simpan kedua CSV di folder "database/"'],
+  ['5. Refresh website'],
   [''],
   ['PENTING:'],
-  ['- JANGAN ubah nama header/kolom di baris pertama sheet "Data Produk"'],
-  ['- Saat Save As CSV, pilih format "CSV UTF-8" agar karakter Indonesia tampil benar'],
-  ['- Header yang benar (huruf kecil): id,name,category,brand,image,desc,origin,weight,cert'],
+  ['- Logo Brand di sheet Produk akan mengambil dari folder "assets/images/brands/"'],
+  ['- Logo Brand di sheet Merek juga mengambil dari folder yang sama'],
+  ['- Di sheet Merek, kolom Kategori bisa diisi lebih dari satu (pisahkan dengan koma), misal: snack,wafer'],
+  ['- Kategori yang didukung: snack, biskuit, wafer, kue, minuman, permen, condiments, noodle, vegelicious'],
+  ['- Jika Logo kosong, website akan otomatis menampilkan Inisial Huruf Brand'],
 ];
 
 const wsGuide = XLSX.utils.aoa_to_sheet(guideData);
-wsGuide['!cols'] = [
-  { wch: 55 },
-  { wch: 40 },
-  { wch: 40 },
-  { wch: 12 },
-];
-
-// Merge cells for title
-wsGuide['!merges'] = [
-  { s: { r: 0, c: 0 }, e: { r: 0, c: 3 } },
-];
-
 XLSX.utils.book_append_sheet(wb, wsGuide, 'Panduan');
-
-// ----- SHEET 3: TEMPLATE TAMBAH PRODUK -----
-const templateData = [
-  ['TEMPLATE TAMBAH PRODUK BARU'],
-  ['Isi data di bawah, lalu copy-paste ke sheet "Data Produk"'],
-  [''],
-  headerLabels,
-  [13, 'Nama Produk Baru', 'snack', 'Nama Brand', 'assets/images/products/nama-file.png', 'Deskripsi produk di sini...', 'Malaysia', '100g', 'Halal, BPOM'],
-  ['', '', '', '', '', '', '', '', ''],
-  ['', '', '', '', '', '', '', '', ''],
-  ['', '', '', '', '', '', '', '', ''],
-  ['', '', '', '', '', '', '', '', ''],
-  ['', '', '', '', '', '', '', '', ''],
-];
-
-const wsTemplate = XLSX.utils.aoa_to_sheet(templateData);
-wsTemplate['!cols'] = ws['!cols'];
-wsTemplate['!merges'] = [
-  { s: { r: 0, c: 0 }, e: { r: 0, c: 8 } },
-  { s: { r: 1, c: 0 }, e: { r: 1, c: 8 } },
-];
-
-XLSX.utils.book_append_sheet(wb, wsTemplate, 'Template Tambah');
 
 // ==========================================
 // SAVE FILE
 // ==========================================
-const outputPath = path.join(__dirname, 'database', 'CMS_Produk_MitraAbadi.xlsx');
+const outputPath = path.join(__dirname, 'database', 'CMS_Mitra_Abadi.xlsx');
 XLSX.writeFile(wb, outputPath);
 console.log('✅ File Excel berhasil dibuat:', outputPath);
-console.log('📊 Total produk:', products.length);
 
-// Also regenerate CSV to ensure sync
-const csvHeaders = headers.join(',');
-const csvRows = products.map(p => {
-  return [
-    p.id,
-    p.name,
-    p.category,
-    p.brand,
-    p.image,
-    `"${p.desc}"`,
-    p.origin,
-    p.weight,
-    `"${p.cert}"`
-  ].join(',');
-});
-const csvContent = [csvHeaders, ...csvRows].join('\n') + '\n';
+// REGENERATE CSVs
+// --- produk.csv ---
+const csvContent = [headers.join(','), ...products.map(p => [
+  p.id, p.name, p.category, p.brand, p.brand_logo, p.image, `"${p.desc}"`, p.origin, p.weight, `"${p.cert}"`, `"${p.info}"`
+].join(','))].join('\n') + '\n';
 fs.writeFileSync(path.join(__dirname, 'database', 'produk.csv'), csvContent, 'utf-8');
-console.log('✅ File CSV juga di-regenerate untuk sinkronisasi');
+
+// --- brands.csv ---
+const brandCsvContent = [brandHeaders.join(','), ...brands.map(b => [
+  b.id, `"${b.name}"`, `"${b.category}"`, b.logo
+].join(','))].join('\n') + '\n';
+fs.writeFileSync(path.join(__dirname, 'database', 'brands.csv'), brandCsvContent, 'utf-8');
+
+console.log('✅ Database CSV (produk.csv & brands.csv) berhasil disinkronisasi.');

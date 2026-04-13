@@ -8,13 +8,18 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="assets/js/i18n-data.js"></script>
+  <script src="assets/js/i18n-engine.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="assets/js/image-fallback.js"></script>
   <style>
     /* ====== PRODUCT PAGE SPECIFIC STYLES ====== */
     .page-hero {
-      padding: 140px 0 80px;
+      padding: clamp(120px, 15vh, 160px) 0 clamp(80px, 10vh, 120px);
       background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
-      position: relative; overflow: hidden; text-align: center;
+      position: relative; text-align: center;
+      z-index: 1;
     }
     .page-hero::before {
       content: ''; position: absolute; inset: 0;
@@ -22,271 +27,1183 @@
                   radial-gradient(circle at 70% 80%, rgba(212,168,67,0.08) 0%, transparent 50%);
     }
     .page-hero .container { position: relative; z-index: 2; }
-    .page-hero h1 { font-size: clamp(32px, 5vw, 52px); color: var(--white); margin-bottom: 16px; }
-    .page-hero p { color: rgba(255,255,255,0.65); font-size: 17px; max-width: 600px; margin: 0 auto; }
+    .page-hero h1 { font-size: clamp(28px, 4.5vw, 42px); color: var(--white); margin-bottom: 12px; }
+    .page-hero p { color: rgba(255,255,255,0.65); font-size: 16px; max-width: 600px; margin: 0 auto; }
     .breadcrumb { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; font-size: 14px; }
     .breadcrumb a { color: var(--accent-light); }
     .breadcrumb span { color: rgba(255,255,255,0.4); }
+ 
+    /* ====== FILTER BAR WHITE GOLD LUXURY ====== */
+    .filter-section { 
+      padding: 60px 0 20px; 
+      background: #ffffff; 
+      position: relative;
+    }
+    .filter-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .search-wrapper-premium {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .search-wrapper-premium input {
+      width: 100%;
+      padding: 18px 28px 18px 64px;
+      background: #f9f9f9;
+      border: 1.5px solid #eaeaea;
+      border-radius: 100px;
+      color: #1a1a1a;
+      font-size: 15px;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .search-wrapper-premium input::placeholder {
+      color: #999;
+    }
+    .search-wrapper-premium input:focus {
+      border-color: #d4a843;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(212, 168, 67, 0.1);
+      outline: none;
+    }
+    .search-wrapper-premium i {
+      position: absolute;
+      left: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #d4a843;
+      font-size: 20px;
+      opacity: 0.8;
+    }
 
-    /* ====== FILTER BAR ====== */
-    .filter-section { padding: 0; position: relative; z-index: 10; }
-    .filter-bar {
-      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-      padding: 24px 32px; background: var(--white);
-      border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
-      margin-top: -40px; position: relative; z-index: 10;
-    }
-    .filter-bar .search-box {
-      flex: 1; min-width: 200px; position: relative;
-    }
-    .filter-bar .search-box input {
-      width: 100%; padding: 14px 20px 14px 48px; border-radius: 12px;
-      border: 1.5px solid var(--gray-200); font-size: 14px; font-family: 'Inter';
-      background: var(--gray-50); transition: var(--transition); outline: none;
-    }
-    .filter-bar .search-box input:focus {
-      border-color: var(--accent); background: var(--white);
-      box-shadow: 0 0 0 4px rgba(212,168,67,0.1);
-    }
-    .filter-bar .search-box i {
-      position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
-      color: var(--gray-400); font-size: 16px;
+    .tabs-carousel {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 0 60px;
     }
     .filter-tabs {
-      display: flex; gap: 8px; flex-wrap: wrap;
+      display: flex;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid #ffffff;
+      padding: 8px;
+      border-radius: 100px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
     }
+    .filter-tabs::-webkit-scrollbar { display: none; }
+    
+    .scroll-btn-premium {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: #ffffff;
+      border: 1px solid #ffffff;
+      border-radius: 50%;
+      color: #d4a843;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .scroll-btn-premium:hover {
+      background: #d4a843;
+      color: #ffffff;
+      border-color: #d4a843;
+      box-shadow: 0 8px 20px rgba(212, 168, 67, 0.3);
+    }
+    .scroll-btn-premium.prev { left: 0; }
+    .scroll-btn-premium.next { right: 0; }
+
     .filter-tab {
-      padding: 10px 22px; border-radius: 50px; font-size: 13px; font-weight: 600;
-      border: 1.5px solid var(--gray-200); background: var(--white); cursor: pointer;
-      transition: var(--transition); color: var(--text-secondary); font-family: 'Inter';
-      white-space: nowrap; display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      background: transparent;
+      border: 1.5px solid transparent;
+      color: #777777;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .filter-tab i { font-size: 14px; opacity: 0.7; transition: var(--transition); }
-    .filter-tab:hover i, .filter-tab.active i { opacity: 1; transform: scale(1.1); }
-    .filter-tab:hover { border-color: var(--accent); color: var(--accent-dark); }
+    .filter-tab i { font-size: 14px; opacity: 0.6; transition: 0.3s; }
+    .filter-tab:hover {
+      color: #1a1a1a;
+      background: rgba(0,0,0,0.03);
+    }
     .filter-tab.active {
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: var(--white); border-color: transparent;
-      box-shadow: 0 4px 15px rgba(212,168,67,0.3);
+      background: #ffffff;
+      color: #d4a843;
+      border-color: #d4a843;
+      box-shadow: 0 6px 18px rgba(212, 168, 67, 0.15);
     }
+    .filter-tab.active i { opacity: 1; color: #d4a843; }
     .results-info {
-      padding: 20px 0 0; font-size: 14px; color: var(--gray-600);
+      padding: 20px 0 0; font-size: 14px; color: #666666;
     }
-    .results-info strong { color: var(--primary); }
+    .results-info strong { color: #d4a843; }
+    .results-count-pill {
+      background: rgba(212, 168, 67, 0.08); color: #d4a843;
+      padding: 4px 14px; border-radius: 50px; font-weight: 800; font-size: 13px;
+      border: 1px solid rgba(212, 168, 67, 0.15);
+    }
 
     /* ====== PRODUCT CATALOG GRID ====== */
-    .catalog-section { padding: 48px 0 100px; background: var(--gray-50); }
+    .catalog-section { padding: 48px 0 100px; background: #ffffff; }
     .catalog-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 28px; margin-top: 24px;
     }
     .catalog-card {
-      background: var(--white); border-radius: var(--radius-lg); overflow: hidden;
-      border: 1px solid var(--gray-200); transition: var(--transition);
+      background: #ffffff; border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid #eaeaea; transition: var(--transition);
       cursor: pointer; position: relative;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .catalog-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
       border-color: var(--accent);
     }
     .catalog-card .card-image {
       position: relative; height: 240px; overflow: hidden;
-      background: var(--gray-50); display: flex; align-items: center; justify-content: center;
+      background: #fafafa; display: flex; align-items: center; justify-content: center;
       padding: 20px;
     }
     .catalog-card .card-image img {
       max-width: 100%; max-height: 100%; object-fit: contain;
       transition: transform 0.6s ease;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
     }
     .catalog-card:hover .card-image img { transform: scale(1.08); }
     .catalog-card .card-badge {
-      position: absolute; top: 16px; left: 16px;
-      padding: 5px 14px; border-radius: 50px; font-size: 11px;
-      font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+      position: absolute; top: 12px; left: 12px;
+      padding: 6px 14px; border-radius: 100px; font-size: 10px;
+      font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;
+      z-index: 2;
     }
-    .badge-snack { background: rgba(255,107,53,0.12); color: #FF6B35; }
-    .badge-biskuit { background: rgba(168,130,56,0.12); color: #A88238; }
-    .badge-wafer { background: rgba(139,90,43,0.12); color: #8B5A2B; }
-    .badge-kue { background: rgba(220,80,120,0.12); color: #DC5078; }
-    .badge-minuman { background: rgba(46,139,192,0.12); color: #2E8BC0; }
+    .badge-snack { background: rgba(255,107,53,0.1); color: #FF6B35; }
+    .badge-biskuit { background: rgba(168,130,56,0.1); color: #A88238; }
+    .badge-wafer { background: rgba(139,90,43,0.1); color: #8B5A2B; }
+    .badge-kue { background: rgba(220,80,120,0.1); color: #DC5078; }
+    .badge-minuman { background: rgba(46,139,192,0.1); color: #2E8BC0; }
+    .badge-permen { background: rgba(233,30,99,0.1); color: #E91E63; }
+    .badge-condiments { background: rgba(255,152,0,0.1); color: #FF9800; }
+    .badge-noodle { background: rgba(121,85,72,0.1); color: #795548; }
+    .badge-vegelicious { background: rgba(76,175,80,0.1); color: #4CAF50; }
+    .badge-pudding { background: rgba(162,89,255,0.1); color: #A259FF; }
+    
     .catalog-card .card-brand {
       position: absolute; top: 16px; right: 16px;
-      width: 36px; height: 36px; border-radius: 10px;
-      background: var(--primary); color: var(--accent-light);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--white); color: var(--primary);
       display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 14px; font-family: 'Inter';
+      font-weight: 900; font-size: 16px; font-family: 'Plus Jakarta Sans';
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      z-index: 5; border: 1.5px solid #eee;
+      overflow: hidden; transition: var(--transition);
     }
-    .catalog-card .card-body { padding: 24px; }
+    .catalog-card .card-brand img {
+      width: 70%; height: 70%; object-fit: contain;
+    }
+    .catalog-card:hover .card-brand { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .catalog-card .card-body { padding: 20px; }
     .catalog-card .card-body h3 {
-      font-family: 'Inter'; font-size: 17px; font-weight: 700;
-      color: var(--primary); margin-bottom: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700;
+      color: #1a1a1a; margin-bottom: 6px; line-height: 1.3;
     }
     .catalog-card .card-body .card-desc {
-      font-size: 13px; color: var(--gray-600); line-height: 1.6; margin-bottom: 16px;
+      font-size: 12px; color: #777; line-height: 1.5; margin-bottom: 16px;
+      display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; min-height: 36px;
     }
     .catalog-card .card-footer {
       display: flex; align-items: center; justify-content: space-between;
-      padding-top: 16px; border-top: 1px solid var(--gray-100);
+      padding-top: 12px; border-top: 1px solid #eee;
     }
     .catalog-card .card-footer .brand-name {
-      font-size: 12px; font-weight: 600; color: var(--accent-dark);
+      font-size: 11px; font-weight: 800; color: #888;
       letter-spacing: 0.5px; text-transform: uppercase;
     }
     .catalog-card .card-footer .detail-btn {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 600; color: var(--primary);
-      transition: var(--transition);
+      font-size: 12px; font-weight: 800; color: #b8860b;
+      transition: var(--transition-fast);
+      text-transform: uppercase; letter-spacing: 0.5px;
     }
-    .catalog-card:hover .card-footer .detail-btn { color: var(--accent-dark); }
-    .catalog-card .card-footer .detail-btn i { font-size: 11px; transition: var(--transition); }
-    .catalog-card:hover .card-footer .detail-btn i { transform: translateX(4px); }
+    .catalog-card:hover .card-footer .detail-btn { color: #8b6b06; }
+    .catalog-card .card-footer .detail-btn i { font-size: 10px; transition: var(--transition-fast); }
+    .catalog-card:hover .card-footer .detail-btn i { transform: translateX(3px); }
 
-    /* ====== MODAL ====== */
+    /* ====== SHOW MORE SECTION PREMIUM ====== */
+    .show-more-container {
+      margin-top: 80px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+    }
+    .show-more-container::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e0e0e0 20%, #e0e0e0 80%, transparent);
+      z-index: 0;
+    }
+    .btn-show-more {
+      position: relative;
+      z-index: 2;
+      background: #1a1a1a;
+      padding: 10px 28px;
+      border: 1.5px solid #1a1a1a;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .btn-show-more span {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+    .btn-show-more .btn-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      animation: arrowBounce 2s infinite ease-in-out;
+    }
+    @keyframes arrowBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
+    }
+    .btn-show-more:hover {
+      background: #ffffff;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(201, 168, 76, 0.2);
+      border-color: #1a1a1a;
+    }
+    .btn-show-more:hover span {
+      color: #1a1a1a;
+    }
+    .btn-show-more:hover .btn-icon {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+
+    /* Animation for new items */
+    .catalog-card.new-item {
+      animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== MODAL NEW DESIGN ====== */
     .modal-overlay {
       display: none; position: fixed; inset: 0; z-index: 9999;
-      background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
-      align-items: center; justify-content: center; padding: 24px;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(12px);
+      align-items: center; justify-content: center; padding: 20px;
     }
     .modal-overlay.active { display: flex; }
     .modal-content {
-      background: var(--white); border-radius: var(--radius-lg); max-width: 600px;
-      width: 100%; max-height: 90vh; overflow-y: auto;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.3); animation: fadeInUp 0.4s ease-out;
+      background: var(--white); border-radius: 24px; max-width: 520px;
+      width: 100%; max-height: 95vh; overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.4); animation: modalEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
-    .modal-image {
-      height: 300px; background: var(--gray-50); display: flex;
-      align-items: center; justify-content: center; padding: 40px; position: relative;
+    @keyframes modalEnter { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    
+    .modal-header {
+      background: #F8F8F8; height: 320px; display: flex; align-items: center; justify-content: center;
+      padding: 40px; position: relative; border-radius: 24px 24px 0 0;
     }
-    .modal-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .brand-logo-container {
+      position: absolute; top: 20px; left: 20px; width: 68px; height: 68px;
+      background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 10px; z-index: 5;
+    }
+    .brand-logo-container img { 
+      max-width: 80%; max-height: 80%; object-fit: contain; 
+    }
     .modal-close {
-      position: absolute; top: 16px; right: 16px; width: 40px; height: 40px;
-      border-radius: 50%; background: rgba(0,0,0,0.08); border: none; cursor: pointer;
+      position: absolute; top: 20px; right: 20px; width: 36px; height: 36px;
+      border-radius: 50%; background: rgba(0,0,0,0.05); border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: var(--gray-600); transition: var(--transition);
+      font-size: 16px; color: var(--gray-600); transition: var(--transition); z-index: 5;
     }
-    .modal-close:hover { background: rgba(0,0,0,0.15); }
+    .modal-close:hover { background: rgba(0,0,0,0.1); transform: rotate(90deg); }
+    .main-product-img { max-width: 100%; max-height: 100%; object-fit: contain; z-index: 1; }
+    
     .modal-body { padding: 32px; }
-    .modal-body .modal-badge {
-      display: inline-block; padding: 5px 14px; border-radius: 50px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
-      text-transform: uppercase; margin-bottom: 12px;
+    .category-pill {
+      display: inline-block; padding: 10px 30px; background: #FFD66B; color: var(--primary);
+      border-radius: 100px; font-weight: 700; font-size: 16px; margin-bottom: 24px;
     }
-    .modal-body h2 { font-family: 'Inter'; font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 12px; }
-    .modal-body .modal-brand { font-size: 14px; color: var(--accent-dark); font-weight: 600; margin-bottom: 16px; }
-    .modal-body .modal-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; }
-    .modal-body .modal-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .modal-body .spec-item {
-      padding: 16px; background: var(--gray-50); border-radius: 12px;
-      text-align: center;
+    .brand-info {
+      display: flex; align-items: center; gap: 8px; color: #A68A3A; font-weight: 700;
+      font-size: 14px; margin-bottom: 12px;
     }
-    .modal-body .spec-item .spec-label { font-size: 11px; color: var(--gray-600); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .modal-body .spec-item .spec-value { font-size: 15px; font-weight: 700; color: var(--primary); }
-    .modal-body .wa-btn {
+    .modal-desc { color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+    
+    .spec-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
+    }
+    .spec-card {
+      background: #F5F5F5; border-radius: 12px; padding: 16px; text-align: center;
+    }
+    .spec-card .label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; font-weight: 600; }
+    .spec-card .value { font-size: 15px; font-weight: 700; color: var(--primary); }
+    
+    .info-box {
+      background: #F5F5F5; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px;
+    }
+    .info-box .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; font-weight: 700; }
+    .info-box .value { font-size: 14px; font-weight: 700; color: var(--primary); line-height: 1.5; }
+    
+    .wa-btn {
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      width: 100%; padding: 16px; margin-top: 24px; border-radius: 14px;
+      width: 100%; padding: 16px; border-radius: 12px;
       background: #25D366; color: var(--white); font-weight: 700; font-size: 15px;
-      border: none; cursor: pointer; font-family: 'Inter'; transition: var(--transition);
+      border: none; cursor: pointer; transition: var(--transition);
     }
-    .modal-body .wa-btn:hover { background: #1DA851; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.35); }
+    .wa-btn:hover { background: #1DA851; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(37,211,102,0.3); }
 
-    /* ====== NO RESULTS ====== */
-    .no-results {
-      text-align: center; padding: 80px 24px; display: none;
+    /* IMAGE PLACEHOLDER */
+    .img-placeholder {
+      width: 100%; height: 100%; background: #eee; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; color: #aaa; border: 2px dashed #ddd; border-radius: 8px; gap: 8px;
     }
-    .no-results.show { display: block; }
-    .no-results .icon { font-size: 64px; margin-bottom: 16px; opacity: 0.3; }
-    .no-results h3 { font-family: 'Inter'; font-size: 20px; color: var(--gray-600); margin-bottom: 8px; }
-    .no-results p { font-size: 14px; color: var(--gray-400); }
+    .img-placeholder i { font-size: 32px; }
+    .img-placeholder span { font-size: 12px; font-weight: 600; text-transform: uppercase; }
+
+    /* ====== NO RESULTS & EMPTY STATE ====== */
+    .no-results {
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 80px 40px; background: #f9f9f9;
+      border-radius: var(--radius-lg); border: 1.5px dashed #ddd;
+      margin-bottom: 40px; animation: fadeIn 0.5s ease;
+    }
+    .no-results.active { display: flex; }
+    
+    .no-results .icon {
+      width: 80px; height: 80px; background: #f0f0f0;
+      color: #b8860b; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 32px; margin-bottom: 24px; border: 2px solid #e0e0e0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .no-results h3 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+    .no-results p { font-size: 14px; color: #777; max-width: 320px; margin: 0 auto 24px; }
+    .no-results .btn-reset {
+      padding: 12px 24px; background: #1a1a1a; color: #fff;
+      border-radius: 12px; font-weight: 600; font-size: 14px;
+      border: none; cursor: pointer; transition: var(--transition);
+    }
+    .no-results .btn-reset:hover { background: var(--accent); color: var(--primary); transform: translateY(-2px); }
+
+    /* ====== SECTION TITLES PREMIUM ====== */
+    .section-title-premium {
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .section-title-premium h2 {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 800;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .section-title-premium .title-accent {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 16px;
+      border-radius: 50px;
+    }
+    .section-title-premium p {
+      font-size: 14px;
+      color: #777;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .results-info { 
+      font-size: 14px; color: #666666; margin-bottom: 20px; 
+      font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 12px;
+    }
+    .results-info strong { color: #d4a843; font-weight: 700; }
+    .results-count-pill {
+      background: rgba(212, 168, 67, 0.08); padding: 4px 12px; border-radius: 50px;
+      font-weight: 700; font-size: 12px; color: #d4a843;
+      border: 1px solid rgba(212, 168, 67, 0.15);
+    }
+    
+    .catalog-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1.5px solid #ffffff;
+    }
+
+    /* ====== CATALOG LAYOUT & SIDEBAR ====== */
+    .catalog-layout {
+      display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start;
+    }
+    .catalog-main { min-width: 0; }
+    .filter-sidebar {
+      background: #ffffff; padding: 32px; border-radius: var(--radius-lg);
+      border: 1px solid #eaeaea; position: sticky; top: 100px;
+      transition: var(--transition); z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .sidebar-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1.5px solid #ffffff;
+    }
+    .sidebar-header h3 { font-size: 18px; font-weight: 700; color: #1a1a1a; margin: 0; }
+    .sidebar-header i { color: #b8860b; font-size: 18px; opacity: 0.8; }
+
+    .sidebar-close {
+      display: none;
+      width: 40px; height: 40px;
+      border-radius: 50%; background: #f0f0f0; border: none;
+      align-items: center; justify-content: center;
+      font-size: 18px; color: #1a1a1a; cursor: pointer;
+      transition: var(--transition);
+    }
+    .sidebar-close:hover { background: #e0e0e0; color: #b8860b; transform: rotate(90deg); }
+
+    .filter-group { margin-bottom: 24px; }
+    .filter-group label {
+      display: block; font-size: 13px; font-weight: 600; color: #b8860b;
+      margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .select-wrapper { position: relative; width: 100%; }
+    .select-wrapper select {
+      width: 100%; padding: 12px 16px; border-radius: 12px;
+      border: 1.5px solid #e0e0e0; background: #f9f9f9;
+      font-size: 14px; color: #1a1a1a; font-family: 'Inter'; font-weight: 500;
+      appearance: none; cursor: pointer; outline: none; transition: var(--transition);
+    }
+    .select-wrapper select:focus { border-color: #b8860b; }
+    .select-wrapper i {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      font-size: 12px; color: #b8860b; pointer-events: none;
+    }
+    
+    .mobile-filter-footer { display: none; margin-top: 24px; }
+    .btn-filter-mobile {
+      display: none; align-items: center; gap: 8px; width: 100%;
+      padding: 12px; background: #fff; border: 1.5px solid #ddd;
+      border-radius: 12px; font-weight: 700; color: #1a1a1a;
+      margin-bottom: 20px; cursor: pointer; transition: var(--transition);
+    }
+
+    @media (max-width: 1024px) {
+      .catalog-layout { grid-template-columns: 1fr; gap: 20px; }
+      .filter-sidebar {
+        position: fixed; top: 0; left: -100%; width: 300px; height: 100vh;
+        border-radius: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow-y: auto;
+        opacity: 0; visibility: hidden; z-index: 2000;
+        background: #fff;
+      }
+      .filter-sidebar.active { left: 0; opacity: 1; visibility: visible; }
+      .sidebar-close { display: flex; }
+      .mobile-filter-footer { display: block; }
+      .btn-filter-mobile { display: flex; justify-content: center; }
+    }
 
     @media (max-width: 768px) {
-      .filter-bar { flex-direction: column; padding: 20px; }
-      .filter-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
-      .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+      .filter-section { padding: 30px 0 10px; }
+      .filter-container { gap: 16px; }
+      .search-wrapper-premium input { padding: 12px 20px 12px 48px; font-size: 14px; }
+      .tabs-carousel { padding: 0 35px; }
+      .scroll-btn-premium { width: 32px; height: 32px; font-size: 12px; }
+      .filter-tab { padding: 8px 18px; font-size: 12px; }
+      .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+      .catalog-card .card-brand { 
+        width: 32px; height: 32px; top: 12px; right: 12px; font-size: 13px; 
+        box-shadow: 0 3px 8px rgba(0,0,0,0.05); 
+      }
+      .catalog-card .card-brand img { padding: 0; }
       .modal-image { height: 220px; }
       .modal-body .modal-specs { grid-template-columns: 1fr 1fr; }
+      .btn-show-more { padding: 12px 32px; font-size: 13px; }
     }
 
-    /* ====== ADMIN CSV UPLOAD ====== */
-    .csv-admin {
-      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+    /* Mobile specific padding overrides */
+    @media (max-width: 768px) {
+      .page-hero { padding: 100px 20px 60px; }
+      .filter-section { padding: 32px 0 0; }
+      .catalog-section { padding: 40px 0 60px; }
+      .filter-bar { padding: 20px; }
     }
-    .csv-btn {
-      width: 52px; height: 52px; border-radius: 16px;
-      background: linear-gradient(135deg, var(--primary), #1a1a2e);
-      color: var(--accent); border: 2px solid rgba(212,168,67,0.2);
-      cursor: pointer; font-size: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      transition: var(--transition);
-      display: flex; align-items: center; justify-content: center;
+
+    @media (max-width: 480px) {
+      .container { padding: 0 20px; }
     }
-    .csv-btn:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 30px rgba(212,168,67,0.3);
+
+    @media (max-width: 360px) {
+      .container { padding: 0 16px; }
+      .filter-bar { padding: 16px; }
+    }
+
+    /* ====== PRODUCT PAGE CUSTOM FOOTER ====== */
+    .produk-footer {
+      position: relative;
+      background: #080808;
+      overflow: hidden;
+    }
+
+    /* Wave decoration at top */
+    .produk-footer__wave {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      margin-top: -1px;
+      background: var(--dark);
+    }
+    .produk-footer__wave svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Main split layout */
+    .produk-footer__main {
+      display: grid;
+      grid-template-columns: 1.6fr auto 1fr;
+      min-height: 420px;
+      position: relative;
+    }
+
+    /* Map side */
+    .produk-footer__map-side {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    .produk-footer__map-side iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: none;
+      transform: scale(1);
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .produk-footer__map-side:hover iframe {
+      transform: scale(1.05);
+    }
+    /* Map overlay for seamless blend */
+    .produk-footer__map-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(8,8,8,0.1) 0%, transparent 40%, transparent 60%, rgba(8,8,8,0.2) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Diagonal Gold Divider */
+    .produk-footer__divider {
+      position: relative;
+      width: 3px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .produk-footer__divider-line {
+      position: absolute;
+      top: -20px;
+      bottom: -20px;
+      width: 2px;
+      background: linear-gradient(180deg, 
+        transparent 0%, 
+        rgba(201, 168, 76, 0.1) 10%,
+        var(--accent) 30%, 
+        var(--accent-light) 50%, 
+        var(--accent) 70%,
+        rgba(201, 168, 76, 0.1) 90%,
+        transparent 100%
+      );
+      transform: skewX(-3deg);
+    }
+    .produk-footer__divider-glow {
+      position: absolute;
+      top: 20%;
+      bottom: 20%;
+      width: 20px;
+      left: -9px;
+      background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+      filter: blur(4px);
+      animation: dividerPulse 3s ease-in-out infinite;
+    }
+    @keyframes dividerPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Info side */
+    .produk-footer__info-side {
+      background: linear-gradient(135deg, #0c0c0c 0%, #080808 50%, #0a0a0a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      position: relative;
+    }
+    /* Subtle radial glow on info side */
+    .produk-footer__info-side::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 30%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.04) 0%, transparent 70%);
+      transform: translate(50%, -50%);
+      pointer-events: none;
+    }
+
+    .produk-footer__info-content {
+      position: relative;
+      z-index: 1;
+      max-width: 440px;
+    }
+
+    .produk-footer__brand {
+      margin-bottom: 20px;
+    }
+    .produk-footer__logo {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(1.1);
+    }
+
+    .produk-footer__tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .produk-footer__office {
+      margin-bottom: 32px;
+    }
+    .produk-footer__office-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .produk-footer__office-label i {
+      font-size: 13px;
+    }
+    .produk-footer__city {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .produk-footer__address {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .produk-footer__branch-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-bottom: 1.5px solid transparent;
+      padding-bottom: 2px;
+      margin-top: 5px;
+    }
+    .produk-footer__branch-link:hover {
+      color: var(--white);
       border-color: var(--accent);
+      padding-left: 5px;
+      text-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
     }
-    .csv-tooltip {
-      position: absolute; bottom: 60px; right: 0; white-space: nowrap;
-      padding: 8px 14px; border-radius: 8px;
-      background: var(--primary); color: var(--accent-light);
-      font-size: 12px; font-weight: 600; font-family: 'Inter';
-      opacity: 0; transform: translateY(5px);
-      transition: all 0.3s ease; pointer-events: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .produk-footer__branch-link i { font-size: 12px; transition: transform 0.3s; }
+    .produk-footer__branch-link:hover i { transform: translateX(5px); }
+
+    /* Action buttons */
+    .produk-footer__actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
     }
-    .csv-admin:hover .csv-tooltip { opacity: 1; transform: translateY(0); }
-    .csv-toast {
-      position: fixed; top: 100px; left: 50%; transform: translateX(-50%) translateY(-20px);
-      padding: 16px 28px; border-radius: 14px; font-size: 14px; font-weight: 600;
-      font-family: 'Inter'; z-index: 10000; opacity: 0; transition: all 0.4s ease;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15); pointer-events: none;
-      display: flex; align-items: center; gap: 10px;
+    .produk-footer__wa-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border: 1.5px solid var(--accent);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(201, 168, 76, 0.05);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      width: 100%;
     }
-    .csv-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    .csv-toast.success { background: #10B981; color: white; }
-    .csv-toast.error { background: #EF4444; color: white; }
-    .csv-toast.info { background: var(--primary); color: var(--accent-light); }
+    .produk-footer__wa-btn:hover {
+      background: var(--accent);
+      color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(201, 168, 76, 0.3);
+    }
+
+    /* Luxury Compact Place Card */
+    .luxury-place-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .luxury-place-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .luxury-place-card:hover {
+      border-color: rgba(201, 168, 76, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    }
+    
+    .luxury-place-info {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .luxury-place-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+    .luxury-place-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .luxury-place-address {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      max-width: 320px;
+    }
+    .luxury-place-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .luxury-place-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 5px 12px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+    .luxury-place-rating .num {
+      font-weight: 800;
+      color: var(--white);
+      font-size: 13px;
+    }
+    .luxury-place-rating .stars {
+      color: #FFD700;
+      display: flex;
+      gap: 2px;
+      font-size: 10px;
+    }
+    .luxury-place-rating .count {
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 12px;
+    }
+    
+    .luxury-directions-btn {
+      width: 60px;
+      height: 60px;
+      background: var(--accent);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 30px rgba(201, 168, 76, 0.4);
+      flex-shrink: 0;
+      text-decoration: none;
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+    .luxury-directions-btn:hover {
+      background: var(--white);
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);
+    }
+    .luxury-directions-btn i {
+      transition: transform 0.4s;
+    }
+    .luxury-directions-btn:hover i {
+      transform: scale(1.1);
+    }
+
+    /* Bottom bar */
+    .produk-footer__bottom {
+      background: #060606;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+    }
+    .produk-footer__bottom-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .produk-footer__bottom p {
+      color: rgba(255,255,255,0.35);
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+    .produk-footer__socials {
+      display: flex;
+      gap: 8px;
+    }
+    .produk-footer__socials a {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 10px;
+      color: rgba(255,255,255,0.45);
+      font-size: 15px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .produk-footer__socials a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+    }
+
+    /* ====== PRODUCT FOOTER RESPONSIVE ====== */
+    @media (max-width: 968px) {
+      .produk-footer__main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .produk-footer__map-side {
+        min-height: 280px;
+      }
+      .produk-footer__divider {
+        width: 100%;
+        height: 3px;
+      }
+      .produk-footer__divider-line {
+        top: 0;
+        bottom: auto;
+        left: -20px;
+        right: -20px;
+        width: auto;
+        height: 2px;
+        transform: skewY(-1deg);
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          rgba(201, 168, 76, 0.1) 10%,
+          var(--accent) 30%, 
+          var(--accent-light) 50%, 
+          var(--accent) 70%,
+          rgba(201, 168, 76, 0.1) 90%,
+          transparent 100%
+        );
+      }
+      .produk-footer__divider-glow {
+        top: -9px;
+        bottom: auto;
+        left: 20%;
+        right: 20%;
+        width: auto;
+        height: 20px;
+        background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+        filter: blur(4px);
+      }
+      .produk-footer__info-side {
+        padding: 48px 24px;
+      }
+      .produk-footer__info-content {
+        max-width: 100%;
+        text-align: center;
+      }
+      .produk-footer__brand {
+        display: flex;
+        justify-content: center;
+      }
+      .produk-footer__tagline {
+        font-size: 13px;
+        line-height: 1.6;
+        text-align: center;
+        margin: 0 auto 24px;
+        color: rgba(255,255,255,0.5);
+      }
+      .produk-footer__office-label {
+        justify-content: center;
+        width: 100%;
+      }
+      .produk-footer__city {
+        text-align: center;
+      }
+      .produk-footer__actions {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .produk-footer__map-side {
+        min-height: 220px;
+      }
+      .produk-footer__info-side {
+        padding: 36px 20px;
+      }
+      .produk-footer__city {
+        font-size: 26px;
+      }
+      .produk-footer__actions {
+        flex-direction: column;
+      }
+      .luxury-place-card {
+        padding: 32px 24px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .luxury-place-label {
+        justify-content: center;
+      }
+      .luxury-place-title {
+        font-size: 19px;
+      }
+      .luxury-place-address {
+        padding-right: 0;
+        margin: 0 auto 16px;
+      }
+      .luxury-place-meta {
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .luxury-directions-btn {
+        position: static;
+        width: 100%;
+        height: 50px;
+        border-radius: 12px;
+        font-size: 18px;
+        margin-top: 10px;
+      }
+      .luxury-directions-btn::after {
+        content: 'PETUNJUK ARAH';
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        margin-left: 10px;
+      }
+      .luxury-directions-btn {
+        animation: pulseGoldMobile 2s infinite;
+      }
+      @keyframes pulseGoldMobile {
+        0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5); }
+        70% { box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+      }
+      .produk-footer__bottom-inner {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- ==================== NAVBAR ==================== -->
   <nav class="navbar" id="navbar">
+    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <div class="container">
       <a href="index.html" class="nav-logo">
         <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
       </a>
       <div class="nav-links" id="navLinks">
+        <button class="mobile-close" onclick="toggleNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="lang-dropdown mobile-only" id="langDropdownMobile">
+          <div class="lang-current" onclick="toggleLangDropdown(true)">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id">Indonesia</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="EN" class="flag-icon"> <span data-i18n="lang-en">English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">Mandarin</span>
+            </div>
+          </div>
+        </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="index.html#beranda" class="nav-item">Beranda</a>
-        <a href="index.html#tentang" class="nav-item">Tentang Kami</a>
-        <a href="produk.html" class="nav-item active">Produk</a>
-        <a href="index.html#distribusi" class="nav-item">Distribusi</a>
-        <a href="index.html#sertifikasi" class="nav-item">Sertifikasi</a>
+        <a href="index.html#beranda" class="nav-item" data-i18n="nav-home">Beranda</a>
+        <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
+        <a href="produk.html" class="nav-item active" data-i18n="nav-products">Produk</a>
+        <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
+        <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        
+        <div class="nav-social mobile-only" style="margin-top: 20px;">
+          <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Hubungi Kami">
+            <i class="fas fa-phone-alt"></i>
+          </a>
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
       </div>
       <div class="nav-actions">
-        <a href="index.html#kontak" class="nav-cta">Hubungi Kami</a>
+        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text" data-i18n="nav-contact">Hubungi Kami</span></a>
         <div class="search-wrapper" id="searchWrapper">
           <button class="search-toggle" id="searchToggle" aria-label="Open Search">
             <i class="fas fa-search"></i>
           </button>
           <div class="search-container" id="searchContainer">
-            <i class="fas fa-search search-icon-inside"></i>
-            <input type="text" placeholder="Cari di Mitra Abadi Sindomas" id="headerSearchInput">
-            <button class="search-close" id="searchClose" aria-label="Close Search">
-              <i class="fas fa-times"></i>
-            </button>
+            <div class="search-input-wrapper">
+              <i class="fas fa-search search-icon-inside"></i>
+              <input type="text" placeholder="Cari produk atau merek..." id="headerSearchInput" autocomplete="off" data-i18n="search-placeholder">
+            </div>
+            <div class="search-results" id="headerSearchResults">
+              <!-- Results will be injected here -->
+            </div>
           </div>
         </div>
-        <div class="lang-switch" id="langSwitch">
-          <div class="lang-indicator" id="langIndicator"></div>
-          <button class="lang-btn active" data-lang="id">
-            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> ID
-          </button>
-          <span class="lang-sep">|</span>
-          <button class="lang-btn" data-lang="en">
-            <img src="https://flagcdn.com/gb.svg" alt="EN" class="flag-icon"> ENG
-          </button>
+        <!-- Social icons moved to mobile menu only -->
+        <div class="lang-dropdown desktop-only" id="langDropdown">
+          <div class="lang-current" onclick="toggleLangDropdown()">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id-short">ID</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span>Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span>English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span>Mandarin</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mobile-toggle" id="mobileToggle" onclick="toggleNav()">
@@ -299,41 +1216,45 @@
 <section class="page-hero">
   <div class="container">
     <div class="breadcrumb">
-      <a href="index.html">Beranda</a>
+      <a href="index.html" data-i18n="prod-breadcrumb-home">Beranda</a>
       <span>/</span>
-      <span style="color:rgba(255,255,255,0.7)">Semua Produk</span>
+      <span style="color:rgba(255,255,255,0.7)" data-i18n="prod-breadcrumb-all">Semua Produk</span>
     </div>
-    <h1>Katalog Produk</h1>
-    <p>Temukan beragam produk makanan dan minuman berkualitas tinggi dari brand internasional terkemuka.</p>
+    <h1 data-i18n="prod-hero-title">Katalog Produk</h1>
+    <p data-i18n="prod-hero-desc">Temukan beragam produk makanan dan minuman berkualitas tinggi dari brand internasional terkemuka.</p>
   </div>
 </section>
 
 <!-- FILTER & CATALOG -->
 <section class="filter-section">
   <div class="container">
-    <div class="filter-bar">
-      <div class="search-box">
+    <div class="section-title-premium">
+      <h2 data-i18n="prod-category-title">Pilih Berdasarkan Kategori</h2>
+      <div class="title-accent"></div>
+      <p data-i18n="prod-category-subtitle">Temukan produk berkualitas dari berbagai kategori pilihan kami</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="filter-container">
+      <!-- Search Bar -->
+      <div class="search-wrapper-premium">
         <i class="fas fa-search"></i>
-        <input type="text" id="searchInput" placeholder="Cari produk..." oninput="filterProducts()">
+        <input type="text" id="searchInput" placeholder="Cari nama produk atau brand..." oninput="filterProducts()" data-i18n="prod-search-placeholder">
       </div>
-      <div class="filter-tabs" id="filterTabs">
-        <button class="filter-tab active" data-filter="all" onclick="setFilter('all', this)">
-          <i class="fas fa-th-large"></i> Semua
+
+      <!-- Categories Carousel -->
+      <div class="tabs-carousel">
+        <button class="scroll-btn-premium prev" id="scrollPrev" onclick="scrollTabs(-200)" aria-label="Scroll Left">
+          <i class="fas fa-chevron-left"></i>
         </button>
-        <button class="filter-tab" data-filter="snack" onclick="setFilter('snack', this)">
-          <i class="fas fa-cookie"></i> Makanan Ringan
-        </button>
-        <button class="filter-tab" data-filter="biskuit" onclick="setFilter('biskuit', this)">
-          <i class="fas fa-cookie-bite"></i> Biskuit
-        </button>
-        <button class="filter-tab" data-filter="wafer" onclick="setFilter('wafer', this)">
-          <i class="fas fa-layer-group"></i> Wafer
-        </button>
-        <button class="filter-tab" data-filter="kue" onclick="setFilter('kue', this)">
-          <i class="fas fa-cake-candles"></i> Kue & Pastry
-        </button>
-        <button class="filter-tab" data-filter="minuman" onclick="setFilter('minuman', this)">
-          <i class="fas fa-bottle-water"></i> Minuman
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-filter="all" onclick="setFilter('all', this)">
+            <i class="fas fa-th-large"></i> <span data-i18n="prod-filter-all">Semua</span>
+          </button>
+          <!-- Dynamic Categories injected by JS -->
+        </div>
+        <button class="scroll-btn-premium next" id="scrollNext" onclick="scrollTabs(200)" aria-label="Scroll Right">
+          <i class="fas fa-chevron-right"></i>
         </button>
       </div>
     </div>
@@ -342,94 +1263,298 @@
 
 <section class="catalog-section">
   <div class="container">
-    <div class="results-info" id="resultsInfo"></div>
-    <div class="catalog-grid" id="catalogGrid">
-      <!-- Products injected by JS -->
-    </div>
-    <div class="no-results" id="noResults">
-      <div class="icon"><i class="fas fa-box-open"></i></div>
-      <h3>Produk Tidak Ditemukan</h3>
-      <p>Coba ubah filter atau kata kunci pencarian Anda.</p>
+    <button class="btn-filter-mobile" onclick="toggleMobileSidebar()">
+      <i class="fas fa-filter"></i> Filter & Atur
+    </button>
+
+    <div class="catalog-layout">
+      <!-- SIDEBAR FILTER -->
+      <aside class="filter-sidebar">
+        <div class="sidebar-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <h3 data-i18n="prod-sidebar-title">Atur Filter</h3>
+            <i class="fas fa-sliders-h"></i>
+          </div>
+          <button class="sidebar-close" onclick="toggleMobileSidebar()" aria-label="Close Filter">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="filter-group">
+          <label for="sortSelect" data-i18n="prod-sort-label">Atur Urutan</label>
+          <div class="select-wrapper">
+            <select id="sortSelect" onchange="filterProducts()">
+              <option value="newest" data-i18n="prod-sort-newest">Terbaru</option>
+              <option value="alpha-asc" data-i18n="prod-sort-alpha-asc">Nama A - Z</option>
+              <option value="alpha-desc" data-i18n="prod-sort-alpha-desc">Nama Z - A</option>
+            </select>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label for="brandSelect" data-i18n="prod-brand-label">Merek</label>
+          <div class="select-wrapper">
+            <select id="brandSelect" onchange="filterProducts()">
+              <option value="all" data-i18n="prod-brand-all">-- Semua Merek --</option>
+              <!-- Brands injected by JS -->
+            </select>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+
+        <div class="mobile-filter-footer">
+          <button class="btn-primary" onclick="toggleMobileSidebar()" data-i18n="prod-btn-apply">Terapkan Filter</button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="catalog-main">
+        <div class="catalog-header">
+           <div class="results-info" id="resultsInfo" data-i18n="prod-results-found">
+             <strong>0</strong> produk ditemukan
+           </div>
+        </div>
+
+        <div class="no-results" id="noResults">
+          <div class="icon"><i class="fas fa-search"></i></div>
+          <h3>Produk Tidak Ditemukan</h3>
+          <p>Maaf, kami tidak menemukan produk yang sesuai dengan filter atau kata kunci Anda.</p>
+          <button class="btn-reset" onclick="resetFilters()">Reset Semua Filter</button>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid">
+          <!-- Products injected by JS -->
+        </div>
+
+        <!-- Show More Button Section -->
+        <div class="show-more-container" id="showMoreContainer" style="display: none;">
+          <button class="btn-show-more" id="btnShowMore" onclick="showMoreProducts()">
+            <span data-i18n="prod-btn-showmore">SELENGKAPNYA</span>
+            <div class="btn-icon">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- MODAL -->
+<!-- MODAL NEW DESIGN -->
 <div class="modal-overlay" id="productModal">
   <div class="modal-content">
-    <div class="modal-image">
-      <img id="modalImg" src="" alt="">
+    <div class="modal-header">
+      <div class="brand-logo-container" id="modalBrandLogoContainer">
+        <!-- Brand Logo injected here -->
+      </div>
       <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      <div id="modalMainImgContainer" style="height:100%; display:flex; align-items:center; justify-content:center;">
+        <!-- Product Image injected here -->
+      </div>
     </div>
     <div class="modal-body">
-      <div class="modal-badge" id="modalBadge"></div>
-      <h2 id="modalTitle"></h2>
-      <div class="modal-brand" id="modalBrand"></div>
+      <div class="category-pill" id="modalCategoryPill"></div>
+      
+      <div class="brand-info">
+        <i class="fas fa-tag"></i> Brand: <span id="modalBrandName"></span>
+      </div>
+      
       <div class="modal-desc" id="modalDesc"></div>
-      <div class="modal-specs" id="modalSpecs"></div>
-      <button class="wa-btn" onclick="window.open('https://wa.me/6281295001778?text=Halo, saya tertarik dengan produk ini','_blank')">
+      
+      <div class="spec-grid">
+        <div class="spec-card">
+          <div class="label">Asal</div>
+          <div class="value" id="specAsal"></div>
+        </div>
+        <div class="spec-card">
+          <div class="label">Berat</div>
+          <div class="value" id="specBerat"></div>
+        </div>
+        <div class="spec-card">
+          <div class="label">Sertifikasi</div>
+          <div class="value" id="specSertifikasi"></div>
+        </div>
+        <div class="spec-card">
+          <div class="label">Kategori</div>
+          <div class="value" id="specKategori" style="text-transform: uppercase;"></div>
+        </div>
+      </div>
+      
+      <div class="info-box">
+        <div class="label">Informasi</div>
+        <div class="value" id="modalInfo"></div>
+      </div>
+      
+      <button class="wa-btn" id="modalWaBtn" onclick="">
         <i class="fab fa-whatsapp"></i> Tanyakan Produk Ini
       </button>
     </div>
   </div>
 </div>
 
-<!-- Admin CSV Upload -->
-<div class="csv-admin" id="csvAdmin">
-  <div class="csv-tooltip">📊 Upload CSV Produk</div>
-  <button class="csv-btn" onclick="document.getElementById('csvFileInput').click()" title="Upload CSV Produk">
-    <i class="fas fa-file-csv"></i>
-  </button>
-  <input type="file" id="csvFileInput" accept=".csv" style="display:none" onchange="handleCSVUpload(event)">
-</div>
-<div class="csv-toast" id="csvToast"></div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-about">
-        <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-logo-img">
-        <p>Importir dan distributor produk makanan & minuman berkualitas tinggi dengan jaringan distribusi seluruh Indonesia.</p>
+  <!-- ==================== KATALOG MODAL ==================== -->
+  <div class="catalog-modal-overlay" id="catalogModal">
+    <div class="catalog-modal-container">
+      <div class="catalog-modal-header">
+        <div class="modal-info">
+          <i class="fas fa-file-pdf modal-icon"></i>
+          <div>
+            <h3>Katalog Produk 2026</h3>
+            <p>PT Mitra Abadi Sindomas</p>
+          </div>
+        </div>
+        <div class="modal-controls">
+          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog"
+            id="btnDownloadKatalog">
+            <i class="fas fa-download"></i> <span class="btn-text">Download Katalog</span>
+          </a>
+          <button class="modal-close-btn" onclick="closeKatalog()" aria-label="Close Modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
-      <div>
-        <h4>Navigasi</h4>
-        <ul>
-          <li><a href="index.html">Beranda</a></li>
-          <li><a href="index.html#tentang">Tentang Kami</a></li>
-          <li><a href="produk.html">Produk</a></li>
-          <li><a href="index.html#distribusi">Distribusi</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Produk</h4>
-        <ul>
-          <li><a href="#" onclick="setFilter('snack',document.querySelector('[data-filter=snack]'))">Makanan Ringan</a></li>
-          <li><a href="#" onclick="setFilter('biskuit',document.querySelector('[data-filter=biskuit]'))">Biskuit</a></li>
-          <li><a href="#" onclick="setFilter('wafer',document.querySelector('[data-filter=wafer]'))">Wafer</a></li>
-          <li><a href="#" onclick="setFilter('minuman',document.querySelector('[data-filter=minuman]'))">Minuman</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Kontak</h4>
-        <ul>
-          <li><a href="tel:+6281295001778"><i class="fas fa-phone" style="margin-right:8px;color:var(--accent)"></i>+62 812-9500-1778</a></li>
-          <li><a href="https://wa.me/6281295001778"><i class="fab fa-whatsapp" style="margin-right:8px;color:var(--accent)"></i>WhatsApp</a></li>
-        </ul>
+      <div class="catalog-modal-content"
+        style="background:#e5e7eb; overflow:hidden; display:flex; flex-direction:column; contain: content;">
+        <div class="pdf-loading" id="pdfLoading">
+          <div class="loader"></div>
+          <p>Sedang memuat katalog...</p>
+        </div>
+        <div id="pdfViewer" style="display:none; flex-direction:column; height:100%; width:100%;">
+          <div class="pdf-controls"
+            style="display:flex; justify-content:center; align-items:center; gap:15px; padding:12px; background:#111; color:#fff; flex-shrink:0; border-bottom:1px solid #333;">
+            <button id="pdfPrev" class="btn-primary" style="padding:6px 12px; font-size:14px;"><i
+                class="fas fa-chevron-left"></i> Prev</button>
+            <span style="font-weight:600; min-width:100px; text-align:center;">Halaman: <span id="pdfPageNum">1</span> /
+              <span id="pdfPageCount">?</span></span>
+            <button id="pdfNext" class="btn-primary" style="padding:6px 12px; font-size:14px;">Next <i
+                class="fas fa-chevron-right"></i></button>
+          </div>
+          <div style="flex-grow:1; overflow:auto; display:flex; justify-content:center; align-items:flex-start; padding:10px; background:#333;">
+            <canvas id="pdfCanvas"
+              style="box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width:100%; height:auto; display:block;"></canvas>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://wa.me/6281295001778"><i class="fab fa-whatsapp"></i></a>
+  </div>
+
+  <!-- PRODUCT PAGE CUSTOM FOOTER -->
+<footer class="produk-footer" id="produkFooter">
+  <!-- Main Footer Content -->
+  <div class="produk-footer__main">
+    <div class="produk-footer__map-side">
+      <iframe 
+        src="https://maps.google.com/maps?q=-6.152833431830808,106.69462406229&hl=id&z=16&output=embed&maptype=roadmap" 
+        allowfullscreen 
+        loading="lazy"
+        title="Lokasi PT Mitra Abadi Sindomas"
+      ></iframe>
+      <!-- Map overlay gradient -->
+      <div class="produk-footer__map-overlay"></div>
+    </div>
+
+    <!-- Diagonal Gold Divider -->
+    <div class="produk-footer__divider">
+      <div class="produk-footer__divider-glow"></div>
+    </div>
+
+    <div class="produk-footer__info-side">
+      <div class="produk-footer__info-content">
+        <div class="produk-footer__brand">
+          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="produk-footer__logo">
+        </div>
+        <p class="produk-footer__tagline">Distributor produk makanan & minuman berkualitas tinggi dari brand internasional terkemuka.</p>
+        
+        <!-- Luxury Location Card -->
+        <div class="luxury-place-card">
+          <div class="luxury-place-info">
+            <span class="luxury-place-label"><i class="fas fa-building"></i> Head Office</span>
+            <h3 class="luxury-place-title">PT Mitra Abadi Sindomas</h3>
+            <p class="luxury-place-address">Green Sedayu Bizpark Blok DM 11 No. 65, Jl. Daan Mogot Raya KM.18, Jakarta Barat 11840, Indonesia</p>
+            <div class="luxury-place-meta">
+              <div class="luxury-place-rating">
+                <span class="num">5.0</span>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="count">(48)</span>
+              </div>
+              <a href="https://maps.app.goo.gl/4BL2Duej9Yzwvrac8" target="_blank" class="produk-footer__branch-link" style="margin-top:0">
+                Lihat di Maps <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <a href="https://www.google.com/maps/dir//PT+Mitra+Abadi+Sindomas/@-6.1528334,106.6946241,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f7dba373809b:0x5e87600674984b93!2m2!1d106.6946241!2d-6.1528334" target="_blank" class="luxury-directions-btn" title="Petunjuk Arah">
+            <i class="fas fa-location-arrow"></i>
+          </a>
+        </div>
+
+        <div class="produk-footer__actions">
+          <a href="https://wa.me/6281295001778" target="_blank" class="produk-footer__wa-btn">
+            <i class="fab fa-whatsapp"></i> Hubungi Kami
+          </a>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="produk-footer__bottom">
+    <div class="produk-footer__bottom-inner">
+      <p>&copy; 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
     </div>
   </div>
 </footer>
 
 <script>
+// ==========================================
+// DYNAMIC CONTENT LOADER (from Admin Dashboard)
+// ==========================================
+(async function loadDynamicContent() {
+  async function getCMSData(fileKey, lsKey) {
+    try {
+      const resp = await fetch(`/database/cms/${fileKey}.json`);
+      if (resp.ok) {
+        const data = await resp.json();
+        if (data) {
+          localStorage.setItem(lsKey, JSON.stringify(data));
+          return data;
+        }
+      }
+    } catch (e) {}
+    try {
+      const stored = localStorage.getItem(lsKey);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return null;
+  }
+
+  const ci = await getCMSData('contact_info', 'mas_contact_info');
+  if (ci) {
+    try {
+      if (ci.instagram) document.querySelectorAll('a[href*="instagram.com"]').forEach(a => { a.href = ci.instagram; });
+      if (ci.whatsapp) document.querySelectorAll('a[href*="wa.me"]').forEach(a => { a.href = 'https://wa.me/' + ci.whatsapp; });
+      if (ci.phone) document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = 'tel:' + ci.phone.replace(/\s/g, ''); });
+    } catch (e) {}
+  }
+
+  const fi = await getCMSData('footer_info', 'mas_footer_info');
+  if (fi) {
+    try {
+      const footerDesc = document.querySelector('.produk-footer__tagline');
+      if (footerDesc && fi.desc) footerDesc.textContent = fi.desc;
+      const footerCopy = document.querySelector('.produk-footer__bottom-inner p');
+      if (footerCopy && fi.year && fi.company) footerCopy.innerHTML = `&copy; ${fi.year} ${fi.company}. All rights reserved.`;
+    } catch (e) {}
+  }
+})();
+
 // Elements
 const navbar = document.getElementById('navbar');
 const navLinks = document.getElementById('navLinks');
@@ -437,43 +1562,132 @@ const mobileToggle = document.getElementById('mobileToggle');
 const searchWrapper = document.getElementById('searchWrapper');
 const searchToggle = document.getElementById('searchToggle');
 const searchContainer = document.getElementById('searchContainer');
-const searchClose = document.getElementById('searchClose');
 const headerSearchInput = document.getElementById('headerSearchInput');
+const headerSearchResults = document.getElementById('headerSearchResults');
 
-// --- Search Logic ---
-searchToggle.addEventListener('click', (e) => {
-  e.stopPropagation();
-  searchContainer.classList.add('active');
-  navLinks.classList.add('search-active');
-  searchToggle.style.opacity = '0';
-  headerSearchInput.focus();
+// ==========================================
+// KATALOG PDF VIEWER LOGIC
+// ==========================================
+let pdfDoc = null, pageNum = 1, pageIsRendering = false, pageNumIsPending = null;
+const scale = 1.5, canvas = document.getElementById('pdfCanvas'), ctx = canvas.getContext('2d');
+const catalogModal = document.getElementById('catalogModal');
+const pdfLoading = document.getElementById('pdfLoading');
+const pdfViewer = document.getElementById('pdfViewer');
+
+function renderPage(num) {
+  pageIsRendering = true;
+  pdfDoc.getPage(num).then(page => {
+    // Auto scale to fit mobile elegantly
+    const parentWidth = canvas.parentElement.clientWidth - 20;
+    const initialViewport = page.getViewport({ scale: 1 });
+    let currentScale = 1.5; // base scale
+
+    if (initialViewport.width * currentScale > parentWidth) {
+      currentScale = parentWidth / initialViewport.width;
+    }
+
+    const viewport = page.getViewport({ scale: currentScale });
+    canvas.height = viewport.height; canvas.width = viewport.width;
+    const renderCtx = { canvasContext: ctx, viewport };
+    page.render(renderCtx).promise.then(() => {
+      pageIsRendering = false;
+      if (pageNumIsPending !== null) { renderPage(pageNumIsPending); pageNumIsPending = null; }
+    });
+    document.getElementById('pdfPageNum').textContent = num;
+  });
+}
+function queueRenderPage(num) { if (pageIsRendering) pageNumIsPending = num; else renderPage(num); }
+
+document.getElementById('pdfPrev')?.addEventListener('click', () => {
+  if (pageNum <= 1) return;
+  pageNum--; queueRenderPage(pageNum);
+  document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
+});
+document.getElementById('pdfNext')?.addEventListener('click', () => {
+  if (pageNum >= pdfDoc.numPages) return;
+  pageNum++; queueRenderPage(pageNum);
+  document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
 });
 
-searchClose.addEventListener('click', (e) => {
+function openKatalog() {
+  catalogModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  if (!pdfDoc) {
+    pdfLoading.style.display = 'flex';
+    const savedKatalog = localStorage.getItem('mas_katalog_path') || 'Catalog PTMAS 2026_compressed.pdf';
+    document.getElementById('btnDownloadKatalog').href = 'database/asset-katalog/' + savedKatalog;
+    const loadingTask = pdfjsLib.getDocument('database/asset-katalog/' + savedKatalog);
+    loadingTask.promise.then(function (pdfDoc_) {
+      pdfDoc = pdfDoc_;
+      document.getElementById('pdfPageCount').textContent = pdfDoc.numPages;
+      pdfLoading.style.display = 'none'; pdfViewer.style.display = 'flex';
+      renderPage(pageNum);
+    }).catch(function (err) {
+      console.error("PDFJS Error: ", err);
+      pdfLoading.innerHTML = '<p>Gagal memuat katalog. Pastikan jalur file benar.</p>';
+    });
+  }
+}
+function closeKatalog() { catalogModal.classList.remove('active'); document.body.style.overflow = ''; }
+catalogModal?.addEventListener('click', (e) => { if (e.target === catalogModal) closeKatalog(); });
+
+// ==========================================
+// HEADER SEARCH LOGIC
+// ==========================================
+searchToggle?.addEventListener('click', (e) => {
   e.stopPropagation();
-  closeSearch();
+  const isActive = searchContainer.classList.toggle('active');
+  searchToggle.classList.toggle('active');
+  const icon = searchToggle.querySelector('i');
+  if (isActive) { icon.classList.replace('fa-search', 'fa-times'); headerSearchInput.focus(); }
+  else { closeSearch(); }
 });
 
+headerSearchInput?.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase().trim();
+  if (!query) { headerSearchResults.innerHTML = ''; return; }
+  const matches = products.filter(p => 
+    p.name.toLowerCase().includes(query) || 
+    (p.brand && p.brand.toLowerCase().includes(query)) ||
+    (p.category && p.category.toLowerCase().includes(query))
+  ).slice(0, 6);
+
+  if (matches.length === 0) {
+    headerSearchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i> Tidak ada produk ditemukan</div>';
+    return;
+  }
+  headerSearchResults.innerHTML = matches.map(p => `
+    <div class="search-result-item" onclick="handleHeaderSearchClick('${p.id}')">
+      <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img">
+      <div class="search-result-info">
+        <span class="search-result-title">${p.name}</span>
+        <span class="search-result-meta">${p.brand || ''} • ${p.category || ''}</span>
+      </div>
+    </div>
+  `).join('');
+});
+
+function handleHeaderSearchClick(id) { closeSearch(); openModal(parseInt(id)); }
 function closeSearch() {
   searchContainer.classList.remove('active');
-  navLinks.classList.remove('search-active');
-  searchToggle.style.opacity = '1';
-  headerSearchInput.value = '';
+  searchToggle?.classList.remove('active');
+  searchToggle?.querySelector('i')?.classList.replace('fa-times', 'fa-search');
+  headerSearchInput.value = ''; headerSearchResults.innerHTML = '';
 }
 
 document.addEventListener('click', (e) => {
-  if (!searchWrapper.contains(e.target) && searchContainer.classList.contains('active')) closeSearch();
+  if (searchWrapper && !searchWrapper.contains(e.target) && searchContainer.classList.contains('active')) closeSearch();
 });
-
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && searchContainer.classList.contains('active')) closeSearch();
+  if (e.key === 'Escape' && catalogModal.classList.contains('active')) closeKatalog();
 });
 
-// --- Navigation Indicators ---
+// ==========================================
+// NAVIGATION INDICATORS
+// ==========================================
 const navIndicator = document.getElementById('navIndicator');
 const navItems = document.querySelectorAll('.nav-item');
-const langIndicator = document.getElementById('langIndicator');
-const langBtns = document.querySelectorAll('.lang-btn');
 
 function updateIndicator(indicator, el) {
   if (!indicator || !el || window.innerWidth <= 768) {
@@ -484,90 +1698,68 @@ function updateIndicator(indicator, el) {
   indicator.style.width = `${el.offsetWidth}px`;
   indicator.style.left = `${el.offsetLeft}px`;
 }
-
 function initIndicators() {
-  const activeNavItem = document.querySelector('.nav-item.active') || navItems[2]; // Produk
-  const activeLangBtn = document.querySelector('.lang-btn.active') || langBtns[0];
+  const activeNavItem = document.querySelector('.nav-item.active') || navItems[2];
   updateIndicator(navIndicator, activeNavItem);
-  updateIndicator(langIndicator, activeLangBtn);
 }
-
 setTimeout(initIndicators, 300);
 window.addEventListener('resize', initIndicators);
-
 navItems.forEach(item => {
   item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
-  item.addEventListener('click', (e) => {
-    if (item.getAttribute('href').startsWith('#')) {
-      navItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      updateIndicator(navIndicator, item);
-    }
-  });
 });
-
 if (navLinks) {
   navLinks.addEventListener('mouseleave', () => {
     updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[2]);
   });
 }
-
-langBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    langBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    updateIndicator(langIndicator, btn);
-    langIndicator.style.transform = 'translateY(-50%) scale(0.95)';
-    setTimeout(() => langIndicator.style.transform = 'translateY(-50%) scale(1)', 150);
-  });
-});
-
 // --- Mobile Nav & Scroll Logic ---
+const navOverlay = document.getElementById('navOverlay');
 function toggleNav() {
   navLinks.classList.toggle('active');
   mobileToggle.classList.toggle('active');
+  navOverlay.classList.toggle('active');
+  document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
 }
 
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => {
     navLinks.classList.remove('active');
     mobileToggle.classList.remove('active');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
   });
 });
-
-window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
-
-// =====================================================
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  const st = document.getElementById('scrollTop');
+  if(st) st.classList.toggle('visible', window.scrollY > 400);
+});// =====================================================
 // DATA PRODUK - Dimuat dari database/produk.csv
 // =====================================================
 
 // Data default (digunakan jika CSV gagal dimuat)
 const defaultProducts = [
-  { id: 1, name: "Super Ring", category: "snack", brand: "Oriental", image: "assets/images/products/super-ring.png", desc: "Makanan ringan berbentuk cincin dengan rasa keju yang gurih dan renyah. Favorit anak-anak dan dewasa.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 2, name: "Cheese Balls", category: "snack", brand: "Oriental", image: "assets/images/products/cheese-balls.png", desc: "Puff balls dengan rasa keju yang lezat, tekstur ringan dan crunchy. Snack populer dari Malaysia.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 3, name: "Prawn Crackers", category: "snack", brand: "Oriental", image: "assets/images/products/prawn-crackers.png", desc: "Kerupuk udang renyah dengan rasa seafood autentik. Cocok untuk camilan sehari-hari.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 4, name: "Green Pea Snack", category: "snack", brand: "Oriental", image: "assets/images/products/green-pea.png", desc: "Snack kacang polong hijau yang renyah dan gurih. Camilan sehat dan lezat.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM" },
-  { id: 5, name: "Potato Chips", category: "snack", brand: "Jacker", image: "assets/images/products/potato-chips.png", desc: "Keripik kentang premium dengan bumbu original yang gurih. Dipotong tipis dan digoreng sempurna.", origin: "Malaysia", weight: "100g", cert: "Halal, BPOM" },
-  { id: 6, name: "Butter Cookies", category: "biskuit", brand: "Zess", image: "assets/images/products/butter-cookies.png", desc: "Biskuit mentega premium dalam kemasan kaleng elegan. Berbagai bentuk dan varian rasa.", origin: "Malaysia", weight: "454g", cert: "Halal, BPOM" },
-  { id: 7, name: "Cream Crackers", category: "biskuit", brand: "Zess", image: "assets/images/products/cream-crackers.png", desc: "Biskuit cream cracker klasik yang renyah dan gurih. Cocok untuk sarapan dan camilan.", origin: "Malaysia", weight: "350g", cert: "Halal, BPOM" },
-  { id: 8, name: "Chocolate Wafer", category: "wafer", brand: "Jacker", image: "assets/images/products/chocolate-wafer.png", desc: "Wafer berlapis dengan krim coklat premium. Tekstur renyah dengan rasa coklat yang kaya.", origin: "Malaysia", weight: "150g", cert: "Halal, BPOM" },
-  { id: 9, name: "Vanilla Wafer Rolls", category: "wafer", brand: "Jacker", image: "assets/images/products/vanilla-wafer.png", desc: "Wafer roll renyah dengan isian krim vanilla yang lembut. Bentuk stick yang mudah dinikmati.", origin: "Malaysia", weight: "120g", cert: "Halal, BPOM" },
-  { id: 10, name: "Swiss Roll Chocolate", category: "kue", brand: "Fudo", image: "assets/images/products/swiss-roll.png", desc: "Swiss roll lembut dengan lapisan krim coklat. Kue gulung premium dengan tekstur moist.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM" },
-  { id: 11, name: "Layer Cake Strawberry", category: "kue", brand: "Fudo", image: "assets/images/products/layer-cake.png", desc: "Layer cake dengan krim strawberry yang lezat. Lapisan sponge cake lembut berlapis krim.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM" },
-  { id: 12, name: "Tropical Fruit Juice", category: "minuman", brand: "Oriental", image: "assets/images/products/fruit-juice.png", desc: "Jus buah tropis segar dengan rasa mangga alami. Dibuat dari konsentrat buah pilihan.", origin: "Malaysia", weight: "250ml", cert: "Halal, BPOM" }
+  { id: 1, name: "Super Ring", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/super-ring.png", desc: "Snack Makanan ringan berbentuk cincin dengan rasa keju premium renyah di mulut. Snack keju yang gurih dan renyah.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 2, name: "Cheese Balls", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/cheese-balls.png", desc: "Puff balls dengan rasa keju yang lezat, tekstur ringan and crunchy. Snack populer dari Malaysia.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 3, name: "Prawn Crackers", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/prawn-crackers.png", desc: "Kerupuk udang renyah dengan rasa seafood autentik. Cocok untuk camilan sehari-hari.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 4, name: "Green Pea Snack", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/green-pea.png", desc: "Snack kacang polong hijau yang renyah dan gurih. Camilan sehat dan lezat.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
+  { id: 5, name: "Potato Chips", category: "snack", brand: "Jacker", brand_logo: "assets/logobrands/jacker.jpg", image: "assets/images/products/potato-chips.png", desc: "Keripik kentang premium dengan bumbu original yang gurih. Dipotong tipis dan digoreng sempurna.", origin: "Malaysia", weight: "100g", cert: "Halal, BPOM", info: "100g x 12 Cans | QTY: 12 Pcs | 0.054 m³/Ctn" },
+  { id: 6, name: "Butter Cookies", category: "biskuit", brand: "Zess", brand_logo: "assets/logobrands/zess.jpg", image: "assets/images/products/butter-cookies.png", desc: "Biskuit mentega premium dalam kemasan kaleng elegan. Berbagai bentuk dan varian rasa.", origin: "Malaysia", weight: "454g", cert: "Halal, BPOM", info: "454g x 12 Tins | QTY: 12 Pcs | 0.082 m³/Ctn" },
+  { id: 7, name: "Cream Crackers", category: "biskuit", brand: "Zess", brand_logo: "assets/logobrands/zess.jpg", image: "assets/images/products/cream-crackers.png", desc: "Biskuit cream cracker klasik yang renyah dan gurih. Cocok untuk sarapan dan camilan.", origin: "Malaysia", weight: "350g", cert: "Halal, BPOM", info: "350g x 24 Packs | QTY: 24 Pcs | 0.095 m³/Ctn" },
+  { id: 8, name: "Chocolate Wafer", category: "wafer", brand: "Jacker", brand_logo: "assets/logobrands/jacker.jpg", image: "assets/images/products/chocolate-wafer.png", desc: "Wafer berlapis dengan krim coklat premium. Tekstur renyah dengan rasa coklat yang kaya.", origin: "Malaysia", weight: "150g", cert: "Halal, BPOM", info: "150g x 24 Packs | QTY: 24 Pcs | 0.076 m³/Ctn" },
+  { id: 9, name: "Vanilla Wafer Rolls", category: "wafer", brand: "Jacker", brand_logo: "assets/logobrands/jacker.jpg", image: "assets/images/products/vanilla-wafer.png", desc: "Wafer roll renyah dengan isian krim vanilla yang lembut. Bentuk stick yang mudah dinikmati.", origin: "Malaysia", weight: "120g", cert: "Halal, BPOM", info: "120g x 24 Packs | QTY: 24 Pcs | 0.068 m³/Ctn" },
+  { id: 10, name: "Swiss Roll Chocolate", category: "kue", brand: "Fudo", brand_logo: "assets/logobrands/fudo.jpg", image: "assets/images/products/swiss-roll.png", desc: "Swiss roll lembut dengan lapisan krim coklat. Kue gulung premium dengan tekstur moist.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM", info: "432g (18g x 24) x 12 Boxes | QTY: 288 Pcs | 0.045 m³/Ctn" },
+  { id: 11, name: "Layer Cake Strawberry", category: "kue", brand: "Fudo", brand_logo: "assets/logobrands/fudo.jpg", image: "assets/images/products/layer-cake.png", desc: "Layer cake dengan krim strawberry yang lezat. Lapisan sponge cake lembut berlapis krim.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM", info: "432g (18g x 24) x 12 Boxes | QTY: 288 Pcs | 0.045 m³/Ctn" },
+  { id: 12, name: "Tropical Fruit Juice", category: "minuman", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/fruit-juice.png", desc: "Jus buah tropis segar dengan rasa mangga alami. Dibuat dari konsentrat buah pilihan.", origin: "Malaysia", weight: "250ml", cert: "Halal, BPOM", info: "250ml x 24 Tins | QTY: 24 Pcs | 0.032 m³/Ctn" }
 ];
 
 let products = [];
+let allBrands = [];
+let allCategories = []; // Loaded from categories.json
 let currentFilter = 'all';
+let currentBrand = 'all';
+let currentSort = 'newest';
 
-// Tampilkan notifikasi toast
-function showToast(message, type = 'info') {
-  const toast = document.getElementById('csvToast');
-  if (!toast) return;
-  toast.innerHTML = message;
-  toast.className = `csv-toast ${type} show`;
-  setTimeout(() => { toast.classList.remove('show'); }, 3500);
-}
 
 // Parse data CSV menjadi array produk
 function parseCSVData(csvText) {
@@ -586,19 +1778,85 @@ function parseCSVData(csvText) {
       name: (row.name || '').trim(),
       category: (row.category || '').toLowerCase().trim(),
       brand: (row.brand || '').trim(),
+      brand_logo: (row.brand_logo || '').trim(),
       image: (row.image || '').trim(),
       desc: (row.desc || '').trim(),
       origin: (row.origin || '').trim(),
       weight: (row.weight || '').trim(),
-      cert: (row.cert || '').trim()
+      cert: (row.cert || '').trim(),
+      info: (row.info || '').trim()
     }));
 
   if (parsed.length === 0) { throw new Error('Tidak ada data produk valid di CSV'); }
   return parsed;
 }
 
-// Muat produk dari file CSV
+// Muat merek dari file CSV
+async function loadBrandsFromCSV() {
+  try {
+    const response = await fetch('database/brands.csv');
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const csvText = await response.text();
+    const result = Papa.parse(csvText, {
+      header: true,
+      skipEmptyLines: true,
+      transformHeader: h => h.trim().toLowerCase()
+    });
+    allBrands = result.data.map(row => ({
+      id: row.id,
+      name: (row.name || '').trim(),
+      category: (row.category || '').toLowerCase().trim(),
+      logo: (row.logo || '').trim()
+    }));
+    console.log('✅ Merek dimuat dari CSV:', allBrands.length, 'item');
+  } catch (err) {
+    console.warn('⚠️ Gagal memuat brands.csv:', err.message);
+    allBrands = [];
+  }
+}
+
+// Muat produk — prioritas: localStorage (sync admin) → CSV → default
 async function loadProductsFromCSV() {
+  await loadBrandsFromCSV();
+  await loadCategories();
+
+  // 1. Prioritas Utama: Ambil dari products.json di server (Synced via Admin)
+  try {
+    const resp = await fetch('database/cms/products.json');
+    if (resp.ok) {
+      const data = await resp.json();
+      if (Array.isArray(data) && data.length > 0) {
+        products = data;
+        console.log('✅ Produk dimuat dari products.json:', products.length, 'item');
+        updateBrandFilter();
+        renderProducts(products);
+        // Sinkronkan ke localStorage untuk backup offline
+        localStorage.setItem('mas_products_synced', JSON.stringify(products));
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn('⚠️ Gagal memuat products.json, mencoba localStorage/CSV');
+  }
+
+  // 2. Cek data sync dari Admin Panel (localStorage - Backup)
+  const syncedData = localStorage.getItem('mas_products_synced');
+  if (syncedData) {
+    try {
+      const parsed = JSON.parse(syncedData);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        products = parsed;
+        console.log('✅ Produk dimuat dari localStorage Backup:', products.length, 'item');
+        updateBrandFilter();
+        renderProducts(products);
+        return;
+      }
+    } catch (e) {
+      console.warn('⚠️ Data sync tidak valid, fallback ke CSV');
+    }
+  }
+
+  // 3. Fallback ke CSV
   try {
     const response = await fetch('database/produk.csv');
     if (!response.ok) throw new Error('HTTP ' + response.status);
@@ -609,65 +1867,180 @@ async function loadProductsFromCSV() {
     console.warn('⚠️ Gagal memuat CSV, menggunakan data default:', err.message);
     products = [...defaultProducts];
   }
+  updateBrandFilter();
   renderProducts(products);
 }
 
-// Handle upload CSV manual
-function handleCSVUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
+// Load Categories from JSON
+async function loadCategories() {
+  try {
+    const resp = await fetch('database/cms/categories.json');
+    if (resp.ok) {
+      allCategories = await resp.json();
+      renderCategoryTabs();
+      console.log('✅ Kategori dimuat:', allCategories.length);
+    }
+  } catch (e) {
+    console.warn('⚠️ Gagal memuat categories.json');
+    allCategories = [
+      { key: 'snack', title: 'Makanan Ringan', icon: 'fas fa-cookie-bite' },
+      { key: 'biskuit', title: 'Biskuit & Cookies', icon: 'fas fa-cookie' },
+      { key: 'wafer', title: 'Wafer', icon: 'fas fa-bread-slice' },
+      { key: 'kue', title: 'Kue & Pastry', icon: 'fas fa-cake-candles' },
+      { key: 'minuman', title: 'Minuman', icon: 'fas fa-glass-water' },
+      { key: 'permen', title: 'Permen', icon: 'fas fa-candy-cane' },
+      { key: 'condiments', title: 'Condiments & Sauces', icon: 'fas fa-bottle-droplet' },
+      { key: 'noodle', title: 'Instant Noodle', icon: 'fas fa-bowl-food' },
+      { key: 'vegelicious', title: 'Vegelicious', icon: 'fas fa-leaf' },
+      { key: 'pudding', title: 'Pudding', icon: 'fas fa-ice-cream' }
+    ];
+    renderCategoryTabs();
+  }
+}
 
-  if (!file.name.endsWith('.csv')) {
-    showToast('<i class="fas fa-exclamation-triangle"></i> Hanya file .csv yang didukung', 'error');
+function renderCategoryTabs() {
+  const tabs = document.getElementById('filterTabs');
+  if (!tabs) return;
+  
+  const allBtn = `
+    <button class="filter-tab ${currentFilter === 'all' ? 'active' : ''}" data-filter="all" onclick="setFilter('all', this)">
+      <i class="fas fa-th-large"></i> Semua
+    </button>
+  `;
+  
+  const catBtns = allCategories.map(c => `
+    <button class="filter-tab ${currentFilter === c.key ? 'active' : ''}" data-filter="${c.key}" onclick="setFilter('${c.key}', this)">
+      <i class="${c.icon || 'fas fa-tag'}"></i> ${c.title}
+    </button>
+  `).join('');
+  
+  tabs.innerHTML = allBtn + catBtns;
+}
+
+// Populate Brand Filter Dropdown based on active Category
+function updateBrandFilter() {
+  const brandSelect = document.getElementById('brandSelect');
+  if (!brandSelect) return;
+  
+  let brandsToShow = allBrands;
+  
+  // Jika ada kategori yang dipilih, filter daftar brand
+  if (currentFilter !== 'all') {
+    brandsToShow = allBrands.filter(b => {
+      if (!b.category) return false;
+      const cats = b.category.split(',').map(c => c.trim());
+      return cats.includes(currentFilter);
+    });
+  }
+
+  // Jika tidak ada data di allBrands (fail-safe), ambil dari produk yang tersedia
+  if (brandsToShow.length === 0 && allBrands.length === 0) {
+    const uniqueFromProducts = [...new Set(products.map(p => p.brand))].sort();
+    brandSelect.innerHTML = `<option value="all">-- Semua Merek --</option>` + 
+      uniqueFromProducts.map(b => `<option value="${b}">${b}</option>`).join('');
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      products = parseCSVData(e.target.result);
-      currentFilter = 'all';
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-      document.querySelector('[data-filter="all"]').classList.add('active');
-      const searchInp = document.getElementById('searchInput');
-      if (searchInp) searchInp.value = '';
-      renderProducts(products);
-      showToast(`<i class="fas fa-check-circle"></i> ${products.length} produk berhasil dimuat dari CSV!`, 'success');
-    } catch (err) {
-      showToast('<i class="fas fa-times-circle"></i> Gagal membaca CSV: ' + err.message, 'error');
+  brandSelect.innerHTML = `<option value="all">-- Semua Merek --</option>` + 
+    brandsToShow.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+  
+  // Tetapkan kembali value if still valid
+  if (currentBrand !== 'all') {
+    const brandInList = brandsToShow.find(b => b.name === currentBrand);
+    if (!brandInList) {
+      currentBrand = 'all';
+      brandSelect.value = 'all';
+    } else {
+      brandSelect.value = currentBrand;
     }
-  };
-  reader.readAsText(file);
-  event.target.value = '';
+  }
 }
+
+// Toggle Mobile Sidebar
+function toggleMobileSidebar() {
+  const sidebar = document.querySelector('.filter-sidebar');
+  if (sidebar) {
+    sidebar.classList.toggle('active');
+    document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+  }
+}
+
+
+// --- Category Slider Scroll ---
+function scrollTabs(distance) {
+  const tabs = document.getElementById('filterTabs');
+  if (tabs) {
+    tabs.scrollBy({ left: distance, behavior: 'smooth' });
+  }
+}
+
+// Show More / Load More logic
+const PRODUCTS_PER_PAGE = 6;
+let currentDisplayCount = PRODUCTS_PER_PAGE;
+let currentFilteredList = [];
 
 function renderProducts(list) {
   const grid = document.getElementById('catalogGrid');
   const noResults = document.getElementById('noResults');
   const info = document.getElementById('resultsInfo');
+  const showMoreContainer = document.getElementById('showMoreContainer');
+  const btnShowMore = document.getElementById('btnShowMore');
 
   if (!grid) return;
 
+  // Store the full filtered list
+  currentFilteredList = list;
+  currentDisplayCount = PRODUCTS_PER_PAGE;
+
   if (list.length === 0) {
     grid.innerHTML = '';
-    if (noResults) noResults.classList.add('show');
-    if (info) info.innerHTML = '';
+    if (noResults) noResults.classList.add('active');
+    if (info) info.innerHTML = '<span class="results-count-pill">0</span> Produk ditemukan';
+    if (showMoreContainer) showMoreContainer.style.display = 'none';
     return;
   }
-  if (noResults) noResults.classList.remove('show');
-  const catLabel = currentFilter === 'all' ? 'Semua Kategori' : document.querySelector('.filter-tab.active')?.textContent || '';
-  if (info) info.innerHTML = `Menampilkan <strong>${list.length}</strong> produk · ${catLabel}`;
+  if (noResults) noResults.classList.remove('active');
+  
+  const catLabel = currentFilter === 'all' ? 'Semua' : (document.querySelector('.filter-tab.active')?.innerText.trim() || 'Kategori');
+  const brandLabel = currentBrand === 'all' ? '' : ` · ${currentBrand}`;
+  
+  if (info) info.innerHTML = `<span class="results-count-pill">${list.length}</span> Produk ditemukan · ${catLabel}${brandLabel}`;
 
-  grid.innerHTML = list.map((p, i) => `
+  // Only show limited products initially
+  const visibleList = list.slice(0, currentDisplayCount);
+  
+  renderProductCards(visibleList);
+
+  // Show/hide the "Show More" button
+  if (showMoreContainer) {
+    if (list.length > currentDisplayCount) {
+      showMoreContainer.style.display = 'flex';
+      if (btnShowMore) {
+        const span = btnShowMore.querySelector('span');
+        if (span) span.textContent = 'Selengkapnya';
+      }
+    } else {
+      showMoreContainer.style.display = 'none';
+    }
+  }
+}
+
+function renderProductCards(visibleList) {
+  const grid = document.getElementById('catalogGrid');
+  if (!grid) return;
+
+  grid.innerHTML = visibleList.map((p, i) => `
     <div class="catalog-card reveal fade-up" style="transition-delay: ${i * 40}ms" onclick="openModal(${p.id})">
       <div class="card-image">
-        <img src="${p.image}" alt="${p.name}">
-        <span class="card-badge badge-${p.category}">${getCategoryLabel(p.category)}</span>
-        <span class="card-brand">${p.brand[0]}</span>
+        <img src="${p.imageData || p.image}" alt="${p.name}">
+        <div class="card-badge badge-${p.category}">${getCategoryLabel(p.category)}</div>
+        <div class="card-brand">
+          ${p.brand_logo ? `<img src="${p.brand_logo}" alt="${p.brand}">` : p.brand[0]}
+        </div>
       </div>
       <div class="card-body">
         <h3>${p.name}</h3>
-        <p class="card-desc">${p.desc.substring(0, 80)}...</p>
+        <p class="card-desc">${p.desc}</p>
         <div class="card-footer">
           <span class="brand-name">${p.brand}</span>
           <span class="detail-btn">Detail <i class="fas fa-arrow-right"></i></span>
@@ -682,58 +2055,193 @@ function renderProducts(list) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        cardObserver.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove('visible');
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
   revealCards.forEach(c => cardObserver.observe(c));
 }
 
+function showMoreProducts() {
+  const previousCount = currentDisplayCount;
+  currentDisplayCount += PRODUCTS_PER_PAGE;
+  const showMoreContainer = document.getElementById('showMoreContainer');
+  const btnShowMore = document.getElementById('btnShowMore');
+  
+  const newList = currentFilteredList.slice(0, currentDisplayCount);
+  renderProductCards(newList);
+
+  // Add animation class to new items
+  const cards = document.querySelectorAll('.catalog-card');
+  cards.forEach((card, index) => {
+    if (index >= previousCount) {
+      card.classList.add('new-item');
+      card.style.animationDelay = `${(index - previousCount) * 100}ms`;
+    }
+  });
+
+  if (currentDisplayCount >= currentFilteredList.length) {
+    if (showMoreContainer) {
+       // Smoothly hide the container
+       showMoreContainer.style.opacity = '1';
+       const fadeEffect = setInterval(() => {
+         if (!showMoreContainer.style.opacity) showMoreContainer.style.opacity = '1';
+         if (parseFloat(showMoreContainer.style.opacity) > 0) {
+           showMoreContainer.style.opacity = (parseFloat(showMoreContainer.style.opacity) - 0.1).toString();
+         } else {
+           showMoreContainer.style.display = 'none';
+           clearInterval(fadeEffect);
+         }
+       }, 50);
+    }
+  }
+}
+
 function getCategoryLabel(cat) {
-  const labels = { snack: 'Makanan Ringan', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry', minuman: 'Minuman' };
-  return labels[cat] || cat;
+  if (allCategories && allCategories.length > 0) {
+    const found = allCategories.find(c => c.key === cat);
+    if (found) return found.title;
+  }
+  const categoryLabels = { snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry', minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments', noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding' };
+  return categoryLabels[cat] || cat;
 }
 
 function setFilter(filter, btn) {
   currentFilter = filter;
+  // Reset brand filter when category changes
+  currentBrand = 'all';
+  const brandSelect = document.getElementById('brandSelect');
+  if (brandSelect) brandSelect.value = 'all';
+
   document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   if (btn) btn.classList.add('active');
+  
+  updateBrandFilter(); // Refresh Brand dropdown logic
   filterProducts();
   window.scrollTo({ top: document.querySelector('.filter-section').offsetTop - 100, behavior: 'smooth' });
 }
 
 function filterProducts() {
   const searchInp = document.getElementById('searchInput');
+  const sortInp = document.getElementById('sortSelect');
+  const brandInp = document.getElementById('brandSelect');
+  
   const query = searchInp ? searchInp.value.toLowerCase() : '';
-  let filtered = products;
-  if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
-  if (query) filtered = filtered.filter(p => p.name.toLowerCase().includes(query) || (p.desc && p.desc.toLowerCase().includes(query)) || (p.brand && p.brand.toLowerCase().includes(query)));
+  currentSort = sortInp ? sortInp.value : 'newest';
+  currentBrand = brandInp ? brandInp.value : 'all';
+
+  let filtered = [...products];
+
+  // 1. Filter by Category
+  if (currentFilter !== 'all') {
+    filtered = filtered.filter(p => p.category === currentFilter);
+  }
+
+  // 2. Filter by Brand
+  if (currentBrand !== 'all') {
+    filtered = filtered.filter(p => p.brand === currentBrand);
+  }
+
+  // 3. Filter by Search Query
+  if (query) {
+    filtered = filtered.filter(p => 
+      p.name.toLowerCase().includes(query) || 
+      (p.desc && p.desc.toLowerCase().includes(query)) || 
+      (p.brand && p.brand.toLowerCase().includes(query))
+    );
+  }
+
+  // 4. Sort
+  if (currentSort === 'alpha-asc') {
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (currentSort === 'alpha-desc') {
+    filtered.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (currentSort === 'newest') {
+    filtered.sort((a, b) => b.id - a.id);
+  }
+
   renderProducts(filtered);
+}
+
+function resetFilters() {
+  const searchInp = document.getElementById('searchInput');
+  const sortInp = document.getElementById('sortSelect');
+  const brandInp = document.getElementById('brandSelect');
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  
+  if (searchInp) searchInp.value = '';
+  if (sortInp) sortInp.value = 'newest';
+  if (brandInp) brandInp.value = 'all';
+  
+  currentFilter = 'all';
+  currentBrand = 'all';
+  currentSort = 'newest';
+  
+  filterTabs.forEach(t => t.classList.remove('active'));
+  const allTab = document.querySelector('[data-filter="all"]');
+  if (allTab) allTab.classList.add('active');
+  
+  updateBrandFilter();
+  filterProducts();
+}
+
+// Helper untuk menampilkan gambar atau placeholder jika path kosong
+function getImageOrPlaceholder(path, label = "Image", className = "") {
+  if (path && path.trim() !== '') {
+    return `<img src="${path}" alt="${label}" class="${className}">`;
+  }
+  return `
+    <div class="img-placeholder">
+      <i class="fas fa-image"></i>
+      <span>${label}</span>
+    </div>
+  `;
 }
 
 function openModal(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
-  const modalImg = document.getElementById('modalImg');
-  const modalBadge = document.getElementById('modalBadge');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalBrand = document.getElementById('modalBrand');
-  const modalDesc = document.getElementById('modalDesc');
-  const modalSpecs = document.getElementById('modalSpecs');
 
-  if (modalImg) { modalImg.src = p.image; modalImg.alt = p.name; }
-  if (modalBadge) { modalBadge.className = `modal-badge badge-${p.category}`; modalBadge.textContent = getCategoryLabel(p.category); }
-  if (modalTitle) { modalTitle.textContent = p.name; }
-  if (modalBrand) { modalBrand.innerHTML = `<i class="fas fa-tag" style="margin-right:6px"></i>Brand: ${p.brand}`; }
-  if (modalDesc) { modalDesc.textContent = p.desc; }
-  if (modalSpecs) {
-    modalSpecs.innerHTML = `
-      <div class="spec-item"><div class="spec-label">Asal</div><div class="spec-value">${p.origin}</div></div>
-      <div class="spec-item"><div class="spec-label">Berat</div><div class="spec-value">${p.weight}</div></div>
-      <div class="spec-item"><div class="spec-label">Sertifikasi</div><div class="spec-value">${p.cert}</div></div>
-      <div class="spec-item"><div class="spec-label">Kategori</div><div class="spec-value">${getCategoryLabel(p.category)}</div></div>
-    `;
+  // Header Elements
+  const brandLogoContainer = document.getElementById('modalBrandLogoContainer');
+  const mainImgContainer = document.getElementById('modalMainImgContainer');
+  
+  // Body Elements
+  const categoryPill = document.getElementById('modalCategoryPill');
+  const brandName = document.getElementById('modalBrandName');
+  const modalDesc = document.getElementById('modalDesc');
+  const specAsal = document.getElementById('specAsal');
+  const specBerat = document.getElementById('specBerat');
+  const specSertifikasi = document.getElementById('specSertifikasi');
+  const specKategori = document.getElementById('specKategori');
+  const modalInfo = document.getElementById('modalInfo');
+  const modalWaBtn = document.getElementById('modalWaBtn');
+
+  // Populate Content
+  if (brandLogoContainer) brandLogoContainer.innerHTML = getImageOrPlaceholder(p.brand_logo, "Logo Brand");
+  if (mainImgContainer) mainImgContainer.innerHTML = getImageOrPlaceholder(p.imageData || p.image, "Gambar Produk", "main-product-img");
+  
+  if (categoryPill) {
+    categoryPill.textContent = getCategoryLabel(p.category);
+    // You could adjust colors based on category if desired
   }
+  
+  if (brandName) brandName.textContent = p.brand;
+  if (modalDesc) modalDesc.textContent = p.desc;
+  
+  if (specAsal) specAsal.textContent = p.origin || '-';
+  if (specBerat) specBerat.textContent = p.weight || '-';
+  if (specSertifikasi) specSertifikasi.textContent = p.cert || '-';
+  if (specKategori) specKategori.textContent = getCategoryLabel(p.category);
+  
+  if (modalInfo) modalInfo.textContent = p.info || 'Hubungi kami untuk informasi lebih lanjut.';
+  
+  if (modalWaBtn) {
+    const message = `Halo, saya tertarik dengan produk ${p.name} (${p.brand}). Mohon informasi lebih lanjut.`;
+    modalWaBtn.onclick = () => window.open(`https://wa.me/6281295001778?text=${encodeURIComponent(message)}`, '_blank');
+  }
+
   const modal = document.getElementById('productModal');
   if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
 }
@@ -750,7 +2258,177 @@ if (modalOverlay) {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // Inisialisasi
-loadProductsFromCSV();
-</script>
+loadProductsFromCSV().then(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchId = urlParams.get('search');
+  if (searchId) {
+    // Give a small delay for DOM rendering
+    setTimeout(() => {
+      openModal(parseInt(searchId));
+      // Remove query param without refresh
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }, 300);
+  }
+});
+
+    // --- Combined Navigation & Modal logic is handled above ---
+    function animateIcon(el) {
+      el.classList.add('animate-click');
+      setTimeout(() => el.classList.remove('animate-click'), 600);
+    }
+
+    // --- LANGUAGE DROPDOWN LOGIC ---
+    function toggleLangDropdown(isMobile = false) {
+      const id = isMobile ? 'langDropdownMobile' : 'langDropdown';
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('active');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.lang-dropdown')) {
+        document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+    // --- CS FORM & SCROLL TOP LOGIC ---
+    function toggleContactModal() {
+      const modal = document.getElementById('contactModalOverlay');
+      if (modal) {
+        modal.classList.toggle('active');
+        if (modal.classList.contains('active')) {
+          initContactFormProducts();
+        }
+      }
+    }
+
+    function initContactFormProducts() {
+      const productSelect = document.getElementById('waProduct');
+      if (!productSelect || productSelect.options.length > 1) return;
+
+      const seen = new Set();
+      products.forEach(p => {
+        const display = `${p.name} - ${p.brand} - ${getCategoryLabel(p.category)}`;
+        if (!seen.has(display)) {
+          seen.add(display);
+          const opt = document.createElement('option');
+          opt.value = display;
+          opt.textContent = display;
+          opt.dataset.image = p.imageData || p.image || '';
+          productSelect.appendChild(opt);
+        }
+      });
+    }
+
+    function updateProductPreview() {
+      const select = document.getElementById('waProduct');
+      const box = document.getElementById('waProductPreviewBox');
+      const img = document.getElementById('waProductImg');
+      const placeholder = document.getElementById('waProductPlaceholder');
+      if(!select || select.selectedIndex < 0) return;
+      const selectedOption = select.options[select.selectedIndex];
+      
+      const imgSrc = selectedOption.dataset.image;
+
+      if (imgSrc) {
+        img.src = imgSrc;
+        img.classList.add('loaded');
+        placeholder.style.display = 'none';
+        box.classList.add('active');
+      } else {
+        img.src = "";
+        img.classList.remove('loaded');
+        placeholder.style.display = 'block';
+        box.classList.remove('active');
+      }
+    }
+
+    function sendWhatsApp() {
+      const name = document.getElementById('waName').value.trim();
+      const phone = document.getElementById('waPhone').value.trim();
+      const region = document.getElementById('waRegion').value.trim();
+      const outlet = document.getElementById('waOutlet').value.trim();
+      const product = document.getElementById('waProduct').value;
+      const message = document.getElementById('waMessage').value.trim();
+
+      if (!name || !phone) {
+        alert('Mohon isi Nama dan No. WhatsApp Anda.');
+        return;
+      }
+
+      const targetPhone = '6281295001778'; 
+      const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
+                 `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
+                 `${message}\n\n` +
+                 `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
+
+      const encodedText = encodeURIComponent(text);
+      window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
+    }
+  </script>
+
+  <!-- ==================== SCROLL TOP ==================== -->
+  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <!-- ==================== FLOATING CONTACT FORM ==================== -->
+  <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
+    <i class="fas fa-headset"></i>
+  </div>
+
+  <div class="contact-modal-overlay" id="contactModalOverlay" onclick="if(event.target===this) toggleContactModal()">
+    <div class="contact-modal-container">
+      <div class="contact-modal-header">
+        <h3>Hubungi Kami</h3>
+        <button class="contact-modal-close" onclick="toggleContactModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="contact-modal-body">
+        <div class="contact-form-row">
+          <div class="contact-form-group">
+            <label><i class="fas fa-user"></i> Nama Lengkap</label>
+            <input type="text" id="waName" placeholder="Nama Anda...">
+          </div>
+          <div class="contact-form-group">
+            <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+            <input type="tel" id="waPhone" placeholder="0812...">
+          </div>
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-map-marker-alt"></i> Region (Provinsi / Kota)</label>
+          <input type="text" id="waRegion" placeholder="Lokasi Anda...">
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-store"></i> Nama Outlet</label>
+          <input type="text" id="waOutlet" placeholder="Nama toko / bisnis...">
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-box"></i> Tertarik Produk</label>
+          <div class="product-selection-wrapper">
+            <div class="wa-product-dropdown">
+              <select id="waProduct" onchange="updateProductPreview()">
+                <option value="">Pilih Produk (opsional)</option>
+              </select>
+            </div>
+            <div class="product-preview-box" id="waProductPreviewBox">
+              <img id="waProductImg" src="" alt="Preview">
+              <i class="fas fa-image" style="color:#333; font-size: 24px;" id="waProductPlaceholder"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-comment-alt"></i> Tinggalkan Pesan</label>
+          <textarea id="waMessage" rows="2" placeholder="Apa yang bisa kami bantu?"></textarea>
+        </div>
+        <button class="btn-send-wa" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

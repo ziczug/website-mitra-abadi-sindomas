@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "name": "Oriental",
+    "logo": "assets/logobrands/oriental.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 2,
+    "name": "Jacker",
+    "logo": "assets/logobrands/jacker.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 3,
+    "name": "Zees",
+    "logo": "assets/logobrands/zess.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 4,
+    "name": "Fudo",
+    "logo": "assets/logobrands/fudo.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 5,
+    "name": "Win2",
+    "logo": "assets/logobrands/win2.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 6,
+    "name": "Ibu Mie",
+    "logo": "assets/logobrands/ibumie.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 7,
+    "name": "Telly",
+    "logo": "assets/logobrands/telly.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 8,
+    "name": "A-TASTE",
+    "logo": "assets/logobrands/a-taste.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 9,
+    "name": "HUANG XIAO GU!",
+    "logo": "assets/logobrands/huang-xiao-gu.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 10,
+    "name": "MASTER JH",
+    "logo": "assets/logobrands/master-jh.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 11,
+    "name": "VEGGILICIOUS",
+    "logo": "assets/logobrands/veggilicious.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 12,
+    "name": "VETRUE",
+    "logo": "assets/logobrands/vetrue.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 13,
+    "name": "TAWANDANG",
+    "logo": "assets/logobrands/tawandang.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 14,
+    "name": "MIKKU",
+    "logo": "assets/logobrands/mikku.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 15,
+    "name": "XIDUODONG",
+    "logo": "assets/logobrands/xiduodong.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 16,
+    "name": "SWECCO",
+    "logo": "assets/logobrands/swecco.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 17,
+    "name": "KISS DELICIAS",
+    "logo": "assets/logobrands/kiss-delicias.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 18,
+    "name": "YAMAMOTO KAWAHIRO",
+    "logo": "assets/logobrands/yamamoto-kawahiro.jpg",
+    "logoData": ""
+  },
+  {
+    "id": 19,
+    "name": "HUI XIANG ZHAI ZI",
+    "logo": "assets/logobrands/hui-xiang-zhai-zi.jpg",
+    "logoData": ""
+  }
+]

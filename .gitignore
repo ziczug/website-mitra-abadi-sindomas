@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.gemini/
+temp_script_*.js
+dist/
+build/
+.vscode/
+.idea/
+package-lock.json
+C:/Users/Design/.gemini/antigravity/brain/e089f88e-ff4b-446b-b2bf-5576e17bd1f4/

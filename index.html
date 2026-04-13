@@ -10,47 +10,95 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="assets/js/i18n-data.js"></script>
+  <script src="assets/js/i18n-engine.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="assets/js/image-fallback.js"></script>
 </head>
 
 <body>
 
   <!-- ==================== NAVBAR ==================== -->
   <nav class="navbar" id="navbar">
+    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <div class="container">
-      <a href="#" class="nav-logo">
+      <a href="index.html" class="nav-logo">
         <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
       </a>
       <div class="nav-links" id="navLinks">
+        <button class="mobile-close" onclick="toggleNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="lang-dropdown mobile-only" id="langDropdownMobile">
+          <div class="lang-current" onclick="toggleLangDropdown(true)">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id">Indonesia</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="EN" class="flag-icon"> <span data-i18n="lang-en">English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">Mandarin</span>
+            </div>
+          </div>
+        </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="#beranda" class="nav-item active">Beranda</a>
-        <a href="#tentang" class="nav-item">Tentang Kami</a>
-        <a href="produk.html" class="nav-item">Produk</a>
-        <a href="#distribusi" class="nav-item">Distribusi</a>
-        <a href="#sertifikasi" class="nav-item">Sertifikasi</a>
+        <a href="#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
+        <a href="#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
+        <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
+        <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
+        <a href="#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
+        <a href="#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        
+        <div class="nav-social mobile-only" style="margin-top: 20px;">
+          <a href="#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Hubungi Kami">
+            <i class="fas fa-phone-alt"></i>
+          </a>
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
       </div>
       <div class="nav-actions">
-        <a href="#kontak" class="nav-cta">Hubungi Kami</a>
+        <a href="#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text" data-i18n="nav-contact">Hubungi Kami</span></a>
         <div class="search-wrapper" id="searchWrapper">
           <button class="search-toggle" id="searchToggle" aria-label="Open Search">
             <i class="fas fa-search"></i>
           </button>
           <div class="search-container" id="searchContainer">
-            <i class="fas fa-search search-icon-inside"></i>
-            <input type="text" placeholder="Cari di Mitra Abadi Sindomas" id="searchInput">
-            <button class="search-close" id="searchClose" aria-label="Close Search">
-              <i class="fas fa-times"></i>
-            </button>
+            <div class="search-input-wrapper">
+              <i class="fas fa-search search-icon-inside"></i>
+              <input type="text" placeholder="Cari produk atau merek..." id="searchInput" autocomplete="off" data-i18n="search-placeholder">
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will be injected here -->
+            </div>
           </div>
         </div>
-        <div class="lang-switch" id="langSwitch">
-          <div class="lang-indicator" id="langIndicator"></div>
-          <button class="lang-btn active" data-lang="id">
-            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> ID
-          </button>
-          <span class="lang-sep">|</span>
-          <button class="lang-btn" data-lang="en">
-            <img src="https://flagcdn.com/gb.svg" alt="EN" class="flag-icon"> ENG
-          </button>
+        <!-- Social icons moved to mobile menu only -->
+        <div class="lang-dropdown desktop-only" id="langDropdown">
+          <div class="lang-current" onclick="toggleLangDropdown()">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id-short">ID</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span>Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span>English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span>Mandarin</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mobile-toggle" id="mobileToggle" onclick="toggleNav()">
@@ -61,34 +109,68 @@
 
   <!-- ==================== HERO ==================== -->
   <section class="hero" id="beranda">
+    <div class="hero-diagonal-bg"></div>
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge"><span class="dot"></span> Trusted Since 2016</div>
-        <h1>Distributor & Importir <span class="highlight">Makanan Berkualitas</span> Indonesia</h1>
-        <p>PT Mitra Abadi Sindomas menghadirkan produk makanan dan minuman impor berkualitas tinggi dari merek-merek
+        <div class="hero-badge" data-i18n="hero-badge">TRUSTED SINCE 2016</div>
+        <h1 data-i18n="hero-title">Distributor & Importir Makanan Berkualitas Indonesia</h1>
+        <p data-i18n="hero-desc">PT Mitra Abadi Sindomas menghadirkan produk makanan dan minuman impor berkualitas tinggi dari merek-merek
           internasional terkemuka dengan jaminan sertifikasi Halal dan BPOM.</p>
         <div class="hero-buttons">
-          <a href="produk.html" class="btn-primary"><i class="fas fa-box-open"></i> Lihat Produk</a>
-          <a href="#kontak" class="btn-outline"><i class="fas fa-headset"></i> Hubungi Kami</a>
+          <a href="produk.html" class="btn-primary"><i class="fas fa-box-open"></i><span class="hero-btn-text" data-i18n="hero-btn-products"> Lihat Produk</span></a>
+          <a href="#kontak" class="btn-outline"><i class="fas fa-headset"></i><span class="hero-btn-text"> Hubungi Kami</span></a>
         </div>
         <div class="hero-stats">
           <div class="stat-item">
-            <div class="stat-number" data-count="8">0</div>
+            <div class="stat-circle">
+              <div class="stat-number" data-count="8">0</div>
+            </div>
             <div class="stat-label">Tahun Pengalaman</div>
+            <div class="stat-line"></div>
           </div>
           <div class="stat-item">
-            <div class="stat-number" data-count="500">0</div>
+            <div class="stat-circle">
+              <div class="stat-number" data-count="500">0</div>
+            </div>
             <div class="stat-label">Produk Terdistribusi</div>
+            <div class="stat-line"></div>
           </div>
           <div class="stat-item">
-            <div class="stat-number" data-count="34">0</div>
+            <div class="stat-circle">
+              <div class="stat-number" data-count="34">0</div>
+            </div>
             <div class="stat-label">Kota Jangkauan</div>
+            <div class="stat-line"></div>
           </div>
         </div>
       </div>
-      <div class="hero-image">
-        <img src="assets/images/hero-banner.png" alt="Premium Food Products">
+      <div class="hero-image" id="heroSlider">
+        <div class="slider-container" id="heroSliderContainer">
+          <div class="slide active"><img src="assets/images/hero-banner-chocochips.png" alt="ZESS Chocochips"></div>
+          <div class="slide"><img src="assets/images/hero-banner.png" alt="Slide 2"></div>
+          <div class="slide"><img src="assets/images/snacks.png" alt="Slide 3"></div>
+          <div class="slide"><img src="assets/images/biscuits.png" alt="Slide 4"></div>
+          <div class="slide"><img src="assets/images/wafers.png" alt="Slide 5"></div>
+          <div class="slide"><img src="assets/images/cakes.png" alt="Slide 6"></div>
+        </div>
+        <button class="slider-btn prev-btn" id="heroPrev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next-btn" id="heroNext" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+        <div class="slider-dots" id="heroDots"></div>
       </div>
+    </div>
+  </section>
+
+  <div class="section-separator reveal fade-up visible"></div>
+
+  <!-- ==================== TOP SLIDER (16:9) ==================== -->
+  <section class="top-slider-section">
+    <div class="top-slider" id="topSlider">
+      <div class="top-slider-container" id="topSliderContainer">
+        <!-- Dynamic slides will be injected here -->
+      </div>
+      <button class="top-slider-btn prev" id="topPrev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+      <button class="top-slider-btn next" id="topNext" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+      <div class="top-slider-dots" id="topDots"></div>
     </div>
   </section>
 
@@ -100,41 +182,66 @@
           <img src="assets/images/mas-bangunan.jpg" alt="PT Mitra Abadi Sindomas Office">
           <div class="accent-frame"></div>
         </div>
-        <div class="about-content reveal fade-left delay-200">
-          <div class="section-tag"><i class="fas fa-building"></i> Tentang Kami</div>
-          <h2>PT Mitra Abadi Sindomas</h2>
-          <p>Adalah perusahaan internasional & nasional yang bergerak di bidang perdagangan umum, ekspor, impor, dan
-            distribusi. Sejak 2016, kami telah menjalin kerja sama dengan merek-merek internasional terkemuka untuk
-            menghadirkan produk makanan dan minuman impor berkualitas.</p>
-          <p>Seluruh produk kami telah bersertifikat <strong>Halal</strong> dan terdaftar di <strong>BPOM</strong>,
-            menjamin keamanan dan kualitas untuk konsumen Indonesia.</p>
-          <div class="about-features">
+        <div class="about-content reveal fade-left">
+          <div class="about-badge" data-i18n="about-badge">TENTANG KAMI</div>
+          <h2 data-i18n="about-title">Dedikasi Untuk Kualitas Dan Keamanan Pangan</h2>
+          <p data-i18n="about-desc-1">PT Mitra Abadi Sindomas adalah perusahaan internasional & nasional yang bergerak di bidang perdagangan umum, ekspor, impor, dan distribusi. Sejak 2016, kami telah menjalin kerja sama dengan merek-merek internasional terkemuka untuk menghadirkan produk makanan dan minuman impor berkualitas.</p>
+          <p data-i18n="about-desc-2">Seluruh produk kami telah bersertifikat Halal dan terdaftar di BPOM, menjamin keamanan dan kualitas untuk konsumen Indonesia.</p>
+          
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number">
+                <span class="counter" data-count="9">0</span><sup>+</sup>
+              </div>
+              <div class="stat-label" data-i18n="about-stat-years">Tahun Pengalaman</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">
+                <span class="counter" data-count="200">0</span><sup>+</sup>
+              </div>
+              <div class="stat-label" data-i18n="about-stat-products">Produk Berkualitas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">
+                <span class="counter" data-count="50">0</span><sup>+</sup>
+              </div>
+              <div class="stat-label" data-i18n="about-stat-partners">Mitra Strategis</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">
+                <span class="counter" data-count="100">0</span><sup>%</sup>
+              </div>
+              <div class="stat-label" data-i18n="about-stat-coverage">Cakupan Nasional</div>
+            </div>
+          </div>
+
+          <div class="about-features reveal fade-up">
             <div class="about-feature">
-              <div class="icon"><i class="fas fa-ship"></i></div>
-              <div>
-                <h4>Importir Terpercaya</h4>
-                <p>Partner resmi brand internasional</p>
+              <div class="icon"><i class="fas fa-shipping-fast"></i></div>
+              <div class="feature-info">
+                <h4>Pengiriman Cepat</h4>
+                <p>Sistem logistik yang handal menjamin pengiriman tepat waktu.</p>
               </div>
             </div>
             <div class="about-feature">
               <div class="icon"><i class="fas fa-certificate"></i></div>
-              <div>
-                <h4>Halal & BPOM</h4>
-                <p>Sertifikasi lengkap & terjamin</p>
+              <div class="feature-info">
+                <h4>Kualitas Terjamin</h4>
+                <p>Seluruh produk kami telah tersertifikasi Halal dan BPOM.</p>
               </div>
             </div>
             <div class="about-feature">
-              <div class="icon"><i class="fas fa-truck-fast"></i></div>
-              <div>
-                <h4>Distribusi Nasional</h4>
-                <p>Jangkauan seluruh Indonesia</p>
+              <div class="icon"><i class="fas fa-handshake"></i></div>
+              <div class="feature-info">
+                <h4>Mitra Strategis</h4>
+                <p>Bekerja sama dengan brand internasional terbaik.</p>
               </div>
             </div>
             <div class="about-feature">
               <div class="icon"><i class="fas fa-award"></i></div>
-              <div>
-                <h4>Kualitas Premium</h4>
-                <p>Produk bermerek berkualitas tinggi</p>
+              <div class="feature-info">
+                <h4>Layanan Ekselen</h4>
+                <p>Berkomitmen memberikan pelayanan terbaik bagi mitra.</p>
               </div>
             </div>
           </div>
@@ -147,140 +254,140 @@
   <section class="section products" id="produk">
     <div class="container">
       <div class="section-header reveal fade-up">
-        <div class="section-tag"><i class="fas fa-utensils"></i> Produk Kami</div>
-        <h2>Kategori Produk Unggulan</h2>
-        <p>Kami mendistribusikan beragam produk makanan dan minuman berkualitas tinggi dari brand-brand internasional
-          terkemuka.</p>
+        <div class="section-tag"><i class="fas fa-utensils"></i> <span data-i18n="nav-products">Produk Kami</span></div>
+        <h2 data-i18n="products-title">Kategori Produk Unggulan</h2>
+        <p data-i18n="products-desc">Kami mendistribusikan beragam produk makanan dan minuman berkualitas tinggi dari brand-brand internasional terkemuka.</p>
       </div>
-      <div class="product-grid">
-        <div class="product-card reveal fade-up">
-          <div class="product-card-image">
-            <img src="assets/images/snacks.png" alt="Snacks">
-            <div class="overlay"></div>
-          </div>
-          <div class="product-card-body">
-            <h3>Makanan Ringan</h3>
-            <p>Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring, Green Pea Snack dan lainnya.</p>
-            <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="product-slider-wrapper reveal fade-up">
+        <button class="product-slider-btn prev" id="productPrev" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+        <div class="product-slider-container" id="productSliderContainer">
+          <div class="product-grid" id="productTrack">
+            <!-- Dynamic Categories will be injected here by JS -->
           </div>
         </div>
-        <div class="product-card reveal fade-up">
-          <div class="product-card-image">
-            <img src="assets/images/biscuits.png" alt="Biscuits">
-            <div class="overlay"></div>
-          </div>
-          <div class="product-card-body">
-            <h3>Biskuit & Cookies</h3>
-            <p>Beragam biskuit, cream crackers, dan cookies premium dari brand internasional.</p>
-            <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
-        </div>
-        <div class="product-card reveal fade-up">
-          <div class="product-card-image">
-            <img src="assets/images/wafers.png" alt="Wafers">
-            <div class="overlay"></div>
-          </div>
-          <div class="product-card-body">
-            <h3>Wafer</h3>
-            <p>Wafer coklat, vanilla, dan berbagai varian rasa dari produsen berkualitas.</p>
-            <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
-        </div>
-        <div class="product-card reveal fade-up">
-          <div class="product-card-image">
-            <img src="assets/images/cakes.png" alt="Cakes">
-            <div class="overlay"></div>
-          </div>
-          <div class="product-card-body">
-            <h3>Kue & Pastry</h3>
-            <p>Swiss roll, layer cake, muffin dan berbagai kue kemasan premium.</p>
-            <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
-        </div>
-        <div class="product-card reveal fade-up">
-          <div class="product-card-image">
-            <img src="assets/images/beverages.png" alt="Beverages">
-            <div class="overlay"></div>
-          </div>
-          <div class="product-card-body">
-            <h3>Minuman</h3>
-            <p>Berbagai minuman berkualitas termasuk jus, teh, dan minuman rasa buah.</p>
-            <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
-        </div>
+        <button class="product-slider-btn next" id="productNext" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
       </div>
       <div style="text-align:center;margin-top:48px"><a href="produk.html" class="btn-primary"><i
-            class="fas fa-th-large"></i> Lihat Semua Produk</a></div>
+            class="fas fa-th-large"></i> <span data-i18n="btn-view-all">Lihat Semua Produk</span></a></div>
     </div>
   </section>
+
+  <div class="section-separator reveal fade-up"></div>
 
   <!-- ==================== BRANDS ==================== -->
   <section class="section brands" id="merek">
     <div class="container">
-      <div class="section-header reveal fade-up">
-        <div class="section-tag"><i class="fas fa-star"></i> Brand Partner</div>
-        <h2>Merek Internasional Kami</h2>
-        <p>Kami adalah distributor resmi dari brand-brand makanan ternama di dunia.</p>
+      <div class="section-header center pulse-on-scroll">
+        <div class="section-badge" data-i18n="brands-badge">MEREK KAMI</div>
+        <h2 data-i18n="brands-title">Menghadirkan Merek Internasional Terbaik</h2>
+        <p data-i18n="brands-desc">Kami bekerja sama dengan produsen global terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
-      <div class="brand-grid">
-        <div class="brand-card reveal zoom-in">
-          <div class="brand-icon">O</div>
-          <h3>Oriental</h3>
-          <p>Snack terkemuka dari Malaysia dengan varian Super Ring, Cheese Balls, dan lainnya.</p>
+
+      <div class="brand-filter-wrapper slide-up-on-scroll">
+        <div class="brand-tabs-container">
+          <button class="brand-tab-nav-btn prev" id="brandTabNavPrev"><i class="fas fa-chevron-left"></i></button>
+          <div class="brand-tabs" id="brandTabContainer">
+            <button class="brand-tab active" data-category="all" data-i18n="brands-all">Semua</button>
+            <!-- Categories will be injected here -->
+          </div>
+          <button class="brand-tab-nav-btn next" id="brandTabNavNext"><i class="fas fa-chevron-right"></i></button>
         </div>
-        <div class="brand-card reveal zoom-in">
-          <div class="brand-icon">J</div>
-          <h3>Jacker</h3>
-          <p>Wafer & snack premium berkualitas tinggi dari Malaysia.</p>
+        
+        <div class="brand-search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="brandSearchInput" placeholder="Cari nama brand..." data-i18n="search-brand-placeholder">
         </div>
-        <div class="brand-card animate-on-scroll">
-          <div class="brand-icon">F</div>
-          <h3>Fudo</h3>
-          <p>Swiss roll dan kue premium dengan beragam varian rasa populer.</p>
+      </div>
+
+      <div class="brand-slider-container reveal fade-up">
+        <button class="brand-nav-btn prev" id="brandPrev"><i class="fas fa-chevron-left"></i></button>
+        <div class="brand-grid-wrapper">
+          <div class="brand-grid" id="brandGrid">
+            <!-- Brands will be loaded dynamically here -->
+          </div>
         </div>
-        <div class="brand-card reveal zoom-in">
-          <div class="brand-icon">Z</div>
-          <h3>Zess</h3>
-          <p>Biskuit dan wafer berkualitas dari produsen terpercaya.</p>
+        <button class="brand-nav-btn next" id="brandNext"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-separator reveal fade-up"></div>
+
+  <!-- ==================== DISTRIBUTION & PARTNERS ==================== -->
+  <section class="section distribution" id="distribusi">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <div class="section-tag"><i class="fas fa-truck"></i> Jaringan Distribusi</div>
+        <h2 style="text-transform: uppercase;">Jangkauan & Mitra Distribusi</h2>
+        <p>Jaringan kantor kami tersebar di berbagai kota besar, didukung oleh fasilitas pergudangan modern dan kemitraan strategis dengan ritel terkemuka.</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="dist-stats-row reveal fade-up">
+        <div class="dist-stat-premium">
+          <div class="stat-icon-wrap" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"><i class="fas fa-city"></i></div>
+          <div class="number" data-count="34">34</div>
+          <div class="label">Cabang / Kota</div>
+          <div class="sub-label">di seluruh Indonesia</div>
+        </div>
+        <div class="dist-stat-premium">
+          <div class="stat-icon-wrap" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"><i class="fas fa-warehouse"></i></div>
+          <div class="number" data-count="40000">40.000+</div>
+          <div class="label" data-i18n="dist-stat-warehouse-label">Meter Persegi</div>
+          <div class="sub-label" data-i18n="dist-stat-warehouse-sub">Luas Gudang</div>
+        </div>
+        <div class="dist-stat-premium">
+          <div class="stat-icon-wrap" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"><i class="fas fa-box"></i></div>
+          <div class="number" data-count="500">500+</div>
+          <div class="label" data-i18n="dist-stat-sku-label">SKU</div>
+          <div class="sub-label" data-i18n="dist-stat-sku-sub">produk lokal dan internasional</div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="dist-map-hero reveal fade-up delay-200">
+        <div class="map-container">
+          <img src="assets/images/peta.gif" alt="Peta Jaringan Distribusi MAS" class="map-image">
+        </div>
+        <div class="map-content-outside" style="text-align: center; margin-top: 32px;">
+          <h3 style="color: var(--accent); font-size: clamp(22px, 4vw, 28px); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;" data-i18n="dist-map-title">Jangkauan Logistik Nasional</h3>
+          <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; opacity: 0.9; max-width: 650px; line-height: 1.6; margin: 0 auto;" data-i18n="dist-map-desc">Sistem distribusi terintegrasi yang menjangkau pulau-pulau utama di Indonesia, memastikan ketersediaan produk berkualitas di mana pun Anda berada.</p>
+        </div>
+      </div>
+
+      <div class="section-separator reveal fade-up"></div>
+
+      <!-- Partner Logos (Merged) -->
+      <div class="partners-inside-dist reveal fade-up" style="margin-top: 20px;">
+        <div class="section-header reveal fade-up">
+          <h2 style="color: var(--white); font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="partners-title">Mitra Strategis Kami</h2>
+          <p style="color: rgba(255,255,255,0.6); font-size: 16px; max-width: 600px; margin: 0 auto;" data-i18n="partners-desc">Produk kami tersedia di berbagai jaringan modern trade dan e-commerce terkemuka.</p>
+        </div>
+        
+        <div class="partner-tabs-wrapper reveal fade-up">
+          <button class="partner-tab-nav-btn prev" id="partnerTabNavPrev" aria-label="Previous Tabs"><i class="fas fa-chevron-left"></i></button>
+          <div class="partner-tabs" id="partnerTabContainer">
+            <button class="partner-tab active" data-category="NATIONAL KEY ACCOUNT">National Key Account</button>
+            <button class="partner-tab" data-category="MODERN TRADE">Modern Trade</button>
+            <button class="partner-tab" data-category="CONVENIENCE STORE">Convenience Store</button>
+            <button class="partner-tab" data-category="E-COMMERCE PLATFORM">E-Commerce</button>
+          </div>
+          <button class="partner-tab-nav-btn next" id="partnerTabNavNext" aria-label="Next Tabs"><i class="fas fa-chevron-right"></i></button>
+        </div>
+  
+        <div class="partner-grid reveal fade-up" id="partnerGrid">
+          <!-- Partners will be loaded dynamically here -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== DISTRIBUTION ==================== -->
-  <section class="section distribution" id="distribusi">
+  <!-- ==================== BRANCH LOCATIONS SLIDER ==================== -->
+  <section class="section branches-locations" id="cabang" style="padding-top: 0;">
     <div class="container">
-      <div class="section-header reveal fade-up">
-        <div class="section-tag"><i class="fas fa-truck"></i> Jaringan Distribusi</div>
-        <h2>Jangkauan Seluruh Indonesia</h2>
-        <p>Jaringan distribusi kami yang luas menjamin ketersediaan produk di seluruh wilayah Indonesia.</p>
-      </div>
-      <div class="dist-grid">
-        <div class="dist-image reveal fade-right">
-          <img src="assets/images/warehouse.gif" alt="Warehouse Distribution">
-        </div>
-        <div class="dist-content reveal fade-left delay-200">
-          <h3>Infrastruktur Modern & Profesional</h3>
-          <p>Kami memiliki fasilitas gudang modern yang dilengkapi dengan sistem pendingin dan penyimpanan optimal untuk
-            menjaga kualitas produk. Didukung armada pengiriman yang handal untuk distribusi ke seluruh Indonesia.</p>
-          <div class="dist-stats">
-            <div class="dist-stat">
-              <div class="number" data-count="34">0</div>
-              <div class="label">Kota Jangkauan</div>
-            </div>
-            <div class="dist-stat">
-              <div class="number" data-count="500">0+</div>
-              <div class="label">Produk SKU</div>
-            </div>
-            <div class="dist-stat">
-              <div class="number" data-count="1000">0+</div>
-              <div class="label">Mitra Retail</div>
-            </div>
-            <div class="dist-stat">
-              <div class="number" data-count="8">0</div>
-              <div class="label">Tahun Beroperasi</div>
-            </div>
-          </div>
+      <div class="branch-slider-container reveal fade-up">
+        <div class="branch-slider" id="branchSlider">
+          <!-- Dynamic branches will be injected here -->
         </div>
       </div>
     </div>
@@ -290,25 +397,25 @@
   <section class="section certifications" id="sertifikasi">
     <div class="container">
       <div class="section-header reveal fade-up">
-        <div class="section-tag"><i class="fas fa-certificate"></i> Sertifikasi</div>
-        <h2>Jaminan Kualitas & Keamanan</h2>
-        <p>Seluruh produk kami telah melewati standar keamanan dan sertifikasi pemerintah.</p>
+        <div class="section-tag"><i class="fas fa-certificate"></i> <span data-i18n="cert-tag">Sertifikasi</span></div>
+        <h2 data-i18n="cert-title">Jaminan Kualitas & Keamanan</h2>
+        <p data-i18n="cert-desc">Seluruh produk kami telah melewati standar keamanan dan sertifikasi pemerintah.</p>
       </div>
       <div class="cert-grid">
         <div class="cert-card reveal fade-up">
-          <div class="cert-icon"><i class="fas fa-star-and-crescent"></i></div>
-          <h3>Sertifikat Halal</h3>
-          <p>Semua produk bersertifikat halal dari MUI, menjamin kehalalan untuk konsumen Muslim Indonesia.</p>
+          <div class="cert-icon"><img src="assets/images/icon/halal.png" alt="Sertifikat Halal" class="cert-img"></div>
+          <h3 data-i18n="cert-halal-title">Sertifikat Halal</h3>
+          <p data-i18n="cert-halal-desc">Semua produk bersertifikat halal dari MUI, menjamin kehalalan untuk konsumen Muslim Indonesia.</p>
         </div>
         <div class="cert-card reveal fade-up">
-          <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3>Izin Edar BPOM</h3>
-          <p>Terdaftar dan diawasi oleh BPOM RI, menjamin keamanan dan kelayakan konsumsi produk.</p>
+          <div class="cert-icon"><img src="assets/images/icon/bpom.png" alt="Izin Edar BPOM" class="cert-img"></div>
+          <h3 data-i18n="cert-bpom-title">Izin Edar BPOM</h3>
+          <p data-i18n="cert-bpom-desc">Terdaftar dan diawasi oleh BPOM RI, menjamin keamanan dan kelayakan konsumsi produk.</p>
         </div>
         <div class="cert-card reveal fade-up">
-          <div class="cert-icon"><i class="fas fa-check-double"></i></div>
-          <h3>Standar Internasional</h3>
-          <p>Produk diproduksi sesuai standar internasional dengan quality control ketat dari negara asal.</p>
+          <div class="cert-icon"><img src="assets/images/icon/world.png" alt="Standar Internasional" class="cert-img"></div>
+          <h3 data-i18n="cert-std-title">Standar Internasional</h3>
+          <p data-i18n="cert-std-desc">Produk diproduksi sesuai standar internasional dengan quality control ketat dari negara asal.</p>
         </div>
       </div>
     </div>
@@ -318,78 +425,82 @@
   <section class="section contact" id="kontak">
     <div class="container">
       <div class="section-header reveal fade-up">
-        <div class="section-tag"><i class="fas fa-envelope"></i> Kontak</div>
-        <h2>Hubungi Kami</h2>
-        <p>Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut tentang produk dan kerjasama distribusi.
+        <div class="section-tag"><i class="fas fa-envelope"></i> <span data-i18n="contact-tag">Kontak</span></div>
+        <h2 data-i18n="contact-title">Hubungi Kami</h2>
+        <p data-i18n="contact-desc-idx">Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut tentang produk dan kerjasama distribusi.
         </p>
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal fade-right">
-          <div class="contact-card">
+          <a href="https://maps.app.goo.gl/4BL2Duej9Yzwvrac8" target="_blank" class="contact-card">
             <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
             <div>
-              <h4>Alamat Head Office</h4>
+              <h4 data-i18n="contact-office-title">Alamat Head Office</h4>
               <p>Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia
               </p>
             </div>
-          </div>
+          </a>
           <div class="contact-card">
             <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
             <div>
-              <h4>Telepon</h4>
+              <h4 data-i18n="contact-phone-title">Telepon</h4>
               <p>+62 812-9500-1778</p>
             </div>
           </div>
           <div class="contact-card">
             <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
             <div>
-              <h4>WhatsApp</h4>
-              <p><a href="https://wa.me/6281295001778" target="_blank" style="color:var(--accent);font-weight:600;">Chat
+              <h4 data-i18n="contact-whatsapp-title">WhatsApp</h4>
+              <p><a href="https://wa.me/6281295001778" target="_blank" style="color:var(--accent);font-weight:600;" data-i18n="contact-whatsapp-link">Chat
                   via WhatsApp</a></p>
             </div>
           </div>
           <div class="contact-card">
             <div class="icon-box"><i class="fas fa-clock"></i></div>
             <div>
-              <h4>Jam Operasional</h4>
-              <p>Senin - Jumat: 08:00 - 17:00 WIB<br>Sabtu: 08:00 - 12:00 WIB</p>
+              <h4 data-i18n="contact-hours-title">Jam Operasional</h4>
+              <p data-i18n="contact-hours-desc">Senin - Jumat: 08:00 - 17:00 WIB<br>Sabtu: 08:00 - 12:00 WIB</p>
             </div>
           </div>
         </div>
         <div class="contact-map reveal fade-left delay-200">
-          <iframe
-            src="https://maps.google.com/maps?q=-6.1528425245516996,106.69466594009853&hl=id&z=17&output=embed"
+          <iframe src="https://maps.google.com/maps?q=-6.152833431830808,106.69462406229&hl=id&z=17&output=embed"
             allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-about">
           <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-logo-img">
-          <p>Perusahaan importir dan distributor produk makanan & minuman berkualitas tinggi dari brand internasional
+          <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan & minuman berkualitas tinggi dari brand internasional
             terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
         </div>
         <div>
-          <h4>Navigasi</h4>
+          <h4 data-i18n="footer-nav-title">Navigasi</h4>
           <ul>
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#tentang">Tentang Kami</a></li>
             <li><a href="#produk">Produk</a></li>
+            <li><a href="javascript:void(0)" onclick="openKatalog()">Katalog</a></li>
             <li><a href="#distribusi">Distribusi</a></li>
           </ul>
         </div>
         <div>
           <h4>Produk</h4>
           <ul>
-            <li><a href="#produk">Makanan Ringan</a></li>
+            <li><a href="#produk">Snack</a></li>
             <li><a href="#produk">Biskuit & Cookies</a></li>
             <li><a href="#produk">Wafer</a></li>
+            <li><a href="#produk">Kue & Pastry</a></li>
             <li><a href="#produk">Minuman</a></li>
+            <li><a href="#produk">Permen</a></li>
+            <li><a href="#produk">Condiments & Sauces</a></li>
+            <li><a href="#produk">Instant Noodle</a></li>
+            <li><a href="#produk">Vegelicious</a></li>
           </ul>
         </div>
         <div>
@@ -407,20 +518,290 @@
       <div class="footer-bottom">
         <p>&copy; 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
         <div class="social-links">
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/6281295001778" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i
+              class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i
+              class="fab fa-whatsapp"></i></a>
         </div>
       </div>
     </div>
   </footer>
-  
+
   <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
     <i class="fas fa-chevron-up"></i>
   </div>
 
+  <!-- ==================== KATALOG MODAL ==================== -->
+  <div class="catalog-modal-overlay" id="catalogModal">
+    <div class="catalog-modal-container">
+      <div class="catalog-modal-header">
+        <div class="modal-info">
+          <i class="fas fa-file-pdf modal-icon"></i>
+          <div>
+            <h3>Katalog Produk 2026</h3>
+            <p>PT Mitra Abadi Sindomas</p>
+          </div>
+        </div>
+        <div class="modal-controls">
+          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog"
+            id="btnDownloadKatalog">
+            <i class="fas fa-download"></i> <span class="btn-text">Download Katalog</span>
+          </a>
+          <button class="modal-close-btn" onclick="closeKatalog()" aria-label="Close Modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="catalog-modal-content"
+        style="background:#e5e7eb; overflow:hidden; display:flex; flex-direction:column; contain: content;">
+        <div class="pdf-loading" id="pdfLoading">
+          <div class="loader"></div>
+          <p>Sedang memuat katalog...</p>
+        </div>
+        <div id="pdfViewer" style="display:none; flex-direction:column; height:100%; width:100%;">
+          <div class="pdf-controls"
+            style="display:flex; justify-content:center; align-items:center; gap:15px; padding:12px; background:#111; color:#fff; flex-shrink:0; border-bottom:1px solid #333;">
+            <button id="pdfPrev" class="btn-primary" style="padding:6px 12px; font-size:14px;"><i
+                class="fas fa-chevron-left"></i> Prev</button>
+            <span style="font-weight:600; min-width:100px; text-align:center;">Halaman: <span id="pdfPageNum">1</span> /
+              <span id="pdfPageCount">?</span></span>
+            <button id="pdfNext" class="btn-primary" style="padding:6px 12px; font-size:14px;">Next <i
+                class="fas fa-chevron-right"></i></button>
+          </div>
+          <div style="flex-grow:1; overflow:auto; display:flex; justify-content:center; align-items:flex-start; padding:10px; background:#333;">
+            <canvas id="pdfCanvas"
+              style="box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width:100%; height:auto; display:block;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // ==========================================
+    // DYNAMIC CONTENT LOADER (from Admin Dashboard)
+    // ==========================================
+    (async function loadDynamicContent() {
+      // Helper to load data with priority: File > LocalStorage
+      async function getCMSData(fileKey, lsKey) {
+        // Try loading from file first
+        try {
+          const resp = await fetch(`/database/cms/${fileKey}.json`);
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data) {
+              // Cache to localStorage for offline/faster access next time
+              localStorage.setItem(lsKey, JSON.stringify(data));
+              return data;
+            }
+          }
+        } catch (e) {}
+        
+        // Fallback to localStorage
+        try {
+          const stored = localStorage.getItem(lsKey);
+          if (stored) return JSON.parse(stored);
+        } catch (e) {}
+        
+        return null;
+      }
+
+      // --- Company Profile ---
+      const c = await getCMSData('company_info', 'mas_company_info');
+      if (c) {
+        try {
+          const aboutH2 = document.querySelector('.about-content h2');
+          if (aboutH2 && c.name) aboutH2.textContent = c.name;
+          const aboutPs = document.querySelectorAll('.about-content > p');
+          if (aboutPs[0] && c.desc1) aboutPs[0].innerHTML = c.desc1;
+          if (aboutPs[1] && c.desc2) aboutPs[1].innerHTML = c.desc2;
+          const aboutImg = document.querySelector('.about-image img');
+          if (aboutImg && c.imageData) aboutImg.src = c.imageData;
+          if (c.features && c.features.length === 4) {
+            const featureEls = document.querySelectorAll('.about-feature');
+            c.features.forEach((f, i) => {
+              if (featureEls[i]) {
+                const icon = featureEls[i].querySelector('.icon i');
+                const h4 = featureEls[i].querySelector('h4');
+                const p = featureEls[i].querySelector('p');
+                if (icon && f.icon) icon.className = f.icon;
+                if (h4 && f.title) h4.textContent = f.title;
+                if (p && f.desc) p.textContent = f.desc;
+              }
+            });
+          }
+        } catch(e) { console.error('Company render error:', e); }
+      }
+
+      // --- Statistics ---
+      const s = await getCMSData('statistics', 'mas_statistics');
+      if (s) {
+        try {
+          const heroStats = document.querySelectorAll('.stats-grid .stat-item');
+          if (heroStats[0] && s.heroYears) {
+            const num = heroStats[0].querySelector('.counter');
+            if (num) { num.dataset.count = s.heroYears; num.textContent = '0'; }
+          }
+          if (heroStats[1] && s.heroProducts) {
+            const num = heroStats[1].querySelector('.counter');
+            if (num) { num.dataset.count = s.heroProducts; num.textContent = '0'; }
+          }
+          if (heroStats[2] && s.heroCities) {
+            const num = heroStats[2].querySelector('.counter');
+            if (num) { num.dataset.count = s.heroCities; num.textContent = '0'; }
+          }
+          // Distribution stats
+          const distStats = document.querySelectorAll('.dist-stat-premium');
+          if (distStats[0] && s.distCities) {
+            const num = distStats[0].querySelector('.number');
+            if (num) { num.dataset.count = s.distCities; num.textContent = s.distCities; }
+          }
+          if (distStats[1] && s.distWarehouse) {
+            const num = distStats[1].querySelector('.number');
+            if (num) { num.dataset.count = s.distWarehouse; num.textContent = s.distWarehouse.toLocaleString() + '+'; }
+          }
+          if (distStats[2] && s.distSKU) {
+            const num = distStats[2].querySelector('.number');
+            if (num) { num.dataset.count = s.distSKU; num.textContent = s.distSKU + '+'; }
+          }
+          // Distribution description
+          const distHeader = document.querySelector('.distribution .section-header');
+          if (distHeader) {
+            const distPs = distHeader.querySelectorAll('p');
+            if (distPs[0] && s.distDesc1) distPs[0].textContent = s.distDesc1;
+            if (distPs[1] && s.distDesc2) distPs[1].textContent = s.distDesc2;
+          }
+        } catch(e) { console.error('Stats render error:', e); }
+      }
+
+      // --- Categories ---
+      const cats = await getCMSData('categories', 'mas_categories');
+      if (cats) {
+        try {
+          const cards = document.querySelectorAll('.product-grid .product-card');
+          cats.forEach((c, i) => {
+            if (cards[i]) {
+              const img = cards[i].querySelector('.product-card-image img');
+              const h3 = cards[i].querySelector('.product-card-body h3');
+              const p = cards[i].querySelector('.product-card-body p');
+              if (img && (c.imageData || c.image)) img.src = c.imageData || c.image;
+              if (h3 && c.title) h3.textContent = c.title;
+              if (p && c.desc) p.textContent = c.desc;
+            }
+          });
+        } catch(e) { console.error('Categories render error:', e); }
+      }
+
+      // --- Certifications ---
+      const certs = await getCMSData('certifications', 'mas_certifications');
+      if (certs) {
+        try {
+          const certCards = document.querySelectorAll('.cert-grid .cert-card');
+          certs.forEach((c, i) => {
+            if (certCards[i]) {
+              const img = certCards[i].querySelector('.cert-icon img');
+              const h3 = certCards[i].querySelector('h3');
+              const p = certCards[i].querySelector('p');
+              if (img && (c.imageData || c.image)) img.src = c.imageData || c.image;
+              if (h3 && c.title) h3.textContent = c.title;
+              if (p && c.desc) p.textContent = c.desc;
+            }
+          });
+        } catch(e) { console.error('Cert render error:', e); }
+      }
+
+      // --- Contact Info ---
+      const ci = await getCMSData('contact_info', 'mas_contact_info');
+      if (ci) {
+        try {
+          // Address
+          const addrP = document.querySelector('.contact-info .contact-card:nth-child(1) p');
+          if (addrP && ci.address) addrP.innerHTML = ci.address.replace(/\n/g, '<br>');
+          // Phone
+          const phoneP = document.querySelector('.contact-info .contact-card:nth-child(2) p');
+          if (phoneP && ci.phone) phoneP.textContent = ci.phone;
+          // WhatsApp
+          const waLink = document.querySelector('.contact-info .contact-card:nth-child(3) a');
+          if (waLink && ci.whatsapp) waLink.href = 'https://wa.me/' + ci.whatsapp;
+          // Hours
+          const hoursP = document.querySelector('.contact-info .contact-card:nth-child(4) p');
+          if (hoursP && ci.hours1) hoursP.innerHTML = ci.hours1 + (ci.hours2 ? '<br>' + ci.hours2 : '');
+          // Maps
+          const iframe = document.querySelector('.contact-map iframe');
+          if (iframe && ci.mapsUrl) iframe.src = ci.mapsUrl;
+          // Nav CTA phone
+          const navCTA = document.querySelector('.nav-cta');
+          if (navCTA && ci.phone) navCTA.href = 'tel:' + ci.phone.replace(/\s/g, '');
+          // Instagram links
+          if (ci.instagram) {
+            document.querySelectorAll('a[href*="instagram.com"]').forEach(a => { a.href = ci.instagram; });
+          }
+          // WhatsApp links in footer
+          if (ci.whatsapp) {
+            document.querySelectorAll('a[href*="wa.me"]').forEach(a => { a.href = 'https://wa.me/' + ci.whatsapp; });
+          }
+          // Phone links in footer
+          if (ci.phone) {
+            document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = 'tel:' + ci.phone.replace(/\s/g, ''); });
+          }
+        } catch(e) { console.error('Contact render error:', e); }
+      }
+
+      // --- Footer ---
+      const fi = await getCMSData('footer_info', 'mas_footer_info');
+      if (fi) {
+        try {
+          const footerDesc = document.querySelector('.footer-about p');
+          if (footerDesc && fi.desc) footerDesc.textContent = fi.desc;
+          const footerCopy = document.querySelector('.footer-bottom p');
+          if (footerCopy && fi.year && fi.company) {
+            footerCopy.innerHTML = `&copy; ${fi.year} ${fi.company}. All rights reserved.`;
+          }
+        } catch(e) { console.error('Footer render error:', e); }
+      }
+
+      // --- Partners ---
+      const pData = await getCMSData('partners', 'mas_partners');
+      if (pData) {
+        try {
+          const pGrid = document.getElementById('partnerGrid');
+          const pTabs = document.querySelectorAll('.partner-tab');
+          
+          function renderPartnersSection(category = 'all') {
+            const filtered = category === 'all' 
+              ? pData 
+              : pData.filter(p => p.category === category);
+              
+            pGrid.innerHTML = filtered.map(p => {
+              const imgSrc = p.imageData || p.image;
+              const initials = p.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+              return `
+                <div class="partner-card reveal fade-up visible">
+                  <div class="partner-logo-wrapper">
+                    ${imgSrc 
+                      ? `<img src="${imgSrc}" alt="${p.name}" class="partner-logo">` 
+                      : `<div class="partner-fallback">${initials}</div>`
+                    }
+                  </div>
+                  <span class="partner-name">${p.name}</span>
+                </div>
+              `;
+            }).join('');
+          }
+
+          renderPartnersSection('NATIONAL KEY ACCOUNT');
+
+          pTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+              pTabs.forEach(t => t.classList.remove('active'));
+              tab.classList.add('active');
+              renderPartnersSection(tab.dataset.category);
+            });
+          });
+        } catch(e) { console.error('Partners render error:', e); }
+      }
+    })();
+
     // Elements
     const navbar = document.getElementById('navbar');
     const navLinks = document.getElementById('navLinks');
@@ -431,57 +812,108 @@
     const searchContainer = document.getElementById('searchContainer');
     const searchClose = document.getElementById('searchClose');
     const searchInput = document.getElementById('searchInput');
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const langIndicator = document.getElementById('langIndicator');
 
     // --- Search Logic ---
+    let searchProducts = [];
+    const searchResults = document.getElementById('searchResults');
+
+    // Load products for search
+    function initSearchData() {
+      Papa.parse("database/produk.csv", {
+        download: true, header: true,
+        complete: (results) => {
+          searchProducts = results.data.filter(p => p.name);
+        },
+        error: () => {
+          // Fallback if csv fails
+          searchProducts = [];
+        }
+      });
+    }
+    initSearchData();
+
     searchToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      searchContainer.classList.add('active');
-      navLinks.classList.add('search-active');
-      searchToggle.style.opacity = '0';
-      searchInput.focus();
+      const isActive = searchContainer.classList.toggle('active');
+      searchToggle.classList.toggle('active');
+
+      const icon = searchToggle.querySelector('i');
+      if (isActive) {
+        icon.classList.replace('fa-search', 'fa-times');
+        searchInput.focus();
+      } else {
+        icon.classList.replace('fa-times', 'fa-search');
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+      }
     });
 
-    searchClose.addEventListener('click', (e) => {
-      e.stopPropagation();
-      closeSearch();
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      
+      if (!query) {
+        searchResults.innerHTML = '';
+        return;
+      }
+
+      const matches = searchProducts.filter(p => 
+        p.name.toLowerCase().includes(query) || 
+        (p.brand && p.brand.toLowerCase().includes(query)) ||
+        (p.category && p.category.toLowerCase().includes(query))
+      ).slice(0, 6);
+
+      if (matches.length === 0) {
+        searchResults.innerHTML = `
+          <div class="search-no-results">
+            <i class="fas fa-search"></i>
+            Tidak ada produk ditemukan
+          </div>`;
+        return;
+      }
+
+      searchResults.innerHTML = matches.map(p => `
+        <div class="search-result-item" onclick="goToProduct('${p.id}')">
+          <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img">
+          <div class="search-result-info">
+            <span class="search-result-title">${p.name}</span>
+            <span class="search-result-meta">${p.brand || ''} • ${p.category || ''}</span>
+          </div>
+        </div>
+      `).join('');
     });
+
+    function goToProduct(id) {
+      window.location.href = `produk.html?search=${id}`;
+    }
 
     function closeSearch() {
       searchContainer.classList.remove('active');
-      navLinks.classList.remove('search-active');
-      searchToggle.style.opacity = '1';
+      searchToggle.classList.remove('active');
+      searchToggle.querySelector('i').classList.replace('fa-times', 'fa-search');
       searchInput.value = '';
+      searchResults.innerHTML = '';
     }
 
     document.addEventListener('click', (e) => {
-      if (!searchWrapper.contains(e.target) && searchContainer.classList.contains('active')) closeSearch();
+      if (!searchWrapper.contains(e.target) && searchContainer.classList.contains('active')) {
+        closeSearch();
+      }
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && searchContainer.classList.contains('active')) closeSearch();
+      if (e.key === 'Escape' && searchContainer.classList.contains('active')) {
+        closeSearch();
+      }
     });
 
     // --- Navigation Indicators ---
     const navIndicator = document.getElementById('navIndicator');
     const navItems = document.querySelectorAll('.nav-item');
-    const langIndicator = document.getElementById('langIndicator');
-    const langBtns = document.querySelectorAll('.lang-btn');
-
-    function updateIndicator(indicator, el) {
-      if (!indicator || !el || window.innerWidth <= 768) {
-        if (indicator) indicator.style.opacity = '0';
-        return;
-      }
-      indicator.style.opacity = '1';
-      indicator.style.width = `${el.offsetWidth}px`;
-      indicator.style.left = `${el.offsetLeft}px`;
-    }
-
     function initIndicators() {
       const activeNavItem = document.querySelector('.nav-item.active') || navItems[0];
-      const activeLangBtn = document.querySelector('.lang-btn.active') || langBtns[0];
       updateIndicator(navIndicator, activeNavItem);
-      updateIndicator(langIndicator, activeLangBtn);
     }
 
     setTimeout(initIndicators, 300);
@@ -500,26 +932,155 @@
       updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[0]);
     });
 
+    // --- Translations Dictionary ---
+    const enTranslations = {
+      '.nav-links a[href="#beranda"]': 'Home',
+      '.nav-links a[href="#tentang"]': 'About Us',
+      '.nav-links a[href="produk.html"]': 'Products',
+      '.nav-links a[onclick="openKatalog()"]': 'Catalog',
+      '.nav-links a[href="#distribusi"]': 'Distribution',
+      '.nav-links a[href="#sertifikasi"]': 'Certifications',
+      '.nav-cta .cta-text': 'Contact Us',
+      '.hero-badge': '<span class="dot"></span> Trusted Since 2016',
+      '.hero h1': 'Distributor & Importer of <span class="highlight">High-Quality Food</span> in Indonesia',
+      '.hero p': 'PT Mitra Abadi Sindomas brings high-quality imported food and beverages from leading international brands with guaranteed Halal and BPOM certification.',
+      '.hero-buttons .btn-primary .hero-btn-text': ' View Products',
+      '.hero-buttons .btn-outline .hero-btn-text': ' Contact Us',
+      '.hero-stats .stat-item:nth-child(1) .stat-label': 'Years Experience',
+      '.hero-stats .stat-item:nth-child(2) .stat-label': 'Products Distributed',
+      '.hero-stats .stat-item:nth-child(3) .stat-label': 'Cities Reached',
+      '.about .section-tag': '<i class="fas fa-building"></i> About Us',
+      '.about h2': 'PT Mitra Abadi Sindomas',
+      '.about p:nth-of-type(1)': 'Is an international & national company engaged in general trading, export, import, and distribution. Since 2016, we have partnered with leading international brands to bring high-quality imported food and beverages.',
+      '.about p:nth-of-type(2)': 'All our products are <strong>Halal</strong> certified and registered with <strong>BPOM</strong>, ensuring safety and quality for Indonesian consumers.',
+      '.about-feature:nth-child(1) h4': 'Trusted Importer',
+      '.about-feature:nth-child(1) p': 'Official partner of international brands',
+      '.about-feature:nth-child(2) h4': 'Halal & BPOM',
+      '.about-feature:nth-child(2) p': 'Complete & guaranteed certification',
+      '.about-feature:nth-child(3) h4': 'National Distribution',
+      '.about-feature:nth-child(3) p': 'Reach across Indonesia',
+      '.products .section-tag': '<i class="fas fa-utensils"></i> Our Products',
+      '.products .section-header h2': 'Featured Product Categories',
+      '.products .section-header p': 'We distribute a variety of high quality food and beverage products from top international brands.',
+      '.product-grid .product-card:nth-child(1) h3': 'Snacks',
+      '.product-grid .product-card:nth-child(1) p': 'Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring, Green Pea Snack and more.',
+      '.product-grid .product-card:nth-child(2) h3': 'Biscuits & Cookies',
+      '.product-grid .product-card:nth-child(2) p': 'Assorted biscuits, cream crackers, and premium cookies from international brands.',
+      '.product-grid .product-card:nth-child(3) h3': 'Wafers',
+      '.product-grid .product-card:nth-child(3) p': 'Chocolate, vanilla wafers, and various flavors from top manufacturers.',
+      '.product-grid .product-card:nth-child(4) h3': 'Cakes & Pastry',
+      '.product-grid .product-card:nth-child(4) p': 'Swiss rolls, layer cakes, muffins and assorted premium packaged cakes.',
+      '.product-grid .product-card:nth-child(5) h3': 'Beverages',
+      '.product-grid .product-card:nth-child(5) p': 'A variety of quality drinks including juice, tea, and fruit-flavored beverages.',
+      '.product-grid .product-card:nth-child(6) h3': 'Candy',
+      '.product-grid .product-card:nth-child(6) p': 'Various kinds of candy and sweets with refreshing flavors.',
+      '.product-grid .product-card:nth-child(7) h3': 'Condiments & Sauces',
+      '.product-grid .product-card:nth-child(7) p': 'Sauces, seasonings, and food complements to enhance flavor.',
+      '.product-grid .product-card:nth-child(8) h3': 'Instant Noodle',
+      '.product-grid .product-card:nth-child(8) p': 'Instant noodles with various flavor choices from top international brands.',
+      '.product-grid .product-card:nth-child(9) h3': 'Vegelicious',
+      '.product-grid .product-card:nth-child(9) p': 'Healthy and highly nutritious food options based on quality vegetables.',
+      '.products .btn-primary': '<i class="fas fa-th-large"></i> View All Products',
+      '.brands .section-tag': '<i class="fas fa-star"></i> Brand Partners',
+      '.brands .section-header h2': 'Our International Brands',
+      '.brands .section-header p': 'We are official distributors of the world\'s leading food brands.',
+      '.distribution .section-tag': '<i class="fas fa-truck"></i> Distribution Network',
+      '.distribution .section-header h2': 'Reach Across Indonesia',
+      '.distribution .section-header p': 'Our extensive distribution network ensures product availability across Indonesia.',
+      '.dist-content h3': 'Modern & Professional Infrastructure',
+      '.dist-content p': 'We have modern warehouse facilities equipped with cooling systems and optimal storage to maintain product quality. Supported by a reliable delivery fleet for distribution throughout Indonesia.',
+      '.dist-stats .dist-stat:nth-child(1) .label': 'Cities Reached',
+      '.dist-stats .dist-stat:nth-child(2) .label': 'Product SKUs',
+      '.dist-stats .dist-stat:nth-child(3) .label': 'Retail Partners',
+      '.dist-stats .dist-stat:nth-child(4) .label': 'Years Operating',
+      '.certifications .section-tag': '<i class="fas fa-certificate"></i> Certifications',
+      '.certifications .section-header h2': 'Quality & Safety Assurance',
+      '.certifications .section-header p': 'All our products have passed government safety standards and certifications.',
+      '.cert-grid .cert-card:nth-child(1) h3': 'Halal Certificate',
+      '.cert-grid .cert-card:nth-child(1) p': 'All products are halal certified by MUI, ensuring halal status for Indonesian Muslim consumers.',
+      '.cert-grid .cert-card:nth-child(2) h3': 'BPOM License',
+      '.cert-grid .cert-card:nth-child(2) p': 'Registered and monitored by the Indonesian FDA (BPOM), ensuring safe product consumption.',
+      '.cert-grid .cert-card:nth-child(3) h3': 'International Standards',
+      '.cert-grid .cert-card:nth-child(3) p': 'Products are manufactured according to international standards with passing strict quality control.',
+      '.contact .section-tag': '<i class="fas fa-envelope"></i> Contact',
+      '.contact .section-header h2': 'Get In Touch',
+      '.contact .section-header p': 'Interested in partnering? Contact us for more information about our products and distribution cooperation.',
+      '.contact-info .contact-card:nth-child(1) h4': 'Head Office Address',
+      '.contact-info .contact-card:nth-child(2) h4': 'Phone',
+      '.contact-info .contact-card:nth-child(4) h4': 'Operational Hours',
+      '.contact-info .contact-card:nth-child(4) p': 'Monday - Friday: 08:00 - 17:00 WIB<br>Saturday: 08:00 - 12:00 WIB',
+      '.footer-about p': 'An importer and distributor of high-quality food & beverage products from leading international brands, with a nationwide distribution network in Indonesia.',
+      '.footer-grid div:nth-child(2) h4': 'Navigation',
+      '.footer-grid div:nth-child(2) li:nth-child(1) a': 'Home',
+      '.footer-grid div:nth-child(2) li:nth-child(2) a': 'About Us',
+      '.footer-grid div:nth-child(2) li:nth-child(3) a': 'Products',
+      '.footer-grid div:nth-child(2) li:nth-child(4) a': 'Catalog',
+      '.footer-grid div:nth-child(2) li:nth-child(5) a': 'Distribution',
+      '.footer-grid div:nth-child(3) h4': 'Products',
+      '.footer-grid div:nth-child(3) li:nth-child(1) a': 'Snacks',
+      '.footer-grid div:nth-child(3) li:nth-child(2) a': 'Biscuits & Cookies',
+      '.footer-grid div:nth-child(3) li:nth-child(3) a': 'Wafers',
+      '.footer-grid div:nth-child(3) li:nth-child(4) a': 'Beverages',
+      '.footer-grid div:nth-child(4) h4': 'Contact',
+      '.footer-grid div:nth-child(4) li:nth-child(3) a': '<i class="fas fa-map-marker-alt" style="margin-right:8px;color:var(--accent)"></i>West Jakarta',
+      '.catalog-modal-header .modal-info h3': 'Product Catalog 2026',
+      '.btn-download-katalog .btn-text': 'Download Catalog'
+    };
+
+    const idTranslations = {};
+    Object.keys(enTranslations).forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el) idTranslations[sel] = el.innerHTML;
+    });
+
+    function applyTranslation(lang) {
+      const dict = lang === 'en' ? enTranslations : idTranslations;
+      Object.keys(dict).forEach(sel => {
+        const el = document.querySelector(sel);
+        if (el) el.innerHTML = dict[sel];
+      });
+      localStorage.setItem('mas_lang', lang);
+      langBtns.forEach(b => b.classList.remove('active'));
+      const activeBtns = document.querySelectorAll(`.lang-btn[data-lang="${lang}"]`);
+      activeBtns.forEach(btn => {
+        btn.classList.add('active');
+      });
+      const firstActive = document.querySelector(`.lang-switch.desktop-only .lang-btn[data-lang="${lang}"]`);
+      if (firstActive && typeof langIndicator !== 'undefined' && window.innerWidth > 768) {
+        updateIndicator(langIndicator, firstActive);
+      }
+    }
+
+    const savedLang = localStorage.getItem('mas_lang');
+    if (savedLang === 'en') {
+      setTimeout(() => applyTranslation('en'), 50);
+    }
+
     langBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        langBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        updateIndicator(langIndicator, btn);
-        langIndicator.style.transform = 'translateY(-50%) scale(0.95)';
-        setTimeout(() => langIndicator.style.transform = 'translateY(-50%) scale(1)', 150);
+        applyTranslation(btn.getAttribute('data-lang'));
+        if (langIndicator && window.innerWidth > 768) {
+          langIndicator.style.transform = 'translateY(-50%) scale(0.95)';
+          setTimeout(() => langIndicator.style.transform = 'translateY(-50%) scale(1)', 150);
+        }
       });
     });
 
     // --- Mobile Nav & Scroll Logic ---
+    const navOverlay = document.getElementById('navOverlay');
     function toggleNav() {
       navLinks.classList.toggle('active');
       mobileToggle.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
     }
 
     document.querySelectorAll('.nav-links a').forEach(a => {
       a.addEventListener('click', () => {
         navLinks.classList.remove('active');
         mobileToggle.classList.remove('active');
+        navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
       });
     });
 
@@ -532,19 +1093,21 @@
     // --- Animations & Interaction ---
     const staggerGrids = document.querySelectorAll('.product-grid, .brand-grid, .cert-grid');
     staggerGrids.forEach(grid => {
-       Array.from(grid.children).forEach((child, index) => {
-          child.style.transitionDelay = `${index * 80}ms`;
-       });
+      Array.from(grid.children).forEach((child, index) => {
+        child.style.transitionDelay = `${index * 80}ms`;
+      });
     });
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+        } else {
+          // Remove class when element leaves view to allow repeat animation
+          entry.target.classList.remove('visible');
         }
       });
-    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
@@ -558,7 +1121,7 @@
         const stepTime = 20;
         const steps = duration / stepTime;
         const stepValue = target / steps;
-        
+
         const timer = setInterval(() => {
           current += stepValue;
           if (current >= target) {
@@ -575,13 +1138,241 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           animateCounters();
-          counterObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.2 });
 
     const statsSection = document.querySelector('.hero-stats');
     if (statsSection) counterObserver.observe(statsSection);
+    
+    // Also observe new distribution stats
+    const distStatsRow = document.querySelector('.dist-stats-row');
+    if (distStatsRow) counterObserver.observe(distStatsRow);
+
+    // --- Dynamic Brands Logic ---
+    const brandGrid = document.getElementById('brandGrid');
+    const brandTabContainer = document.getElementById('brandTabContainer');
+    const brandSearchInput = document.getElementById('brandSearchInput');
+
+    
+    let allBrandsData = [];
+    let currentBrandCat = 'all';
+    let currentBrandQuery = '';
+    
+    // Slider state
+    let scrollPos = 0;
+    let isHovering = false;
+    let scrollInterval;
+
+    const fallbackBrands = [
+      "ORIENTAL", "JACKER", "FUDO", "ZESS", "WIN2", "KOLAKIDS", "POTATO CRIPS", "BAKE STORY",
+      "TOMO", "IBUMIE", "TELLY", "VEGGILICIOUS", "A-TASTE", "HUANG XIAO GU!", "VETRUE",
+      "HUI XIANG ZHAI ZI", "KISS DELICIAS", "YAMAMOTO KAWAHIRO", "MIKKU",
+      "TAWANDANG", "SWECCO", "XIDUODONG", "SHUANG-JIAO", "MASTER JH"
+    ].map((name, i) => ({ 
+      id: i + 1, name: name, logo: "", 
+      category: i < 4 ? "Biscuit" : (i < 8 ? "Beverages" : (i < 12 ? "Candy" : "Wafer & Chocolate")) 
+    }));
+
+
+    async function loadBrands() {
+      // Load Categories first
+      try {
+        const catResp = await fetch('database/cms/categories.json');
+        if (catResp.ok) {
+          const categories = await catResp.json();
+          renderBrandTabs(categories);
+        }
+      } catch(e) { console.error('Categories load error:', e); }
+
+      let bp = null;
+
+      try {
+        const resp = await fetch('database/cms/brand_partners.json');
+        if (resp.ok) bp = await resp.json();
+      } catch(e) {}
+
+      if (!bp) {
+        const storedBrands = localStorage.getItem('mas_brand_partners');
+        if (storedBrands) {
+          try {
+            bp = JSON.parse(storedBrands);
+          } catch(e) {}
+        }
+      }
+
+      if (bp && bp.length > 0) {
+        allBrandsData = bp.map(b => ({ 
+          name: b.name, 
+          logo: b.logoData || b.logo || '', 
+          category: b.category || 'all' 
+        }));
+        applyBrandFilters();
+        return;
+      }
+
+      Papa.parse("database/brands.csv", {
+        download: true,
+        header: true,
+        complete: function (results) {
+          allBrandsData = results.data.filter(b => b.name);
+          if (allBrandsData.length === 0) allBrandsData = fallbackBrands;
+          applyBrandFilters();
+        },
+        error: function () {
+          allBrandsData = fallbackBrands;
+          applyBrandFilters();
+        }
+      });
+    }
+
+    function applyBrandFilters() {
+      let filtered = allBrandsData;
+      
+      if (currentBrandCat !== 'all') {
+        filtered = filtered.filter(b => b.category === currentBrandCat);
+      }
+      
+      if (currentBrandQuery) {
+        filtered = filtered.filter(b => b.name.toLowerCase().includes(currentBrandQuery.toLowerCase()));
+      }
+      
+      renderBrands(filtered);
+      initBrandSlider();
+    }
+
+    function renderBrands(brands) {
+      if (brands.length === 0) {
+        brandGrid.innerHTML = `<div style="padding: 40px; color: var(--gray-400);">Tidak ada brand ditemukan.</div>`;
+        return;
+      }
+
+      // Duplicate brands for seamless infinite loop (if enough brands)
+      const displayBrands = brands.length > 4 ? [...brands, ...brands] : brands;
+
+      brandGrid.innerHTML = displayBrands.map((brand, index) => {
+        const initial = brand.name.trim().charAt(0).toUpperCase();
+        const logoHtml = brand.logo && brand.logo.trim() !== ""
+          ? `<img src="${brand.logo}" alt="${brand.name}" class="brand-img">`
+          : `<div class="brand-placeholder">
+               <span class="initial">${initial}</span>
+               <span class="label">Logo</span>
+             </div>`;
+
+        return `
+          <div class="brand-card reveal zoom-in visible">
+            <div class="brand-img-container">
+              ${logoHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderBrandTabs(categories) {
+      if (!brandTabContainer) return;
+      const allBtn = `<button class="brand-tab active" data-category="all">Semua</button>`;
+      const tabsHtml = categories.map(cat => `
+        <button class="brand-tab" data-category="${cat.title}">${cat.title}</button>
+      `).join('');
+      
+      brandTabContainer.innerHTML = allBtn + tabsHtml;
+
+      // Re-attach listeners to new tabs
+      const brandTabs = brandTabContainer.querySelectorAll('.brand-tab');
+      brandTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          brandTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentBrandCat = tab.dataset.category;
+          applyBrandFilters();
+        });
+      });
+    }
+
+    function initBrandSlider() {
+      clearInterval(scrollInterval);
+      scrollPos = 0;
+      brandGrid.style.transform = `translateX(0)`;
+
+      const wrapper = document.querySelector('.brand-grid-wrapper');
+      if (!wrapper) return;
+
+      scrollInterval = setInterval(() => {
+        if (!isHovering) {
+          scrollPos += 0.8;
+          const maxScroll = brandGrid.scrollWidth / 2;
+          if (scrollPos >= maxScroll && allBrandsData.length > 4) {
+             scrollPos = 0;
+          }
+          brandGrid.style.transform = `translateX(-${scrollPos}px)`;
+        }
+      }, 30);
+
+      // Mouse events for desktop
+      brandGrid.addEventListener('mouseenter', () => isHovering = true);
+      brandGrid.addEventListener('mouseleave', () => isHovering = false);
+      
+      // Touch events for mobile
+      let touchStartX = 0;
+      brandGrid.addEventListener('touchstart', (e) => {
+        isHovering = true;
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      brandGrid.addEventListener('touchend', () => {
+        setTimeout(() => isHovering = false, 2000);
+      }, { passive: true });
+    }
+
+    document.getElementById('brandNext')?.addEventListener('click', () => {
+      const step = 260;
+      scrollPos += step;
+      const maxScroll = brandGrid.scrollWidth / 2;
+      if (scrollPos > maxScroll) scrollPos = maxScroll;
+      brandGrid.style.transform = `translateX(-${scrollPos}px)`;
+    });
+
+    document.getElementById('brandPrev')?.addEventListener('click', () => {
+      const step = 260;
+      scrollPos = Math.max(0, scrollPos - step);
+      brandGrid.style.transform = `translateX(-${scrollPos}px)`;
+    });
+
+    document.getElementById('brandTabNavNext')?.addEventListener('click', () => {
+      if(brandTabContainer) {
+        brandTabContainer.scrollBy({ left: 150, behavior: 'smooth' });
+      }
+    });
+
+    document.getElementById('brandTabNavPrev')?.addEventListener('click', () => {
+      if(brandTabContainer) {
+        brandTabContainer.scrollBy({ left: -150, behavior: 'smooth' });
+      }
+    });
+
+    // Partner Tabs Scroll Logic
+    document.getElementById('partnerTabNavNext')?.addEventListener('click', () => {
+      const partnerTabContainer = document.getElementById('partnerTabContainer');
+      if(partnerTabContainer) {
+        partnerTabContainer.scrollBy({ left: 150, behavior: 'smooth' });
+      }
+    });
+
+    document.getElementById('partnerTabNavPrev')?.addEventListener('click', () => {
+      const partnerTabContainer = document.getElementById('partnerTabContainer');
+      if(partnerTabContainer) {
+        partnerTabContainer.scrollBy({ left: -150, behavior: 'smooth' });
+      }
+    });
+
+    if (brandSearchInput) {
+      brandSearchInput.addEventListener('input', (e) => {
+        currentBrandQuery = e.target.value;
+        applyBrandFilters();
+      });
+    }
+
+    loadBrands();
 
     // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -602,8 +1393,711 @@
         }
       });
     });
+
+    // --- Katalog Modal Logic (PDF.js) ---
+    const catalogModal = document.getElementById('catalogModal');
+    const pdfLoading = document.getElementById('pdfLoading');
+    const pdfViewer = document.getElementById('pdfViewer');
+    const pdfCanvas = document.getElementById('pdfCanvas');
+    const ctx = pdfCanvas.getContext('2d');
+
+    let pdfDoc = null;
+    let pageNum = 1;
+    let pageRendering = false;
+    let pageNumPending = null;
+    const baseScale = 1.5;
+
+    function renderPage(num) {
+      pageRendering = true;
+      pdfDoc.getPage(num).then(function (page) {
+        // Auto scale to fit mobile elegantly
+        const parentWidth = pdfCanvas.parentElement.clientWidth - 20;
+        const initialViewport = page.getViewport({ scale: 1 });
+        let scale = baseScale;
+
+        if (initialViewport.width * baseScale > parentWidth) {
+          scale = parentWidth / initialViewport.width;
+        }
+
+        const viewport = page.getViewport({ scale: scale });
+        pdfCanvas.height = viewport.height;
+        pdfCanvas.width = viewport.width;
+
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+
+        const renderTask = page.render(renderContext);
+        renderTask.promise.then(function () {
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            renderPage(pageNumPending);
+            pageNumPending = null;
+          }
+        });
+      });
+
+      document.getElementById('pdfPageNum').textContent = num;
+    }
+
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+
+    document.getElementById('pdfPrev').addEventListener('click', () => {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPage(pageNum);
+      document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
+    });
+
+    document.getElementById('pdfNext').addEventListener('click', () => {
+      if (pageNum >= pdfDoc.numPages) return;
+      pageNum++;
+      queueRenderPage(pageNum);
+      document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
+    });
+
+    function openKatalog() {
+      catalogModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      if (!pdfDoc) {
+        pdfLoading.style.display = 'flex';
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        const savedKatalog = localStorage.getItem('mas_katalog_path') || 'Catalog PTMAS 2026_compressed.pdf';
+        // Update the download link
+        const btnDownload = document.getElementById('btnDownloadKatalog');
+        if (btnDownload) {
+          btnDownload.href = 'database/asset-katalog/' + savedKatalog;
+        }
+
+        const loadingTask = pdfjsLib.getDocument('database/asset-katalog/' + savedKatalog);
+        loadingTask.promise.then(function (pdfDoc_) {
+          pdfDoc = pdfDoc_;
+          document.getElementById('pdfPageCount').textContent = pdfDoc.numPages;
+          pdfLoading.style.display = 'none';
+          pdfViewer.style.display = 'flex';
+          renderPage(pageNum);
+        }).catch(function (err) {
+          console.error("PDFJS Error: ", err);
+          pdfLoading.innerHTML = '<p>Gagal memuat katalog. Pastikan jalur file benar.</p>';
+        });
+      }
+    }
+
+    function closeKatalog() {
+      catalogModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    catalogModal.addEventListener('click', (e) => {
+      if (e.target === catalogModal) closeKatalog();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && catalogModal.classList.contains('active')) {
+        closeKatalog();
+      }
+      if (e.key === 'Escape') {
+        const promo = document.getElementById('promoModalOverlay');
+        if (promo && promo.classList.contains('active')) closePromoModal();
+      }
+    });
+
+    // --- HERO SLIDER LOGIC ---
+    const sliderContainer = document.getElementById('heroSliderContainer');
+    const heroPrev = document.getElementById('heroPrev');
+    const heroNext = document.getElementById('heroNext');
+    const heroDots = document.getElementById('heroDots');
+    
+    // Inject dynamic banners if available
+    async function initHeroSlider() {
+      let heroes = null;
+      try {
+        const resp = await fetch('database/cms/heroes.json');
+        if (resp.ok) heroes = await resp.json();
+      } catch(e) {}
+
+      if (!heroes) {
+        const storedHeroes = localStorage.getItem('mas_heroes');
+        if (storedHeroes) {
+          try {
+            heroes = JSON.parse(storedHeroes);
+          } catch (e) {}
+        }
+      }
+
+      if (heroes) {
+        try {
+          const activeHeroes = heroes.filter(h => h.active && h.imageData);
+          if (activeHeroes.length > 0 && sliderContainer) {
+            sliderContainer.innerHTML = activeHeroes.map((h, index) => 
+              `<div class="slide ${index === 0 ? 'active' : ''}"><img src="${h.imageData}" alt="${h.title}"></div>`
+            ).join('');
+            
+            // Re-initialize slides after injection
+            slides = document.querySelectorAll('.slide');
+            slideCount = slides.length;
+            initSliderControls();
+          }
+        } catch (e) {
+          console.error('Error loading heroes:', e);
+        }
+      }
+    }
+
+    let slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    let slideCount = slides.length;
+    let slideInterval;
+
+    function goToSlide(index) {
+      const dots = document.querySelectorAll('.slider-dot');
+      slides[currentSlide].classList.remove('active');
+      if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+      currentSlide = (index + slideCount) % slideCount;
+      slides[currentSlide].classList.add('active');
+      if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+      resetInterval();
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    function startInterval() { slideInterval = setInterval(nextSlide, 3000); }
+    function resetInterval() { clearInterval(slideInterval); startInterval(); }
+
+    if (heroNext) heroNext.addEventListener('click', nextSlide);
+    if (heroPrev) heroPrev.addEventListener('click', prevSlide);
+
+    // --- CATEGORY SLIDER LOGIC ---
+    async function initCategories() {
+      const track = document.getElementById('productTrack');
+      if (!track) return;
+
+      const fallbackCategories = [
+        { key: "snack", title: "Makanan Ringan", desc: "Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring.", image: "assets/images/snacks.png" },
+        { key: "biskuit", title: "Biskuit & Cookies", desc: "Beragam biskuit dan cookies premium dari brand internasional.", image: "assets/images/biscuits.png" },
+        { key: "wafer", title: "Wafer", desc: "Wafer coklat, vanilla, dan berbagai varian rasa berkualitas.", image: "assets/images/wafers.png" },
+        { key: "kue", title: "Kue & Pastry", desc: "Swiss roll, layer cake, muffin dan berbagai kue kemasan.", image: "assets/images/cakes.png" }
+      ];
+
+      let cats = null;
+      try {
+        const resp = await fetch('database/cms/categories.json');
+        if (resp.ok) cats = await resp.json();
+      } catch(e) {}
+
+      if (!cats) {
+        const stored = localStorage.getItem('mas_categories');
+        if (stored) {
+          try { cats = JSON.parse(stored); } catch(e) {}
+        }
+      }
+
+      if (!cats || cats.length === 0) {
+        cats = fallbackCategories;
+      }
+
+      track.innerHTML = cats.map(c => `
+        <div class="product-card reveal fade-up visible" onclick="window.location.href='produk.html?filter=${c.key}'">
+          <div class="product-card-image">
+            <img src="${c.imageData || c.image}" alt="${c.title}">
+            <div class="overlay"></div>
+          </div>
+          <div class="product-card-body">
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
+            <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      `).join('');
+      
+      // Re-init slider after injection
+      setTimeout(() => initProductSlider(), 100);
+    }
+
+    initSliderControls();
+    initHeroSlider();
+    initCategories();
+
+    // --- TOP SLIDER LOGIC ---
+    async function initTopSlider() {
+      const topContainer = document.getElementById('topSliderContainer');
+      const topPrev = document.getElementById('topPrev');
+      const topNext = document.getElementById('topNext');
+      const topDots = document.getElementById('topDots');
+      
+      let topHeroes = null;
+      try {
+        const resp = await fetch('database/cms/top_heroes.json');
+        if (resp.ok) topHeroes = await resp.json();
+      } catch(e) {}
+
+      if (!topHeroes) {
+        const storedTop = localStorage.getItem('mas_top_heroes');
+        if (storedTop) {
+          try {
+            topHeroes = JSON.parse(storedTop);
+          } catch (e) {}
+        }
+      }
+
+      if (!topHeroes) topHeroes = [];
+      topHeroes = topHeroes.filter(h => h.active && h.imageData);
+
+      // Default if empty
+      if (topHeroes.length === 0) {
+        topHeroes = [
+          { imageData: "assets/images/hero-banner.png", title: "Default 1" },
+          { imageData: "assets/images/snacks.png", title: "Default 2" },
+          { imageData: "assets/images/biscuits.png", title: "Default 3" }
+        ];
+      }
+
+      if (!topContainer) return;
+
+      topContainer.innerHTML = topHeroes.map((h, i) => `
+        <div class="top-slide ${i === 0 ? 'active' : ''}">
+          <img src="${h.imageData}" alt="${h.title || 'Slide'}">
+        </div>
+      `).join('');
+
+      let topSlides = topContainer.querySelectorAll('.top-slide');
+      let currentTop = 0;
+      let topCount = topSlides.length;
+      let topInterval;
+
+      if (topDots) {
+        topDots.innerHTML = '';
+        topSlides.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.classList.add('top-dot');
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => goToTopSlide(i));
+          topDots.appendChild(dot);
+        });
+      }
+
+      const dots = topDots ? topDots.querySelectorAll('.top-dot') : [];
+
+      function goToTopSlide(index) {
+        topSlides[currentTop].classList.remove('active');
+        if (dots[currentTop]) dots[currentTop].classList.remove('active');
+        currentTop = (index + topCount) % topCount;
+        topSlides[currentTop].classList.add('active');
+        if (dots[currentTop]) dots[currentTop].classList.add('active');
+        resetTopInterval();
+      }
+
+      function nextTopSlide() { goToTopSlide(currentTop + 1); }
+      function prevTopSlide() { goToTopSlide(currentTop - 1); }
+
+      function startTopInterval() { topInterval = setInterval(nextTopSlide, 5000); }
+      function resetTopInterval() { clearInterval(topInterval); startTopInterval(); }
+
+      if (topNext) topNext.addEventListener('click', nextTopSlide);
+      if (topPrev) topPrev.addEventListener('click', prevTopSlide);
+      startTopInterval();
+    }
+
+    initTopSlider();
+
+
+    // --- PROMO POPUP LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedPromos = localStorage.getItem('mas_promos');
+      if (storedPromos) {
+        try {
+          const promos = JSON.parse(storedPromos);
+          const activePromo = promos.find(p => p.active);
+          const hasShown = sessionStorage.getItem('mas_promo_shown');
+
+          if (activePromo && !hasShown) {
+            const promoOverlay = document.getElementById('promoModalOverlay');
+            const promoImg = document.getElementById('promoModalImg');
+            if (promoOverlay && promoImg) {
+              if (activePromo.imageData) {
+                promoImg.src = activePromo.imageData;
+                promoImg.style.display = 'block';
+              } else {
+                promoImg.style.display = 'none';
+                const fallbackTxt = document.getElementById('promoFallbackText');
+                if (fallbackTxt) {
+                  fallbackTxt.textContent = activePromo.title;
+                  fallbackTxt.style.display = 'block';
+                }
+              }
+              setTimeout(() => {
+                promoOverlay.classList.add('active');
+                sessionStorage.setItem('mas_promo_shown', '1');
+              }, 1500);
+            }
+          }
+        } catch (e) { console.error('Promo err:', e); }
+      }
+    });
+
+
+
+    // --- BRANCH SLIDER LOGIC ---
+    let currentBranchIdx = 0;
+    let bCount = 0;
+    let bSlides = [];
+
+    async function initBranchSlider() {
+      const slider = document.getElementById('branchSlider');
+      if (!slider) return;
+
+      const branches = await getCMSData('branches', 'mas_branches') || [
+        { id: 1, name: 'Batam', address: 'Batam Centre, Kepulauan Riau', path: 'assets/images/mas-bangunan.jpg' },
+        { id: 2, name: 'Jakarta', address: 'Sedayu Bizpark Blok DM, Daan Mogot KM 18', path: 'assets/images/warehouse.gif' }
+      ];
+
+      bCount = branches.length;
+      if (bCount === 0) {
+        slider.innerHTML = '<div style="padding:40px;text-align:center;width:100%;color:var(--gray-400)">Belum ada data cabang gudang.</div>';
+        return;
+      }
+
+      slider.innerHTML = branches.map((b, i) => `
+        <div class="branch-slide ${i === 0 ? 'active' : ''}">
+          <div class="branch-content">
+            <div class="branch-counter">${i + 1} / ${bCount}</div>
+            <h3 class="branch-name">${b.name}</h3>
+            <p class="branch-address">${b.address}</p>
+            <div class="branch-nav">
+              <button class="branch-nav-btn" onclick="prevBranch()"><i class="fas fa-arrow-left"></i></button>
+              <button class="branch-nav-btn" onclick="nextBranch()"><i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <div class="branch-image">
+            <img src="${b.imageData || b.path}" alt="${b.name} Branch Office">
+          </div>
+        </div>
+      `).join('');
+
+      bSlides = slider.querySelectorAll('.branch-slide');
+      currentBranchIdx = 0;
+    }
+
+    function showBranch(index) {
+      if (bCount <= 1) return;
+      bSlides[currentBranchIdx].classList.remove('active');
+      currentBranchIdx = (index + bCount) % bCount;
+      bSlides[currentBranchIdx].classList.add('active');
+    }
+
+    function nextBranch() { showBranch(currentBranchIdx + 1); }
+    function prevBranch() { showBranch(currentBranchIdx - 1); }
+
+    initBranchSlider();
+    
+    // --- PRODUCT SLIDER LOGIC ---
+    function initProductSlider() {
+      const container = document.getElementById('productSliderContainer');
+      const track = document.getElementById('productTrack');
+      const nextBtn = document.getElementById('productNext');
+      const prevBtn = document.getElementById('productPrev');
+      if (!container || !track) return;
+
+      let currentPos = 0;
+      let isPaused = false;
+      let autoPlayInterval;
+
+      function updateSlider() {
+        const firstCard = track.querySelector('.product-card');
+        if (!firstCard) return;
+        
+        const cardWidth = firstCard.offsetWidth + 24; // 24 is gap
+        const maxScroll = track.scrollWidth - container.offsetWidth;
+        
+        if (currentPos > maxScroll) currentPos = 0;
+        if (currentPos < 0) currentPos = maxScroll;
+        
+        track.style.transform = `translateX(-${currentPos}px)`;
+      }
+
+      function nextProd() {
+        const firstCard = track.querySelector('.product-card');
+        if (!firstCard) return;
+        const cardWidth = firstCard.offsetWidth + 24;
+        currentPos += cardWidth;
+        updateSlider();
+      }
+
+      function prevProd() {
+        const firstCard = track.querySelector('.product-card');
+        if (!firstCard) return;
+        const cardWidth = firstCard.offsetWidth + 24;
+        currentPos -= cardWidth;
+        updateSlider();
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', () => { nextProd(); resetAuto(); });
+      if (prevBtn) prevBtn.addEventListener('click', () => { prevProd(); resetAuto(); });
+
+      // Elegant Auto-Movement
+      function startAuto() {
+        autoPlayInterval = setInterval(() => {
+          if (!isPaused) {
+            currentPos += 1; // Slow constant drift
+            updateSliderSimple();
+          }
+        }, 30);
+      }
+
+      function updateSliderSimple() {
+        const maxScroll = track.scrollWidth - container.offsetWidth;
+        if (currentPos > maxScroll) currentPos = 0;
+        track.style.transform = `translateX(-${currentPos}px)`;
+        track.style.transition = isPaused ? 'none' : 'transform 0.1s linear';
+      }
+
+      function resetAuto() {
+        clearInterval(autoPlayInterval);
+        track.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        setTimeout(() => {
+          startAuto();
+        }, 3000);
+      }
+
+      container.addEventListener('mouseenter', () => { isPaused = true; track.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'; });
+      container.addEventListener('mouseleave', () => { isPaused = false; });
+
+      window.addEventListener('resize', () => { currentPos = 0; updateSlider(); });
+      
+      startAuto();
+    }
+    
+    initProductSlider();
+
+    function closePromoModal() {
+      const el = document.getElementById('promoModalOverlay');
+      if (el) el.classList.remove('active');
+    }
+    function animateIcon(el) {
+      el.classList.add('animate-click');
+      setTimeout(() => el.classList.remove('animate-click'), 600);
+    }
+
+    // --- PARTNER TABS SLIDER LOGIC ---
+    const pTabsContainer = document.getElementById('partnerTabContainer');
+    const pTabPrev = document.getElementById('partnerTabPrev');
+    const pTabNext = document.getElementById('partnerTabNext');
+    if (pTabsContainer && pTabPrev && pTabNext) {
+      pTabPrev.addEventListener('click', () => {
+        pTabsContainer.scrollBy({ left: -150, behavior: 'smooth' });
+      });
+      pTabNext.addEventListener('click', () => {
+        pTabsContainer.scrollBy({ left: 150, behavior: 'smooth' });
+      });
+      
+      const updateNavBtns = () => {
+        pTabPrev.style.opacity = pTabsContainer.scrollLeft > 0 ? '1' : '0.3';
+        pTabPrev.style.pointerEvents = pTabsContainer.scrollLeft > 0 ? 'auto' : 'none';
+        
+        const maxScroll = pTabsContainer.scrollWidth - pTabsContainer.clientWidth;
+        const reachedEnd = pTabsContainer.scrollLeft >= maxScroll - 1;
+        pTabNext.style.opacity = reachedEnd ? '0.3' : '1';
+        pTabNext.style.pointerEvents = reachedEnd ? 'none' : 'auto';
+      };
+      
+      pTabsContainer.addEventListener('scroll', updateNavBtns);
+      window.addEventListener('resize', updateNavBtns);
+      // Wait for font/styles to load then check
+      setTimeout(updateNavBtns, 100);
+      setTimeout(updateNavBtns, 1000);
+    }
+
+    // --- LANGUAGE DROPDOWN LOGIC ---
+    function toggleLangDropdown(isMobile = false) {
+      const id = isMobile ? 'langDropdownMobile' : 'langDropdown';
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('active');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.lang-dropdown')) {
+        document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+
+    // --- CONTACT FORM LOGIC ---
+    let contactProducts = [];
+
+    function toggleContactModal() {
+      const modal = document.getElementById('contactModalOverlay');
+      if (modal) modal.classList.toggle('active');
+    }
+
+    async function initContactFormProducts() {
+      const productSelect = document.getElementById('waProduct');
+      if (!productSelect) return;
+
+      async function fetchProducts() {
+        try {
+          const resp = await fetch('/database/cms/products.json');
+          if (resp.ok) return await resp.json();
+        } catch(e) {}
+        try {
+          const stored = localStorage.getItem('mas_products');
+          if (stored) return JSON.parse(stored);
+        } catch(e) {}
+        return [];
+      }
+
+      contactProducts = await fetchProducts();
+      const seen = new Set();
+
+      contactProducts.forEach(p => {
+        const display = `${p.name} - ${p.brand} - ${p.category}`;
+        if (!seen.has(display)) {
+          seen.add(display);
+          const opt = document.createElement('option');
+          opt.value = display;
+          opt.textContent = display;
+          opt.dataset.image = p.imageData || p.image || '';
+          productSelect.appendChild(opt);
+        }
+      });
+    }
+    initContactFormProducts();
+
+    function updateProductPreview() {
+      const select = document.getElementById('waProduct');
+      const box = document.getElementById('waProductPreviewBox');
+      const img = document.getElementById('waProductImg');
+      const placeholder = document.getElementById('waProductPlaceholder');
+      const selectedOption = select.options[select.selectedIndex];
+      
+      const imgSrc = selectedOption.dataset.image;
+
+      if (imgSrc) {
+        img.src = imgSrc;
+        img.classList.add('loaded');
+        placeholder.style.display = 'none';
+        box.classList.add('active');
+      } else {
+        img.src = "";
+        img.classList.remove('loaded');
+        placeholder.style.display = 'block';
+        box.classList.remove('active');
+      }
+    }
+
+    function sendWhatsApp() {
+      const name = document.getElementById('waName').value.trim();
+      const phone = document.getElementById('waPhone').value.trim();
+      const region = document.getElementById('waRegion').value.trim();
+      const outlet = document.getElementById('waOutlet').value.trim();
+      const product = document.getElementById('waProduct').value;
+      const message = document.getElementById('waMessage').value.trim();
+
+      if (!name || !phone) {
+        alert('Mohon isi Nama dan No. WhatsApp Anda.');
+        return;
+      }
+
+      const targetPhone = '6281295001778'; 
+      const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
+                 `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
+                 `${message}\n\n` +
+                 `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
+
+      const encodedText = encodeURIComponent(text);
+      window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
+    }
+
   </script>
 
+
+  <!-- PROMO POPUP MODAL -->
+  <div class="promo-modal-overlay" id="promoModalOverlay" onclick="if(event.target===this) closePromoModal()">
+    <div class="promo-modal-content">
+      <button class="promo-close-btn" onclick="closePromoModal()"><i class="fas fa-times"></i></button>
+      <div class="promo-img-wrapper">
+        <img id="promoModalImg" src="" alt="Promo Popup">
+        <h2 id="promoFallbackText"
+          style="display:none; color:rgba(255,255,255,0.7); padding:40px; text-align:center; font-family:'Plus Jakarta Sans',sans-serif; margin:0;">
+        </h2>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ==================== FLOATING CONTACT FORM MODAL ==================== -->
+
+
+  <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
+    <i class="fas fa-headset"></i>
+  </div>
+
+  <div class="contact-modal-overlay" id="contactModalOverlay" onclick="if(event.target===this) toggleContactModal()">
+    <div class="contact-modal-container">
+      <div class="contact-modal-header">
+        <h3>Hubungi Kami</h3>
+        <button class="contact-modal-close" onclick="toggleContactModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="contact-modal-body">
+        <div class="contact-form-row">
+          <div class="contact-form-group">
+            <label><i class="fas fa-user"></i> Nama Lengkap</label>
+            <input type="text" id="waName" placeholder="Nama Anda...">
+          </div>
+          <div class="contact-form-group">
+            <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+            <input type="tel" id="waPhone" placeholder="0812...">
+          </div>
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-map-marker-alt"></i> Region (Provinsi / Kota)</label>
+          <input type="text" id="waRegion" placeholder="Lokasi Anda...">
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-store"></i> Nama Outlet</label>
+          <input type="text" id="waOutlet" placeholder="Nama toko / bisnis...">
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-box"></i> Tertarik Produk</label>
+          <div class="product-selection-wrapper">
+            <div class="wa-product-dropdown">
+              <select id="waProduct" onchange="updateProductPreview()">
+                <option value="">Pilih Produk (Nama - Brand - Kategori)</option>
+              </select>
+            </div>
+            <div class="product-preview-box" id="waProductPreviewBox">
+              <img id="waProductImg" src="" alt="Preview">
+              <i class="fas fa-image" style="color:#333; font-size: 24px;" id="waProductPlaceholder"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-comment-alt"></i> Tinggalkan Pesan</label>
+          <textarea id="waMessage" rows="2" placeholder="Apa yang bisa kami bantu?"></textarea>
+        </div>
+        <button class="btn-send-wa" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
+        </button>
+      </div>
+
+    </div>
+  </div>
+
 </body>
+
 
 </html>
