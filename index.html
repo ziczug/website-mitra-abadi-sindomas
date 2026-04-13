@@ -344,14 +344,33 @@
         </div>
       </div>
 
-      <!-- Map -->
-      <div class="dist-map-hero reveal fade-up delay-200">
+
+      <!-- Section Content Header -->
+      <div class="map-content-outside" style="text-align: center; margin-bottom: 40px;">
+        <h3 style="color: var(--accent); font-size: clamp(24px, 4vw, 32px); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;" data-i18n="dist-map-title">Jangkauan Logistik Nasional</h3>
+        <p style="color: rgba(255, 255, 255, 0.7); font-size: clamp(15px, 2vw, 17px); max-width: 700px; line-height: 1.6; margin: 0 auto; font-weight: 400;" data-i18n="dist-map-desc">Sistem distribusi terintegrasi yang menjangkau pulau-pulau utama di Indonesia, memastikan ketersediaan produk berkualitas di mana pun Anda berada.</p>
+      </div>
+
+      <div class="section-separator reveal fade-up"></div>
+
+      <!-- Map Content -->
+      <div class="dist-map-hero reveal fade-up delay-200" style="margin-bottom: 60px;">
         <div class="map-container">
           <img src="assets/images/peta.gif" alt="Peta Jaringan Distribusi MAS" class="map-image">
         </div>
-        <div class="map-content-outside" style="text-align: center; margin-top: 32px;">
-          <h3 style="color: var(--accent); font-size: clamp(22px, 4vw, 28px); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;" data-i18n="dist-map-title">Jangkauan Logistik Nasional</h3>
-          <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; opacity: 0.9; max-width: 650px; line-height: 1.6; margin: 0 auto;" data-i18n="dist-map-desc">Sistem distribusi terintegrasi yang menjangkau pulau-pulau utama di Indonesia, memastikan ketersediaan produk berkualitas di mana pun Anda berada.</p>
+      </div>
+
+      <div class="section-badge-center" style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <div class="section-tag"><i class="fas fa-warehouse"></i> <span data-i18n="dist-warehouse-tag">Lokasi Gudang & Cabang</span></div>
+      </div>
+
+      <!-- Branch / Warehouse Locations Slider -->
+      <div class="branch-slider-container reveal fade-up">
+        <div class="branch-slider" id="branchSlider">
+          <div style="padding:80px 40px;text-align:center;color:rgba(255,255,255,0.3);font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;">
+            <i class="fas fa-spinner fa-spin" style="font-size:32px;margin-bottom:16px;display:block;color:var(--accent);"></i>
+            Memuat data gudang...
+          </div>
         </div>
       </div>
 
@@ -382,16 +401,68 @@
     </div>
   </section>
 
-  <!-- ==================== BRANCH LOCATIONS SLIDER ==================== -->
-  <section class="section branches-locations" id="cabang" style="padding-top: 0;">
-    <div class="container">
-      <div class="branch-slider-container reveal fade-up">
-        <div class="branch-slider" id="branchSlider">
-          <!-- Dynamic branches will be injected here -->
+  <script>
+  // Self-contained branch slider initialization - independent from main script
+  (async function() {
+    const slider = document.getElementById('branchSlider');
+    if (!slider) return;
+
+    let branches = null;
+    
+    // Try fetch from file
+    try {
+      const r = await fetch('database/cms/branches.json');
+      if (r.ok) branches = await r.json();
+    } catch(e) { console.warn('Branch fetch failed:', e); }
+    
+    // Fallback to localStorage
+    if (!branches) {
+      try {
+        const s = localStorage.getItem('mas_branches');
+        if (s) branches = JSON.parse(s);
+      } catch(e) {}
+    }
+    
+    // Hardcoded fallback
+    if (!branches || !branches.length) {
+      branches = [
+        { name: 'Jakarta', address: 'Sedayu Bizz Park, Jakarta Barat', path: 'assets/images/warehouse.gif' },
+        { name: 'Batam', address: 'Batam Centre, Kepulauan Riau', path: 'assets/images/mas-bangunan.jpg' },
+        { name: 'Surabaya', address: 'Kawasan Industri Margomulyo, Surabaya', path: 'assets/images/warehouse.gif' }
+      ];
+    }
+
+    const cnt = branches.length;
+    slider.innerHTML = branches.map((b, i) => `
+      <div class="branch-slide ${i === 0 ? 'active' : ''}">
+        <div class="branch-content">
+          <div class="branch-counter">${i + 1} / ${cnt}</div>
+          <h3 class="branch-name">${b.name}</h3>
+          <p class="branch-address">${b.address}</p>
+          <div class="branch-nav">
+            <button class="branch-nav-btn" onclick="window._branchNav(-1)" title="Previous"><i class="fas fa-arrow-left"></i></button>
+            <button class="branch-nav-btn" onclick="window._branchNav(1)" title="Next"><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="branch-image">
+          <img src="${b.imageData || b.path || 'assets/images/mas-bangunan.jpg'}" alt="${b.name} Warehouse" loading="lazy">
         </div>
       </div>
-    </div>
-  </section>
+    `).join('');
+
+    const slides = slider.querySelectorAll('.branch-slide');
+    let cur = 0;
+
+    window._branchNav = function(dir) {
+      if (cnt <= 1) return;
+      slides[cur].classList.remove('active');
+      cur = (cur + dir + cnt) % cnt;
+      slides[cur].classList.add('active');
+    };
+    window.nextBranch = function() { window._branchNav(1); };
+    window.prevBranch = function() { window._branchNav(-1); };
+  })();
+  </script>
 
   <!-- ==================== CERTIFICATIONS ==================== -->
   <section class="section certifications" id="sertifikasi">
@@ -581,31 +652,42 @@
     // ==========================================
     // DYNAMIC CONTENT LOADER (from Admin Dashboard)
     // ==========================================
-    (async function loadDynamicContent() {
-      // Helper to load data with priority: File > LocalStorage
-      async function getCMSData(fileKey, lsKey) {
-        // Try loading from file first
-        try {
-          const resp = await fetch(`/database/cms/${fileKey}.json`);
-          if (resp.ok) {
-            const data = await resp.json();
-            if (data) {
-              // Cache to localStorage for offline/faster access next time
-              localStorage.setItem(lsKey, JSON.stringify(data));
-              return data;
-            }
+    
+    // Helper to load data with priority: File > LocalStorage
+    async function getCMSData(fileKey, lsKey) {
+      // Try loading from file first
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
+        const resp = await fetch(`database/cms/${fileKey}.json`, { signal: controller.signal });
+        clearTimeout(timeout);
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data) {
+            // Cache to localStorage only if data is small enough (<500KB)
+            try {
+              const str = JSON.stringify(data);
+              if (str.length < 500000) {
+                localStorage.setItem(lsKey, str);
+              }
+            } catch (cacheErr) { /* skip caching if too large */ }
+            return data;
           }
-        } catch (e) {}
-        
-        // Fallback to localStorage
-        try {
-          const stored = localStorage.getItem(lsKey);
-          if (stored) return JSON.parse(stored);
-        } catch (e) {}
-        
-        return null;
+        }
+      } catch (e) {
+        console.warn('CMS fetch failed for', fileKey, ':', e.message || e);
       }
+      
+      // Fallback to localStorage
+      try {
+        const stored = localStorage.getItem(lsKey);
+        if (stored) return JSON.parse(stored);
+      } catch (e) {}
+      
+      return null;
+    }
 
+    (async function loadDynamicContent() {
       // --- Company Profile ---
       const c = await getCMSData('company_info', 'mas_company_info');
       if (c) {
@@ -1763,7 +1845,7 @@
 
       bCount = branches.length;
       if (bCount === 0) {
-        slider.innerHTML = '<div style="padding:40px;text-align:center;width:100%;color:var(--gray-400)">Belum ada data cabang gudang.</div>';
+        slider.innerHTML = '<div style="padding:100px;text-align:center;width:100%;color:var(--gray-400); font-family:var(--font-heading);">No warehouse data found.</div>';
         return;
       }
 
@@ -1774,12 +1856,12 @@
             <h3 class="branch-name">${b.name}</h3>
             <p class="branch-address">${b.address}</p>
             <div class="branch-nav">
-              <button class="branch-nav-btn" onclick="prevBranch()"><i class="fas fa-arrow-left"></i></button>
-              <button class="branch-nav-btn" onclick="nextBranch()"><i class="fas fa-arrow-right"></i></button>
+              <button class="branch-nav-btn" onclick="prevBranch()" title="Previous Warehouse"><i class="fas fa-arrow-left"></i></button>
+              <button class="branch-nav-btn" onclick="nextBranch()" title="Next Warehouse"><i class="fas fa-arrow-right"></i></button>
             </div>
           </div>
           <div class="branch-image">
-            <img src="${b.imageData || b.path}" alt="${b.name} Branch Office">
+            <img src="${b.imageData || b.path}" alt="${b.name} Warehouse Branch Office" loading="lazy">
           </div>
         </div>
       `).join('');
@@ -1789,16 +1871,19 @@
     }
 
     function showBranch(index) {
-      if (bCount <= 1) return;
-      bSlides[currentBranchIdx].classList.remove('active');
+      if (bCount <= 1 || !bSlides[currentBranchIdx] || !bSlides[index]) return;
+      
+      const prevIdx = currentBranchIdx;
       currentBranchIdx = (index + bCount) % bCount;
+      
+      bSlides[prevIdx].classList.remove('active');
       bSlides[currentBranchIdx].classList.add('active');
     }
 
     function nextBranch() { showBranch(currentBranchIdx + 1); }
     function prevBranch() { showBranch(currentBranchIdx - 1); }
 
-    initBranchSlider();
+    // Branch slider is now initialized by its own self-contained script above
     
     // --- PRODUCT SLIDER LOGIC ---
     function initProductSlider() {

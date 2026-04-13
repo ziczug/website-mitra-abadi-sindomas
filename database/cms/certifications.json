@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Sertifikat Halal",
+    "desc": "Semua produk bersertifikat halal dari MUI, menjamin kehalalan untuk konsumen Muslim Indonesia.",
+    "image": "assets/images/icon/halal.png",
+    "imageData": ""
+  },
+  {
+    "title": "Izin Edar BPOM",
+    "desc": "Terdaftar dan diawasi oleh BPOM RI, menjamin keamanan dan kelayakan konsumsi produk.",
+    "image": "assets/images/icon/bpom.png",
+    "imageData": ""
+  },
+  {
+    "title": "Standar Internasional",
+    "desc": "Produk diproduksi sesuai standar internasional dengan quality control ketat dari negara asal.",
+    "image": "assets/images/icon/world.png",
+    "imageData": ""
+  }
+]
