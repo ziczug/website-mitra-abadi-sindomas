@@ -89,12 +89,12 @@ const products = rawData.map((r, i) => {
   const weightVal     = r['Berat/Ukuran'] !== undefined ? String(r['Berat/Ukuran']).trim() : '';
   
   // Auto-generate image path if empty in Excel
-  let imgPath = String(r['Gambar'] || '').trim();
+  let imgPath = String(r['Gambar'] || '').trim().replace(/\.jpg$/i, '.png');
   if (!imgPath) {
     const brandSlug = toSlug(brandName);
     const prodSlug = toSlug(String(r['Nama Produk'] || ''));
     if (brandSlug && prodSlug) {
-      imgPath = `assets/images/products/${brandSlug}/${prodSlug}.jpg`;
+      imgPath = `assets/images/products/${brandSlug}/${prodSlug}.png`;
     }
   }
 
