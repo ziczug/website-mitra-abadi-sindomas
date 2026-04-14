@@ -2324,12 +2324,15 @@ section {
 }
 
 .partner-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
 }
 
 .partner-card {
+  flex: 0 0 calc(16.666% - 17px);
+  min-width: 170px;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -2428,8 +2431,8 @@ section {
 /* Premium Metallic Tabs Styling handled by base .partner-tabs and .partner-tab */
 
 @media (max-width: 1200px) {
-  .partner-grid {
-    grid-template-columns: repeat(4, 1fr);
+  .partner-card {
+    flex: 0 0 calc(25% - 15px);
   }
 }
 
@@ -2466,11 +2469,12 @@ section {
   }
 
   .partner-grid {
-    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
 
   .partner-card {
+    flex: 0 0 calc(33.333% - 8px);
+    min-width: 100px;
     padding: 16px 10px;
   }
 
@@ -2480,8 +2484,8 @@ section {
 }
 
 @media (max-width: 480px) {
-  .partner-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .partner-card {
+    flex: 0 0 calc(50% - 6px);
   }
 
   .partner-tabs {
