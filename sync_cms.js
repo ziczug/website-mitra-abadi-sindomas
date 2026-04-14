@@ -108,7 +108,9 @@ const products = rawData.map((r, i) => {
     desc:       String(r['Deskripsi'] || '').trim(),
     origin:     String(r['Asal Negara'] || '').trim(),
     weight:     weightVal,
-    cert:       String(r['Sertifikasi'] || '').trim(),
+    cert:       String(r['Sertifikasi'] || '').trim()
+                  .replace(/halal\.?\s*bpom/gi, 'HALAL & BPOM')
+                  .replace(/bpom\.?\s*halal/gi, 'HALAL & BPOM'),
     info:       String(r['Info Kemasan'] || '').trim()
   };
 }).filter(p => p.name);
