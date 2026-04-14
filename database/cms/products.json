@@ -83,12 +83,13 @@
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
-    "image": "assets/images/products/oriental/rota-prawn-crackers.jpg",
+    "image": "assets/images/products/oriental/rota-prawn-crackers.png",
     "desc": "Makanan ringan rasa gurih renyah dengan rasa udang (prawn) dengan rasa seafood autentik",
     "origin": "Malaysia",
     "weight": "60g",
     "cert": "Halal. BPOM",
-    "info": "60g x 10 Bags x 6 Balls | 1 Carton = 30 Pcs | 0.1104 m³/Ctn"
+    "info": "60g x 10 Bags x 6 Balls | 1 Carton = 30 Pcs | 0.1104 m³/Ctn",
+    "imageData": ""
   },
   {
     "id": 8,

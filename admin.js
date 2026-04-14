@@ -21,18 +21,48 @@ let partners = [];
 // ==========================================
 // FILE SYNC UTILITIES
 // ==========================================
+// Helper untuk simpan ke localStorage dengan aman (cegah crash jika penuh)
+function safeLSSet(key, data) {
+  try {
+    const str = typeof data === 'string' ? data : JSON.stringify(data);
+    localStorage.setItem(key, str);
+    return true;
+  } catch (e) {
+    console.warn(`[Storage] Gagal simpan ${key} ke localStorage (mungkin penuh):`, e.message);
+    return false;
+  }
+}
+
 // Simpan data ke file JSON di database/cms/ (via API)
 async function saveToFile(key, data) {
   try {
+    const payload = JSON.stringify({ key, data });
+    // Jika data sangat besar (>2MB), beri peringatan di console
+    if (payload.length > 2 * 1024 * 1024) {
+      console.warn(`[FileSync] Menyimpan data besar (${(payload.length/1024/1024).toFixed(2)} MB) untuk ${key}...`);
+    }
+
     const resp = await fetch('/api/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key, data })
+      body: payload
     });
-    if (!resp.ok) throw new Error('Save failed');
-    return true;
+    
+    if (!resp.ok) {
+      const errText = await resp.text();
+      throw new Error(`Server error: ${resp.status} ${errText}`);
+    }
+    
+    const res = await resp.json();
+    if (res.success) {
+      console.log(`[FileSync] Berhasil simpan file: ${key}.json`);
+      return true;
+    } else {
+      throw new Error(res.error || 'Unknown error');
+    }
   } catch(e) {
-    console.warn(`[FileSync] Gagal simpan file ${key}:`, e.message);
+    console.error(`[FileSync] Gagal simpan file ${key}:`, e.message);
+    showToast(`Gagal sinkron ke server: ${key}. Data hanya tersimpan di browser.`, 'warning');
     return false;
   }
 }
@@ -52,7 +82,7 @@ async function loadFromFile(key) {
 // Baca semua data CMS dari file sekaligus, lalu sinkronkan ke localStorage
 async function syncAllFromFiles() {
   try {
-    const resp = await fetch('/api/load-all');
+    const resp = await fetch(`/api/load-all?t=${Date.now()}`);
     if (!resp.ok) return;
     const allData = await resp.json();
     
@@ -77,14 +107,18 @@ async function syncAllFromFiles() {
     Object.entries(allData).forEach(([fileKey, data]) => {
       const lsKey = keyMap[fileKey];
       if (lsKey && data && (!Array.isArray(data) || data.length > 0 || typeof data === 'object')) {
-        localStorage.setItem(lsKey, JSON.stringify(data));
-        synced++;
+        try {
+          localStorage.setItem(lsKey, JSON.stringify(data));
+          synced++;
+        } catch (e) {
+          console.warn(`[FileSync] QuotaExceeded for ${lsKey}, continuing...`);
+        }
       }
     });
 
     if (synced > 0) {
-      console.log(`[FileSync] ✅ ${synced} file berhasil disinkronkan ke localStorage`);
-      localStorage.setItem('mas_sync_complete', '1');
+      console.log(`[FileSync] ✅ ${synced} file disinkronkan ke localStorage`);
+      try { localStorage.setItem('mas_sync_complete', '1'); } catch(e) {}
     }
   } catch(e) {
     console.warn('[FileSync] API tidak tersedia, gunakan localStorage saja.', e.message);
@@ -214,9 +248,9 @@ async function loadProducts() {
   loadHeroes();
   loadTopHeroes();
   loadBranches();
-  await loadBrandPartners(); // async: loads from brand_partners.json file first
-  loadPartners();
-  saveProducts();
+  await loadBrandPartners();
+  await loadPartners(); // Now async
+  // saveProducts(); // Removed redundant save on load
   refreshAll();
 }
 
@@ -1245,7 +1279,7 @@ function loadBranches() {
 }
 
 function saveBranches() {
-  localStorage.setItem('mas_branches', JSON.stringify(branches));
+  safeLSSet('mas_branches', branches);
   saveToFile('branches', branches);
 }
 
@@ -1453,7 +1487,7 @@ function saveCompanyInfo() {
     imageData: document.getElementById('fCompanyImgData').value,
     features: features
   };
-  localStorage.setItem('mas_company_info', JSON.stringify(info));
+  safeLSSet('mas_company_info', info);
   saveToFile('company_info', info);
   toast('Profil perusahaan berhasil disimpan!', 'success');
 }
@@ -1496,7 +1530,7 @@ function saveContactInfo() {
     email: document.getElementById('fContactEmail').value.trim(),
     mapsUrl: document.getElementById('fContactMapsUrl').value.trim()
   };
-  localStorage.setItem('mas_contact_info', JSON.stringify(info));
+  safeLSSet('mas_contact_info', info);
   saveToFile('contact_info', info);
   toast('Informasi kontak berhasil disimpan!', 'success');
 }
@@ -1535,7 +1569,7 @@ function saveStatistics() {
     distDesc1: document.getElementById('fStatDistDesc1').value.trim(),
     distDesc2: document.getElementById('fStatDistDesc2').value.trim()
   };
-  localStorage.setItem('mas_statistics', JSON.stringify(s));
+  safeLSSet('mas_statistics', s);
   saveToFile('statistics', s);
   toast('Statistik berhasil disimpan!', 'success');
 }
@@ -1569,7 +1603,7 @@ async function loadBrandPartners() {
 }
 
 function saveBrandPartners() {
-  localStorage.setItem('mas_brand_partners', JSON.stringify(brandPartners));
+  safeLSSet('mas_brand_partners', brandPartners);
   saveToFile('brand_partners', brandPartners);
 }
 
@@ -1697,13 +1731,41 @@ function deleteBrandPartner(id) {
 // ==========================================
 // DISTRIBUTION PARTNER MANAGEMENT
 // ==========================================
-function loadPartners() {
+async function loadPartners() {
+  // Try server file first
+  try {
+    const resp = await fetch('/api/load?key=partners');
+    if (resp.ok) {
+      const fileData = await resp.json();
+      if (fileData && Array.isArray(fileData) && fileData.length > 0) {
+        partners = fileData;
+        safeLSSet('mas_partners', partners);
+        renderPartners();
+        return;
+      }
+    }
+  } catch(e) {
+    console.warn('[Sync] Gagal memuat mitra dari server, menggunakan local storage.');
+  }
+
   const stored = localStorage.getItem('mas_partners');
-  if (stored) partners = JSON.parse(stored);
+  if (stored) {
+    try {
+      partners = JSON.parse(stored);
+      renderPartners();
+    } catch(e) {
+      console.error('[Sync] Error parsing local partners data');
+      partners = [];
+    }
+  }
 }
 
 function savePartners() {
-  localStorage.setItem('mas_partners', JSON.stringify(partners));
+  try {
+    localStorage.setItem('mas_partners', JSON.stringify(partners));
+  } catch (e) {
+    console.warn('[Storage] Local storage full, saving to file anyway.');
+  }
   saveToFile('partners', partners);
 }
 
@@ -1742,15 +1804,25 @@ function renderPartners() {
 }
 
 function openPartnerModal() {
+  document.getElementById('partnerModal').classList.add('active');
   document.getElementById('fPartnerId').value = '';
+  document.getElementById('partnerModalTitle').textContent = 'Tambah Mitra Distribusi';
   document.getElementById('fPartnerName').value = '';
   document.getElementById('fPartnerCategory').value = 'NATIONAL KEY ACCOUNT';
   document.getElementById('fPartnerImageData').value = '';
-  document.getElementById('partnerModalTitle').textContent = 'Tambah Mitra Distribusi';
-  const pc = document.querySelector('#partnerUploadArea .upload-preview');
-  if (pc) pc.style.display = 'none';
-  document.getElementById('partnerModal').classList.add('active');
+  document.getElementById('fPartnerFile').value = '';
+  document.querySelector('#partnerUploadArea .upload-preview').style.display = 'none';
+  document.querySelector('#partnerUploadArea .upload-placeholder').style.display = 'block';
+  document.getElementById('fPartnerPreview').src = '';
   document.body.style.overflow = 'hidden';
+}
+
+function removePartnerLogo() {
+  document.getElementById('fPartnerImageData').value = '';
+  document.getElementById('fPartnerFile').value = '';
+  document.querySelector('#partnerUploadArea .upload-preview').style.display = 'none';
+  document.querySelector('#partnerUploadArea .upload-placeholder').style.display = 'block';
+  document.getElementById('fPartnerPreview').src = '';
 }
 
 function closePartnerModal() {
@@ -1759,7 +1831,7 @@ function closePartnerModal() {
 }
 
 function editPartner(id) {
-  const p = partners.find(x => x.id === id);
+  const p = partners.find(x => x.id == id);
   if (!p) return;
   openPartnerModal();
   document.getElementById('fPartnerId').value = p.id;
@@ -1769,8 +1841,13 @@ function editPartner(id) {
   document.getElementById('fPartnerImageData').value = p.imageData || '';
   if (p.imageData || p.image) {
     const pc = document.querySelector('#partnerUploadArea .upload-preview');
+    const ph = document.querySelector('#partnerUploadArea .upload-placeholder');
     const img = document.getElementById('fPartnerPreview');
-    if (pc && img) { img.src = p.imageData || p.image; pc.style.display = 'block'; }
+    if (pc && img) { 
+        img.src = p.imageData || p.image; 
+        pc.style.display = 'block';
+        if (ph) ph.style.display = 'none';
+    }
   }
 }
 
@@ -1778,12 +1855,28 @@ function handlePartnerUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
   if (file.size > 2 * 1024 * 1024) return toast('Ukuran file max 2MB', 'error');
+  
+  const saveBtn = document.querySelector('#partnerModal .btn-primary');
+  if (saveBtn) {
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
+  }
+
   const reader = new FileReader();
   reader.onload = e => {
     document.getElementById('fPartnerImageData').value = e.target.result;
     const pc = document.querySelector('#partnerUploadArea .upload-preview');
+    const ph = document.querySelector('#partnerUploadArea .upload-placeholder');
     const img = document.getElementById('fPartnerPreview');
-    if (pc && img) { img.src = e.target.result; pc.style.display = 'block'; }
+    if (pc && img) { 
+        img.src = e.target.result; 
+        pc.style.display = 'block'; 
+        if (ph) ph.style.display = 'none';
+    }
+    if (saveBtn) {
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = 'Simpan Mitra';
+    }
   };
   reader.readAsDataURL(file);
 }
@@ -1800,11 +1893,21 @@ function savePartnerEntry() {
     if (idx >= 0) {
       partners[idx].name = name;
       partners[idx].category = category;
-      if (imageData) partners[idx].imageData = imageData;
+      if (imageData) {
+        partners[idx].imageData = imageData;
+        partners[idx].image = ''; // Clear path if we use raw data
+      }
     }
     toast('Mitra berhasil diperbarui!', 'success');
   } else {
-    partners.push({ id: Date.now(), name: name, category: category, image: '', imageData: imageData, active: true });
+    partners.push({ 
+      id: Date.now(), 
+      name: name, 
+      category: category, 
+      image: '', 
+      imageData: imageData || '', 
+      active: true 
+    });
     toast('Mitra berhasil ditambahkan!', 'success');
   }
   savePartners();
