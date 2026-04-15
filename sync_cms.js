@@ -88,11 +88,21 @@ const products = rawData.map((r, i) => {
   
   const weightVal     = r['Berat/Ukuran'] !== undefined ? String(r['Berat/Ukuran']).trim() : '';
   
-  // Auto-generate image path if empty in Excel
+  const brandSlug = toSlug(brandName);
+  const prodSlug = toSlug(String(r['Nama Produk'] || ''));
+
+  // Auto-generate or fix image path
   let imgPath = String(r['Gambar'] || '').trim().replace(/\.jpg$/i, '.png');
+  
+  if (imgPath && imgPath.startsWith('assets/images/products/')) {
+    const parts = imgPath.split('/');
+    // if path is assets/images/products/filename.png, insert brandSlug
+    if (parts.length === 4) {
+      imgPath = `assets/images/products/${brandSlug}/${parts[3]}`;
+    }
+  }
+
   if (!imgPath) {
-    const brandSlug = toSlug(brandName);
-    const prodSlug = toSlug(String(r['Nama Produk'] || ''));
     if (brandSlug && prodSlug) {
       imgPath = `assets/images/products/${brandSlug}/${prodSlug}.png`;
     }
