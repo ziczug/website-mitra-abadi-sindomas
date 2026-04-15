@@ -1,6 +1,6 @@
 # 🗂️ Index Gambar Produk — PT Mitra Abadi Sindomas
 
-> Generated: 14/4/2026, 10.17.10
+> Generated: 15/4/2026, 09.04.07
 
 ## Ringkasan Folder Brand
 
@@ -36,8 +36,8 @@ Folder: `assets/images/products/oriental/`
 | 1 | Super Ring | `super-ring.jpg` |
 | 2 | Super Ring Family Pack | `super-ring-family-pack.jpg` |
 | 3 | Super Ring Cans | `super-ring-cans.jpg` |
-| 4 | Cheese Balls Family Pack | `cheese-balls-family-pack.jpg` |
-| 5 | Cheese Balls | `cheese-balls.jpg` |
+| 4 | Cheese Balls | `cheese-balls.jpg` |
+| 5 | Cheese Balls Family Pack | `cheese-balls-family-pack.jpg` |
 | 6 | Cheese Balls Cans | `cheese-balls-cans.jpg` |
 | 7 | Rota Prawn Crackers | `rota-prawn-crackers.jpg` |
 | 8 | Rota Prawn Family Pack | `rota-prawn-family-pack.jpg` |

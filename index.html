@@ -955,11 +955,13 @@
         return;
       }
 
-      const matches = searchProducts.filter(p => 
-        p.name.toLowerCase().includes(query) || 
-        (p.brand && p.brand.toLowerCase().includes(query)) ||
-        (p.category && p.category.toLowerCase().includes(query))
-      ).slice(0, 6);
+      const keywords = query.split(' ').filter(k => k.trim() !== '');
+      const matches = searchProducts.filter(p => {
+        const searchableText = [
+          p.name, p.brand, p.category, p.desc, p.weight, p.origin, p.info
+        ].filter(Boolean).join(' ').toLowerCase();
+        return keywords.every(kw => searchableText.includes(kw));
+      }).slice(0, 6);
 
       if (matches.length === 0) {
         searchResults.innerHTML = `
@@ -1331,7 +1333,11 @@
       }
       
       if (currentBrandQuery) {
-        filtered = filtered.filter(b => b.name.toLowerCase().includes(currentBrandQuery.toLowerCase()));
+        const keywords = currentBrandQuery.split(' ').filter(k => k.trim() !== '');
+        filtered = filtered.filter(b => {
+          const searchableText = [b.name, b.category].filter(Boolean).join(' ').toLowerCase();
+          return keywords.every(kw => searchableText.includes(kw));
+        });
       }
       
       renderBrands(filtered);

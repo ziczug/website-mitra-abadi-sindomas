@@ -348,13 +348,19 @@ function renderBrandFilter() {
 }
 
 function getFilteredProducts() {
-  const q = (document.getElementById('tableSearch')?.value || '').toLowerCase();
+  const q = (document.getElementById('tableSearch')?.value || '').toLowerCase().trim();
   const cat = document.getElementById('filterCategory')?.value || 'all';
   const brand = document.getElementById('filterBrand')?.value || 'all';
   let list = products.filter(p => {
     if (cat !== 'all' && p.category !== cat) return false;
     if (brand !== 'all' && p.brand !== brand) return false;
-    if (q && !(p.name.toLowerCase().includes(q) || (p.brand||'').toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q))) return false;
+    if (q) {
+      const keywords = q.split(' ').filter(k => k.trim() !== '');
+      const searchableText = [
+        p.name, p.brand, p.category, p.desc, p.weight, p.origin, p.info
+      ].filter(Boolean).join(' ').toLowerCase();
+      if (!keywords.every(kw => searchableText.includes(kw))) return false;
+    }
     return true;
   });
   if (sortField) {
@@ -1774,12 +1780,16 @@ function renderPartners() {
   const empty = document.getElementById('partnersEmptyState');
   if (!grid) return;
 
-  const q = (document.getElementById('partnerSearch')?.value || '').toLowerCase();
+  const q = (document.getElementById('partnerSearch')?.value || '').toLowerCase().trim();
   const cat = document.getElementById('filterPartnerCategory')?.value || 'all';
 
   let list = partners.filter(p => {
     if (cat !== 'all' && p.category !== cat) return false;
-    if (q && !p.name.toLowerCase().includes(q)) return false;
+    if (q) {
+      const keywords = q.split(' ').filter(k => k.trim() !== '');
+      const searchableText = [p.name, p.category].filter(Boolean).join(' ').toLowerCase();
+      if (!keywords.every(kw => searchableText.includes(kw))) return false;
+    }
     return true;
   });
 
