@@ -6,19 +6,19 @@ Folder ini berisi gambar produk untuk brand **Oriental**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 1 | Super Ring | `super-ring.jpg` |
-| 2 | Super Ring Family Pack | `super-ring-family-pack.jpg` |
-| 3 | Super Ring Cans | `super-ring-cans.jpg` |
-| 4 | Cheese Balls | `cheese-balls.jpg` |
-| 5 | Cheese Balls Family Pack | `cheese-balls-family-pack.jpg` |
-| 6 | Cheese Balls Cans | `cheese-balls-cans.jpg` |
-| 7 | Rota Prawn Crackers | `rota-prawn-crackers.jpg` |
-| 8 | Rota Prawn Family Pack | `rota-prawn-family-pack.jpg` |
-| 9 | Green Pea Snack | `green-pea-snack.jpg` |
-| 10 | Green Pea Snack Family Pack | `green-pea-snack-family-pack.jpg` |
-| 11 | Chiken Ring | `chiken-ring.jpg` |
-| 12 | Rostik Chicken Curry | `rostik-chicken-curry.jpg` |
-| 13 | Rostik Cuttlefish | `rostik-cuttlefish.jpg` |
+| 1 | Super Ring | `super-ring60gr.png` |
+| 2 | Super Ring Family Pack | `super-ring-family-pack14gr.png` |
+| 3 | Super Ring Cans | `super-ring-cans80gr.png` |
+| 4 | Cheese Balls | `cheese-balls60gr.png` |
+| 5 | Cheese Balls Family Pack | `cheese-balls-family-pack14gr.png` |
+| 6 | Cheese Balls Cans | `cheese-balls-cans80gr.png` |
+| 7 | Rota Prawn Crackers | `rota-prawn-crackers60gr.png` |
+| 8 | Rota Prawn Family Pack | `rota-prawn-family-pack14gr.png` |
+| 9 | Green Pea Snack | `green-pea-snack60gr.png` |
+| 10 | Green Pea Snack Family Pack | `green-pea-snack-family-pack14gr.png` |
+| 11 | Chiken Ring | `chiken-ring60gr.png` |
+| 12 | Rostik Chicken Curry | `rostik-chicken-curry60gr.png` |
+| 13 | Rostik Cuttlefish | `rostik-cuttlefish60gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -31,5 +31,5 @@ Folder ini berisi gambar produk untuk brand **Oriental**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/oriental/{nama-file}.jpg
+assets/images/products/oriental/{nama-file}.png
 ```

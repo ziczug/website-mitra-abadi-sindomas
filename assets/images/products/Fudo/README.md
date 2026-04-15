@@ -6,16 +6,16 @@ Folder ini berisi gambar produk untuk brand **Fudo**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 58 | Layer Cake Chocolate | `layer-cake-chocolate.jpg` |
-| 59 | Layer Cake Banana | `layer-cake-banana.jpg` |
-| 60 | Layer Cake Pandan | `layer-cake-pandan.jpg` |
-| 61 | Layer Cake Strawberry | `layer-cake-strawberry.jpg` |
-| 62 | Layer Cake Butter | `layer-cake-butter.jpg` |
-| 63 | Swissroll Chocolate | `swissroll-chocolate.jpg` |
-| 64 | Swissroll Pandan | `swissroll-pandan.jpg` |
-| 65 | Swissroll Strawberry | `swissroll-strawberry.jpg` |
-| 66 | Swissroll Tiramisu | `swissroll-tiramisu.jpg` |
-| 67 | Swissroll Butter | `swissroll-butter.jpg` |
+| 58 | Layer Cake Chocolate | `layer-cake-chocolate14gr.png` |
+| 59 | Layer Cake Banana | `layer-cake-banana14gr.png` |
+| 60 | Layer Cake Pandan | `layer-cake-pandan14gr.png` |
+| 61 | Layer Cake Strawberry | `layer-cake-strawberry14gr.png` |
+| 62 | Layer Cake Butter | `layer-cake-butter14gr.png` |
+| 63 | Swissroll Chocolate | `swissroll-chocolate18gr.png` |
+| 64 | Swissroll Pandan | `swissroll-pandan18gr.png` |
+| 65 | Swissroll Strawberry | `swissroll-strawberry18gr.png` |
+| 66 | Swissroll Tiramisu | `swissroll-tiramisu18gr.png` |
+| 67 | Swissroll Butter | `swissroll-butter18gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -28,5 +28,5 @@ Folder ini berisi gambar produk untuk brand **Fudo**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/fudo/{nama-file}.jpg
+assets/images/products/fudo/{nama-file}.png
 ```

@@ -6,23 +6,23 @@ Folder ini berisi gambar produk untuk brand **SWECCO**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 188 | Cheese Pudding | `cheese-pudding.jpg` |
-| 189 | Cheese Pudding 3 Cups | `cheese-pudding-3-cups.jpg` |
-| 190 | Yogurt Pudding Original Flavour 3 Cups | `yogurt-pudding-original-flavour-3-cups.jpg` |
-| 191 | Yogurt Pudding Strawberry Flavour 3 Cups | `yogurt-pudding-strawberry-flavour-3-cups.jpg` |
-| 192 | Yogurt Pudding Mango Flavour 3 Cups | `yogurt-pudding-mango-flavour-3-cups.jpg` |
-| 193 | Yogurt Pudding Lychee Flavour 3 Cups | `yogurt-pudding-lychee-flavour-3-cups.jpg` |
-| 194 | Yogurt Pudding Lychee Flavour 6 Cups | `yogurt-pudding-lychee-flavour-6-cups.jpg` |
-| 195 | Yogurt Pudding Strawberry Flavour 6 Cups | `yogurt-pudding-strawberry-flavour-6-cups.jpg` |
-| 196 | Yogurt Pudding Original Flavour Box (25 Cups) | `yogurt-pudding-original-flavour-box-25-cups.jpg` |
-| 197 | Yogurt Pudding Mango Flavour Box (25 Cups) | `yogurt-pudding-mango-flavour-box-25-cups.jpg` |
-| 198 | Yogurt Pudding Lychee Flavour Box (25 Cups) | `yogurt-pudding-lychee-flavour-box-25-cups.jpg` |
-| 199 | Yogurt Pudding Strawberry Flavour Box (25 Cups) | `yogurt-pudding-strawberry-flavour-box-25-cups.jpg` |
-| 200 | Strawberry Pudding With Nata de Coco (6 Cups) | `strawberry-pudding-with-nata-de-coco-6-cups.jpg` |
-| 201 | Honeymelon Pudding With Nata de Coco  (6 Cups) | `honeymelon-pudding-with-nata-de-coco-6-cups.jpg` |
-| 202 | Mango Pudding With Nata de Coco  (6 Cups) | `mango-pudding-with-nata-de-coco-6-cups.jpg` |
-| 203 | Mix 3 Cups Pudding (Lychee. Mango. Strawberry) | `mix-3-cups-pudding-lychee-mango-strawberry.jpg` |
-| 204 | Mix 6 Cups Pudding (Lychee. Mango. Strawberry) | `mix-6-cups-pudding-lychee-mango-strawberry.jpg` |
+| 188 | Cheese Pudding | `cheese-pudding108gr.png` |
+| 189 | Cheese Pudding 3 Cups | `cheese-pudding-3-cups80gr.png` |
+| 190 | Yogurt Pudding Original Flavour 3 Cups | `yogurt-pudding-original-flavour-3-cups80gr.png` |
+| 191 | Yogurt Pudding Strawberry Flavour 3 Cups | `yogurt-pudding-strawberry-flavour-3-cups80gr.png` |
+| 192 | Yogurt Pudding Mango Flavour 3 Cups | `yogurt-pudding-mango-flavour-3-cups80gr.png` |
+| 193 | Yogurt Pudding Lychee Flavour 3 Cups | `yogurt-pudding-lychee-flavour-3-cups80gr.png` |
+| 194 | Yogurt Pudding Lychee Flavour 6 Cups | `yogurt-pudding-lychee-flavour-6-cups80gr.png` |
+| 195 | Yogurt Pudding Strawberry Flavour 6 Cups | `yogurt-pudding-strawberry-flavour-6-cups80gr.png` |
+| 196 | Yogurt Pudding Original Flavour Box (25 Cups) | `yogurt-pudding-original-flavour-box-25-cups15gr.png` |
+| 197 | Yogurt Pudding Mango Flavour Box (25 Cups) | `yogurt-pudding-mango-flavour-box-25-cups15gr.png` |
+| 198 | Yogurt Pudding Lychee Flavour Box (25 Cups) | `yogurt-pudding-lychee-flavour-box-25-cups15gr.png` |
+| 199 | Yogurt Pudding Strawberry Flavour Box (25 Cups) | `yogurt-pudding-strawberry-flavour-box-25-cups15gr.png` |
+| 200 | Strawberry Pudding With Nata de Coco (6 Cups) | `strawberry-pudding-with-nata-de-coco-6-cups80gr.png` |
+| 201 | Honeymelon Pudding With Nata de Coco  (6 Cups) | `honeymelon-pudding-with-nata-de-coco-6-cups80gr.png` |
+| 202 | Mango Pudding With Nata de Coco  (6 Cups) | `mango-pudding-with-nata-de-coco-6-cups80gr.png` |
+| 203 | Mix 3 Cups Pudding (Lychee. Mango. Strawberry) | `mix-3-cups-pudding-lychee-mango-strawberry80gr.png` |
+| 204 | Mix 6 Cups Pudding (Lychee. Mango. Strawberry) | `mix-6-cups-pudding-lychee-mango-strawberry80gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -35,5 +35,5 @@ Folder ini berisi gambar produk untuk brand **SWECCO**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/swecco/{nama-file}.jpg
+assets/images/products/swecco/{nama-file}.png
 ```

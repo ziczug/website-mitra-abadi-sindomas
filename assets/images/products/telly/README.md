@@ -6,9 +6,9 @@ Folder ini berisi gambar produk untuk brand **Telly**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 114 | Dry Base Instant Noodle | `dry-base-instant-noodle.jpg` |
-| 115 | Telly Vegetarian Instant Noodle | `telly-vegetarian-instant-noodle.jpg` |
-| 116 | Hot Pepper Instant Noodle | `hot-pepper-instant-noodle.jpg` |
+| 114 | Dry Base Instant Noodle | `dry-base-instant-noodle85gr.png` |
+| 115 | Telly Vegetarian Instant Noodle | `telly-vegetarian-instant-noodle85gr.png` |
+| 116 | Hot Pepper Instant Noodle | `hot-pepper-instant-noodle75gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -21,5 +21,5 @@ Folder ini berisi gambar produk untuk brand **Telly**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/telly/{nama-file}.jpg
+assets/images/products/telly/{nama-file}.png
 ```

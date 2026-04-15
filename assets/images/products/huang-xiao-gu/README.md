@@ -6,8 +6,8 @@ Folder ini berisi gambar produk untuk brand **HUANG XIAO GU!**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 131 | Instant Noodle Spicy Flavor | `instant-noodle-spicy-flavor.jpg` |
-| 132 | Instant Noodle Original | `instant-noodle-original.jpg` |
+| 131 | Instant Noodle Spicy Flavor | `instant-noodle-spicy-flavor103gr.png` |
+| 132 | Instant Noodle Original | `instant-noodle-original103gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -20,5 +20,5 @@ Folder ini berisi gambar produk untuk brand **HUANG XIAO GU!**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/huang-xiao-gu/{nama-file}.jpg
+assets/images/products/huang-xiao-gu/{nama-file}.png
 ```

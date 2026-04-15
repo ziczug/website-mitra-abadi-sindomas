@@ -6,29 +6,29 @@ Folder ini berisi gambar produk untuk brand **Zees**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 35 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate.jpg` |
-| 36 | Sadwich Cracker Lemon | `sadwich-cracker-lemon.jpg` |
-| 37 | Sadwich Cracker Cheese | `sadwich-cracker-cheese.jpg` |
-| 38 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate.jpg` |
-| 39 | Sadwich Cracker Lemon | `sadwich-cracker-lemon.jpg` |
-| 40 | Sadwich Cracker Cheese | `sadwich-cracker-cheese.jpg` |
-| 41 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate.jpg` |
-| 42 | Sadwich Cracker Lemon | `sadwich-cracker-lemon.jpg` |
-| 43 | Sadwich Cracker Cheese | `sadwich-cracker-cheese.jpg` |
-| 44 | Original Cream Crackers | `original-cream-crackers.jpg` |
-| 45 | Original Cream Crackers | `original-cream-crackers.jpg` |
-| 46 | Sugar Cream Cracker | `sugar-cream-cracker.jpg` |
-| 47 | Cracker Sandwich Cheese | `cracker-sandwich-cheese.jpg` |
-| 48 | Cracker Sandwich Peanut Butter | `cracker-sandwich-peanut-butter.jpg` |
-| 49 | Assorted Biscuit | `assorted-biscuit.jpg` |
-| 50 | Choco Chips Cookie Hazalnut | `choco-chips-cookie-hazalnut.jpg` |
-| 51 | Choco Chips Cookie Coklat | `choco-chips-cookie-coklat.jpg` |
-| 52 | Chocolate Biscuit | `chocolate-biscuit.jpg` |
-| 53 | Chocolate Sandwich Biscuit Chocolate | `chocolate-sandwich-biscuit-chocolate.jpg` |
-| 54 | Chocolate Sandwich Biscuit Vanilla | `chocolate-sandwich-biscuit-vanilla.jpg` |
-| 55 | Butter Cookies | `butter-cookies.jpg` |
-| 56 | Super Ring Cheese Cracker | `super-ring-cheese-cracker.jpg` |
-| 57 | Savory Crackers Original | `savory-crackers-original.jpg` |
+| 35 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate180gr.png` |
+| 36 | Sadwich Cracker Lemon | `sadwich-cracker-lemon180gr.png` |
+| 37 | Sadwich Cracker Cheese | `sadwich-cracker-cheese180gr.png` |
+| 38 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate90gr.png` |
+| 39 | Sadwich Cracker Lemon | `sadwich-cracker-lemon90gr.png` |
+| 40 | Sadwich Cracker Cheese | `sadwich-cracker-cheese90gr.png` |
+| 41 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate54gr.png` |
+| 42 | Sadwich Cracker Lemon | `sadwich-cracker-lemon54gr.png` |
+| 43 | Sadwich Cracker Cheese | `sadwich-cracker-cheese54gr.png` |
+| 44 | Original Cream Crackers | `original-cream-crackers184gr.png` |
+| 45 | Original Cream Crackers | `original-cream-crackers380gr.png` |
+| 46 | Sugar Cream Cracker | `sugar-cream-cracker192gr.png` |
+| 47 | Cracker Sandwich Cheese | `cracker-sandwich-cheese229.5gr.png` |
+| 48 | Cracker Sandwich Peanut Butter | `cracker-sandwich-peanut-butter229.5gr.png` |
+| 49 | Assorted Biscuit | `assorted-biscuit451.5gr.png` |
+| 50 | Choco Chips Cookie Hazalnut | `choco-chips-cookie-hazalnut150gr.png` |
+| 51 | Choco Chips Cookie Coklat | `choco-chips-cookie-coklat150gr.png` |
+| 52 | Chocolate Biscuit | `chocolate-biscuit148gr.png` |
+| 53 | Chocolate Sandwich Biscuit Chocolate | `chocolate-sandwich-biscuit-chocolate264gr.png` |
+| 54 | Chocolate Sandwich Biscuit Vanilla | `chocolate-sandwich-biscuit-vanilla264gr.png` |
+| 55 | Butter Cookies | `butter-cookies115gr.png` |
+| 56 | Super Ring Cheese Cracker | `super-ring-cheese-cracker75gr.png` |
+| 57 | Savory Crackers Original | `savory-crackers-original75gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -41,5 +41,5 @@ Folder ini berisi gambar produk untuk brand **Zees**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/zees/{nama-file}.jpg
+assets/images/products/zees/{nama-file}.png
 ```

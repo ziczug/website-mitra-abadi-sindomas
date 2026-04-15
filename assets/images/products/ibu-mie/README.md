@@ -6,11 +6,11 @@ Folder ini berisi gambar produk untuk brand **Ibu Mie**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 109 | White Curry Mee | `white-curry-mee.jpg` |
-| 110 | Harmee | `harmee.jpg` |
-| 111 | VegeMee | `vegemee.jpg` |
-| 112 | Sambal Udang Mee | `sambal-udang-mee.jpg` |
-| 113 | Curry Kapitan Flavor | `curry-kapitan-flavor.jpg` |
+| 109 | White Curry Mee | `white-curry-mee105gr.png` |
+| 110 | Harmee | `harmee85gr.png` |
+| 111 | VegeMee | `vegemee85gr.png` |
+| 112 | Sambal Udang Mee | `sambal-udang-mee85gr.png` |
+| 113 | Curry Kapitan Flavor | `curry-kapitan-flavor85gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -23,5 +23,5 @@ Folder ini berisi gambar produk untuk brand **Ibu Mie**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/ibu-mie/{nama-file}.jpg
+assets/images/products/ibu-mie/{nama-file}.png
 ```
