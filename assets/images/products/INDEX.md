@@ -79,15 +79,15 @@ Folder: `assets/images/products/zees/`
 
 | ID | Nama Produk | File |
 |----|-------------|------|
-| 35 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate.jpg` |
-| 36 | Sadwich Cracker Lemon | `sadwich-cracker-lemon.jpg` |
-| 37 | Sadwich Cracker Cheese | `sadwich-cracker-cheese.jpg` |
-| 38 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate.jpg` |
-| 39 | Sadwich Cracker Lemon | `sadwich-cracker-lemon.jpg` |
-| 40 | Sadwich Cracker Cheese | `sadwich-cracker-cheese.jpg` |
-| 41 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate.jpg` |
-| 42 | Sadwich Cracker Lemon | `sadwich-cracker-lemon.jpg` |
-| 43 | Sadwich Cracker Cheese | `sadwich-cracker-cheese.jpg` |
+| 35 | Sandwich Cracker Chocolate | `sandwich-cracker-chocolate.jpg` |
+| 36 | Sandwich Cracker Lemon | `sandwich-cracker-lemon.jpg` |
+| 37 | Sandwich Cracker Cheese | `sandwich-cracker-cheese.jpg` |
+| 38 | Sandwich Cracker Chocolate | `sandwich-cracker-chocolate.jpg` |
+| 39 | Sandwich Cracker Lemon | `sandwich-cracker-lemon.jpg` |
+| 40 | Sandwich Cracker Cheese | `sandwich-cracker-cheese.jpg` |
+| 41 | Sandwich Cracker Chocolate | `sandwich-cracker-chocolate.jpg` |
+| 42 | Sandwich Cracker Lemon | `sandwich-cracker-lemon.jpg` |
+| 43 | Sandwich Cracker Cheese | `sandwich-cracker-cheese.jpg` |
 | 44 | Original Cream Crackers | `original-cream-crackers.jpg` |
 | 45 | Original Cream Crackers | `original-cream-crackers.jpg` |
 | 46 | Sugar Cream Cracker | `sugar-cream-cracker.jpg` |

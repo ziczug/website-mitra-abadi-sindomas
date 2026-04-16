@@ -6,15 +6,15 @@ Folder ini berisi gambar produk untuk brand **Zees**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 35 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate180gr.png` |
-| 36 | Sadwich Cracker Lemon | `sadwich-cracker-lemon180gr.png` |
-| 37 | Sadwich Cracker Cheese | `sadwich-cracker-cheese180gr.png` |
-| 38 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate90gr.png` |
-| 39 | Sadwich Cracker Lemon | `sadwich-cracker-lemon90gr.png` |
-| 40 | Sadwich Cracker Cheese | `sadwich-cracker-cheese90gr.png` |
-| 41 | Sadwich Cracker Chocolate | `sadwich-cracker-chocolate54gr.png` |
-| 42 | Sadwich Cracker Lemon | `sadwich-cracker-lemon54gr.png` |
-| 43 | Sadwich Cracker Cheese | `sadwich-cracker-cheese54gr.png` |
+| 35 | Sandwich Cracker Chocolate | `sandwich-cracker-chocolate180gr.png` |
+| 36 | Sandwich Cracker Lemon | `sandwich-cracker-lemon180gr.png` |
+| 37 | Sandwich Cracker Cheese | `sandwich-cracker-cheese180gr.png` |
+| 38 | Sandwich Cracker Chocolate | `sandwich-cracker-chocolate90gr.png` |
+| 39 | Sandwich Cracker Lemon | `sandwich-cracker-lemon90gr.png` |
+| 40 | Sandwich Cracker Cheese | `sandwich-cracker-cheese90gr.png` |
+| 41 | Sandwich Cracker Chocolate | `sandwich-cracker-chocolate54gr.png` |
+| 42 | Sandwich Cracker Lemon | `sandwich-cracker-lemon54gr.png` |
+| 43 | Sandwich Cracker Cheese | `sandwich-cracker-cheese54gr.png` |
 | 44 | Original Cream Crackers | `original-cream-crackers184gr.png` |
 | 45 | Original Cream Crackers | `original-cream-crackers380gr.png` |
 | 46 | Sugar Cream Cracker | `sugar-cream-cracker192gr.png` |
