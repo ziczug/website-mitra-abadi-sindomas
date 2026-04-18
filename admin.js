@@ -56,14 +56,38 @@ async function saveToFile(key, data) {
     const res = await resp.json();
     if (res.success) {
       console.log(`[FileSync] Berhasil simpan file: ${key}.json`);
+      
+      // Auto-trigger master file sync if products or categories are updated
+      if (key === 'products' || key === 'categories') {
+          triggerServerSync();
+      }
+      
       return true;
     } else {
       throw new Error(res.error || 'Unknown error');
     }
   } catch(e) {
     console.error(`[FileSync] Gagal simpan file ${key}:`, e.message);
-    showToast(`Gagal sinkron ke server: ${key}. Data hanya tersimpan di browser.`, 'warning');
+    toast(`Gagal sinkron ke server: ${key}. Data hanya tersimpan di browser.`, 'warning');
     return false;
+  }
+}
+
+// Trigger sinkronisasi server untuk regenerasi file master (CSV, Brands, dll)
+async function triggerServerSync() {
+  try {
+    console.log('[Sync] Memicu sinkronisasi file master di server...');
+    const resp = await fetch('/api/sync', { method: 'POST' });
+    if (!resp.ok) throw new Error(`HTTP Error: ${resp.status}`);
+    
+    const res = await resp.json();
+    if (res.success) {
+      console.log('[Sync] ✅ Sinkronisasi file master berhasil:', res.files.join(', '));
+      // Jika kita berada di dashboard atau halaman produk, kita mungkin ingin refresh status
+      updateSyncStatus(true);
+    }
+  } catch (e) {
+    console.warn('[Sync] ❌ Gagal sinkronisasi otomatis di server:', e.message);
   }
 }
 

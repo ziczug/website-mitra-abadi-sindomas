@@ -1869,7 +1869,7 @@ async function loadProductsFromCSV() {
 
   // 1. Prioritas Utama: Ambil dari products.json di server (Synced via Admin)
   try {
-    const resp = await fetch('database/cms/products.json');
+    const resp = await fetch(`database/cms/products.json?t=${Date.now()}`);
     if (resp.ok) {
       const data = await resp.json();
       if (Array.isArray(data) && data.length > 0) {
