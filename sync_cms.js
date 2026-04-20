@@ -80,48 +80,143 @@ function toSlug(str) {
 
 // ── 4. Convert to product objects ─────────────────────────────────────────
 const products = rawData.map((r, i) => {
-  const brandName     = (r['Brand'] || '').trim();
+  const brandName = (r['Brand'] || '').trim();
   const logoFromExcel = (r['Logo Brand'] || '').trim();
-  const brandLogo     = logoFromExcel || getBrandLogo(brandName);
-  const catRaw        = (r['Kategori'] || '').toLowerCase().trim();
-  const category      = catKeyMap[catRaw] || catRaw;
-  
-  const weightVal     = r['Berat/Ukuran'] !== undefined ? String(r['Berat/Ukuran']).trim() : '';
+  const brandLogo = logoFromExcel || getBrandLogo(brandName);
+  const catRaw = (r['Kategori'] || '').toLowerCase().trim();
+  const category = catKeyMap[catRaw] || catRaw;
+  const weightVal = (r['Berat/Ukuran'] !== undefined ? String(r['Berat/Ukuran']).trim() : '')
+    .replace(/(\d+)\s*gr\b/gi, '$1g');
+
+  const originalName = String(r['Nama Produk'] || '').trim()
+    .replace(/Garlic Butte\b/g, 'Garlic Butter')
+    .replace(/\bChia\b(?!\s+Seed)/gi, 'Chia Seed')
+    .replace(/Sadwich/gi, 'Sandwich')
+    .replace(/Vannila/gi, 'Vanilla')
+    .replace(/Chiken/gi, 'Chicken')
+    .replace(/Sasame/gi, 'Sesame')
+    .replace(/Craker/gi, 'Cracker')
+    .replace(/Gingseng/gi, 'Ginseng')
+    .replace(/(\d+)\s*gr\b/gi, '$1g');
+
+  // New naming standard: Brand - Product Name Weight
+  // If originalName already starts with brandName (case insensitive), don't prepend it again
+  let displayName = originalName.toLowerCase().startsWith(brandName.toLowerCase()) 
+    ? originalName 
+    : `${brandName} - ${originalName}`;
+    
+  if (weightVal && !originalName.toLowerCase().includes(weightVal.toLowerCase())) {
+    displayName += ` ${weightVal}`;
+  }
   
   const brandSlug = toSlug(brandName);
-  const prodSlug = toSlug(String(r['Nama Produk'] || ''));
+  const prodSlug = toSlug(originalName);
 
-  // Auto-generate or fix image path
-  let imgPath = String(r['Gambar'] || '').trim().replace(/\.jpg$/i, '.png');
+  // Convert weight for filename: g → gr, ml → mlgr (matching README convention)
+  let fileWeight = weightVal
+    .replace(/(\d+[\d.]*)g$/i, '$1gr')
+    .replace(/(\d+[\d.]*)ml$/i, '$1mlgr');
+
+  // Standard path: brand-folder/product-slug + weight + .png (README convention)
+  let imgPathSuffix = `${prodSlug}${fileWeight}`;
   
-  if (imgPath && imgPath.startsWith('assets/images/products/')) {
-    const parts = imgPath.split('/');
-    // if path is assets/images/products/filename.png, insert brandSlug
-    if (parts.length === 4) {
-      imgPath = `assets/images/products/${brandSlug}/${parts[3]}`;
+  // If slug already contains the weight, don't duplicate it (avoids ...100g100gr.png)
+  const weightSlug = toSlug(fileWeight);
+  const rawWeightSlug = toSlug(weightVal);
+  if (prodSlug.endsWith(weightSlug) || prodSlug.endsWith(rawWeightSlug)) {
+    imgPathSuffix = prodSlug;
+  }
+
+  let imgPath = `assets/images/products/${brandSlug}/${imgPathSuffix}.png`;
+
+  // --- FALLBACK LOGIC ---
+  const fullPath = path.join(ROOT, imgPath);
+  if (!fs.existsSync(fullPath)) {
+    const pLower = originalName.toLowerCase();
+    const bLower = brandName.toLowerCase();
+
+    // Jacker Potato Chips/Crisps
+    if (bLower === 'jacker' && pLower.includes('potato')) {
+      if (pLower.includes('hot & spicy')) {
+        imgPath = `assets/images/products/${brandSlug}/hot-spicy-flavor-potato-chips60gr.png`;
+      } else if (pLower.includes('barbecue')) {
+        imgPath = `assets/images/products/${brandSlug}/barbecue-flavor-potato-chips60gr.png`;
+      } else if (pLower.includes('mexican hot sauce')) {
+        imgPath = `assets/images/products/${brandSlug}/wavy-chips-mexican-hot-sauce60gr.png`;
+      } else {
+        const original60 = `assets/images/products/${brandSlug}/original-flavor-potato-crisps60gr.png`;
+        if (fs.existsSync(path.join(ROOT, original60))) imgPath = original60;
+      }
+    } 
+    // Zees Sandwich Crackers
+    else if (bLower === 'zees' && pLower.includes('sandwich cracker')) {
+      let flavor = '';
+      if (pLower.includes('chocolate')) flavor = 'chocolate';
+      else if (pLower.includes('lemon')) flavor = 'lemon';
+      else if (pLower.includes('cheese')) flavor = 'cheese';
+      
+      if (flavor) {
+        const fallback180 = `assets/images/products/${brandSlug}/sandwich-cracker-${flavor}180gr.png`;
+        if (fs.existsSync(path.join(ROOT, fallback180))) imgPath = fallback180;
+      }
+    }
+    // Win2 Croutons
+    else if (bLower === 'win2' && pLower.includes('croutons')) {
+      let flavor = '';
+      if (pLower.includes('honey mustard')) flavor = 'honey-mustard';
+      else if (pLower.includes('margarine sugar')) flavor = 'margarine-sugar';
+      else if (pLower.includes('garlic butter')) flavor = 'garlic-butter';
+      
+      if (flavor) {
+        const fallback30 = `assets/images/products/${brandSlug}/${flavor}-croutons30gr.png`;
+        if (fs.existsSync(path.join(ROOT, fallback30))) imgPath = fallback30;
+      }
+    }
+    // Zees Original Cream Crackers
+    else if (bLower === 'zees' && pLower.includes('original cream crackers')) {
+      const fallback184 = `assets/images/products/${brandSlug}/original-cream-crackers184gr.png`;
+      if (fs.existsSync(path.join(ROOT, fallback184))) imgPath = fallback184;
     }
   }
 
-  if (!imgPath) {
-    if (brandSlug && prodSlug) {
-      imgPath = `assets/images/products/${brandSlug}/${prodSlug}.png`;
+  // Fallback: If generated path doesn't exist but Excel path does, check it
+  const excelImgPath = String(r['Gambar'] || '').trim().replace(/\.jpg$/i, '.png');
+  const currentPath = path.join(ROOT, imgPath);
+  if (!fs.existsSync(currentPath) && excelImgPath) {
+    let candidate = '';
+    if (excelImgPath.startsWith('assets/images/products/')) {
+      candidate = excelImgPath;
+    } else {
+      candidate = `assets/images/products/${brandSlug}/${excelImgPath}`;
+    }
+    
+    if (fs.existsSync(path.join(ROOT, candidate))) {
+      imgPath = candidate;
     }
   }
 
   return {
-    id:         parseInt(r['ID']) || (i + 1),
-    name:       String(r['Nama Produk'] || '').trim(),
-    category:   category,
-    brand:      brandName,
+    id: parseInt(r['ID']) || (i + 1),
+    name: displayName,
+    category: category,
+    brand: brandName,
     brand_logo: brandLogo,
-    image:      imgPath,
-    desc:       String(r['Deskripsi'] || '').trim(),
-    origin:     String(r['Asal Negara'] || '').trim(),
-    weight:     weightVal,
-    cert:       String(r['Sertifikasi'] || '').trim()
-                  .replace(/halal\.?\s*bpom/gi, 'HALAL & BPOM')
-                  .replace(/bpom\.?\s*halal/gi, 'HALAL & BPOM'),
-    info:       String(r['Info Kemasan'] || '').trim()
+    image: imgPath.replace(/garlic-butte\b/g, 'garlic-butter')
+      .replace(/-chia(?![-\w]*seed)/gi, '-chia-seed')
+      .replace(/sadwich/gi, 'sandwich')
+      .replace(/vannila/gi, 'vanilla')
+      .replace(/chiken/gi, 'chicken')
+      .replace(/sasame/gi, 'sesame')
+      .replace(/craker/gi, 'cracker')
+      .replace(/gingseng/gi, 'ginseng'),
+    desc: String(r['Deskripsi'] || '').trim().replace(/(\d+)\s*gr\b/gi, '$1g'),
+    origin: String(r['Asal Negara'] || '').trim(),
+    weight: weightVal.replace(/(\d+)\s*gr\b/gi, '$1g'),
+    cert: String(r['Sertifikasi'] || '').trim()
+      .replace(/halal\.?\s*bpom/gi, 'HALAL & BPOM')
+      .replace(/bpom\.?\s*halal/gi, 'HALAL & BPOM')
+      .replace(/(\d+)\s*gr\b/gi, '$1g'),
+    info: String(r['Info Kemasan'] || '').trim().replace(/(\d+)\s*gr\b/gi, '$1g')
   };
 }).filter(p => p.name);
 
@@ -144,7 +239,6 @@ products.forEach(p => {
   const row = productCsvHeaders.map(h => {
     let val = p[h] || '';
     if (h === 'id') val = String(val);
-    // Escape quotes and wrap in quotes if contains comma
     val = String(val).replace(/"/g, '""');
     if (val.includes(',') || val.includes('"') || val.includes('\n')) {
       val = `"${val}"`;
@@ -169,9 +263,9 @@ products.forEach(p => {
   if (!seenBrands[key]) {
     seenBrands[key] = true;
     brandPartners.push({
-      id:       bpId++,
-      name:     p.brand,
-      logo:     p.brand_logo,
+      id: bpId++,
+      name: p.brand,
+      logo: p.brand_logo,
       logoData: ''
     });
   }
@@ -183,7 +277,7 @@ fs.writeFileSync(
 );
 console.log(`[OK] brand_partners.json saved (${brandPartners.length} brands)`);
 
-// ── 7. Update categories.json (Auto-sync all categories) ──────────────────
+// ── 7. Update categories.json ─────────────────────────────────────────────
 const catsPath = path.join(CMS_DIR, 'categories.json');
 let cats = [];
 if (fs.existsSync(catsPath)) {
@@ -243,13 +337,4 @@ fs.writeFileSync(
 );
 console.log('[OK] brands.csv updated');
 
-// ── 9. Summary ────────────────────────────────────────────────────────────
 console.log('\n====== SYNC COMPLETE ======');
-console.log(`Products  : ${products.length}`);
-console.log(`Brands    : ${brandPartners.length}`);
-console.log(`Categories: ${cats.length}`);
-console.log('\nBrand → Logo mapping:');
-brandPartners.forEach(b => {
-  const hasLogo = b.logo ? '✓' : '✗ (missing!)';
-  console.log(`  ${hasLogo}  ${b.name}  →  ${b.logo || 'NO LOGO FILE'}`);
-});

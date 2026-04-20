@@ -16,7 +16,7 @@ Folder ini berisi gambar produk untuk brand **Oriental**.
 | 8 | Rota Prawn Family Pack | `rota-prawn-family-pack14gr.png` |
 | 9 | Green Pea Snack | `green-pea-snack60gr.png` |
 | 10 | Green Pea Snack Family Pack | `green-pea-snack-family-pack14gr.png` |
-| 11 | Chiken Ring | `chiken-ring60gr.png` |
+| 11 | Chicken Ring | `chicken-ring60gr.png` |
 | 12 | Rostik Chicken Curry | `rostik-chicken-curry60gr.png` |
 | 13 | Rostik Cuttlefish | `rostik-cuttlefish60gr.png` |
 
@@ -31,5 +31,5 @@ Folder ini berisi gambar produk untuk brand **Oriental**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/oriental/{nama-file}.png
+assets/images/products/oriental/{nama-file}
 ```

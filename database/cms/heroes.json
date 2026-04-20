@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "ZESS Chocochips",
+    "image": "assets/images/hero-banner-chocochips.png",
+    "active": true
+  },
+  {
+    "id": 2,
+    "title": "General Promo",
+    "image": "assets/images/hero-banner.png",
+    "active": true
+  },
+  {
+    "id": 3,
+    "title": "Snacks Category",
+    "image": "assets/images/snack.png",
+    "active": true
+  },
+  {
+    "id": 4,
+    "title": "Biscuits Category",
+    "image": "assets/images/biskuit.png",
+    "active": true
+  },
+  {
+    "id": 5,
+    "title": "Wafers Category",
+    "image": "assets/images/wafer.png",
+    "active": true
+  },
+  {
+    "id": 6,
+    "title": "Cakes Category",
+    "image": "assets/images/kue.png",
+    "active": true
+  }
+]

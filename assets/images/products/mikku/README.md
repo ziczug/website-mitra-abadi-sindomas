@@ -6,11 +6,11 @@ Folder ini berisi gambar produk untuk brand **MIKKU**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 179 | Hokaido Fruits Juice Yogurt Flavor | `hokaido-fruits-juice-yogurt-flavor300ml.png` |
-| 180 | Hokaido Fruits Juice Melon Flavor | `hokaido-fruits-juice-melon-flavor300ml.png` |
-| 181 | Hokaido Fruits Juice Strawberry Flavor | `hokaido-fruits-juice-strawberry-flavor300ml.png` |
-| 182 | Hokaido Fruits Juice Blueberry Flavor | `hokaido-fruits-juice-blueberry-flavor300ml.png` |
-| 183 | Hokaido Fruits Juice White Grape Juice Flavoured Original | `hokaido-fruits-juice-white-grape-juice-flavoured-original100ml.png` |
+| 179 | Hokaido Fruits Juice Yogurt Flavor | `hokaido-fruits-juice-yogurt-flavor300mlgr.png` |
+| 180 | Hokaido Fruits Juice Melon Flavor | `hokaido-fruits-juice-melon-flavor300mlgr.png` |
+| 181 | Hokaido Fruits Juice Strawberry Flavor | `hokaido-fruits-juice-strawberry-flavor300mlgr.png` |
+| 182 | Hokaido Fruits Juice Blueberry Flavor | `hokaido-fruits-juice-blueberry-flavor300mlgr.png` |
+| 183 | Hokaido Fruits Juice White Grape Juice Flavoured Original | `hokaido-fruits-juice-white-grape-juice-flavoured-original100mlgr.png` |
 
 ## 📌 Panduan Upload
 
@@ -23,5 +23,5 @@ Folder ini berisi gambar produk untuk brand **MIKKU**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/mikku/{nama-file}.png
+assets/images/products/mikku/{nama-file}
 ```

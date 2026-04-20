@@ -30,5 +30,5 @@ Folder ini berisi gambar produk untuk brand **YAMAMOTO KAWAHIRO**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/yamamoto-kawahiro/{nama-file}.png
+assets/images/products/yamamoto-kawahiro/{nama-file}
 ```

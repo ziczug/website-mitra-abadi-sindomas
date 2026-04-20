@@ -19,7 +19,7 @@ Folder ini berisi gambar produk untuk brand **A-TASTE**.
 | 127 | Potato Cracker Original | `potato-cracker-original238gr.png` |
 | 128 | Multi-Grain High Fiber | `multi-grain-high-fiber160gr.png` |
 | 129 | Multi-Grain Sea Salt Flavor | `multi-grain-sea-salt-flavor160gr.png` |
-| 130 | Multi-Grain Chia | `multi-grain-chia160gr.png` |
+| 130 | Multi-Grain Chia Seed | `multi-grain-chia-seed160gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -32,5 +32,5 @@ Folder ini berisi gambar produk untuk brand **A-TASTE**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/a-taste/{nama-file}.png
+assets/images/products/a-taste/{nama-file}
 ```

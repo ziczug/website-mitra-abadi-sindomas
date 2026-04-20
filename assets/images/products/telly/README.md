@@ -21,5 +21,5 @@ Folder ini berisi gambar produk untuk brand **Telly**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/telly/{nama-file}.png
+assets/images/products/telly/{nama-file}
 ```

@@ -56,22 +56,23 @@ Object.entries(brandMap).forEach(([brandSlug, { name, products: brandProducts }]
   const fileList = [];
 
   brandProducts.forEach(p => {
-    const productSlug = toSlug(p.name);
-    const expectedPath = `assets/images/products/${brandSlug}/${productSlug}.jpg`;
-
-    // Update image path di products array (cari by id)
-    const idx = products.findIndex(x => x.id === p.id);
-    if (idx >= 0) {
-      // Hanya update jika path masih kosong atau masih path lama (bukan folder brand)
-      const currentImage = products[idx].image || '';
-      const alreadyInBrandFolder = currentImage.includes(`/products/${brandSlug}/`);
-      if (!currentImage || !alreadyInBrandFolder) {
-        products[idx].image = expectedPath;
-        updatedCount++;
-      }
+    // Get filename from current image path or generate fallback
+    let fileName = '';
+    if (p.image) {
+      fileName = path.basename(p.image);
+    } else {
+      const productSlug = toSlug(p.name);
+      fileName = `${productSlug}.png`;
+      p.image = `assets/images/products/${brandSlug}/${fileName}`;
     }
 
-    fileList.push({ id: p.id, name: p.name, file: `${productSlug}.jpg`, path: expectedPath });
+    // Ensure path in products.json is correct
+    const idx = products.findIndex(x => x.id === p.id);
+    if (idx >= 0) {
+      products[idx].image = p.image;
+    }
+
+    fileList.push({ id: p.id, name: p.name, file: fileName, path: p.image });
   });
 
   // ── Tulis README.md ──────────────────────────────────────────────────────
@@ -97,7 +98,7 @@ Object.entries(brandMap).forEach(([brandSlug, { name, products: brandProducts }]
     `## 🔗 Path yang digunakan di sistem`,
     ``,
     `\`\`\``,
-    `assets/images/products/${brandSlug}/{nama-file}.jpg`,
+    `assets/images/products/${brandSlug}/{nama-file}`,
     `\`\`\``,
   ];
 
@@ -112,7 +113,7 @@ Object.entries(brandMap).forEach(([brandSlug, { name, products: brandProducts }]
 
 // ── Simpan products.json yang sudah diupdate ──────────────────────────────────
 fs.writeFileSync(PRODUCTS_PATH, JSON.stringify(products, null, 2), 'utf8');
-console.log(`\n[OK] products.json diperbarui — ${updatedCount} path gambar diupdate`);
+console.log(`\n[OK] products.json diperbarui`);
 
 // ── Buat INDEX.md global di assets/images/products/ ─────────────────────────
 const indexLines = [

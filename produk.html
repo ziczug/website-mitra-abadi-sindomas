@@ -962,14 +962,14 @@
       width: 60px;
       height: 60px;
       background: var(--accent);
-      color: var(--primary);
+      color: #000000; /* Hitam */
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 26px;
       transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-      box-shadow: 0 10px 30px rgba(201, 168, 76, 0.4);
+      box-shadow: 0 10px 30px rgba(212, 168, 67, 0.4);
       flex-shrink: 0;
       text-decoration: none;
       border: none;
@@ -977,9 +977,10 @@
       z-index: 1;
     }
     .luxury-directions-btn:hover {
-      background: var(--white);
-      transform: scale(1.1) rotate(15deg);
-      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);
+      background: var(--accent);
+      transform: scale(1.1); /* Membesar tanpa miring */
+      color: #000000;
+      box-shadow: 0 15px 45px rgba(212, 168, 67, 0.5);
     }
     .luxury-directions-btn i {
       transition: transform 0.4s;
@@ -1138,26 +1139,68 @@
       }
       .luxury-directions-btn {
         position: static;
-        width: 100%;
-        height: 50px;
-        border-radius: 12px;
-        font-size: 18px;
-        margin-top: 10px;
+        width: 100% !important;
+        height: 54px;
+        background: var(--accent); /* Gold */
+        color: #000000; /* Hitam */
+        border-radius: 14px;
+        font-size: 20px;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: 700;
+        overflow: hidden;
+        position: relative;
+        border: 1.5px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 12px 35px rgba(212, 168, 67, 0.3);
+        transform: rotate(0deg) !important; /* Menghilangkan miring */
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        animation: growElegant 3s infinite ease-in-out;
+        z-index: 1;
+      }
+      .luxury-directions-btn:active {
+        transform: scale(1.08) rotate(0deg) !important;
+      }
+      .luxury-directions-btn i {
+        position: relative;
+        z-index: 2;
       }
       .luxury-directions-btn::after {
         content: 'PETUNJUK ARAH';
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 800;
-        letter-spacing: 1.5px;
-        margin-left: 10px;
+        letter-spacing: 2px;
+        margin-left: 12px;
+        color: #000000; /* Hitam */
+        position: relative;
+        z-index: 2;
       }
-      .luxury-directions-btn {
-        animation: pulseGoldMobile 2s infinite;
+      /* Shine Effect within shape */
+      .luxury-directions-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          120deg, 
+          transparent, 
+          rgba(255, 255, 255, 0.8), 
+          transparent
+        );
+        animation: shineSweep 4s infinite ease-in-out;
+        z-index: 1;
       }
-      @keyframes pulseGoldMobile {
-        0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5); }
-        70% { box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+      @keyframes growElegant {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      @keyframes shineSweep {
+        0% { left: -150%; }
+        25%, 100% { left: 150%; }
       }
       .produk-footer__bottom-inner {
         flex-direction: column;
@@ -1207,7 +1250,7 @@
         <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
         
         <div class="nav-social mobile-only" style="margin-top: 20px;">
-          <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Hubungi Kami">
+          <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
             <i class="fas fa-phone-alt"></i>
           </a>
           <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item" aria-label="Instagram">
@@ -1216,7 +1259,7 @@
         </div>
       </div>
       <div class="nav-actions">
-        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text" data-i18n="nav-contact">Hubungi Kami</span></a>
+        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text" data-i18n="nav-contact">Kontak</span></a>
         <div class="search-wrapper" id="searchWrapper">
           <button class="search-toggle" id="searchToggle" aria-label="Open Search">
             <i class="fas fa-search"></i>
@@ -2493,13 +2536,46 @@ loadProductsFromCSV().then(() => {
       }
     }
 
-    function initContactFormProducts() {
+    async function initContactFormProducts() {
       const productSelect = document.getElementById('waProduct');
       if (!productSelect || productSelect.options.length > 1) return;
 
+      let prods = [];
+      // Use global 'products' if available (common in produk.html)
+      if (typeof products !== 'undefined' && products.length > 0) {
+        prods = products;
+      } else {
+        // Fetch if not available (backup)
+        try {
+          const resp = await fetch('database/cms/products.json');
+          if (resp.ok) prods = await resp.json();
+          else {
+            const stored = localStorage.getItem('mas_products');
+            if (stored) prods = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn('CS Form fetch error:', e);
+        }
+      }
+
+      if (!prods || prods.length === 0) return;
+
       const seen = new Set();
-      products.forEach(p => {
-        const display = `${p.name} - ${p.brand} - ${getCategoryLabel(p.category)}`;
+      prods.forEach(p => {
+        // Get category label safely
+        let catLabel = p.category;
+        if (typeof getCategoryLabel === 'function') {
+          catLabel = getCategoryLabel(p.category);
+        } else {
+          const labels = {
+            snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
+            minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
+            noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
+          };
+          catLabel = labels[p.category] || p.category;
+        }
+
+        const display = `${p.name} - ${p.brand} - ${catLabel}`;
         if (!seen.has(display)) {
           seen.add(display);
           const opt = document.createElement('option');
@@ -2516,9 +2592,8 @@ loadProductsFromCSV().then(() => {
       const box = document.getElementById('waProductPreviewBox');
       const img = document.getElementById('waProductImg');
       const placeholder = document.getElementById('waProductPlaceholder');
-      if(!select || select.selectedIndex < 0) return;
+      if (!select || select.selectedIndex < 0) return;
       const selectedOption = select.options[select.selectedIndex];
-      
       const imgSrc = selectedOption.dataset.image;
 
       if (imgSrc) {
@@ -2547,11 +2622,11 @@ loadProductsFromCSV().then(() => {
         return;
       }
 
-      const targetPhone = '6281295001778'; 
+      const targetPhone = '6281295001778';
       const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
-                 `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
-                 `${message}\n\n` +
-                 `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
+        `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
+        `${message}\n\n` +
+        `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
 
       const encodedText = encodeURIComponent(text);
       window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');

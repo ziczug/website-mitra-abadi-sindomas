@@ -29,5 +29,5 @@ Folder ini berisi gambar produk untuk brand **TAWANDANG**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/tawandang/{nama-file}.png
+assets/images/products/tawandang/{nama-file}
 ```

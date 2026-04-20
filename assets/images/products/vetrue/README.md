@@ -9,8 +9,8 @@ Folder ini berisi gambar produk untuk brand **VETRUE**.
 | 148 | Weikesu Cheese Flavor | `weikesu-cheese-flavor66gr.png` |
 | 149 | Waikesu Durian Flavor | `waikesu-durian-flavor66gr.png` |
 | 150 | Waikesu Strawberry Flavor | `waikesu-strawberry-flavor66gr.png` |
-| 151 | Taiwan Rice Craker Salted Egg Yolk | `taiwan-rice-craker-salted-egg-yolk116gr.png` |
-| 152 | Taiwan Rice Craker Salted Cheese Flavor | `taiwan-rice-craker-salted-cheese-flavor116gr.png` |
+| 151 | Taiwan Rice Cracker Salted Egg Yolk | `taiwan-rice-cracker-salted-egg-yolk116gr.png` |
+| 152 | Taiwan Rice Cracker Salted Cheese Flavor | `taiwan-rice-cracker-salted-cheese-flavor116gr.png` |
 | 153 | Rice Cracker Japanese Salted Egg Yolk Flavor | `rice-cracker-japanese-salted-egg-yolk-flavor300gr.png` |
 | 154 | Rice Cracker Japanese Vegetable Flavor | `rice-cracker-japanese-vegetable-flavor300gr.png` |
 | 155 | Rice Cracker Japanese Spicy Crayfish Flavor | `rice-cracker-japanese-spicy-crayfish-flavor300gr.png` |
@@ -38,5 +38,5 @@ Folder ini berisi gambar produk untuk brand **VETRUE**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/vetrue/{nama-file}.png
+assets/images/products/vetrue/{nama-file}
 ```

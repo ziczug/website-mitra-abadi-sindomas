@@ -59,7 +59,7 @@
         <a href="#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
 
         <div class="nav-social mobile-only" style="margin-top: 20px;">
-          <a href="#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Hubungi Kami">
+          <a href="#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
             <i class="fas fa-phone-alt"></i>
           </a>
           <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item"
@@ -70,7 +70,7 @@
       </div>
       <div class="nav-actions">
         <a href="#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text"
-            data-i18n="nav-contact">Hubungi Kami</span></a>
+            data-i18n="nav-contact">Kontak</span></a>
         <div class="search-wrapper" id="searchWrapper">
           <button class="search-toggle" id="searchToggle" aria-label="Open Search">
             <i class="fas fa-search"></i>
@@ -156,10 +156,10 @@
         <div class="slider-container" id="heroSliderContainer">
           <div class="slide active"><img src="assets/images/hero-banner-chocochips.png" alt="ZESS Chocochips"></div>
           <div class="slide"><img src="assets/images/hero-banner.png" alt="Slide 2"></div>
-          <div class="slide"><img src="assets/images/snacks.png" alt="Slide 3"></div>
-          <div class="slide"><img src="assets/images/biscuits.png" alt="Slide 4"></div>
-          <div class="slide"><img src="assets/images/wafers.png" alt="Slide 5"></div>
-          <div class="slide"><img src="assets/images/cakes.png" alt="Slide 6"></div>
+          <div class="slide"><img src="assets/images/snack.png" alt="Snacks"></div>
+          <div class="slide"><img src="assets/images/biskuit.png" alt="Biscuits"></div>
+          <div class="slide"><img src="assets/images/wafer.png" alt="Wafers"></div>
+          <div class="slide"><img src="assets/images/kue.png" alt="Cakes"></div>
         </div>
         <button class="slider-btn prev-btn" id="heroPrev" aria-label="Previous Slide"><i
             class="fas fa-chevron-left"></i></button>
@@ -2082,35 +2082,57 @@
     });
 
 
-    // --- CONTACT FORM LOGIC ---
-    let contactProducts = [];
-
+    // --- CS FORM & SCROLL TOP LOGIC ---
     function toggleContactModal() {
       const modal = document.getElementById('contactModalOverlay');
-      if (modal) modal.classList.toggle('active');
+      if (modal) {
+        modal.classList.toggle('active');
+        if (modal.classList.contains('active')) {
+          initContactFormProducts();
+        }
+      }
     }
 
     async function initContactFormProducts() {
       const productSelect = document.getElementById('waProduct');
-      if (!productSelect) return;
+      if (!productSelect || productSelect.options.length > 1) return;
 
-      async function fetchProducts() {
+      let prods = [];
+      // Use global 'products' if available (common in produk.html)
+      if (typeof products !== 'undefined' && products.length > 0) {
+        prods = products;
+      } else {
+        // Fetch if not available (common in index.html)
         try {
-          const resp = await fetch('/database/cms/products.json');
-          if (resp.ok) return await resp.json();
-        } catch (e) { }
-        try {
-          const stored = localStorage.getItem('mas_products');
-          if (stored) return JSON.parse(stored);
-        } catch (e) { }
-        return [];
+          const resp = await fetch('database/cms/products.json');
+          if (resp.ok) prods = await resp.json();
+          else {
+            const stored = localStorage.getItem('mas_products');
+            if (stored) prods = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn('CS Form fetch error:', e);
+        }
       }
 
-      contactProducts = await fetchProducts();
-      const seen = new Set();
+      if (!prods || prods.length === 0) return;
 
-      contactProducts.forEach(p => {
-        const display = `${p.name} - ${p.brand} - ${p.category}`;
+      const seen = new Set();
+      prods.forEach(p => {
+        // Get category label safely
+        let catLabel = p.category;
+        if (typeof getCategoryLabel === 'function') {
+          catLabel = getCategoryLabel(p.category);
+        } else {
+          const labels = {
+            snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
+            minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
+            noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
+          };
+          catLabel = labels[p.category] || p.category;
+        }
+
+        const display = `${p.name} - ${p.brand} - ${catLabel}`;
         if (!seen.has(display)) {
           seen.add(display);
           const opt = document.createElement('option');
@@ -2121,15 +2143,14 @@
         }
       });
     }
-    initContactFormProducts();
 
     function updateProductPreview() {
       const select = document.getElementById('waProduct');
       const box = document.getElementById('waProductPreviewBox');
       const img = document.getElementById('waProductImg');
       const placeholder = document.getElementById('waProductPlaceholder');
+      if (!select || select.selectedIndex < 0) return;
       const selectedOption = select.options[select.selectedIndex];
-
       const imgSrc = selectedOption.dataset.image;
 
       if (imgSrc) {
@@ -2186,9 +2207,7 @@
 
 
 
-  <!-- ==================== FLOATING CONTACT FORM MODAL ==================== -->
-
-
+  <!-- ==================== FLOATING CONTACT FORM ==================== -->
   <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
     <i class="fas fa-headset"></i>
   </div>
@@ -2225,7 +2244,7 @@
           <div class="product-selection-wrapper">
             <div class="wa-product-dropdown">
               <select id="waProduct" onchange="updateProductPreview()">
-                <option value="">Pilih Produk (Nama - Brand - Kategori)</option>
+                <option value="">Pilih Produk (opsional)</option>
               </select>
             </div>
             <div class="product-preview-box" id="waProductPreviewBox">
@@ -2243,7 +2262,6 @@
           <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
         </button>
       </div>
-
     </div>
   </div>
 

@@ -10,9 +10,9 @@ Folder ini berisi gambar produk untuk brand **KISS DELICIAS**.
 | 206 | Oolong Tea Flavor (Box) | `oolong-tea-flavor-box18gr.png` |
 | 207 | Black Tea Flavor Candy (Bags) | `black-tea-flavor-candy-bags60gr.png` |
 | 208 | Oolong Tea Flavor (Bags) | `oolong-tea-flavor-bags60gr.png` |
-| 209 | Ming Ji Tang Gingseng Candy Lime Flavor | `ming-ji-tang-gingseng-candy-lime-flavor40gr.png` |
-| 210 | Ming Ji Tang Gingseng Candy Original Flavor | `ming-ji-tang-gingseng-candy-original-flavor40gr.png` |
-| 211 | Ming Ji Tang Gingseng Candy Jasmine Flavor | `ming-ji-tang-gingseng-candy-jasmine-flavor40gr.png` |
+| 209 | Ming Ji Tang Ginseng Candy Lime Flavor | `ming-ji-tang-ginseng-candy-lime-flavor40gr.png` |
+| 210 | Ming Ji Tang Ginseng Candy Original Flavor | `ming-ji-tang-ginseng-candy-original-flavor40gr.png` |
+| 211 | Ming Ji Tang Ginseng Candy Jasmine Flavor | `ming-ji-tang-ginseng-candy-jasmine-flavor40gr.png` |
 | 212 | Spray Candy Lime Flavor | `spray-candy-lime-flavor18mlgr.png` |
 | 213 | Spray Candy Peach Flavor | `spray-candy-peach-flavor18mlgr.png` |
 | 214 | Spray Candy Passion Fruit Flavor | `spray-candy-passion-fruit-flavor18mlgr.png` |
@@ -42,5 +42,5 @@ Folder ini berisi gambar produk untuk brand **KISS DELICIAS**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/kiss-delicias/{nama-file}.png
+assets/images/products/kiss-delicias/{nama-file}
 ```

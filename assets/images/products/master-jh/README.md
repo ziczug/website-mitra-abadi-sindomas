@@ -6,8 +6,8 @@ Folder ini berisi gambar produk untuk brand **MASTER JH**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 133 | Gummy Candy Assorted | `gummy-candy-assorted150gr.png` |
-| 134 | Orange Soft Candy | `orange-soft-candy150gr.png` |
+| 133 | Gummy Candy Assorted | `gummy-candy-assorted8gr.png` |
+| 134 | Orange Soft Candy | `orange-soft-candy500gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -20,5 +20,5 @@ Folder ini berisi gambar produk untuk brand **MASTER JH**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/master-jh/{nama-file}.png
+assets/images/products/master-jh/{nama-file}
 ```

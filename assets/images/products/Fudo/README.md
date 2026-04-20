@@ -28,5 +28,5 @@ Folder ini berisi gambar produk untuk brand **Fudo**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/fudo/{nama-file}.png
+assets/images/products/fudo/{nama-file}
 ```

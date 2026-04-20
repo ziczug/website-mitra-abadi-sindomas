@@ -6,10 +6,10 @@ Folder ini berisi gambar produk untuk brand **HUI XIANG ZHAI ZI**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 241 | Q-Jin Dried Tofu Barbeque Flavor | `q-jin-dried-tofu-barbeque-flavor.jpg` |
-| 242 | La Si Dried Tofu Barbeque Flavor | `la-si-dried-tofu-barbeque-flavor.jpg` |
-| 243 | La Si Dried Tofu Spicy Flavor | `la-si-dried-tofu-spicy-flavor.jpg` |
-| 244 | La Si Dried Tofu Peppercorn Flavor | `la-si-dried-tofu-peppercorn-flavor.jpg` |
+| 241 | Q-Jin Dried Tofu Barbeque Flavor | `q-jin-dried-tofu-barbeque-flavor25gr.png` |
+| 242 | La Si Dried Tofu Barbeque Flavor | `la-si-dried-tofu-barbeque-flavor25gr.png` |
+| 243 | La Si Dried Tofu Spicy Flavor | `la-si-dried-tofu-spicy-flavor25gr.png` |
+| 244 | La Si Dried Tofu Peppercorn Flavor | `la-si-dried-tofu-peppercorn-flavor25gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -22,5 +22,5 @@ Folder ini berisi gambar produk untuk brand **HUI XIANG ZHAI ZI**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/hui-xiang-zhai-zi/{nama-file}.jpg
+assets/images/products/hui-xiang-zhai-zi/{nama-file}
 ```

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Super Ring",
+    "name": "Oriental - Super Ring 60g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -14,7 +14,7 @@
   },
   {
     "id": 2,
-    "name": "Super Ring Family Pack",
+    "name": "Oriental - Super Ring Family Pack 14g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -27,7 +27,7 @@
   },
   {
     "id": 3,
-    "name": "Super Ring Cans",
+    "name": "Oriental - Super Ring Cans 80g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -40,7 +40,7 @@
   },
   {
     "id": 4,
-    "name": "Cheese Balls",
+    "name": "Oriental - Cheese Balls 60g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -53,7 +53,7 @@
   },
   {
     "id": 5,
-    "name": "Cheese Balls Family Pack",
+    "name": "Oriental - Cheese Balls Family Pack 14g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -66,7 +66,7 @@
   },
   {
     "id": 6,
-    "name": "Cheese Balls Cans",
+    "name": "Oriental - Cheese Balls Cans 80g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -79,7 +79,7 @@
   },
   {
     "id": 7,
-    "name": "Rota Prawn Crackers",
+    "name": "Oriental - Rota Prawn Crackers 60g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -92,7 +92,7 @@
   },
   {
     "id": 8,
-    "name": "Rota Prawn Family Pack",
+    "name": "Oriental - Rota Prawn Family Pack 14g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -105,7 +105,7 @@
   },
   {
     "id": 9,
-    "name": "Green Pea Snack",
+    "name": "Oriental - Green Pea Snack 60g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -118,7 +118,7 @@
   },
   {
     "id": 10,
-    "name": "Green Pea Snack Family Pack",
+    "name": "Oriental - Green Pea Snack Family Pack 14g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -131,11 +131,11 @@
   },
   {
     "id": 11,
-    "name": "Chiken Ring",
+    "name": "Oriental - Chicken Ring 60g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
-    "image": "assets/images/products/oriental/chiken-ring60gr.png",
+    "image": "assets/images/products/oriental/chicken-ring60gr.png",
     "desc": "Makanan ringan Berbentuk ring (cincin) dengan rasa ayam yang gurih dan renyah",
     "origin": "Malaysia",
     "weight": "60g",
@@ -144,7 +144,7 @@
   },
   {
     "id": 12,
-    "name": "Rostik Chicken Curry",
+    "name": "Oriental - Rostik Chicken Curry 60g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -157,7 +157,7 @@
   },
   {
     "id": 13,
-    "name": "Rostik Cuttlefish",
+    "name": "Oriental - Rostik Cuttlefish 60g",
     "category": "snack",
     "brand": "Oriental",
     "brand_logo": "assets/logobrands/oriental.jpg",
@@ -170,7 +170,7 @@
   },
   {
     "id": 14,
-    "name": "Wafer Cube Coklat",
+    "name": "Jacker - Wafer Cube Coklat 80g",
     "category": "wafer",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
@@ -183,7 +183,7 @@
   },
   {
     "id": 15,
-    "name": "Wafer Cube Hazelnut",
+    "name": "Jacker - Wafer Cube Hazelnut 80g",
     "category": "wafer",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
@@ -196,7 +196,7 @@
   },
   {
     "id": 16,
-    "name": "Wafer Cube Tiramisu",
+    "name": "Jacker - Wafer Cube Tiramisu 80g",
     "category": "wafer",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
@@ -209,11 +209,11 @@
   },
   {
     "id": 17,
-    "name": "Original Flavor Potato Crisps",
+    "name": "Jacker - Original Flavor Potato Crisps Cans 100g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/original-flavor-potato-crisps100gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa original",
     "origin": "Malaysia",
     "weight": "100g",
@@ -222,11 +222,11 @@
   },
   {
     "id": 18,
-    "name": "Barbecue Flavor Potato Crisps",
+    "name": "Jacker - Barbecue Flavor Potato Crisps Cans 100g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/barbecue-flavor-potato-crisps100gr.png",
+    "image": "assets/images/products/jacker/barbecue-flavor-potato-chips60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa barbecue dan aroma bbq yang khas",
     "origin": "Malaysia",
     "weight": "100g",
@@ -235,11 +235,11 @@
   },
   {
     "id": 19,
-    "name": "Hot & Spicy Flavor Potato Crisps",
+    "name": "Jacker - Hot & Spicy Flavor Potato Crisps Cans 100g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/hot-spicy-flavor-potato-crisps100gr.png",
+    "image": "assets/images/products/jacker/hot-spicy-flavor-potato-chips60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa  pedas hot & Spicy",
     "origin": "Malaysia",
     "weight": "100g",
@@ -248,11 +248,11 @@
   },
   {
     "id": 20,
-    "name": "Cheese Flavor Potato Crisps",
+    "name": "Jacker - Cheese Flavor Potato Crisps Cans 100g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/cheese-flavor-potato-crisps100gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa keju yang lezat",
     "origin": "Malaysia",
     "weight": "100g",
@@ -261,11 +261,11 @@
   },
   {
     "id": 21,
-    "name": "Vegetable Flavor Potato Crisps",
+    "name": "Jacker - Vegetable Flavor Potato Crisps Cans 100g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/vegetable-flavor-potato-crisps100gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa sayuran",
     "origin": "Malaysia",
     "weight": "100g",
@@ -274,11 +274,11 @@
   },
   {
     "id": 22,
-    "name": "Sour Cream & Onion Flavor Potato Crisps",
+    "name": "Jacker - Sour Cream & Onion Flavor Potato Crisps Cans 100g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/sour-cream-onion-flavor-potato-crisps100gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa creamy. sedikit asam. dan gurih yang seimbang.",
     "origin": "Malaysia",
     "weight": "100g",
@@ -287,11 +287,11 @@
   },
   {
     "id": 23,
-    "name": "Tomato Flavor Potato Crisps",
+    "name": "Jacker - Tomato Flavor Potato Crisps Cans 100g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/tomato-flavor-potato-crisps100gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa  tomat",
     "origin": "Malaysia",
     "weight": "100g",
@@ -300,11 +300,11 @@
   },
   {
     "id": 24,
-    "name": "Cheese Flavor Potato Crisps",
+    "name": "Jacker - Cheese Flavor Potato Crisps 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/cheese-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa keju yang lezat",
     "origin": "Malaysia",
     "weight": "60g",
@@ -313,11 +313,11 @@
   },
   {
     "id": 25,
-    "name": "Barbecue Flavor Potato Crisps",
+    "name": "Jacker - Barbecue Flavor Potato Crisps 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/barbecue-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/barbecue-flavor-potato-chips60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa barbecue dan aroma bbq yang khas",
     "origin": "Malaysia",
     "weight": "60g",
@@ -326,11 +326,11 @@
   },
   {
     "id": 26,
-    "name": "Hot & Spicy Flavor Potato Crisps",
+    "name": "Jacker - Hot & Spicy Flavor Potato Crisps 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/hot-spicy-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/hot-spicy-flavor-potato-chips60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa  pedas hot & Spicy",
     "origin": "Malaysia",
     "weight": "60g",
@@ -339,11 +339,11 @@
   },
   {
     "id": 27,
-    "name": "Sour Cream & Onion Flavor Potato Crisps",
+    "name": "Jacker - Sour Cream & Onion Flavor Potato Crisps 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/sour-cream-onion-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah dan kemasan tabung kokoh. Terbuat dari kentang pilihan. Dengan rasa creamy. sedikit asam. dan gurih yang seimbang.",
     "origin": "Malaysia",
     "weight": "60g",
@@ -352,7 +352,7 @@
   },
   {
     "id": 28,
-    "name": "Original Flavor Potato Crisps",
+    "name": "Jacker - Original Flavor Potato Crisps 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
@@ -365,11 +365,11 @@
   },
   {
     "id": 29,
-    "name": "Wavy Mexican Hot Sauce",
+    "name": "Jacker - Wavy Chips Mexican Hot Sauce 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/wavy-mexican-hot-sauce60gr.png",
+    "image": "assets/images/products/jacker/wavy-chips-mexican-hot-sauce60gr.png",
     "desc": "Keripik kentang dengan bentuk texture bergelombang renyah rasa saus mexician autentik",
     "origin": "Malaysia",
     "weight": "60g",
@@ -378,24 +378,24 @@
   },
   {
     "id": 30,
-    "name": "Wavy Mexican Hot Sauce Potato Crisps",
+    "name": "Jacker - Potato Crisps Wavy Mexican Hot Sauce Cans 110g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/wavy-mexican-hot-sauce-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/wavy-chips-mexican-hot-sauce60gr.png",
     "desc": "Keripik kentang dengan bentuk texture bergelombang renyah rasa saus mexician autentik",
     "origin": "Malaysia",
-    "weight": "60g",
+    "weight": "110g",
     "cert": "HALAL & BPOM",
     "info": "110g x 14 Cans | 1 Carton = 14 cans | 0.02823 m³/Ctn"
   },
   {
     "id": 31,
-    "name": "Hot & Spicy Flavor Potato Crisps",
+    "name": "Jacker - Hot & Spicy Flavor Potato Chips 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/hot-spicy-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/hot-spicy-flavor-potato-chips60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah. Terbuat dari kentang pilihan rasa pedas Hot & Spicy",
     "origin": "Malaysia",
     "weight": "60g",
@@ -404,11 +404,11 @@
   },
   {
     "id": 32,
-    "name": "Barbecue Flavor Potato Crisps",
+    "name": "Jacker - Barbecue Flavor Potato Chips 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/barbecue-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/barbecue-flavor-potato-chips60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah. Terbuat dari kentang pilihan rasa barbecue",
     "origin": "Malaysia",
     "weight": "60g",
@@ -417,11 +417,11 @@
   },
   {
     "id": 33,
-    "name": "Natural Flavor Potato Crisps",
+    "name": "Jacker - Natural Flavor Potato Crisps 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/natural-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/original-flavor-potato-crisps60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah. Terbuat dari kentang pilihan rasa kentang natural",
     "origin": "Malaysia",
     "weight": "60g",
@@ -430,11 +430,11 @@
   },
   {
     "id": 34,
-    "name": "Spicy Mala Hot Pot Flavor Potato Crisps",
+    "name": "Jacker - Spicy Mala Hot Pot Flavor Potato Chips 60g",
     "category": "snack",
     "brand": "Jacker",
     "brand_logo": "assets/logobrands/jacker.jpg",
-    "image": "assets/images/products/jacker/spicy-mala-hot-pot-flavor-potato-crisps60gr.png",
+    "image": "assets/images/products/jacker/spicy-mala-hot-pot-flavor-potato-chips60gr.png",
     "desc": "Keripik kentang dengan tekstur renyah. Terbuat dari kentang pilihan rasa bumbu pedas mala dan hot pot",
     "origin": "Malaysia",
     "weight": "60g",
@@ -443,11 +443,11 @@
   },
   {
     "id": 35,
-    "name": "Sadwich Cracker Chocolate",
+    "name": "Zees - Sandwich Cracker Chocolate 180g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-chocolate180gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-chocolate180gr.png",
     "desc": "biskuit belapis dengan isi krim coklat tebal rasa yang premium perpaduan renyah. manis. lezat dengan aroma coklat",
     "origin": "Malaysia",
     "weight": "180g",
@@ -456,11 +456,11 @@
   },
   {
     "id": 36,
-    "name": "Sadwich Cracker Lemon",
+    "name": "Zees - Sandwich Cracker Lemon 180g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-lemon180gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-lemon180gr.png",
     "desc": "biskuit belapis dengan isi krim lemon tebal rasa yang premium perpaduan renyah. manis. lezat dengan aroma lemon fresh",
     "origin": "Malaysia",
     "weight": "180g",
@@ -469,11 +469,11 @@
   },
   {
     "id": 37,
-    "name": "Sadwich Cracker Cheese",
+    "name": "Zees - Sandwich Cracker Cheese 180g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-cheese180gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-cheese180gr.png",
     "desc": "biskuit belapis dengan isi krim keju tebal rasa yang premium perpaduan renyah. lezat rasa khas keju",
     "origin": "Malaysia",
     "weight": "180g",
@@ -482,11 +482,11 @@
   },
   {
     "id": 38,
-    "name": "Sadwich Cracker Chocolate",
+    "name": "Zees - Sandwich Cracker Chocolate 90g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-chocolate90gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-chocolate180gr.png",
     "desc": "biskuit belapis dengan isi krim coklat tebal rasa yang premium perpaduan renyah. manis. lezat dengan aroma coklat",
     "origin": "Malaysia",
     "weight": "90g",
@@ -495,11 +495,11 @@
   },
   {
     "id": 39,
-    "name": "Sadwich Cracker Lemon",
+    "name": "Zees - Sandwich Cracker Lemon 90g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-lemon90gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-lemon180gr.png",
     "desc": "biskuit belapis dengan isi krim lemon tebal rasa yang premium perpaduan renyah. manis. lezat dengan aroma lemon fresh",
     "origin": "Malaysia",
     "weight": "90g",
@@ -508,11 +508,11 @@
   },
   {
     "id": 40,
-    "name": "Sadwich Cracker Cheese",
+    "name": "Zees - Sandwich Cracker Cheese 90g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-cheese90gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-cheese180gr.png",
     "desc": "biskuit belapis dengan isi krim keju tebal rasa yang premium perpaduan renyah. lezat rasa khas keju",
     "origin": "Malaysia",
     "weight": "90g",
@@ -521,11 +521,11 @@
   },
   {
     "id": 41,
-    "name": "Sadwich Cracker Chocolate",
+    "name": "Zees - Sandwich Cracker Chocolate 54g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-chocolate54gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-chocolate180gr.png",
     "desc": "biskuit belapis dengan isi krim coklat tebal rasa yang premium perpaduan renyah. manis. lezat dengan aroma coklat",
     "origin": "Malaysia",
     "weight": "54g",
@@ -534,11 +534,11 @@
   },
   {
     "id": 42,
-    "name": "Sadwich Cracker Lemon",
+    "name": "Zees - Sandwich Cracker Lemon 54g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-lemon54gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-lemon180gr.png",
     "desc": "biskuit belapis dengan isi krim lemon tebal rasa yang premium perpaduan renyah. manis. lezat dengan aroma lemon fresh",
     "origin": "Malaysia",
     "weight": "54g",
@@ -547,11 +547,11 @@
   },
   {
     "id": 43,
-    "name": "Sadwich Cracker Cheese",
+    "name": "Zees - Sandwich Cracker Cheese 54g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/sadwich-cracker-cheese54gr.png",
+    "image": "assets/images/products/zees/sandwich-cracker-cheese180gr.png",
     "desc": "biskuit belapis dengan isi krim keju tebal rasa yang premium perpaduan renyah. lezat rasa khas keju",
     "origin": "Malaysia",
     "weight": "54g",
@@ -560,7 +560,7 @@
   },
   {
     "id": 44,
-    "name": "Original Cream Crackers",
+    "name": "Zees - Original Cream Crackers 184g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -573,11 +573,11 @@
   },
   {
     "id": 45,
-    "name": "Original Cream Crackers",
+    "name": "Zees - Original Cream Crackers 380g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
-    "image": "assets/images/products/zees/original-cream-crackers380gr.png",
+    "image": "assets/images/products/zees/original-cream-crackers184gr.png",
     "desc": "biskuit kraker rasa krim",
     "origin": "Malaysia",
     "weight": "380g",
@@ -586,7 +586,7 @@
   },
   {
     "id": 46,
-    "name": "Sugar Cream Cracker",
+    "name": "Zees - Sugar Cream Cracker 192g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -599,7 +599,7 @@
   },
   {
     "id": 47,
-    "name": "Cracker Sandwich Cheese",
+    "name": "Zees - Cracker Sandwich Cheese 229.5g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -612,7 +612,7 @@
   },
   {
     "id": 48,
-    "name": "Cracker Sandwich Peanut Butter",
+    "name": "Zees - Cracker Sandwich Peanut Butter 229.5g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -625,7 +625,7 @@
   },
   {
     "id": 49,
-    "name": "Assorted Biscuit",
+    "name": "Zees - Assorted Biscuit 451.5g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -638,7 +638,7 @@
   },
   {
     "id": 50,
-    "name": "Choco Chips Cookie Hazalnut",
+    "name": "Zees - Choco Chips Cookie Hazalnut 150g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -651,7 +651,7 @@
   },
   {
     "id": 51,
-    "name": "Choco Chips Cookie Coklat",
+    "name": "Zees - Choco Chips Cookie Coklat 150g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -664,7 +664,7 @@
   },
   {
     "id": 52,
-    "name": "Chocolate Biscuit",
+    "name": "Zees - Chocolate Biscuit 148g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -677,7 +677,7 @@
   },
   {
     "id": 53,
-    "name": "Chocolate Sandwich Biscuit Chocolate",
+    "name": "Zees - Chocolate Sandwich Biscuit Chocolate 264.gr",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -690,7 +690,7 @@
   },
   {
     "id": 54,
-    "name": "Chocolate Sandwich Biscuit Vanilla",
+    "name": "Zees - Chocolate Sandwich Biscuit Vanilla 264.gr",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -703,7 +703,7 @@
   },
   {
     "id": 55,
-    "name": "Butter Cookies",
+    "name": "Zees - Butter Cookies 115g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -716,7 +716,7 @@
   },
   {
     "id": 56,
-    "name": "Super Ring Cheese Cracker",
+    "name": "Zees - Super Ring Cheese Cracker 75g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -729,7 +729,7 @@
   },
   {
     "id": 57,
-    "name": "Savory Crackers Original",
+    "name": "Zees - Savory Crackers Original 75g",
     "category": "biskuit",
     "brand": "Zees",
     "brand_logo": "assets/logobrands/zess.jpg",
@@ -742,7 +742,7 @@
   },
   {
     "id": 58,
-    "name": "Layer Cake Chocolate",
+    "name": "Fudo - Layer Cake Chocolate 14g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -755,7 +755,7 @@
   },
   {
     "id": 59,
-    "name": "Layer Cake Banana",
+    "name": "Fudo - Layer Cake Banana 14g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -768,7 +768,7 @@
   },
   {
     "id": 60,
-    "name": "Layer Cake Pandan",
+    "name": "Fudo - Layer Cake Pandan 14g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -781,7 +781,7 @@
   },
   {
     "id": 61,
-    "name": "Layer Cake Strawberry",
+    "name": "Fudo - Layer Cake Strawberry 14g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -794,7 +794,7 @@
   },
   {
     "id": 62,
-    "name": "Layer Cake Butter",
+    "name": "Fudo - Layer Cake Butter 14g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -807,7 +807,7 @@
   },
   {
     "id": 63,
-    "name": "Swissroll Chocolate",
+    "name": "Fudo - Swissroll Chocolate 18g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -820,7 +820,7 @@
   },
   {
     "id": 64,
-    "name": "Swissroll Pandan",
+    "name": "Fudo - Swissroll Pandan 18g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -833,7 +833,7 @@
   },
   {
     "id": 65,
-    "name": "Swissroll Strawberry",
+    "name": "Fudo - Swissroll Strawberry 18g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -846,7 +846,7 @@
   },
   {
     "id": 66,
-    "name": "Swissroll Tiramisu",
+    "name": "Fudo - Swissroll Tiramisu 18g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -859,7 +859,7 @@
   },
   {
     "id": 67,
-    "name": "Swissroll Butter",
+    "name": "Fudo - Swissroll Butter 18g",
     "category": "kue",
     "brand": "Fudo",
     "brand_logo": "assets/logobrands/fudo.jpg",
@@ -872,7 +872,7 @@
   },
   {
     "id": 68,
-    "name": "Baked Potato Crisp BBQ",
+    "name": "Win2 - Baked Potato Crisp BBQ 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -885,7 +885,7 @@
   },
   {
     "id": 69,
-    "name": "Baked Potato Crisp Vegetable",
+    "name": "Win2 - Baked Potato Crisp Vegetable 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -898,7 +898,7 @@
   },
   {
     "id": 70,
-    "name": "Baked Potato Crisp Sour Cream",
+    "name": "Win2 - Baked Potato Crisp Sour Cream 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -911,7 +911,7 @@
   },
   {
     "id": 71,
-    "name": "Baked Potato Crisp Himalayan Salt",
+    "name": "Win2 - Baked Potato Crisp Himalayan Salt 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -924,7 +924,7 @@
   },
   {
     "id": 72,
-    "name": "Baked Potato Crisp Tomato",
+    "name": "Win2 - Baked Potato Crisp Tomato 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -937,7 +937,7 @@
   },
   {
     "id": 73,
-    "name": "Baked Potato Crisp Seafood",
+    "name": "Win2 - Baked Potato Crisp Seafood 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -950,7 +950,7 @@
   },
   {
     "id": 74,
-    "name": "Baked Sweet Potato Crisp",
+    "name": "Win2 - Baked Sweet Potato Crisp 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -963,7 +963,7 @@
   },
   {
     "id": 75,
-    "name": "Baked Potato Crisp Coffee",
+    "name": "Win2 - Baked Potato Crisp Coffee 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -976,7 +976,7 @@
   },
   {
     "id": 76,
-    "name": "Baked Potato Crisp Sweet Corn",
+    "name": "Win2 - Baked Potato Crisp Sweet Corn 120g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -989,7 +989,7 @@
   },
   {
     "id": 77,
-    "name": "Baked Potato Crisp BBQ",
+    "name": "Win2 - Baked Potato Crisp BBQ 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1002,7 +1002,7 @@
   },
   {
     "id": 78,
-    "name": "Baked Potato Crisp Vegetable",
+    "name": "Win2 - Baked Potato Crisp Vegetable 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1015,7 +1015,7 @@
   },
   {
     "id": 79,
-    "name": "Baked Potato Crisp Sour Cream",
+    "name": "Win2 - Baked Potato Crisp Sour Cream 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1028,7 +1028,7 @@
   },
   {
     "id": 80,
-    "name": "Baked Potato Crisp Himalayan Salt",
+    "name": "Win2 - Baked Potato Crisp Himalayan Salt 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1041,7 +1041,7 @@
   },
   {
     "id": 81,
-    "name": "Baked Potato Crisp Tomato",
+    "name": "Win2 - Baked Potato Crisp Tomato 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1054,7 +1054,7 @@
   },
   {
     "id": 82,
-    "name": "Baked Potato Crisp Seafood",
+    "name": "Win2 - Baked Potato Crisp Seafood 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1067,7 +1067,7 @@
   },
   {
     "id": 83,
-    "name": "Baked Sweet Potato Crisp",
+    "name": "Win2 - Baked Sweet Potato Crisp 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1080,7 +1080,7 @@
   },
   {
     "id": 84,
-    "name": "Baked Potato Crisp Coffee",
+    "name": "Win2 - Baked Potato Crisp Coffee 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1093,7 +1093,7 @@
   },
   {
     "id": 85,
-    "name": "Baked Potato Crisp Sweet Corn",
+    "name": "Win2 - Baked Potato Crisp Sweet Corn 75g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1106,7 +1106,7 @@
   },
   {
     "id": 86,
-    "name": "Cheese Bread",
+    "name": "Win2 - Cheese Bread 65g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1119,7 +1119,7 @@
   },
   {
     "id": 87,
-    "name": "Garlic Bread",
+    "name": "Win2 - Garlic Bread 65g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1132,7 +1132,7 @@
   },
   {
     "id": 88,
-    "name": "KOLA KIDS WITH CHEESE",
+    "name": "Win2 - KOLA KIDS WITH CHEESE 24g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1145,7 +1145,7 @@
   },
   {
     "id": 89,
-    "name": "KOLA KIDS WITH CHOCOLATE",
+    "name": "Win2 - KOLA KIDS WITH CHOCOLATE 24g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1158,7 +1158,7 @@
   },
   {
     "id": 90,
-    "name": "KOLA KIDS WITH MILK",
+    "name": "Win2 - KOLA KIDS WITH MILK 24g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1171,7 +1171,7 @@
   },
   {
     "id": 91,
-    "name": "KOLA KIDS WITH STRAWBERRY",
+    "name": "Win2 - KOLA KIDS WITH STRAWBERRY 24g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1184,7 +1184,7 @@
   },
   {
     "id": 92,
-    "name": "Kokopie Choco Coated Cake with Vanilla",
+    "name": "Win2 - Kokopie Choco Coated Cake with Vanilla 20g",
     "category": "kue",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1197,7 +1197,7 @@
   },
   {
     "id": 93,
-    "name": "Bake Story Mini Muffin Cake Original",
+    "name": "Win2 - Bake Story Mini Muffin Cake Original 20g",
     "category": "kue",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1210,7 +1210,7 @@
   },
   {
     "id": 94,
-    "name": "Bake Story Muffin Cake Pandan",
+    "name": "Win2 - Bake Story Muffin Cake Pandan 20g",
     "category": "kue",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1223,7 +1223,7 @@
   },
   {
     "id": 95,
-    "name": "Joystix Chocolate Flavor Bags",
+    "name": "Win2 - Joystix Chocolate Flavor Bags 20g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1236,7 +1236,7 @@
   },
   {
     "id": 96,
-    "name": "Joystix with Vanila Flavor Bags",
+    "name": "Win2 - Joystix with Vanila Flavor Bags 20g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1249,33 +1249,33 @@
   },
   {
     "id": 97,
-    "name": "Joystix Chocolate & Strawberry Flavor Box",
+    "name": "Win2 - Joystix Chocolate & Strawberry Flavor Box 40g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
-    "image": "assets/images/products/win2/joystix-chocolate-strawberry-flavor-box20gr.png",
+    "image": "assets/images/products/win2/joystix-chocolate-strawberry-flavor-box40gr.png",
     "desc": "-",
     "origin": "Malaysia",
-    "weight": "20g",
+    "weight": "40g",
     "cert": "HALAL & BPOM",
     "info": "20g x 8 Pcs x 6 Bags x 4 Boxes | 160g | 0.034 m³/Ctn"
   },
   {
     "id": 98,
-    "name": "Joystix Chocolate & Vanilla Flavor Box",
+    "name": "Win2 - Joystix Chocolate & Vanilla Flavor Box 40g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
-    "image": "assets/images/products/win2/joystix-chocolate-vanilla-flavor-box20gr.png",
+    "image": "assets/images/products/win2/joystix-chocolate-vanilla-flavor-box40gr.png",
     "desc": "-",
     "origin": "Malaysia",
-    "weight": "20g",
+    "weight": "40g",
     "cert": "HALAL & BPOM",
     "info": "20g x 8 Pcs x 6 Bags x 4 Boxes | 160g | 0.034 m³/Ctn"
   },
   {
     "id": 99,
-    "name": "Mini 1 More",
+    "name": "Win2 - Mini 1 More 90g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1288,7 +1288,7 @@
   },
   {
     "id": 100,
-    "name": "Crunchy Stick Double Chocolate Flavor",
+    "name": "Win2 - Crunchy Stick Double Chocolate Flavor 40g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1301,11 +1301,11 @@
   },
   {
     "id": 101,
-    "name": "Crunchy Stick Chocolate & Vannila Flavor",
+    "name": "Win2 - Crunchy Stick Chocolate & Vanilla Flavor 40g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
-    "image": "assets/images/products/win2/crunchy-stick-chocolate-vannila-flavor40gr.png",
+    "image": "assets/images/products/win2/crunchy-stick-chocolate-vanilla-flavor40gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "40g",
@@ -1314,7 +1314,7 @@
   },
   {
     "id": 102,
-    "name": "Crunchy Stick Chocolate & Strawberry Flavor",
+    "name": "Win2 - Crunchy Stick Chocolate & Strawberry Flavor 40g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1327,7 +1327,7 @@
   },
   {
     "id": 103,
-    "name": "Honey Mustard Croutons",
+    "name": "Win2 - Honey Mustard Croutons 30g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1340,7 +1340,7 @@
   },
   {
     "id": 104,
-    "name": "Margarine Sugar Croutons",
+    "name": "Win2 - Margarine Sugar Croutons 30g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
@@ -1353,11 +1353,11 @@
   },
   {
     "id": 105,
-    "name": "Garlic Butte Croutons",
+    "name": "Win2 - Garlic Butter Croutons 30g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
-    "image": "assets/images/products/win2/garlic-butte-croutons30gr.png",
+    "image": "assets/images/products/win2/garlic-butter-croutons30gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "30g",
@@ -1366,11 +1366,11 @@
   },
   {
     "id": 106,
-    "name": "Honey Mustard Croutons",
+    "name": "Win2 - Honey Mustard Croutons 100g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
-    "image": "assets/images/products/win2/honey-mustard-croutons100gr.png",
+    "image": "assets/images/products/win2/honey-mustard-croutons30gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "100g",
@@ -1379,11 +1379,11 @@
   },
   {
     "id": 107,
-    "name": "Margarine Sugar Croutons",
+    "name": "Win2 - Margarine Sugar Croutons 100g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
-    "image": "assets/images/products/win2/margarine-sugar-croutons100gr.png",
+    "image": "assets/images/products/win2/margarine-sugar-croutons30gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "100g",
@@ -1392,11 +1392,11 @@
   },
   {
     "id": 108,
-    "name": "Garlic Butte Croutons",
+    "name": "Win2 - Garlic Butter Croutons 100g",
     "category": "snack",
     "brand": "Win2",
     "brand_logo": "assets/logobrands/win2.jpg",
-    "image": "assets/images/products/win2/garlic-butte-croutons100gr.png",
+    "image": "assets/images/products/win2/garlic-butter-croutons30gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "100g",
@@ -1405,7 +1405,7 @@
   },
   {
     "id": 109,
-    "name": "White Curry Mee",
+    "name": "Ibu Mie - White Curry Mee 105g",
     "category": "noodle",
     "brand": "Ibu Mie",
     "brand_logo": "assets/logobrands/ibumie.jpg",
@@ -1418,7 +1418,7 @@
   },
   {
     "id": 110,
-    "name": "Harmee",
+    "name": "Ibu Mie - Harmee 85g",
     "category": "noodle",
     "brand": "Ibu Mie",
     "brand_logo": "assets/logobrands/ibumie.jpg",
@@ -1431,7 +1431,7 @@
   },
   {
     "id": 111,
-    "name": "VegeMee",
+    "name": "Ibu Mie - VegeMee 85g",
     "category": "noodle",
     "brand": "Ibu Mie",
     "brand_logo": "assets/logobrands/ibumie.jpg",
@@ -1444,7 +1444,7 @@
   },
   {
     "id": 112,
-    "name": "Sambal Udang Mee",
+    "name": "Ibu Mie - Sambal Udang Mee 85g",
     "category": "noodle",
     "brand": "Ibu Mie",
     "brand_logo": "assets/logobrands/ibumie.jpg",
@@ -1457,7 +1457,7 @@
   },
   {
     "id": 113,
-    "name": "Curry Kapitan Flavor",
+    "name": "Ibu Mie - Curry Kapitan Flavor 85g",
     "category": "noodle",
     "brand": "Ibu Mie",
     "brand_logo": "assets/logobrands/ibumie.jpg",
@@ -1470,7 +1470,7 @@
   },
   {
     "id": 114,
-    "name": "Dry Base Instant Noodle",
+    "name": "Telly - Dry Base Instant Noodle 85g",
     "category": "noodle",
     "brand": "Telly",
     "brand_logo": "assets/logobrands/telly.jpg",
@@ -1483,7 +1483,7 @@
   },
   {
     "id": 115,
-    "name": "Telly Vegetarian Instant Noodle",
+    "name": "Telly Vegetarian Instant Noodle 85g",
     "category": "noodle",
     "brand": "Telly",
     "brand_logo": "assets/logobrands/telly.jpg",
@@ -1496,7 +1496,7 @@
   },
   {
     "id": 116,
-    "name": "Hot Pepper Instant Noodle",
+    "name": "Telly - Hot Pepper Instant Noodle 75g",
     "category": "noodle",
     "brand": "Telly",
     "brand_logo": "assets/logobrands/telly.jpg",
@@ -1509,7 +1509,7 @@
   },
   {
     "id": 117,
-    "name": "Good Vita Natural Oat Cracker",
+    "name": "A-TASTE - Good Vita Natural Oat Cracker 380g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1522,7 +1522,7 @@
   },
   {
     "id": 118,
-    "name": "Good Vita Natural Oat Cracker Black Sesame",
+    "name": "A-TASTE - Good Vita Natural Oat Cracker Black Sesame 380g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1535,7 +1535,7 @@
   },
   {
     "id": 119,
-    "name": "Good Vita Natural Oat Cracker No Sugar",
+    "name": "A-TASTE - Good Vita Natural Oat Cracker No Sugar 380g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1548,7 +1548,7 @@
   },
   {
     "id": 120,
-    "name": "Sesame Pastry",
+    "name": "A-TASTE - Sesame Pastry 260g",
     "category": "kue",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1561,7 +1561,7 @@
   },
   {
     "id": 121,
-    "name": "Almond Pastry",
+    "name": "A-TASTE - Almond Pastry 260g",
     "category": "kue",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1574,7 +1574,7 @@
   },
   {
     "id": 122,
-    "name": "Potato Stick Original",
+    "name": "A-TASTE - Potato Stick Original 170g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1587,7 +1587,7 @@
   },
   {
     "id": 123,
-    "name": "Potato Stick Seaweed",
+    "name": "A-TASTE - Potato Stick Seaweed 170g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1600,7 +1600,7 @@
   },
   {
     "id": 124,
-    "name": "Soda Health Daily Original",
+    "name": "A-TASTE - Soda Health Daily Original 240g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1613,7 +1613,7 @@
   },
   {
     "id": 125,
-    "name": "Soda Health Daily Seaweed",
+    "name": "A-TASTE - Soda Health Daily Seaweed 240g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1626,7 +1626,7 @@
   },
   {
     "id": 126,
-    "name": "Potato Cracker Tomato",
+    "name": "A-TASTE - Potato Cracker Tomato 238g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1639,7 +1639,7 @@
   },
   {
     "id": 127,
-    "name": "Potato Cracker Original",
+    "name": "A-TASTE - Potato Cracker Original 238g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1652,7 +1652,7 @@
   },
   {
     "id": 128,
-    "name": "Multi-Grain High Fiber",
+    "name": "A-TASTE - Multi-Grain High Fiber 160g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1665,7 +1665,7 @@
   },
   {
     "id": 129,
-    "name": "Multi-Grain Sea Salt Flavor",
+    "name": "A-TASTE - Multi-Grain Sea Salt Flavor 160g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
@@ -1678,11 +1678,11 @@
   },
   {
     "id": 130,
-    "name": "Multi-Grain Chia",
+    "name": "A-TASTE - Multi-Grain Chia Seed 160g",
     "category": "biskuit",
     "brand": "A-TASTE",
     "brand_logo": "assets/logobrands/a-taste.jpg",
-    "image": "assets/images/products/a-taste/multi-grain-chia160gr.png",
+    "image": "assets/images/products/a-taste/multi-grain-chia-seed160gr.png",
     "desc": "-",
     "origin": "China",
     "weight": "160g",
@@ -1691,7 +1691,7 @@
   },
   {
     "id": 131,
-    "name": "Instant Noodle Spicy Flavor",
+    "name": "HUANG XIAO GU! - Instant Noodle Spicy Flavor 180g",
     "category": "snack",
     "brand": "HUANG XIAO GU!",
     "brand_logo": "assets/logobrands/huang-xiao-gu.jpg",
@@ -1704,7 +1704,7 @@
   },
   {
     "id": 132,
-    "name": "Instant Noodle Original",
+    "name": "HUANG XIAO GU! - Instant Noodle Original 180g",
     "category": "snack",
     "brand": "HUANG XIAO GU!",
     "brand_logo": "assets/logobrands/huang-xiao-gu.jpg",
@@ -1717,7 +1717,7 @@
   },
   {
     "id": 133,
-    "name": "Gummy Candy Assorted",
+    "name": "MASTER JH - Gummy Candy Assorted 8g",
     "category": "permen",
     "brand": "MASTER JH",
     "brand_logo": "assets/logobrands/master-jh.jpg",
@@ -1730,7 +1730,7 @@
   },
   {
     "id": 134,
-    "name": "Orange Soft Candy",
+    "name": "MASTER JH - Orange Soft Candy 500g",
     "category": "permen",
     "brand": "MASTER JH",
     "brand_logo": "assets/logobrands/master-jh.jpg",
@@ -1743,11 +1743,11 @@
   },
   {
     "id": 135,
-    "name": "Veggilicious Golden Magnolian Sauce Vegan Chiken",
+    "name": "Veggilicious Golden Magnolian Sauce Vegan Chicken 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
-    "image": "assets/images/products/veggilicious/veggilicious-golden-magnolian-sauce-vegan-chiken300gr.png",
+    "image": "assets/images/products/veggilicious/veggilicious-golden-magnolian-sauce-vegan-chicken300gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "300g",
@@ -1756,7 +1756,7 @@
   },
   {
     "id": 136,
-    "name": "Veggilicious Kam Heong Braised Mushroom",
+    "name": "Veggilicious Kam Heong Braised Mushroom 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1769,7 +1769,7 @@
   },
   {
     "id": 137,
-    "name": "Veggilicious Hakka Stewed Vegan Lean Meat",
+    "name": "Veggilicious Hakka Stewed Vegan Lean Meat 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1782,7 +1782,7 @@
   },
   {
     "id": 138,
-    "name": "Veggilicious Vegan Fish With Assam Sauce",
+    "name": "Veggilicious Vegan Fish With Assam Sauce 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1795,7 +1795,7 @@
   },
   {
     "id": 139,
-    "name": "Veggilicious Vegan Curry Rendang Mutton",
+    "name": "Veggilicious Vegan Curry Rendang Mutton 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1808,11 +1808,11 @@
   },
   {
     "id": 140,
-    "name": "Veggilicious Sasame Oil Lion's Mane Mushroom",
+    "name": "Veggilicious Sesame Oil Lion's Mane Mushroom 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
-    "image": "assets/images/products/veggilicious/veggilicious-sasame-oil-lions-mane-mushroom300gr.png",
+    "image": "assets/images/products/veggilicious/veggilicious-sesame-oil-lions-mane-mushroom300gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "300g",
@@ -1821,7 +1821,7 @@
   },
   {
     "id": 141,
-    "name": "Veggilicious Vegan Fish With Tomato Sauce",
+    "name": "Veggilicious Vegan Fish With Tomato Sauce 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1834,7 +1834,7 @@
   },
   {
     "id": 142,
-    "name": "Veggilicious Vegan Black Vinegar Trotter",
+    "name": "Veggilicious Vegan Black Vinegar Trotter 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1847,7 +1847,7 @@
   },
   {
     "id": 143,
-    "name": "Veggilicious  Mala Spicy Lotus Root Vegan Konjac",
+    "name": "Veggilicious  Mala Spicy Lotus Root Vegan Konjac 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1860,7 +1860,7 @@
   },
   {
     "id": 144,
-    "name": "Veggilicious Traditional Vegan Baak Kut The",
+    "name": "Veggilicious Traditional Vegan Baak Kut The 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1873,7 +1873,7 @@
   },
   {
     "id": 145,
-    "name": "Veggilicious Bentong Ginger Lion's Mane Mushroom",
+    "name": "Veggilicious Bentong Ginger Lion's Mane Mushroom 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1886,11 +1886,11 @@
   },
   {
     "id": 146,
-    "name": "Veggilicious Vegan Kung Pao Chiken",
+    "name": "Veggilicious Vegan Kung Pao Chicken 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
-    "image": "assets/images/products/veggilicious/veggilicious-vegan-kung-pao-chiken300gr.png",
+    "image": "assets/images/products/veggilicious/veggilicious-vegan-kung-pao-chicken300gr.png",
     "desc": "-",
     "origin": "Malaysia",
     "weight": "300g",
@@ -1899,7 +1899,7 @@
   },
   {
     "id": 147,
-    "name": "Veggilicious Heritage Vegan Curry Chicken",
+    "name": "Veggilicious Heritage Vegan Curry Chicken 300g",
     "category": "vegelicious",
     "brand": "VEGGILICIOUS",
     "brand_logo": "assets/logobrands/veggilicious.jpg",
@@ -1912,7 +1912,7 @@
   },
   {
     "id": 148,
-    "name": "Weikesu Cheese Flavor",
+    "name": "VETRUE - Weikesu Cheese Flavor 66g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -1925,7 +1925,7 @@
   },
   {
     "id": 149,
-    "name": "Waikesu Durian Flavor",
+    "name": "VETRUE - Waikesu Durian Flavor 66g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -1938,7 +1938,7 @@
   },
   {
     "id": 150,
-    "name": "Waikesu Strawberry Flavor",
+    "name": "VETRUE - Waikesu Strawberry Flavor 66g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -1951,11 +1951,11 @@
   },
   {
     "id": 151,
-    "name": "Taiwan Rice Craker Salted Egg Yolk",
+    "name": "VETRUE - Taiwan Rice Cracker Salted Egg Yolk 116g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
-    "image": "assets/images/products/vetrue/taiwan-rice-craker-salted-egg-yolk116gr.png",
+    "image": "assets/images/products/vetrue/taiwan-rice-cracker-salted-egg-yolk116gr.png",
     "desc": "-",
     "origin": "Taiwan",
     "weight": "116g",
@@ -1964,11 +1964,11 @@
   },
   {
     "id": 152,
-    "name": "Taiwan Rice Craker Salted Cheese Flavor",
+    "name": "VETRUE - Taiwan Rice Cracker Salted Cheese Flavor 116g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
-    "image": "assets/images/products/vetrue/taiwan-rice-craker-salted-cheese-flavor116gr.png",
+    "image": "assets/images/products/vetrue/taiwan-rice-cracker-salted-cheese-flavor116gr.png",
     "desc": "-",
     "origin": "Taiwan",
     "weight": "116g",
@@ -1977,7 +1977,7 @@
   },
   {
     "id": 153,
-    "name": "Rice Cracker Japanese Salted Egg Yolk Flavor",
+    "name": "VETRUE - Rice Cracker Japanese Salted Egg Yolk Flavor 300g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -1990,7 +1990,7 @@
   },
   {
     "id": 154,
-    "name": "Rice Cracker Japanese Vegetable Flavor",
+    "name": "VETRUE - Rice Cracker Japanese Vegetable Flavor 300g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2003,7 +2003,7 @@
   },
   {
     "id": 155,
-    "name": "Rice Cracker Japanese Spicy Crayfish Flavor",
+    "name": "VETRUE - Rice Cracker Japanese Spicy Crayfish Flavor 300g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2016,7 +2016,7 @@
   },
   {
     "id": 156,
-    "name": "Taiwan Rice Crackers Egg Yolk Flavor",
+    "name": "VETRUE - Taiwan Rice Crackers Egg Yolk Flavor 320g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2029,7 +2029,7 @@
   },
   {
     "id": 157,
-    "name": "Taiwan Rice Crackers Cheese Flavor",
+    "name": "VETRUE - Taiwan Rice Crackers Cheese Flavor 320g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2042,7 +2042,7 @@
   },
   {
     "id": 158,
-    "name": "Rice Cake Vegetable Flavor",
+    "name": "VETRUE - Rice Cake Vegetable Flavor 65g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2055,7 +2055,7 @@
   },
   {
     "id": 159,
-    "name": "Rice Cake Egg Yolk Flavor",
+    "name": "VETRUE - Rice Cake Egg Yolk Flavor 65g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2068,7 +2068,7 @@
   },
   {
     "id": 160,
-    "name": "Rice Cake Cheese Flavor",
+    "name": "VETRUE - Rice Cake Cheese Flavor 65g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2081,7 +2081,7 @@
   },
   {
     "id": 161,
-    "name": "Rice Crackers Cheese Flavor",
+    "name": "VETRUE - Rice Crackers Cheese Flavor 220g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2094,7 +2094,7 @@
   },
   {
     "id": 162,
-    "name": "Rice Crackers Salted Egg Flavor",
+    "name": "VETRUE - Rice Crackers Salted Egg Flavor 220g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2107,7 +2107,7 @@
   },
   {
     "id": 163,
-    "name": "Rice Crackers Vegetable Flavor",
+    "name": "VETRUE - Rice Crackers Vegetable Flavor 220g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2120,7 +2120,7 @@
   },
   {
     "id": 164,
-    "name": "Snow Cracker Original Flavor",
+    "name": "VETRUE - Snow Cracker Original Flavor 115g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2133,7 +2133,7 @@
   },
   {
     "id": 165,
-    "name": "Rice Cracker Original Flavor",
+    "name": "VETRUE - Rice Cracker Original Flavor 108g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2146,7 +2146,7 @@
   },
   {
     "id": 166,
-    "name": "Rice Cracker Seaweed Flavor",
+    "name": "VETRUE - Rice Cracker Seaweed Flavor 108g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2159,7 +2159,7 @@
   },
   {
     "id": 167,
-    "name": "Rice Cracker Cheese Flavor",
+    "name": "VETRUE - Rice Cracker Cheese Flavor 108g",
     "category": "snack",
     "brand": "VETRUE",
     "brand_logo": "assets/logobrands/vetrue.jpg",
@@ -2172,7 +2172,7 @@
   },
   {
     "id": 168,
-    "name": "Roasted Seaweed Stick Original Flavor (Box)",
+    "name": "TAWANDANG - Roasted Seaweed Stick Original Flavor (Box) 2.5g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2185,7 +2185,7 @@
   },
   {
     "id": 169,
-    "name": "Roasted Seaweed Stick Hot Spicy (Box)",
+    "name": "TAWANDANG - Roasted Seaweed Stick Hot Spicy (Box) 2.5g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2198,7 +2198,7 @@
   },
   {
     "id": 170,
-    "name": "Roasted Seaweed Stick Grilled Squid(Box)",
+    "name": "TAWANDANG - Roasted Seaweed Stick Grilled Squid(Box) 2.5g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2211,7 +2211,7 @@
   },
   {
     "id": 171,
-    "name": "Roasted Seaweed Sheet Original Flavor",
+    "name": "TAWANDANG - Roasted Seaweed Sheet Original Flavor 6g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2224,7 +2224,7 @@
   },
   {
     "id": 172,
-    "name": "Roasted Seaweed Sheet Hot Spicy",
+    "name": "TAWANDANG - Roasted Seaweed Sheet Hot Spicy 6g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2237,7 +2237,7 @@
   },
   {
     "id": 173,
-    "name": "Roasted Seaweed Sheet Grilled Squid",
+    "name": "TAWANDANG - Roasted Seaweed Sheet Grilled Squid 6g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2250,7 +2250,7 @@
   },
   {
     "id": 174,
-    "name": "Roasted Seaweed Stick Original Flavor (Super Pack)",
+    "name": "TAWANDANG - Roasted Seaweed Stick Original Flavor (Super Pack) 16g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2263,7 +2263,7 @@
   },
   {
     "id": 175,
-    "name": "Roasted Seaweed Sheet Original Flavor (Super Pack)",
+    "name": "TAWANDANG - Roasted Seaweed Sheet Original Flavor (Super Pack) 16g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2276,7 +2276,7 @@
   },
   {
     "id": 176,
-    "name": "Super Pack Seafood Flavour With Sweet Chilli Sauce",
+    "name": "TAWANDANG - Super Pack Seafood Flavour With Sweet Chilli Sauce 20g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2289,7 +2289,7 @@
   },
   {
     "id": 177,
-    "name": "Super Pack Original Flavour With Sweet Chilli Sauce",
+    "name": "TAWANDANG - Super Pack Original Flavour With Sweet Chilli Sauce 20g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2302,7 +2302,7 @@
   },
   {
     "id": 178,
-    "name": "Travel Set Crispy Seaweed With Sweet Chili Sauce",
+    "name": "TAWANDANG - Travel Set Crispy Seaweed With Sweet Chili Sauce 20g",
     "category": "condiments",
     "brand": "TAWANDANG",
     "brand_logo": "assets/logobrands/tawandang.jpg",
@@ -2315,7 +2315,7 @@
   },
   {
     "id": 179,
-    "name": "Hokaido Fruits Juice Yogurt Flavor",
+    "name": "MIKKU - Hokaido Fruits Juice Yogurt Flavor 300 ml",
     "category": "minuman",
     "brand": "MIKKU",
     "brand_logo": "assets/logobrands/mikku.jpg",
@@ -2328,7 +2328,7 @@
   },
   {
     "id": 180,
-    "name": "Hokaido Fruits Juice Melon Flavor",
+    "name": "MIKKU - Hokaido Fruits Juice Melon Flavor 300 ml",
     "category": "minuman",
     "brand": "MIKKU",
     "brand_logo": "assets/logobrands/mikku.jpg",
@@ -2341,7 +2341,7 @@
   },
   {
     "id": 181,
-    "name": "Hokaido Fruits Juice Strawberry Flavor",
+    "name": "MIKKU - Hokaido Fruits Juice Strawberry Flavor 300 ml",
     "category": "minuman",
     "brand": "MIKKU",
     "brand_logo": "assets/logobrands/mikku.jpg",
@@ -2354,7 +2354,7 @@
   },
   {
     "id": 182,
-    "name": "Hokaido Fruits Juice Blueberry Flavor",
+    "name": "MIKKU - Hokaido Fruits Juice Blueberry Flavor 300 ml",
     "category": "minuman",
     "brand": "MIKKU",
     "brand_logo": "assets/logobrands/mikku.jpg",
@@ -2367,7 +2367,7 @@
   },
   {
     "id": 183,
-    "name": "Hokaido Fruits Juice White Grape Juice Flavoured Original",
+    "name": "MIKKU - Hokaido Fruits Juice White Grape Juice Flavoured Original 100 ml",
     "category": "minuman",
     "brand": "MIKKU",
     "brand_logo": "assets/logobrands/mikku.jpg",
@@ -2380,7 +2380,7 @@
   },
   {
     "id": 184,
-    "name": "XiDuoDong Fruit Flavored Yogurt Old Yogurt Flavored",
+    "name": "XiDuoDong Fruit Flavored Yogurt Old Yogurt Flavored 50",
     "category": "minuman",
     "brand": "XIDUODONG",
     "brand_logo": "assets/logobrands/xiduodong.jpg",
@@ -2393,7 +2393,7 @@
   },
   {
     "id": 185,
-    "name": "XiDuoDong Fruit Flavored Yogurt Strawberry Yogurt Flavored",
+    "name": "XiDuoDong Fruit Flavored Yogurt Strawberry Yogurt Flavored 50",
     "category": "minuman",
     "brand": "XIDUODONG",
     "brand_logo": "assets/logobrands/xiduodong.jpg",
@@ -2406,7 +2406,7 @@
   },
   {
     "id": 186,
-    "name": "XiDuoDong Fruit Flavored Yogurt Grape Yogurt Flavored",
+    "name": "XiDuoDong Fruit Flavored Yogurt Grape Yogurt Flavored 50",
     "category": "minuman",
     "brand": "XIDUODONG",
     "brand_logo": "assets/logobrands/xiduodong.jpg",
@@ -2419,7 +2419,7 @@
   },
   {
     "id": 187,
-    "name": "XiDuoDong Fruit Flavored Yogurt Pineapple Flavored",
+    "name": "XiDuoDong Fruit Flavored Yogurt Pineapple Flavored 50",
     "category": "minuman",
     "brand": "XIDUODONG",
     "brand_logo": "assets/logobrands/xiduodong.jpg",
@@ -2432,7 +2432,7 @@
   },
   {
     "id": 188,
-    "name": "Cheese Pudding",
+    "name": "SWECCO - Cheese Pudding 108g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2445,7 +2445,7 @@
   },
   {
     "id": 189,
-    "name": "Cheese Pudding 3 Cups",
+    "name": "SWECCO - Cheese Pudding 3 Cups 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2458,7 +2458,7 @@
   },
   {
     "id": 190,
-    "name": "Yogurt Pudding Original Flavour 3 Cups",
+    "name": "SWECCO - Yogurt Pudding Original Flavour 3 Cups 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2471,7 +2471,7 @@
   },
   {
     "id": 191,
-    "name": "Yogurt Pudding Strawberry Flavour 3 Cups",
+    "name": "SWECCO - Yogurt Pudding Strawberry Flavour 3 Cups 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2484,7 +2484,7 @@
   },
   {
     "id": 192,
-    "name": "Yogurt Pudding Mango Flavour 3 Cups",
+    "name": "SWECCO - Yogurt Pudding Mango Flavour 3 Cups 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2497,7 +2497,7 @@
   },
   {
     "id": 193,
-    "name": "Yogurt Pudding Lychee Flavour 3 Cups",
+    "name": "SWECCO - Yogurt Pudding Lychee Flavour 3 Cups 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2510,7 +2510,7 @@
   },
   {
     "id": 194,
-    "name": "Yogurt Pudding Lychee Flavour 6 Cups",
+    "name": "SWECCO - Yogurt Pudding Lychee Flavour 6 Cups 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2523,7 +2523,7 @@
   },
   {
     "id": 195,
-    "name": "Yogurt Pudding Strawberry Flavour 6 Cups",
+    "name": "SWECCO - Yogurt Pudding Strawberry Flavour 6 Cups 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2536,7 +2536,7 @@
   },
   {
     "id": 196,
-    "name": "Yogurt Pudding Original Flavour Box (25 Cups)",
+    "name": "SWECCO - Yogurt Pudding Original Flavour Box (25 Cups) 15g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2549,7 +2549,7 @@
   },
   {
     "id": 197,
-    "name": "Yogurt Pudding Mango Flavour Box (25 Cups)",
+    "name": "SWECCO - Yogurt Pudding Mango Flavour Box (25 Cups) 15g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2562,7 +2562,7 @@
   },
   {
     "id": 198,
-    "name": "Yogurt Pudding Lychee Flavour Box (25 Cups)",
+    "name": "SWECCO - Yogurt Pudding Lychee Flavour Box (25 Cups) 15g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2575,7 +2575,7 @@
   },
   {
     "id": 199,
-    "name": "Yogurt Pudding Strawberry Flavour Box (25 Cups)",
+    "name": "SWECCO - Yogurt Pudding Strawberry Flavour Box (25 Cups) 15g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2588,7 +2588,7 @@
   },
   {
     "id": 200,
-    "name": "Strawberry Pudding With Nata de Coco (6 Cups)",
+    "name": "SWECCO - Strawberry Pudding With Nata de Coco (6 Cups) 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2601,7 +2601,7 @@
   },
   {
     "id": 201,
-    "name": "Honeymelon Pudding With Nata de Coco  (6 Cups)",
+    "name": "SWECCO - Honeymelon Pudding With Nata de Coco  (6 Cups) 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2614,7 +2614,7 @@
   },
   {
     "id": 202,
-    "name": "Mango Pudding With Nata de Coco  (6 Cups)",
+    "name": "SWECCO - Mango Pudding With Nata de Coco  (6 Cups) 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2627,7 +2627,7 @@
   },
   {
     "id": 203,
-    "name": "Mix 3 Cups Pudding (Lychee. Mango. Strawberry)",
+    "name": "SWECCO - Mix 3 Cups Pudding (Lychee. Mango. Strawberry) 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2640,7 +2640,7 @@
   },
   {
     "id": 204,
-    "name": "Mix 6 Cups Pudding (Lychee. Mango. Strawberry)",
+    "name": "SWECCO - Mix 6 Cups Pudding (Lychee. Mango. Strawberry) 80g",
     "category": "pudding",
     "brand": "SWECCO",
     "brand_logo": "assets/logobrands/swecco.jpg",
@@ -2653,7 +2653,7 @@
   },
   {
     "id": 205,
-    "name": "Black Tea Flavor Candy (Box)",
+    "name": "KISS DELICIAS - Black Tea Flavor Candy (Box) 18g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2666,7 +2666,7 @@
   },
   {
     "id": 206,
-    "name": "Oolong Tea Flavor (Box)",
+    "name": "KISS DELICIAS - Oolong Tea Flavor (Box) 18g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2679,7 +2679,7 @@
   },
   {
     "id": 207,
-    "name": "Black Tea Flavor Candy (Bags)",
+    "name": "KISS DELICIAS - Black Tea Flavor Candy (Bags) 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2692,7 +2692,7 @@
   },
   {
     "id": 208,
-    "name": "Oolong Tea Flavor (Bags)",
+    "name": "KISS DELICIAS - Oolong Tea Flavor (Bags) 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2705,11 +2705,11 @@
   },
   {
     "id": 209,
-    "name": "Ming Ji Tang Gingseng Candy Lime Flavor",
+    "name": "KISS DELICIAS - Ming Ji Tang Ginseng Candy Lime Flavor 40g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
-    "image": "assets/images/products/kiss-delicias/ming-ji-tang-gingseng-candy-lime-flavor40gr.png",
+    "image": "assets/images/products/kiss-delicias/ming-ji-tang-ginseng-candy-lime-flavor40gr.png",
     "desc": "-",
     "origin": "China",
     "weight": "40g",
@@ -2718,11 +2718,11 @@
   },
   {
     "id": 210,
-    "name": "Ming Ji Tang Gingseng Candy Original Flavor",
+    "name": "KISS DELICIAS - Ming Ji Tang Ginseng Candy Original Flavor 40g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
-    "image": "assets/images/products/kiss-delicias/ming-ji-tang-gingseng-candy-original-flavor40gr.png",
+    "image": "assets/images/products/kiss-delicias/ming-ji-tang-ginseng-candy-original-flavor40gr.png",
     "desc": "-",
     "origin": "China",
     "weight": "40g",
@@ -2731,11 +2731,11 @@
   },
   {
     "id": 211,
-    "name": "Ming Ji Tang Gingseng Candy Jasmine Flavor",
+    "name": "KISS DELICIAS - Ming Ji Tang Ginseng Candy Jasmine Flavor 40g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
-    "image": "assets/images/products/kiss-delicias/ming-ji-tang-gingseng-candy-jasmine-flavor40gr.png",
+    "image": "assets/images/products/kiss-delicias/ming-ji-tang-ginseng-candy-jasmine-flavor40gr.png",
     "desc": "-",
     "origin": "China",
     "weight": "40g",
@@ -2744,7 +2744,7 @@
   },
   {
     "id": 212,
-    "name": "Spray Candy Lime Flavor",
+    "name": "KISS DELICIAS - Spray Candy Lime Flavor 18ml",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2757,7 +2757,7 @@
   },
   {
     "id": 213,
-    "name": "Spray Candy Peach Flavor",
+    "name": "KISS DELICIAS - Spray Candy Peach Flavor 18ml",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2770,7 +2770,7 @@
   },
   {
     "id": 214,
-    "name": "Spray Candy Passion Fruit Flavor",
+    "name": "KISS DELICIAS - Spray Candy Passion Fruit Flavor 18ml",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2783,7 +2783,7 @@
   },
   {
     "id": 215,
-    "name": "Juicy Gummy Green Grape Flavor",
+    "name": "KISS DELICIAS - Juicy Gummy Green Grape Flavor 50g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2796,7 +2796,7 @@
   },
   {
     "id": 216,
-    "name": "Juicy Gummy Strawberry Flavor",
+    "name": "KISS DELICIAS - Juicy Gummy Strawberry Flavor 50g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2809,7 +2809,7 @@
   },
   {
     "id": 217,
-    "name": "Juicy Gummy Peach Flavor",
+    "name": "KISS DELICIAS - Juicy Gummy Peach Flavor 50g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2822,7 +2822,7 @@
   },
   {
     "id": 218,
-    "name": "Juicy Gummy Passion Fruit Flavor",
+    "name": "KISS DELICIAS - Juicy Gummy Passion Fruit Flavor 50g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2835,7 +2835,7 @@
   },
   {
     "id": 219,
-    "name": "Fruit Candy Mix Fruit Flavor",
+    "name": "KISS DELICIAS - Fruit Candy Mix Fruit Flavor 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2848,7 +2848,7 @@
   },
   {
     "id": 220,
-    "name": "Fruit Candy Pear Flavor",
+    "name": "KISS DELICIAS - Fruit Candy Pear Flavor 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2861,7 +2861,7 @@
   },
   {
     "id": 221,
-    "name": "Fruit Candy Peach Fruit Flavor",
+    "name": "KISS DELICIAS - Fruit Candy Peach Fruit Flavor 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2874,7 +2874,7 @@
   },
   {
     "id": 222,
-    "name": "Fruit Candy Passion Fruit Flavor",
+    "name": "KISS DELICIAS - Fruit Candy Passion Fruit Flavor 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -2887,7 +2887,7 @@
   },
   {
     "id": 223,
-    "name": "Sugar Free Mint Candy Lemon Flavor 16g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Lemon Flavor 16g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2900,7 +2900,7 @@
   },
   {
     "id": 224,
-    "name": "Sugar Free Mint Candy Peach Flavor 16g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 16g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2913,7 +2913,7 @@
   },
   {
     "id": 225,
-    "name": "Sugar Free Mint Candy Jasmine Green Grape Flavor 16g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 16g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2926,7 +2926,7 @@
   },
   {
     "id": 226,
-    "name": "Sugar Free Mint Candy Watermelon Flavor 16g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 16g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2939,7 +2939,7 @@
   },
   {
     "id": 227,
-    "name": "Sugar Free Mint Candy Rose Lychee Flavor 16g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 16g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2952,7 +2952,7 @@
   },
   {
     "id": 228,
-    "name": "Sugar Free Mint Candy Passion Fruit Flavor 16g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Passion Fruit Flavor 16g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2965,7 +2965,7 @@
   },
   {
     "id": 229,
-    "name": "Sugar Free MintCandy Lemon Flavor 38g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free MintCandy Lemon Flavor 38g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2978,7 +2978,7 @@
   },
   {
     "id": 230,
-    "name": "Sugar Free Mint Candy Peach Flavor 38g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 38g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -2991,7 +2991,7 @@
   },
   {
     "id": 231,
-    "name": "Sugar Free Mint Candy Jasmine Green Grape Flavor 38g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 38g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -3004,7 +3004,7 @@
   },
   {
     "id": 232,
-    "name": "Sugar Free Mint Candy Watermelon Flavor 38g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 38g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -3017,7 +3017,7 @@
   },
   {
     "id": 233,
-    "name": "Sugar Free Mint Candy Rose Lychee Flavor 38g",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 38g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -3030,7 +3030,7 @@
   },
   {
     "id": 234,
-    "name": "Sugar Free Mint Candy Passion Fruit Flavor 38",
+    "name": "YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Passion Fruit Flavor 38 38g",
     "category": "permen",
     "brand": "YAMAMOTO KAWAHIRO",
     "brand_logo": "assets/logobrands/yamamoto-kawahiro.jpg",
@@ -3043,7 +3043,7 @@
   },
   {
     "id": 235,
-    "name": "Petal Mint Candy Osmanthus Honey Flavor",
+    "name": "KISS DELICIAS - Petal Mint Candy Osmanthus Honey Flavor 50g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -3056,7 +3056,7 @@
   },
   {
     "id": 236,
-    "name": "Petal Mint Candy Jasmine Green Grape Flavor",
+    "name": "KISS DELICIAS - Petal Mint Candy Jasmine Green Grape Flavor 50g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -3069,7 +3069,7 @@
   },
   {
     "id": 237,
-    "name": "Petal Mint Candy Rose Lychee Flavor",
+    "name": "KISS DELICIAS - Petal Mint Candy Rose Lychee Flavor 50g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -3082,7 +3082,7 @@
   },
   {
     "id": 238,
-    "name": "Ice Lolly Shaped Lollipop Milk Flavor",
+    "name": "KISS DELICIAS - Ice Lolly Shaped Lollipop Milk Flavor 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -3095,7 +3095,7 @@
   },
   {
     "id": 239,
-    "name": "Ice Lolly Shaped Lollipop Hamimelon Flavor",
+    "name": "KISS DELICIAS - Ice Lolly Shaped Lollipop Hamimelon Flavor 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -3108,7 +3108,7 @@
   },
   {
     "id": 240,
-    "name": "Ice Lolly Shaped Lollipop Strawberry Flavor",
+    "name": "KISS DELICIAS - Ice Lolly Shaped Lollipop Strawberry Flavor 60g",
     "category": "permen",
     "brand": "KISS DELICIAS",
     "brand_logo": "assets/logobrands/kiss-delicias.jpg",
@@ -3121,7 +3121,7 @@
   },
   {
     "id": 241,
-    "name": "Q-Jin Dried Tofu Barbeque Flavor",
+    "name": "HUI XIANG ZHAI ZI - Q-Jin Dried Tofu Barbeque Flavor 25g",
     "category": "snack",
     "brand": "HUI XIANG ZHAI ZI",
     "brand_logo": "assets/logobrands/hui-xiang-zhai-zi.jpg",
@@ -3134,7 +3134,7 @@
   },
   {
     "id": 242,
-    "name": "La Si Dried Tofu Barbeque Flavor",
+    "name": "HUI XIANG ZHAI ZI - La Si Dried Tofu Barbeque Flavor 25g",
     "category": "snack",
     "brand": "HUI XIANG ZHAI ZI",
     "brand_logo": "assets/logobrands/hui-xiang-zhai-zi.jpg",
@@ -3147,7 +3147,7 @@
   },
   {
     "id": 243,
-    "name": "La Si Dried Tofu Spicy Flavor",
+    "name": "HUI XIANG ZHAI ZI - La Si Dried Tofu Spicy Flavor 25g",
     "category": "snack",
     "brand": "HUI XIANG ZHAI ZI",
     "brand_logo": "assets/logobrands/hui-xiang-zhai-zi.jpg",
@@ -3160,7 +3160,7 @@
   },
   {
     "id": 244,
-    "name": "La Si Dried Tofu Peppercorn Flavor",
+    "name": "HUI XIANG ZHAI ZI - La Si Dried Tofu Peppercorn Flavor 25g",
     "category": "snack",
     "brand": "HUI XIANG ZHAI ZI",
     "brand_logo": "assets/logobrands/hui-xiang-zhai-zi.jpg",

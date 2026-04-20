@@ -21,12 +21,12 @@ Folder ini berisi gambar produk untuk brand **Jacker**.
 | 26 | Hot & Spicy Flavor Potato Crisps | `hot-spicy-flavor-potato-crisps60gr.png` |
 | 27 | Sour Cream & Onion Flavor Potato Crisps | `sour-cream-onion-flavor-potato-crisps60gr.png` |
 | 28 | Original Flavor Potato Crisps | `original-flavor-potato-crisps60gr.png` |
-| 29 | Wavy Mexican Hot Sauce | `wavy-mexican-hot-sauce60gr.png` |
-| 30 | Wavy Mexican Hot Sauce Potato Crisps | `wavy-mexican-hot-sauce-potato-crisps60gr.png` |
-| 31 | Hot & Spicy Flavor Potato Crisps | `hot-spicy-flavor-potato-crisps60gr.png` |
-| 32 | Barbecue Flavor Potato Crisps | `barbecue-flavor-potato-crisps60gr.png` |
-| 33 | Natural Flavor Potato Crisps | `natural-flavor-potato-crisps60gr.png` |
-| 34 | Spicy Mala Hot Pot Flavor Potato Crisps | `spicy-mala-hot-pot-flavor-potato-crisps60gr.png` |
+| 29 | Wavy Chips Mexican Hot Sauce | `wavy-chips-mexican-hot-sauce60gr.png` |
+| 30 | Potato Crisps Wavy Mexican Hot Sauce | `wavy-mexican-crips-hot-sauce-potato-crisps110gr.png` |
+| 31 | Hot & Spicy Flavor Potato Chips | `hot-spicy-flavor-potato-chips60gr.png` |
+| 32 | Barbecue Flavor Potato Chips | `barbecue-flavor-potato-chips60gr.png` |
+| 33 | Natural Flavor Potato Crisps | `natural-flavor-potato-chips60gr.png` |
+| 34 | Spicy Mala Hot Pot Flavor Potato Chips | `spicy-mala-hot-pot-flavor-potato-chips60gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -39,5 +39,5 @@ Folder ini berisi gambar produk untuk brand **Jacker**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/jacker/{nama-file}.png
+assets/images/products/jacker/{nama-file}
 ```

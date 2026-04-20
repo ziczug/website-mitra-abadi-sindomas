@@ -35,5 +35,5 @@ Folder ini berisi gambar produk untuk brand **SWECCO**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/swecco/{nama-file}.png
+assets/images/products/swecco/{nama-file}
 ```

@@ -23,5 +23,5 @@ Folder ini berisi gambar produk untuk brand **Ibu Mie**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/ibu-mie/{nama-file}.png
+assets/images/products/ibu-mie/{nama-file}
 ```

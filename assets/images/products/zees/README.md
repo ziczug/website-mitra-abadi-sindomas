@@ -41,5 +41,5 @@ Folder ini berisi gambar produk untuk brand **Zees**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/zees/{nama-file}.png
+assets/images/products/zees/{nama-file}
 ```

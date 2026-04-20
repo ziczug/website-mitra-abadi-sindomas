@@ -35,18 +35,18 @@ Folder ini berisi gambar produk untuk brand **Win2**.
 | 94 | Bake Story Muffin Cake Pandan | `bake-story-muffin-cake-pandan20gr.png` |
 | 95 | Joystix Chocolate Flavor Bags | `joystix-chocolate-flavor-bags20gr.png` |
 | 96 | Joystix with Vanila Flavor Bags | `joystix-with-vanila-flavor-bags20gr.png` |
-| 97 | Joystix Chocolate & Strawberry Flavor Box | `joystix-chocolate-strawberry-flavor-box20gr.png` |
-| 98 | Joystix Chocolate & Vanilla Flavor Box | `joystix-chocolate-vanilla-flavor-box20gr.png` |
+| 97 | Joystix Chocolate & Strawberry Flavor Box | `joystix-chocolate-strawberry-flavor-box40gr.png` |
+| 98 | Joystix Chocolate & Vanilla Flavor Box | `joystix-chocolate-vanilla-flavor-box40gr.png` |
 | 99 | Mini 1 More | `mini-1-more90gr.png` |
 | 100 | Crunchy Stick Double Chocolate Flavor | `crunchy-stick-double-chocolate-flavor40gr.png` |
-| 101 | Crunchy Stick Chocolate & Vannila Flavor | `crunchy-stick-chocolate-vannila-flavor40gr.png` |
+| 101 | Crunchy Stick Chocolate & Vanilla Flavor | `crunchy-stick-chocolate-vanilla-flavor40gr.png` |
 | 102 | Crunchy Stick Chocolate & Strawberry Flavor | `crunchy-stick-chocolate-strawberry-flavor40gr.png` |
 | 103 | Honey Mustard Croutons | `honey-mustard-croutons30gr.png` |
 | 104 | Margarine Sugar Croutons | `margarine-sugar-croutons30gr.png` |
-| 105 | Garlic Butte Croutons | `garlic-butte-croutons30gr.png` |
+| 105 | Garlic Butter Croutons | `garlic-butter-croutons30gr.png` |
 | 106 | Honey Mustard Croutons | `honey-mustard-croutons100gr.png` |
 | 107 | Margarine Sugar Croutons | `margarine-sugar-croutons100gr.png` |
-| 108 | Garlic Butte Croutons | `garlic-butte-croutons100gr.png` |
+| 108 | Garlic Butter Croutons | `garlic-butter-croutons100gr.png` |
 
 ## 📌 Panduan Upload
 
@@ -59,5 +59,5 @@ Folder ini berisi gambar produk untuk brand **Win2**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/win2/{nama-file}.png
+assets/images/products/win2/{nama-file}
 ```

@@ -22,5 +22,5 @@ Folder ini berisi gambar produk untuk brand **XIDUODONG**.
 ## 🔗 Path yang digunakan di sistem
 
 ```
-assets/images/products/xiduodong/{nama-file}.png
+assets/images/products/xiduodong/{nama-file}
 ```
