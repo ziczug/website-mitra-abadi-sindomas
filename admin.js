@@ -1967,11 +1967,11 @@ function deletePartner(id) {
 // CATEGORIES MANAGEMENT
 // ==========================================
 const defaultCategories = [
-  { key: 'snack', title: 'Makanan Ringan', desc: 'Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring, Green Pea Snack dan lainnya.', image: 'assets/images/snacks.png', imageData: '' },
-  { key: 'biskuit', title: 'Biskuit & Cookies', desc: 'Beragam biskuit, cream crackers, dan cookies premium dari brand internasional.', image: 'assets/images/biscuits.png', imageData: '' },
-  { key: 'wafer', title: 'Wafer', desc: 'Wafer coklat, vanilla, dan berbagai varian rasa dari produsen berkualitas.', image: 'assets/images/wafers.png', imageData: '' },
-  { key: 'kue', title: 'Kue & Pastry', desc: 'Swiss roll, layer cake, muffin dan berbagai kue kemasan premium.', image: 'assets/images/cakes.png', imageData: '' },
-  { key: 'minuman', title: 'Minuman', desc: 'Berbagai minuman berkualitas termasuk jus, teh, dan minuman rasa buah.', image: 'assets/images/beverages.png', imageData: '' },
+  { key: 'snack', title: 'Makanan Ringan', desc: 'Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring, Green Pea Snack dan lainnya.', image: 'assets/images/snack.png', imageData: '' },
+  { key: 'biskuit', title: 'Biskuit & Cookies', desc: 'Beragam biskuit, cream crackers, dan cookies premium dari brand internasional.', image: 'assets/images/biskuit.png', imageData: '' },
+  { key: 'wafer', title: 'Wafer', desc: 'Wafer coklat, vanilla, dan berbagai varian rasa dari produsen berkualitas.', image: 'assets/images/wafer.png', imageData: '' },
+  { key: 'kue', title: 'Kue & Pastry', desc: 'Swiss roll, layer cake, muffin dan berbagai kue kemasan premium.', image: 'assets/images/kue.png', imageData: '' },
+  { key: 'minuman', title: 'Minuman', desc: 'Berbagai minuman berkualitas termasuk jus, teh, dan minuman rasa buah.', image: 'assets/images/minuman.png', imageData: '' },
   { key: 'permen', title: 'Permen', desc: 'Berbagai macam permen dan manisan dengan rasa yang menyegarkan.', image: 'assets/images/permen.png', imageData: '' },
   { key: 'condiments', title: 'Condiments & Sauces', desc: 'Saus, bumbu, dan bahan pelengkap makanan untuk menambah citarasa.', image: 'assets/images/condiments.png', imageData: '' },
   { key: 'noodle', title: 'Instant Noodle', desc: 'Mie instan dengan berbagai pilihan rasa dari brand internasional terbaik.', image: 'assets/images/noodle.png', imageData: '' },

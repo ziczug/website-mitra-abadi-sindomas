@@ -1683,10 +1683,10 @@
 
       if (heroes) {
         try {
-          const activeHeroes = heroes.filter(h => h.active && h.imageData);
+          const activeHeroes = heroes.filter(h => h.active && (h.imageData || h.image));
           if (activeHeroes.length > 0 && sliderContainer) {
             sliderContainer.innerHTML = activeHeroes.map((h, index) =>
-              `<div class="slide ${index === 0 ? 'active' : ''}"><img src="${h.imageData}" alt="${h.title}"></div>`
+              `<div class="slide ${index === 0 ? 'active' : ''}"><img src="${h.imageData || h.image}" alt="${h.title}"></div>`
             ).join('');
 
             // Re-initialize slides after injection
@@ -1798,14 +1798,14 @@
       }
 
       if (!topHeroes) topHeroes = [];
-      topHeroes = topHeroes.filter(h => h.active && h.imageData);
+      topHeroes = topHeroes.filter(h => h.active && (h.imageData || h.image));
 
       // Default if empty
       if (topHeroes.length === 0) {
         topHeroes = [
-          { imageData: "assets/images/hero-banner.png", title: "Default 1" },
-          { imageData: "assets/images/snacks.png", title: "Default 2" },
-          { imageData: "assets/images/biscuits.png", title: "Default 3" }
+          { image: "assets/images/hero-banner.png", title: "Default 1" },
+          { image: "assets/images/snack.png", title: "Default 2" },
+          { image: "assets/images/biskuit.png", title: "Default 3" }
         ];
       }
 
@@ -1813,7 +1813,7 @@
 
       topContainer.innerHTML = topHeroes.map((h, i) => `
         <div class="top-slide ${i === 0 ? 'active' : ''}">
-          <img src="${h.imageData}" alt="${h.title || 'Slide'}">
+          <img src="${h.imageData || h.image}" alt="${h.title || 'Slide'}">
         </div>
       `).join('');
 
