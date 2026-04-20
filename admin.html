@@ -51,6 +51,7 @@
       <button class="nav-item" onclick="showPage('promo',this)"><i class="fas fa-bullhorn"></i> Popup Promo</button>
       <button class="nav-item" onclick="showPage('hero',this)"><i class="fas fa-layer-group"></i> Banner Hero</button>
       <button class="nav-item" onclick="showPage('top-slider',this)"><i class="fas fa-arrows-left-right"></i> Top Slider</button>
+      <button class="nav-item" onclick="showPage('news',this)"><i class="fas fa-newspaper"></i> Berita</button>
       <button class="nav-item" onclick="showPage('branches',this)"><i class="fas fa-warehouse"></i> Cabang Gudang</button>
       <div class="nav-label">Konten Website</div>
       <button class="nav-item" onclick="showPage('company',this)"><i class="fas fa-building"></i> Profil Perusahaan</button>
@@ -304,6 +305,35 @@
               </table>
             </div>
             <div class="empty-state" id="topHeroEmptyState" style="display:none"><i class="fas fa-arrows-left-right"></i><h3>Belum ada Banner Top Slider</h3><p>Klik "Tambah Banner Top" untuk mulai.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== NEWS/BERITA PAGE ===== -->
+      <div class="page-section" id="page-news">
+        <div class="panel">
+          <div class="panel-header">
+            <h3><i class="fas fa-newspaper"></i> Manajemen Berita</h3>
+            <button class="btn btn-gold btn-sm" onclick="openNewsModal()"><i class="fas fa-plus"></i> Tambah Berita</button>
+          </div>
+          <div class="panel-body">
+            <p style="font-size:13px;color:rgba(0, 0, 0, 0.6);margin-bottom:20px">
+              <i class="fas fa-info-circle" style="color:var(--accent);margin-right:4px"></i>
+              Kelola berita dan artikel yang tampil di halaman <a href="berita.html" target="_blank" style="color:var(--accent);font-weight:600">Berita</a>. Berita aktif akan langsung tampil di website.
+            </p>
+            <div style="overflow-x:auto">
+              <table class="data-table">
+                <thead><tr>
+                  <th style="width:60px">Aktif</th>
+                  <th style="width:100px">Gambar</th>
+                  <th>Judul Berita</th>
+                  <th style="width:120px">Tanggal</th>
+                  <th style="width:100px">Aksi</th>
+                </tr></thead>
+                <tbody id="newsTableBody"></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="newsEmptyState" style="display:none"><i class="fas fa-newspaper"></i><h3>Belum ada Berita</h3><p>Klik "Tambah Berita" untuk mulai menambahkan berita.</p></div>
           </div>
         </div>
       </div>
@@ -991,6 +1021,64 @@
     <div class="modal-footer">
       <button class="btn btn-outline-gray" onclick="closeImportModal()">Batal</button>
       <button class="btn btn-success" onclick="confirmImport()"><i class="fas fa-check"></i> Import Semua</button>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS MODAL -->
+<div class="modal-overlay" id="newsModalManager">
+  <div class="modal wide">
+    <div class="modal-header">
+      <h3><i class="fas fa-newspaper"></i> <span id="newsModalTitle">Tambah Berita</span></h3>
+      <button class="modal-close" onclick="closeNewsModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="fNewsId">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label class="form-label">Judul Berita <span class="required">*</span></label>
+          <input type="text" class="form-input" id="fNewsTitle" placeholder="Judul artikel berita...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tanggal Publikasi <span class="required">*</span></label>
+          <input type="date" class="form-input" id="fNewsDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="fNewsActive">
+            <option value="true">Aktif (Tampil)</option>
+            <option value="false">Draft (Tersembunyi)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Ringkasan / Excerpt <span class="required">*</span></label>
+          <textarea class="form-textarea" id="fNewsSummary" rows="2" placeholder="Ringkasan singkat berita yang tampil di card..."></textarea>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Konten Lengkap <span class="required">*</span></label>
+          <textarea class="form-textarea" id="fNewsContent" rows="10" placeholder="Isi lengkap artikel berita...&#10;&#10;Gunakan format:&#10;## Heading&#10;### Sub-heading&#10;> Kutipan&#10;&#10;Pisahkan paragraf dengan baris kosong."></textarea>
+          <p class="form-hint" style="margin-top:4px"><i class="fas fa-info-circle"></i> Gunakan <code>## Judul</code> untuk heading, <code>### Sub</code> untuk sub-heading, <code>&gt; teks</code> untuk kutipan. Pisahkan paragraf dengan baris kosong.</p>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Gambar Banner Berita</label>
+          <div class="upload-area" id="newsUploadArea" style="min-height: 120px; padding: 20px;">
+            <input type="file" id="fNewsFile" accept="image/*" onchange="handleNewsUpload(event)">
+            <div class="upload-placeholder">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Pilih file gambar atau tarik ke sini</p>
+            </div>
+            <div class="upload-preview" style="display:none;">
+              <img id="fNewsPreview" src="" alt="Preview">
+            </div>
+          </div>
+          <p class="form-hint" style="margin-top:4px;"><i class="fas fa-info-circle"></i> Gambar banner landscape (16:9) untuk tampilan terbaik. Max 2MB.</p>
+          <input type="hidden" id="fNewsImageData">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-gray" onclick="closeNewsModal()">Batal</button>
+      <button class="btn btn-gold" onclick="saveNewsEntry()"><i class="fas fa-save"></i> Simpan Berita</button>
     </div>
   </div>
 </div>

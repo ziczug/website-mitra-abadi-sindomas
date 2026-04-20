@@ -17,6 +17,7 @@ let heroBanners = [];
 let topHeroBanners = [];
 let branches = [];
 let partners = [];
+let newsItems = [];
 
 // ==========================================
 // FILE SYNC UTILITIES
@@ -124,7 +125,8 @@ async function syncAllFromFiles() {
       'partners': 'mas_partners',
       'promos': 'mas_promos',
       'katalogs': 'mas_katalogs',
-      'products': 'mas_products'
+      'products': 'mas_products',
+      'news': 'mas_news'
     };
     
     let synced = 0;
@@ -215,7 +217,7 @@ function showPage(page, btn) {
   document.getElementById('page-' + page).classList.add('active');
   document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  const titles = { dashboard:'Dashboard', products:'Manajemen Produk', images:'Gambar & Icon', importexport:'Import / Export', katalog:'Manajemen Katalog', promo: 'Manajemen Popup Promo', hero: 'Manajemen Banner Hero', 'top-slider': 'Manajemen Top Slider', branches: 'Manajemen Cabang Gudang', company:'Profil Perusahaan', contact:'Informasi Kontak', statistics:'Statistik Website', brandpartner:'Brand Partner', partners:'Mitra Distribusi', categories:'Kategori Produk', certifications:'Manajemen Sertifikasi', footermgr:'Manajemen Footer', settings:'Pengaturan' };
+  const titles = { dashboard:'Dashboard', products:'Manajemen Produk', images:'Gambar & Icon', importexport:'Import / Export', katalog:'Manajemen Katalog', promo: 'Manajemen Popup Promo', hero: 'Manajemen Banner Hero', 'top-slider': 'Manajemen Top Slider', news: 'Manajemen Berita', branches: 'Manajemen Cabang Gudang', company:'Profil Perusahaan', contact:'Informasi Kontak', statistics:'Statistik Website', brandpartner:'Brand Partner', partners:'Mitra Distribusi', categories:'Kategori Produk', certifications:'Manajemen Sertifikasi', footermgr:'Manajemen Footer', settings:'Pengaturan' };
   document.getElementById('pageTitle').textContent = titles[page] || page;
   if (page === 'images') renderImageGrid();
   if (page === 'katalog') renderKatalogs();
@@ -223,6 +225,7 @@ function showPage(page, btn) {
   if (page === 'hero') renderHeroes();
   if (page === 'top-slider') renderTopHeroes();
   if (page === 'branches') renderBranches();
+  if (page === 'news') renderNews();
   if (page === 'company') loadCompanyForm();
   if (page === 'contact') loadContactForm();
   if (page === 'statistics') loadStatisticsForm();
@@ -272,6 +275,7 @@ async function loadProducts() {
   loadHeroes();
   loadTopHeroes();
   loadBranches();
+  loadNews();
   await loadBrandPartners();
   await loadPartners(); // Now async
   // saveProducts(); // Removed redundant save on load
@@ -2118,6 +2122,206 @@ function loadFooterForm() {
   document.getElementById('fFooterCompany').value = info.company || '';
 }
 
+// ==========================================
+// NEWS/BERITA MANAGEMENT
+// ==========================================
+function loadNews() {
+  const stored = localStorage.getItem('mas_news');
+  if (stored) {
+    newsItems = JSON.parse(stored);
+  } else {
+    newsItems = [];
+  }
+}
+
+function saveNews() {
+  safeLSSet('mas_news', newsItems);
+  saveToFile('news', newsItems);
+}
+
+function renderNews() {
+  const tbody = document.getElementById('newsTableBody');
+  const empty = document.getElementById('newsEmptyState');
+  if(!tbody) return;
+
+  if (newsItems.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  
+  empty.style.display = 'none';
+  // Sort by date descending
+  const sorted = [...newsItems].sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  tbody.innerHTML = sorted.map(n => {
+    const dateStr = n.date ? new Date(n.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+    return `
+    <tr>
+      <td style="text-align:center;">
+        <input type="checkbox" onchange="toggleNewsActive(${n.id})" ${n.active !== false ? 'checked' : ''} style="cursor:pointer; transform:scale(1.2);">
+      </td>
+      <td>
+        <div style="width:80px; height:50px; background:#f0f0f0; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+          ${n.imageData ? `<img src="${n.imageData}" style="width:100%;height:100%;object-fit:cover;">` : `<span style="font-size:10px;color:#999;text-align:center;">Tanpa<br>Gambar</span>`}
+        </div>
+      </td>
+      <td>
+        <div style="font-weight:600">${n.title}</div>
+        <div style="font-size:11px;color:rgba(0,0,0,0.4);margin-top:2px;">${(n.summary || '').substring(0, 60)}${(n.summary || '').length > 60 ? '...' : ''}</div>
+      </td>
+      <td>${dateStr}</td>
+      <td>
+        <div class="action-btns">
+          <button class="action-btn edit" title="Edit" onclick="editNews(${n.id})"><i class="fas fa-pen"></i></button>
+          <button class="action-btn delete" title="Hapus" onclick="deleteNews(${n.id})"><i class="fas fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>
+  `;
+  }).join('');
+}
+
+function openNewsModal() {
+  document.getElementById('fNewsId').value = '';
+  document.getElementById('newsModalTitle').textContent = 'Tambah Berita';
+  document.getElementById('fNewsTitle').value = '';
+  document.getElementById('fNewsDate').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('fNewsActive').value = 'true';
+  document.getElementById('fNewsSummary').value = '';
+  document.getElementById('fNewsContent').value = '';
+  document.getElementById('fNewsImageData').value = '';
+  document.getElementById('fNewsFile').value = '';
+  
+  const previewCont = document.querySelector('#newsUploadArea .upload-preview');
+  if(previewCont) previewCont.style.display = 'none';
+  const placeholder = document.querySelector('#newsUploadArea .upload-placeholder');
+  if(placeholder) placeholder.style.display = '';
+  const img = document.getElementById('fNewsPreview');
+  if(img) img.src = '';
+  
+  document.getElementById('newsModalManager').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNewsModal() {
+  document.getElementById('newsModalManager').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function editNews(id) {
+  const n = newsItems.find(x => x.id === id || x.id == id);
+  if(!n) return;
+  
+  openNewsModal();
+  document.getElementById('fNewsId').value = n.id;
+  document.getElementById('newsModalTitle').textContent = 'Edit Berita';
+  document.getElementById('fNewsTitle').value = n.title || '';
+  document.getElementById('fNewsDate').value = n.date || '';
+  document.getElementById('fNewsActive').value = n.active !== false ? 'true' : 'false';
+  document.getElementById('fNewsSummary').value = n.summary || '';
+  document.getElementById('fNewsContent').value = n.content || '';
+  document.getElementById('fNewsImageData').value = n.imageData || '';
+  
+  if (n.imageData) {
+    const previewCont = document.querySelector('#newsUploadArea .upload-preview');
+    const placeholder = document.querySelector('#newsUploadArea .upload-placeholder');
+    const img = document.getElementById('fNewsPreview');
+    if(previewCont && img) {
+      img.src = n.imageData;
+      previewCont.style.display = 'block';
+      if(placeholder) placeholder.style.display = 'none';
+    }
+  }
+}
+
+function handleNewsUpload(event) {
+  const file = event.target.files[0];
+  if(file) {
+    if (file.size > 2 * 1024 * 1024) return toast('Ukuran file maksimal 2MB', 'error');
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('fNewsImageData').value = e.target.result;
+      const previewCont = document.querySelector('#newsUploadArea .upload-preview');
+      const placeholder = document.querySelector('#newsUploadArea .upload-placeholder');
+      const img = document.getElementById('fNewsPreview');
+      if(previewCont && img) {
+        img.src = e.target.result;
+        previewCont.style.display = 'block';
+        if(placeholder) placeholder.style.display = 'none';
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function saveNewsEntry() {
+  const title = document.getElementById('fNewsTitle').value.trim();
+  const date = document.getElementById('fNewsDate').value;
+  const summary = document.getElementById('fNewsSummary').value.trim();
+  const content = document.getElementById('fNewsContent').value.trim();
+  const imageData = document.getElementById('fNewsImageData').value;
+  const active = document.getElementById('fNewsActive').value === 'true';
+  const id = document.getElementById('fNewsId').value;
+  
+  if(!title || !date || !summary || !content) return toast('Harap lengkapi judul, tanggal, ringkasan, dan konten!', 'error');
+  
+  if (id) {
+    const idx = newsItems.findIndex(x => x.id == id);
+    if (idx >= 0) {
+      newsItems[idx].title = title;
+      newsItems[idx].date = date;
+      newsItems[idx].summary = summary;
+      newsItems[idx].content = content;
+      newsItems[idx].active = active;
+      if(imageData) newsItems[idx].imageData = imageData;
+    }
+    toast('Berita berhasil diperbarui!', 'success');
+  } else {
+    newsItems.push({
+      id: Date.now(),
+      title: title,
+      date: date,
+      summary: summary,
+      content: content,
+      imageData: imageData,
+      imagePath: '',
+      active: active,
+      createdAt: new Date().toISOString()
+    });
+    toast('Berita berhasil ditambahkan!', 'success');
+  }
+  
+  saveNews();
+  renderNews();
+  closeNewsModal();
+}
+
+function toggleNewsActive(id) {
+  const n = newsItems.find(x => x.id === id || x.id == id);
+  if(n) {
+    n.active = !n.active;
+    saveNews();
+    renderNews();
+    toast('Status berita berhasil diubah.', 'success');
+  }
+}
+
+function deleteNews(id) {
+  const n = newsItems.find(x => x.id === id || x.id == id);
+  document.getElementById('confirmTitle').textContent = 'Hapus Berita?';
+  document.getElementById('confirmMsg').textContent = `"${n ? n.title : ''}" akan dihapus permanen.`;
+  document.getElementById('confirmBtn').textContent = 'Ya, Hapus';
+  document.getElementById('confirmBtn').className = 'btn btn-danger';
+  document.getElementById('confirmBtn').onclick = () => { 
+    newsItems = newsItems.filter(x => x.id !== id && x.id != id);
+    saveNews(); renderNews(); closeConfirm(); toast('Berita berhasil dihapus', 'success');
+  };
+  document.getElementById('confirmModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
 function saveFooterInfo() {
   const info = {
     desc: document.getElementById('fFooterDesc').value.trim(),
@@ -2184,7 +2388,7 @@ document.querySelectorAll('.image-upload-area, .upload-area').forEach(area => {
 });
 
 // Close modals on overlay click
-['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','topHeroModalManager','partnerModal','brandPartnerModal'].forEach(id => {
+['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','topHeroModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('click', function(e) {
     if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; }
@@ -2194,7 +2398,7 @@ document.querySelectorAll('.image-upload-area, .upload-area').forEach(area => {
 // ESC to close modals
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','topHeroModalManager','partnerModal','brandPartnerModal'].forEach(id => {
+    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','topHeroModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('active');
     });

@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita & Informasi | PT Mitra Abadi Sindomas</title>
+  <meta name="description" content="Berita terbaru, informasi produk, dan update dari PT Mitra Abadi Sindomas. Temukan artikel terkini tentang produk makanan impor berkualitas.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="assets/js/i18n-data.js"></script>
+  <script src="assets/js/i18n-engine.js"></script>
+  <script src="assets/js/image-fallback.js"></script>
+  <style>
+    /* ==================== BERITA PAGE STYLES ==================== */
+
+    /* Banner Hero */
+    .berita-hero {
+      position: relative;
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 40%, #111 100%);
+      overflow: hidden;
+      margin-top: 76px;
+    }
+
+    .berita-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .berita-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, var(--primary), transparent);
+      pointer-events: none;
+    }
+
+    .berita-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 80px 24px 60px;
+    }
+
+    .berita-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--accent);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .berita-hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.8s 0.1s ease both;
+    }
+
+    .berita-hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .berita-hero p {
+      font-size: clamp(15px, 2vw, 17px);
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Main Content */
+    .berita-main {
+      background: var(--primary);
+      padding: 60px 0 80px;
+      min-height: 60vh;
+    }
+
+    .berita-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .berita-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Search Bar */
+    .berita-search {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .berita-search-input {
+      flex: 1;
+      position: relative;
+    }
+
+    .berita-search-input i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+
+    .berita-search-input input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      color: var(--white);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition-fast);
+    }
+
+    .berita-search-input input::placeholder {
+      color: var(--gray-400);
+    }
+
+    .berita-search-input input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    }
+
+    .berita-search-btn {
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: var(--primary);
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .berita-search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* Results Info */
+    .berita-results-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .berita-results-count {
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .berita-results-count strong {
+      color: var(--accent);
+    }
+
+    .berita-sort select {
+      padding: 10px 36px 10px 14px;
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C9A84C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    .berita-sort select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* News Grid */
+    .berita-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* News Card */
+    .berita-card {
+      background: var(--dark-card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .berita-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201,168,76,0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(201,168,76,0.1);
+    }
+
+    .berita-card-img {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .berita-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .berita-card:hover .berita-card-img img {
+      transform: scale(1.08);
+    }
+
+    .berita-card-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      pointer-events: none;
+    }
+
+    .berita-card-body {
+      padding: 20px;
+    }
+
+    .berita-card-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .berita-card-date i {
+      font-size: 11px;
+    }
+
+    .berita-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.3s;
+    }
+
+    .berita-card:hover h3 {
+      color: var(--accent);
+    }
+
+    .berita-card-summary {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .berita-card-readmore {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      transition: var(--transition-fast);
+    }
+
+    .berita-card:hover .berita-card-readmore {
+      gap: 10px;
+    }
+
+    /* Sidebar Filter */
+    .berita-sidebar {
+      position: sticky;
+      top: 100px;
+    }
+
+    .berita-filter-panel {
+      background: var(--dark-card);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 24px;
+    }
+
+    .berita-filter-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .berita-filter-title i {
+      color: var(--accent);
+    }
+
+    .berita-filter-group {
+      margin-bottom: 18px;
+    }
+
+    .berita-filter-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .berita-filter-group select {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+    }
+
+    .berita-filter-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .berita-filter-reset {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .berita-filter-reset:hover {
+      background: rgba(201,168,76,0.1);
+    }
+
+    /* Empty State */
+    .berita-empty {
+      display: none;
+      text-align: center;
+      padding: 80px 20px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .berita-empty i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      color: rgba(201,168,76,0.3);
+    }
+
+    .berita-empty h3 {
+      font-size: 20px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .berita-empty p {
+      font-size: 14px;
+    }
+
+    /* ==================== DETAIL VIEW ==================== */
+    .berita-detail-overlay {
+      display: none;
+    }
+
+    .berita-detail-overlay.active {
+      display: block;
+    }
+
+    .berita-detail-banner {
+      position: relative;
+      width: 100%;
+      min-height: 420px;
+      max-height: 520px;
+      overflow: hidden;
+      margin-top: 76px;
+    }
+
+    .berita-detail-banner img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
+
+    .berita-detail-banner-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 60px 0 40px;
+      background: linear-gradient(to top, rgba(10,10,10,0.95), rgba(10,10,10,0.5), transparent);
+    }
+
+    .berita-detail-banner-overlay .container {
+      max-width: 800px;
+    }
+
+    .berita-detail-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .berita-detail-banner h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .berita-detail-excerpt {
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      font-style: italic;
+      max-width: 700px;
+    }
+
+    .berita-detail-body {
+      background: var(--primary);
+      padding: 60px 0 80px;
+    }
+
+    .berita-detail-content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .berita-detail-content p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+
+    .berita-detail-content h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 40px 0 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .berita-detail-content h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      margin: 32px 0 12px;
+    }
+
+    .berita-detail-content ul,
+    .berita-detail-content ol {
+      margin: 16px 0 24px 24px;
+      color: rgba(255,255,255,0.7);
+      line-height: 2;
+    }
+
+    .berita-detail-content li {
+      list-style: disc;
+      margin-bottom: 4px;
+    }
+
+    .berita-detail-content blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 16px 24px;
+      margin: 24px 0;
+      background: rgba(201,168,76,0.05);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .berita-detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-decoration: none;
+      margin-top: 40px;
+    }
+
+    .berita-detail-back:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    /* Related News */
+    .berita-related {
+      background: var(--dark-card);
+      padding: 60px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .berita-related h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .berita-related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Pagination (optional for future) */
+    .berita-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .berita-page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .berita-page-btn:hover,
+    .berita-page-btn.active {
+      background: var(--accent);
+      color: var(--primary);
+      border-color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .berita-hero {
+        min-height: 260px;
+        margin-top: 70px;
+      }
+
+      .berita-hero-content {
+        padding: 60px 20px 40px;
+      }
+
+      .berita-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .berita-detail-banner {
+        min-height: 300px;
+        margin-top: 70px;
+      }
+
+      .berita-detail-banner img {
+        height: 380px;
+      }
+
+      .berita-search {
+        flex-direction: column;
+      }
+
+      .berita-search-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <button class="mobile-close" onclick="toggleNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="nav-indicator" id="navIndicator"></div>
+        <a href="index.html" class="nav-item" data-i18n="nav-home">Beranda</a>
+        <a href="berita.html" class="nav-item active" data-i18n="nav-news">Berita</a>
+        <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
+        <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
+        <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        <div class="nav-social mobile-only" style="margin-top: 20px;">
+          <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
+            <i class="fas fa-phone-alt"></i>
+          </a>
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item"
+            aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text"
+            data-i18n="nav-contact">Kontak</span></a>
+        <div class="lang-dropdown desktop-only" id="langDropdown">
+          <div class="lang-current" onclick="toggleLangDropdown()">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id-short">ID</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span>Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span>English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span>Mandarin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== LISTING VIEW ==================== -->
+  <div id="beritaListing">
+    <!-- Banner Hero -->
+    <section class="berita-hero">
+      <div class="berita-hero-content">
+        <div class="berita-hero-badge"><i class="fas fa-newspaper"></i> BERITA & INFORMASI</div>
+        <h1>Berita <span>Terbaru</span></h1>
+        <p>Temukan informasi terkini, update produk, dan berita seputar PT Mitra Abadi Sindomas.</p>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="berita-main">
+      <div class="container">
+        <div class="berita-layout">
+          <!-- Left: Content -->
+          <div>
+            <!-- Search -->
+            <div class="berita-search">
+              <div class="berita-search-input">
+                <i class="fas fa-search"></i>
+                <input type="text" id="beritaSearch" placeholder="Pencarian kata kunci..." oninput="filterBerita()">
+              </div>
+              <button class="berita-search-btn" onclick="filterBerita()"><i class="fas fa-search"></i> Cari</button>
+            </div>
+
+            <!-- Results Info -->
+            <div class="berita-results-info">
+              <div class="berita-results-count">Menampilkan <strong id="beritaCount">0</strong> Hasil</div>
+              <div class="berita-sort">
+                <select id="beritaSort" onchange="filterBerita()">
+                  <option value="newest">Diterbitkan (terbaru)</option>
+                  <option value="oldest">Diterbitkan (terlama)</option>
+                  <option value="title">Judul (A-Z)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Grid -->
+            <div class="berita-grid" id="beritaGrid"></div>
+
+            <!-- Empty -->
+            <div class="berita-empty" id="beritaEmpty">
+              <i class="fas fa-newspaper"></i>
+              <h3>Belum Ada Berita</h3>
+              <p>Berita akan muncul setelah ditambahkan melalui Admin Dashboard.</p>
+            </div>
+          </div>
+
+          <!-- Right: Sidebar -->
+          <aside class="berita-sidebar">
+            <div class="berita-filter-panel">
+              <div class="berita-filter-title"><i class="fas fa-filter"></i> Hasil pencarian</div>
+              <div class="berita-filter-group">
+                <label>Tanggal kisaran</label>
+              </div>
+              <div class="berita-filter-group">
+                <label>Tanggal sejak / dari</label>
+                <div style="display:flex;gap:8px;margin-bottom:8px">
+                  <select id="filterMonthFrom" onchange="filterBerita()">
+                    <option value="">Bulan</option>
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Maret</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Agustus</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                  </select>
+                  <select id="filterYearFrom" onchange="filterBerita()">
+                    <option value="">Tahun</option>
+                  </select>
+                </div>
+              </div>
+              <div class="berita-filter-group">
+                <label>Tanggal saat ini</label>
+                <div style="display:flex;gap:8px;margin-bottom:8px">
+                  <select id="filterMonthTo" onchange="filterBerita()">
+                    <option value="">Bulan</option>
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Maret</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Agustus</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                  </select>
+                  <select id="filterYearTo" onchange="filterBerita()">
+                    <option value="">Tahun</option>
+                  </select>
+                </div>
+              </div>
+              <button class="berita-filter-reset" onclick="resetFilter()"><i class="fas fa-times"></i> Hapus semua filter</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== DETAIL VIEW ==================== -->
+  <div id="beritaDetail" class="berita-detail-overlay">
+    <div class="berita-detail-banner" id="detailBanner">
+      <img id="detailBannerImg" src="" alt="">
+      <div class="berita-detail-banner-overlay">
+        <div class="container">
+          <div class="berita-detail-date"><i class="fas fa-calendar-alt"></i> <span id="detailDate"></span></div>
+          <h1 id="detailTitle"></h1>
+          <p class="berita-detail-excerpt" id="detailExcerpt"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="berita-detail-body">
+      <div class="berita-detail-content" id="detailContent"></div>
+      <div style="max-width:760px;margin:0 auto;padding:0 24px;">
+        <a href="javascript:void(0)" class="berita-detail-back" onclick="closeDetail()">
+          <i class="fas fa-arrow-left"></i> Kembali ke Berita
+        </a>
+      </div>
+    </div>
+
+    <div class="berita-related" id="relatedSection" style="display:none">
+      <h2>Berita Lainnya</h2>
+      <div class="berita-related-grid" id="relatedGrid"></div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-logo-img">
+          <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan & minuman berkualitas tinggi
+            dari brand internasional
+            terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
+        </div>
+        <div>
+          <h4 data-i18n="footer-nav-title">Navigasi</h4>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="berita.html">Berita</a></li>
+            <li><a href="index.html#tentang">Tentang Kami</a></li>
+            <li><a href="produk.html">Produk</a></li>
+            <li><a href="javascript:void(0)" onclick="openKatalog()">Katalog</a></li>
+            <li><a href="index.html#sertifikasi">Sertifikasi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Produk</h4>
+          <ul>
+            <li><a href="produk.html">Snack</a></li>
+            <li><a href="produk.html">Biskuit & Cookies</a></li>
+            <li><a href="produk.html">Wafer</a></li>
+            <li><a href="produk.html">Kue & Pastry</a></li>
+            <li><a href="produk.html">Minuman</a></li>
+            <li><a href="produk.html">Permen</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontak</h4>
+          <ul>
+            <li><a href="tel:+6281295001778"><i class="fas fa-phone"
+                  style="margin-right:8px;color:var(--accent)"></i>+62 812-9500-1778</a></li>
+            <li><a href="https://wa.me/6281295001778" target="_blank"><i class="fab fa-whatsapp"
+                  style="margin-right:8px;color:var(--accent)"></i>WhatsApp</a></li>
+            <li><a href="index.html#kontak"><i class="fas fa-map-marker-alt"
+                  style="margin-right:8px;color:var(--accent)"></i>Jakarta Barat</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i
+              class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i
+              class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <script>
+    // ==========================================
+    // DATA
+    // ==========================================
+    let newsItems = [];
+    const MONTHS_ID = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+    function formatDateID(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return `${d.getDate()} ${MONTHS_ID[d.getMonth() + 1]} ${d.getFullYear()}`;
+    }
+
+    // Load news data
+    async function loadNewsData() {
+      try {
+        const resp = await fetch(`database/cms/news.json?t=${Date.now()}`);
+        if (resp.ok) {
+          newsItems = await resp.json();
+          if (!Array.isArray(newsItems)) newsItems = [];
+        }
+      } catch (e) {
+        console.warn('Failed to load news from file:', e);
+      }
+
+      // Fallback to localStorage
+      if (!newsItems || newsItems.length === 0) {
+        try {
+          const stored = localStorage.getItem('mas_news');
+          if (stored) newsItems = JSON.parse(stored);
+        } catch (e) { }
+      }
+
+      // Filter only active
+      newsItems = (newsItems || []).filter(n => n.active !== false);
+
+      populateYearFilters();
+      filterBerita();
+      checkUrlForDetail();
+    }
+
+    function populateYearFilters() {
+      const years = [...new Set(newsItems.map(n => new Date(n.date).getFullYear()))].sort((a, b) => b - a);
+      const currentYear = new Date().getFullYear();
+      const allYears = [...new Set([...years, currentYear, currentYear - 1, currentYear - 2])].sort((a, b) => b - a);
+
+      ['filterYearFrom', 'filterYearTo'].forEach(id => {
+        const sel = document.getElementById(id);
+        const cur = sel.value;
+        sel.innerHTML = '<option value="">Tahun</option>' + allYears.map(y => `<option value="${y}">${y}</option>`).join('');
+        sel.value = cur;
+      });
+    }
+
+    // ==========================================
+    // FILTER & RENDER
+    // ==========================================
+    function filterBerita() {
+      const query = (document.getElementById('beritaSearch')?.value || '').toLowerCase().trim();
+      const sort = document.getElementById('beritaSort')?.value || 'newest';
+      const monthFrom = parseInt(document.getElementById('filterMonthFrom')?.value) || 0;
+      const yearFrom = parseInt(document.getElementById('filterYearFrom')?.value) || 0;
+      const monthTo = parseInt(document.getElementById('filterMonthTo')?.value) || 0;
+      const yearTo = parseInt(document.getElementById('filterYearTo')?.value) || 0;
+
+      let filtered = newsItems.filter(n => {
+        // Search
+        if (query) {
+          const searchText = [n.title, n.summary, n.content].filter(Boolean).join(' ').toLowerCase();
+          const keywords = query.split(' ').filter(k => k);
+          if (!keywords.every(kw => searchText.includes(kw))) return false;
+        }
+
+        // Date from
+        if (yearFrom) {
+          const d = new Date(n.date);
+          const fromDate = new Date(yearFrom, monthFrom ? monthFrom - 1 : 0, 1);
+          if (d < fromDate) return false;
+        }
+
+        // Date to
+        if (yearTo) {
+          const d = new Date(n.date);
+          const toDate = new Date(yearTo, monthTo ? monthTo : 12, 0);
+          if (d > toDate) return false;
+        }
+
+        return true;
+      });
+
+      // Sort
+      if (sort === 'newest') {
+        filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else if (sort === 'oldest') {
+        filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+      } else if (sort === 'title') {
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+      }
+
+      renderBeritaGrid(filtered);
+    }
+
+    function renderBeritaGrid(items) {
+      const grid = document.getElementById('beritaGrid');
+      const empty = document.getElementById('beritaEmpty');
+      document.getElementById('beritaCount').textContent = items.length;
+
+      if (items.length === 0) {
+        grid.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      grid.innerHTML = items.map(n => {
+        const imgSrc = n.imageData || n.imagePath || 'assets/images/mas-bangunan.jpg';
+        return `
+          <div class="berita-card" onclick="showDetail(${n.id})">
+            <div class="berita-card-img">
+              <img src="${imgSrc}" alt="${n.title}" loading="lazy">
+            </div>
+            <div class="berita-card-body">
+              <div class="berita-card-date"><i class="fas fa-calendar-alt"></i> ${formatDateID(n.date)}</div>
+              <h3>${n.title}</h3>
+              <p class="berita-card-summary">${n.summary || ''}</p>
+              <span class="berita-card-readmore">Baca selengkapnya <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function resetFilter() {
+      document.getElementById('beritaSearch').value = '';
+      document.getElementById('filterMonthFrom').value = '';
+      document.getElementById('filterYearFrom').value = '';
+      document.getElementById('filterMonthTo').value = '';
+      document.getElementById('filterYearTo').value = '';
+      document.getElementById('beritaSort').value = 'newest';
+      filterBerita();
+    }
+
+    // ==========================================
+    // DETAIL VIEW
+    // ==========================================
+    function showDetail(id) {
+      const article = newsItems.find(n => n.id === id || n.id == id);
+      if (!article) return;
+
+      // Update URL
+      history.pushState({ newsId: id }, '', `berita.html?id=${id}`);
+
+      const imgSrc = article.imageData || article.imagePath || 'assets/images/mas-bangunan.jpg';
+
+      document.getElementById('detailBannerImg').src = imgSrc;
+      document.getElementById('detailDate').textContent = 'Diterbitkan: ' + formatDateID(article.date);
+      document.getElementById('detailTitle').textContent = article.title;
+      document.getElementById('detailExcerpt').textContent = article.summary || '';
+
+      // Render content
+      const contentEl = document.getElementById('detailContent');
+      if (article.content) {
+        // Convert content: support markdown-like paragraphs and headings
+        const html = article.content
+          .split('\n\n')
+          .map(para => {
+            para = para.trim();
+            if (!para) return '';
+            if (para.startsWith('## ')) return `<h2>${para.slice(3)}</h2>`;
+            if (para.startsWith('### ')) return `<h3>${para.slice(4)}</h3>`;
+            if (para.startsWith('> ')) return `<blockquote>${para.slice(2)}</blockquote>`;
+            return `<p>${para.replace(/\n/g, '<br>')}</p>`;
+          })
+          .join('');
+        contentEl.innerHTML = html;
+      } else {
+        contentEl.innerHTML = '<p>Konten belum tersedia.</p>';
+      }
+
+      // Related news
+      const related = newsItems.filter(n => n.id !== id).slice(0, 3);
+      const relatedSection = document.getElementById('relatedSection');
+      if (related.length > 0) {
+        relatedSection.style.display = '';
+        document.getElementById('relatedGrid').innerHTML = related.map(n => {
+          const rImg = n.imageData || n.imagePath || 'assets/images/mas-bangunan.jpg';
+          return `
+            <div class="berita-card" onclick="showDetail(${n.id})">
+              <div class="berita-card-img">
+                <img src="${rImg}" alt="${n.title}" loading="lazy">
+              </div>
+              <div class="berita-card-body">
+                <div class="berita-card-date"><i class="fas fa-calendar-alt"></i> ${formatDateID(n.date)}</div>
+                <h3>${n.title}</h3>
+                <span class="berita-card-readmore">Baca selengkapnya <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        relatedSection.style.display = 'none';
+      }
+
+      // Show detail, hide listing
+      document.getElementById('beritaListing').style.display = 'none';
+      document.getElementById('beritaDetail').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeDetail() {
+      document.getElementById('beritaDetail').classList.remove('active');
+      document.getElementById('beritaListing').style.display = '';
+      history.pushState(null, '', 'berita.html');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function checkUrlForDetail() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      if (id) {
+        showDetail(parseInt(id) || id);
+      }
+    }
+
+    window.addEventListener('popstate', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      if (id) {
+        showDetail(parseInt(id) || id);
+      } else {
+        closeDetail();
+      }
+    });
+
+    // ==========================================
+    // NAVBAR LOGIC (replicated from index.html)
+    // ==========================================
+    const navbar = document.getElementById('navbar');
+    const scrollTopBtn = document.getElementById('scrollTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+        scrollTopBtn.classList.add('visible');
+      } else {
+        navbar.classList.remove('scrolled');
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    function toggleNav() {
+      const navLinks = document.getElementById('navLinks');
+      const overlay = document.getElementById('navOverlay');
+      navLinks.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    }
+
+    function toggleLangDropdown(isMobile) {
+      const dd = isMobile ? document.getElementById('langDropdownMobile') : document.getElementById('langDropdown');
+      if (dd) dd.classList.toggle('active');
+    }
+
+    function setLanguage(lang) {
+      localStorage.setItem('mas_lang', lang);
+      document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
+    }
+
+    function openKatalog() {
+      window.location.href = 'index.html#katalog';
+    }
+
+    // ==========================================
+    // INIT
+    // ==========================================
+    loadNewsData();
+  </script>
+</body>
+</html>
