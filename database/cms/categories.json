@@ -4,7 +4,7 @@
     "title": "Makanan Ringan",
     "icon": "fas fa-cookie-bite",
     "desc": "Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring,",
-    "image": "assets/images/snacks.png",
+    "image": "assets/images/snack.png",
     "imageData": ""
   },
   {
@@ -12,7 +12,7 @@
     "title": "Biskuit & Cookies",
     "icon": "fas fa-cookie",
     "desc": "Beragam biskuit, cream crackers, dan cookies premium dari brand internasional.",
-    "image": "assets/images/biscuits.png",
+    "image": "assets/images/biskuit.png",
     "imageData": ""
   },
   {
@@ -20,7 +20,7 @@
     "title": "Wafer",
     "icon": "fas fa-bread-slice",
     "desc": "Wafer coklat, vanilla, dan berbagai varian rasa dari produsen berkualitas.",
-    "image": "assets/images/wafers.png",
+    "image": "assets/images/wafer.png",
     "imageData": ""
   },
   {
@@ -28,7 +28,7 @@
     "title": "Kue & Pastry",
     "icon": "fas fa-cake-candles",
     "desc": "Swiss roll, layer cake, muffin dan berbagai kue kemasan premium.",
-    "image": "assets/images/cakes.png",
+    "image": "assets/images/kue.png",
     "imageData": ""
   },
   {
@@ -36,7 +36,7 @@
     "title": "Minuman",
     "icon": "fas fa-glass-water",
     "desc": "Berbagai minuman berkualitas termasuk yogurt, dan minuman rasa buah.",
-    "image": "assets/images/beverages.png",
+    "image": "assets/images/minuman.png",
     "imageData": ""
   },
   {
