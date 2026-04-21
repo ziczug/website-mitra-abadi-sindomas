@@ -97,6 +97,10 @@ const products = rawData.map((r, i) => {
     .replace(/Sasame/gi, 'Sesame')
     .replace(/Craker/gi, 'Cracker')
     .replace(/Gingseng/gi, 'Ginseng')
+    .replace(/Natural Flavor Potato Crisps/gi, 'Natural Flavor Potato Chips')
+    .replace(/Hot & Spicy Flavor Potato Crisps/gi, 'Hot & Spicy Flavor Potato Chips')
+    .replace(/Barbecue Flavor Potato Crisps/gi, 'Barbecue Flavor Potato Chips')
+    .replace(/Spicy Mala Hot Pot Flavor Potato Crisps/gi, 'Spicy Mala Hot Pot Flavor Potato Chips')
     .replace(/(\d+)\s*gr\b/gi, '$1g');
 
   // New naming standard: Brand - Product Name Weight

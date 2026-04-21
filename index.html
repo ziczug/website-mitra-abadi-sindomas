@@ -1408,7 +1408,7 @@
              </div>`;
 
         return `
-          <div class="brand-card reveal zoom-in visible">
+          <div class="brand-card reveal zoom-in visible" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=${encodeURIComponent(brand.name)}'">
             <div class="brand-img-container">
               ${logoHtml}
             </div>

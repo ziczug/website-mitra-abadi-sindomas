@@ -25,7 +25,7 @@ Folder ini berisi gambar produk untuk brand **Jacker**.
 | 30 | Potato Crisps Wavy Mexican Hot Sauce | `wavy-mexican-crips-hot-sauce-potato-crisps110gr.png` |
 | 31 | Hot & Spicy Flavor Potato Chips | `hot-spicy-flavor-potato-chips60gr.png` |
 | 32 | Barbecue Flavor Potato Chips | `barbecue-flavor-potato-chips60gr.png` |
-| 33 | Natural Flavor Potato Crisps | `natural-flavor-potato-chips60gr.png` |
+| 33 | Natural Flavor Potato Chips | `natural-flavor-potato-chips60gr.png` |
 | 34 | Spicy Mala Hot Pot Flavor Potato Chips | `spicy-mala-hot-pot-flavor-potato-chips60gr.png` |
 
 ## 📌 Panduan Upload

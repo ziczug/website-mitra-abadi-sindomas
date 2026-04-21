@@ -102,21 +102,19 @@
 
     /* Main Content */
     .berita-main {
-      background: var(--primary);
+      background: #ffffff;
       padding: 60px 0 80px;
       min-height: 60vh;
     }
 
     .berita-layout {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 40px;
-      align-items: start;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     @media (max-width: 900px) {
       .berita-layout {
-        grid-template-columns: 1fr;
+        /* Mobile adjustments if needed */
       }
     }
 
@@ -125,7 +123,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .berita-search-input {
@@ -135,52 +133,56 @@
 
     .berita-search-input i {
       position: absolute;
-      left: 16px;
+      left: 18px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--gray-400);
-      font-size: 14px;
+      color: #999;
+      font-size: 15px;
     }
 
     .berita-search-input input {
       width: 100%;
-      padding: 14px 16px 14px 44px;
-      background: var(--dark-card);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      color: var(--white);
+      padding: 16px 20px 16px 50px;
+      background: #f8f8f8;
+      border: 1.5px solid #eee;
+      border-radius: 50px;
+      color: #111;
       font-size: 14px;
       font-family: 'Inter', sans-serif;
       transition: var(--transition-fast);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
     }
 
     .berita-search-input input::placeholder {
-      color: var(--gray-400);
+      color: #aaa;
     }
 
     .berita-search-input input:focus {
       outline: none;
+      background: #fff;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+      box-shadow: 0 10px 30px rgba(201,168,76,0.1);
     }
 
     .berita-search-btn {
-      padding: 14px 24px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: var(--primary);
+      padding: 16px 30px;
+      background: #111;
+      color: var(--white);
       border: none;
-      border-radius: 12px;
+      border-radius: 50px;
       font-weight: 700;
       font-size: 14px;
       cursor: pointer;
       transition: var(--transition-fast);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .berita-search-btn:hover {
       transform: translateY(-2px);
+      background: var(--accent);
+      color: #000;
       box-shadow: var(--shadow-gold);
     }
 
@@ -195,62 +197,85 @@
     }
 
     .berita-results-count {
-      color: rgba(255,255,255,0.6);
+      color: #666;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .berita-results-count strong {
+      color: var(--accent-dark);
+      font-size: 16px;
+    }
+
+    .berita-sort {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .berita-sort i {
+      position: absolute;
+      left: 14px;
       color: var(--accent);
+      font-size: 14px;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 2;
     }
 
     .berita-sort select {
-      padding: 10px 36px 10px 14px;
-      background: var(--dark-card);
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 36px 10px 42px; /* Increased left padding for icon */
+      background: #f8f8f8;
+      border: 1.5px solid #eee;
       border-radius: 10px;
-      color: var(--white);
+      color: #111;
       font-size: 13px;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C9A84C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 12px center;
+      background-position: right 14px center;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
     }
 
     .berita-sort select:focus {
       outline: none;
       border-color: var(--accent);
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(201, 168, 76, 0.1);
     }
 
     /* News Grid */
     .berita-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
     }
 
     /* News Card */
     .berita-card {
-      background: var(--dark-card);
-      border-radius: 16px;
+      background: #ffffff;
+      border-radius: 20px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid #f0f0f0;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
       cursor: pointer;
       position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
 
     .berita-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(201,168,76,0.3);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(201,168,76,0.1);
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08), 0 0 20px rgba(201,168,76,0.1);
     }
 
     .berita-card-img {
       position: relative;
-      height: 200px;
+      height: 220px;
       overflow: hidden;
     }
 
@@ -258,49 +283,45 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .berita-card:hover .berita-card-img img {
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
     .berita-card-img::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 60%;
-      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
       pointer-events: none;
     }
 
     .berita-card-body {
-      padding: 20px;
+      padding: 24px;
     }
 
     .berita-card-date {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .berita-card-date i {
+      gap: 8px;
       font-size: 11px;
+      color: var(--accent-dark);
+      font-weight: 800;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     .berita-card h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.35;
-      margin-bottom: 10px;
+      font-size: 19px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.3;
+      margin-bottom: 12px;
       letter-spacing: -0.02em;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -310,15 +331,16 @@
     }
 
     .berita-card:hover h3 {
-      color: var(--accent);
+      color: var(--accent-dark);
     }
 
     .berita-card-summary {
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      color: #666;
       line-height: 1.6;
+      margin-bottom: 20px;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -326,16 +348,18 @@
     .berita-card-readmore {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 16px;
+      gap: 8px;
       font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
+      font-weight: 800;
+      color: var(--accent-dark);
       transition: var(--transition-fast);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .berita-card:hover .berita-card-readmore {
-      gap: 10px;
+      gap: 12px;
+      color: #000;
     }
 
     /* Sidebar Filter */
@@ -345,21 +369,35 @@
     }
 
     .berita-filter-panel {
-      background: var(--dark-card);
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 24px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      border-radius: 24px;
+      border: 1px solid var(--accent);
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .berita-filter-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 100px; height: 100px;
+      background: radial-gradient(circle at top right, rgba(201,168,76,0.1), transparent);
+      pointer-events: none;
     }
 
     .berita-filter-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 800;
       color: var(--white);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 16px;
     }
 
     .berita-filter-title i {
@@ -367,54 +405,60 @@
     }
 
     .berita-filter-group {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .berita-filter-group label {
       display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.4);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
     }
 
     .berita-filter-group select {
       width: 100%;
-      padding: 10px 14px;
+      padding: 12px 16px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
+      border-radius: 12px;
       color: var(--white);
       font-size: 13px;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
+      transition: all 0.3s;
     }
 
     .berita-filter-group select:focus {
       outline: none;
       border-color: var(--accent);
+      background: rgba(255,255,255,0.1);
     }
 
     .berita-filter-reset {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
-      padding: 10px;
+      padding: 14px;
       background: transparent;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 10px;
+      border: 1.5px dashed rgba(201,168,76,0.3);
+      border-radius: 12px;
       color: var(--accent);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: var(--transition-fast);
-      text-align: center;
-      margin-top: 8px;
+      margin-top: 12px;
     }
 
     .berita-filter-reset:hover {
       background: rgba(201,168,76,0.1);
+      border-style: solid;
+      border-color: var(--accent);
     }
 
     /* Empty State */
@@ -422,23 +466,600 @@
       display: none;
       text-align: center;
       padding: 80px 20px;
-      color: rgba(255,255,255,0.3);
+      color: #999;
     }
 
     .berita-empty i {
-      font-size: 48px;
-      margin-bottom: 16px;
-      color: rgba(201,168,76,0.3);
+      font-size: 64px;
+      margin-bottom: 24px;
+      color: #eee;
     }
 
     .berita-empty h3 {
-      font-size: 20px;
-      color: rgba(255,255,255,0.5);
+      font-size: 22px;
+      color: #333;
       margin-bottom: 8px;
     }
 
     .berita-empty p {
+      font-size: 15px;
+    }
+
+    /* ==================== PREMIUM FOOTER ==================== */
+    .produk-footer {
+      position: relative;
+      background: #080808;
+      overflow: hidden;
+    }
+
+    /* Wave decoration at top */
+    .produk-footer__wave {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      margin-top: -1px;
+      background: var(--dark);
+    }
+    .produk-footer__wave svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Main split layout */
+    .produk-footer__main {
+      display: grid;
+      grid-template-columns: 1.6fr auto 1fr;
+      min-height: 420px;
+      position: relative;
+    }
+
+    /* Map side */
+    .produk-footer__map-side {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    .produk-footer__map-side iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: none;
+      transform: scale(1);
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .produk-footer__map-side:hover iframe {
+      transform: scale(1.05);
+    }
+    /* Map overlay for seamless blend */
+    .produk-footer__map-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(8,8,8,0.1) 0%, transparent 40%, transparent 60%, rgba(8,8,8,0.2) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Diagonal Gold Divider */
+    .produk-footer__divider {
+      position: relative;
+      width: 3px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .produk-footer__divider-line {
+      position: absolute;
+      top: -20px;
+      bottom: -20px;
+      width: 2px;
+      background: linear-gradient(180deg, 
+        transparent 0%, 
+        rgba(201, 168, 76, 0.1) 10%,
+        var(--accent) 30%, 
+        var(--accent-light) 50%, 
+        var(--accent) 70%,
+        rgba(201, 168, 76, 0.1) 90%,
+        transparent 100%
+      );
+      transform: skewX(-3deg);
+    }
+    .produk-footer__divider-glow {
+      position: absolute;
+      top: 20%;
+      bottom: 20%;
+      width: 20px;
+      left: -9px;
+      background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+      filter: blur(4px);
+      animation: dividerPulse 3s ease-in-out infinite;
+    }
+    @keyframes dividerPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Info side */
+    .produk-footer__info-side {
+      background: linear-gradient(135deg, #0c0c0c 0%, #080808 50%, #0a0a0a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      position: relative;
+    }
+    /* Subtle radial glow on info side */
+    .produk-footer__info-side::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 30%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.04) 0%, transparent 70%);
+      transform: translate(50%, -50%);
+      pointer-events: none;
+    }
+
+    .produk-footer__info-content {
+      position: relative;
+      z-index: 1;
+      max-width: 440px;
+    }
+
+    .produk-footer__brand {
+      margin-bottom: 20px;
+    }
+    .produk-footer__logo {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(1.1);
+    }
+
+    .produk-footer__tagline {
       font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .produk-footer__office {
+      margin-bottom: 32px;
+    }
+    .produk-footer__office-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .produk-footer__office-label i {
+      font-size: 13px;
+    }
+    .produk-footer__city {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .produk-footer__address {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .produk-footer__branch-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-bottom: 1.5px solid transparent;
+      padding-bottom: 2px;
+      margin-top: 5px;
+    }
+    .produk-footer__branch-link:hover {
+      color: var(--white);
+      border-color: var(--accent);
+      padding-left: 5px;
+      text-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+    }
+    .produk-footer__branch-link i { font-size: 12px; transition: transform 0.3s; }
+    .produk-footer__branch-link:hover i { transform: translateX(5px); }
+
+    /* Action buttons */
+    .produk-footer__actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .produk-footer__wa-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border: 1.5px solid var(--accent);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(201, 168, 76, 0.05);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      width: 100%;
+    }
+    .produk-footer__wa-btn:hover {
+      background: var(--accent);
+      color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(201, 168, 76, 0.3);
+    }
+
+    /* Luxury Compact Place Card */
+    .luxury-place-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .luxury-place-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .luxury-place-card:hover {
+      border-color: rgba(201, 168, 76, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    }
+    
+    .luxury-place-info {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .luxury-place-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+    .luxury-place-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .luxury-place-address {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      max-width: 320px;
+    }
+    .luxury-place-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .luxury-place-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 5px 12px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+    .luxury-place-rating .num {
+      font-weight: 800;
+      color: var(--white);
+      font-size: 13px;
+    }
+    .luxury-place-rating .stars {
+      color: #FFD700;
+      display: flex;
+      gap: 2px;
+      font-size: 10px;
+    }
+    .luxury-place-rating .count {
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 12px;
+    }
+    
+    .luxury-directions-btn {
+      width: 60px;
+      height: 60px;
+      background: var(--accent);
+      color: #000000; /* Hitam */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 30px rgba(212, 168, 67, 0.4);
+      flex-shrink: 0;
+      text-decoration: none;
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+    .luxury-directions-btn:hover {
+      background: var(--accent);
+      transform: scale(1.1); /* Membesar tanpa miring */
+      color: #000000;
+      box-shadow: 0 15px 45px rgba(212, 168, 67, 0.5);
+    }
+    .luxury-directions-btn i {
+      transition: transform 0.4s;
+    }
+    .luxury-directions-btn:hover i {
+      transform: scale(1.1);
+    }
+
+    /* Bottom bar */
+    .produk-footer__bottom {
+      background: #ffffff;
+      border-top: 1px solid #eaeaea;
+    }
+    .produk-footer__bottom-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px; /* Compact padding */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .produk-footer__bottom p {
+      color: #777777;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+    .produk-footer__socials {
+      display: flex;
+      gap: 8px;
+    }
+    .produk-footer__socials a {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 10px;
+      color: rgba(255,255,255,0.45);
+      font-size: 15px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .produk-footer__socials a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+    }
+
+    /* ====== PRODUCT FOOTER RESPONSIVE ====== */
+    @media (max-width: 968px) {
+      .produk-footer__main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .produk-footer__map-side {
+        min-height: 280px;
+      }
+      .produk-footer__divider {
+        width: 100%;
+        height: 3px;
+      }
+      .produk-footer__divider-line {
+        top: 0;
+        bottom: auto;
+        left: -20px;
+        right: -20px;
+        width: auto;
+        height: 2px;
+        transform: skewY(-1deg);
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          rgba(201, 168, 76, 0.1) 10%,
+          var(--accent) 30%, 
+          var(--accent-light) 50%, 
+          var(--accent) 70%,
+          rgba(201, 168, 76, 0.1) 90%,
+          transparent 100%
+        );
+      }
+      .produk-footer__divider-glow {
+        top: -9px;
+        bottom: auto;
+        left: 20%;
+        right: 20%;
+        width: auto;
+        height: 20px;
+        background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+        filter: blur(4px);
+      }
+      .produk-footer__info-side {
+        padding: 48px 24px;
+      }
+      .produk-footer__info-content {
+        max-width: 100%;
+        text-align: center;
+      }
+      .produk-footer__brand {
+        display: flex;
+        justify-content: center;
+      }
+      .produk-footer__tagline {
+        font-size: 13px;
+        line-height: 1.6;
+        text-align: center;
+        margin: 0 auto 24px;
+        color: rgba(255,255,255,0.5);
+      }
+      .produk-footer__office-label {
+        justify-content: center;
+        width: 100%;
+      }
+      .produk-footer__city {
+        text-align: center;
+      }
+      .produk-footer__actions {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .produk-footer__map-side {
+        min-height: 220px;
+      }
+      .produk-footer__info-side {
+        padding: 36px 20px;
+      }
+      .produk-footer__city {
+        font-size: 26px;
+      }
+      .produk-footer__actions {
+        flex-direction: column;
+      }
+      .luxury-place-card {
+        padding: 32px 24px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .luxury-place-label {
+        justify-content: center;
+      }
+      .luxury-place-title {
+        font-size: 19px;
+      }
+      .luxury-place-address {
+        padding-right: 0;
+        margin: 0 auto 16px;
+      }
+      .luxury-place-meta {
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .luxury-directions-btn {
+        position: static;
+        width: 100% !important;
+        height: 54px;
+        background: var(--accent); /* Gold */
+        color: #000000; /* Hitam */
+        border-radius: 14px;
+        font-size: 20px;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: 700;
+        overflow: hidden;
+        position: relative;
+        border: 1.5px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 12px 35px rgba(212, 168, 67, 0.3);
+        transform: rotate(0deg) !important; /* Menghilangkan miring */
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        animation: growElegant 3s infinite ease-in-out;
+        z-index: 1;
+      }
+      .luxury-directions-btn:active {
+        transform: scale(1.08) rotate(0deg) !important;
+      }
+      .luxury-directions-btn i {
+        position: relative;
+        z-index: 2;
+      }
+      .luxury-directions-btn::after {
+        content: 'PETUNJUK ARAH';
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-left: 12px;
+        color: #000000; /* Hitam */
+        position: relative;
+        z-index: 2;
+      }
+      /* Shine Effect within shape */
+      .luxury-directions-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          120deg, 
+          transparent, 
+          rgba(255, 255, 255, 0.8), 
+          transparent
+        );
+        animation: shineSweep 4s infinite ease-in-out;
+        z-index: 1;
+      }
+      @keyframes growElegant {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      @keyframes shineSweep {
+        0% { left: -150%; }
+        25%, 100% { left: 150%; }
+      }
+      .produk-footer__bottom-inner {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
     }
 
     /* ==================== DETAIL VIEW ==================== */
@@ -748,8 +1369,7 @@
     <section class="berita-main">
       <div class="container">
         <div class="berita-layout">
-          <!-- Left: Content -->
-          <div>
+          <!-- Main Content -->
             <!-- Search -->
             <div class="berita-search">
               <div class="berita-search-input">
@@ -763,8 +1383,9 @@
             <div class="berita-results-info">
               <div class="berita-results-count">Menampilkan <strong id="beritaCount">0</strong> Hasil</div>
               <div class="berita-sort">
+                <i class="fas fa-sliders-h"></i>
                 <select id="beritaSort" onchange="filterBerita()">
-                  <option value="newest">Diterbitkan (terbaru)</option>
+                  <option value="newest" selected>Diterbitkan (terbaru)</option>
                   <option value="oldest">Diterbitkan (terlama)</option>
                   <option value="title">Judul (A-Z)</option>
                 </select>
@@ -780,64 +1401,9 @@
               <h3>Belum Ada Berita</h3>
               <p>Berita akan muncul setelah ditambahkan melalui Admin Dashboard.</p>
             </div>
-          </div>
 
-          <!-- Right: Sidebar -->
-          <aside class="berita-sidebar">
-            <div class="berita-filter-panel">
-              <div class="berita-filter-title"><i class="fas fa-filter"></i> Hasil pencarian</div>
-              <div class="berita-filter-group">
-                <label>Tanggal kisaran</label>
-              </div>
-              <div class="berita-filter-group">
-                <label>Tanggal sejak / dari</label>
-                <div style="display:flex;gap:8px;margin-bottom:8px">
-                  <select id="filterMonthFrom" onchange="filterBerita()">
-                    <option value="">Bulan</option>
-                    <option value="1">Januari</option>
-                    <option value="2">Februari</option>
-                    <option value="3">Maret</option>
-                    <option value="4">April</option>
-                    <option value="5">Mei</option>
-                    <option value="6">Juni</option>
-                    <option value="7">Juli</option>
-                    <option value="8">Agustus</option>
-                    <option value="9">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                  </select>
-                  <select id="filterYearFrom" onchange="filterBerita()">
-                    <option value="">Tahun</option>
-                  </select>
-                </div>
-              </div>
-              <div class="berita-filter-group">
-                <label>Tanggal saat ini</label>
-                <div style="display:flex;gap:8px;margin-bottom:8px">
-                  <select id="filterMonthTo" onchange="filterBerita()">
-                    <option value="">Bulan</option>
-                    <option value="1">Januari</option>
-                    <option value="2">Februari</option>
-                    <option value="3">Maret</option>
-                    <option value="4">April</option>
-                    <option value="5">Mei</option>
-                    <option value="6">Juni</option>
-                    <option value="7">Juli</option>
-                    <option value="8">Agustus</option>
-                    <option value="9">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                  </select>
-                  <select id="filterYearTo" onchange="filterBerita()">
-                    <option value="">Tahun</option>
-                  </select>
-                </div>
-              </div>
-              <button class="berita-filter-reset" onclick="resetFilter()"><i class="fas fa-times"></i> Hapus semua filter</button>
-            </div>
-          </aside>
+
+
         </div>
       </div>
     </section>
@@ -871,58 +1437,74 @@
     </div>
   </div>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-logo-img">
-          <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan & minuman berkualitas tinggi
-            dari brand internasional
-            terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
-        </div>
-        <div>
-          <h4 data-i18n="footer-nav-title">Navigasi</h4>
-          <ul>
-            <li><a href="index.html">Beranda</a></li>
-            <li><a href="berita.html">Berita</a></li>
-            <li><a href="index.html#tentang">Tentang Kami</a></li>
-            <li><a href="produk.html">Produk</a></li>
-            <li><a href="javascript:void(0)" onclick="openKatalog()">Katalog</a></li>
-            <li><a href="index.html#sertifikasi">Sertifikasi</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Produk</h4>
-          <ul>
-            <li><a href="produk.html">Snack</a></li>
-            <li><a href="produk.html">Biskuit & Cookies</a></li>
-            <li><a href="produk.html">Wafer</a></li>
-            <li><a href="produk.html">Kue & Pastry</a></li>
-            <li><a href="produk.html">Minuman</a></li>
-            <li><a href="produk.html">Permen</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Kontak</h4>
-          <ul>
-            <li><a href="tel:+6281295001778"><i class="fas fa-phone"
-                  style="margin-right:8px;color:var(--accent)"></i>+62 812-9500-1778</a></li>
-            <li><a href="https://wa.me/6281295001778" target="_blank"><i class="fab fa-whatsapp"
-                  style="margin-right:8px;color:var(--accent)"></i>WhatsApp</a></li>
-            <li><a href="index.html#kontak"><i class="fas fa-map-marker-alt"
-                  style="margin-right:8px;color:var(--accent)"></i>Jakarta Barat</a></li>
-          </ul>
+  <!-- PRODUCT PAGE CUSTOM FOOTER -->
+  <footer class="produk-footer" id="produkFooter">
+    <!-- Main Footer Content -->
+    <div class="produk-footer__main">
+      <div class="produk-footer__map-side">
+        <iframe 
+          src="https://maps.google.com/maps?q=-6.152833431830808,106.69462406229&hl=id&z=16&output=embed&maptype=roadmap" 
+          allowfullscreen 
+          loading="lazy"
+          title="Lokasi PT Mitra Abadi Sindomas"
+        ></iframe>
+        <!-- Map overlay gradient -->
+        <div class="produk-footer__map-overlay"></div>
+      </div>
+
+      <!-- Diagonal Gold Divider -->
+      <div class="produk-footer__divider">
+        <div class="produk-footer__divider-glow"></div>
+      </div>
+
+      <div class="produk-footer__info-side">
+        <div class="produk-footer__info-content">
+          <div class="produk-footer__brand">
+            <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="produk-footer__logo">
+          </div>
+          <p class="produk-footer__tagline">Distributor produk makanan & minuman berkualitas tinggi dari brand internasional terkemuka.</p>
+          
+          <!-- Luxury Location Card -->
+          <div class="luxury-place-card">
+            <div class="luxury-place-info">
+              <span class="luxury-place-label"><i class="fas fa-building"></i> Head Office</span>
+              <h3 class="luxury-place-title">PT Mitra Abadi Sindomas</h3>
+              <p class="luxury-place-address">Green Sedayu Bizpark Blok DM 11 No. 65, Jl. Daan Mogot Raya KM.18, Jakarta Barat 11840, Indonesia</p>
+              <div class="luxury-place-meta">
+                <div class="luxury-place-rating">
+                  <span class="num">5.0</span>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <span class="count">(48)</span>
+                </div>
+                <a href="https://maps.app.goo.gl/4BL2Duej9Yzwvrac8" target="_blank" class="produk-footer__branch-link" style="margin-top:0">
+                  Lihat di Maps <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+            </div>
+            <a href="https://www.google.com/maps/dir//PT+Mitra+Abadi+Sindomas/@-6.1528334,106.6946241,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f7dba373809b:0x5e87600674984b93!2m2!1d106.6946241!2d-6.1528334" target="_blank" class="luxury-directions-btn" title="Petunjuk Arah">
+              <i class="fas fa-location-arrow"></i>
+            </a>
+          </div>
+
+          <div class="produk-footer__actions">
+            <a href="https://wa.me/6281295001778" target="_blank" class="produk-footer__wa-btn">
+              <i class="fab fa-whatsapp"></i> Hubungi Kami
+            </a>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="produk-footer__bottom">
+      <div class="produk-footer__bottom-inner">
         <p>&copy; 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
-        <div class="social-links">
-          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i
-              class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i
-              class="fab fa-whatsapp"></i></a>
-        </div>
       </div>
     </div>
   </footer>
@@ -967,6 +1549,9 @@
       // Filter only active
       newsItems = (newsItems || []).filter(n => n.active !== false);
 
+      // Sort by date descending (newest first) by default
+      newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+
       populateYearFilters();
       filterBerita();
       checkUrlForDetail();
@@ -979,9 +1564,11 @@
 
       ['filterYearFrom', 'filterYearTo'].forEach(id => {
         const sel = document.getElementById(id);
-        const cur = sel.value;
-        sel.innerHTML = '<option value="">Tahun</option>' + allYears.map(y => `<option value="${y}">${y}</option>`).join('');
-        sel.value = cur;
+        if (sel) {
+          const cur = sel.value;
+          sel.innerHTML = '<option value="">Tahun</option>' + allYears.map(y => `<option value="${y}">${y}</option>`).join('');
+          sel.value = cur;
+        }
       });
     }
 
@@ -1064,12 +1651,22 @@
     }
 
     function resetFilter() {
-      document.getElementById('beritaSearch').value = '';
-      document.getElementById('filterMonthFrom').value = '';
-      document.getElementById('filterYearFrom').value = '';
-      document.getElementById('filterMonthTo').value = '';
-      document.getElementById('filterYearTo').value = '';
-      document.getElementById('beritaSort').value = 'newest';
+      const search = document.getElementById('beritaSearch');
+      if (search) search.value = '';
+      
+      const mFrom = document.getElementById('filterMonthFrom');
+      if (mFrom) mFrom.value = '';
+      const yFrom = document.getElementById('filterYearFrom');
+      if (yFrom) yFrom.value = '';
+      
+      const mTo = document.getElementById('filterMonthTo');
+      if (mTo) mTo.value = '';
+      const yTo = document.getElementById('filterYearTo');
+      if (yTo) yTo.value = '';
+      
+      const sort = document.getElementById('beritaSort');
+      if (sort) sort.value = 'newest';
+      
       filterBerita();
     }
 
@@ -1202,6 +1799,48 @@
     function openKatalog() {
       window.location.href = 'index.html#katalog';
     }
+
+    // ==========================================
+    // DYNAMIC CONTENT LOADER (from Admin Dashboard)
+    // ==========================================
+    (async function loadDynamicContent() {
+      async function getCMSData(fileKey, lsKey) {
+        try {
+          const resp = await fetch(`database/cms/${fileKey}.json`);
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data) {
+              localStorage.setItem(lsKey, JSON.stringify(data));
+              return data;
+            }
+          }
+        } catch (e) {}
+        try {
+          const stored = localStorage.getItem(lsKey);
+          if (stored) return JSON.parse(stored);
+        } catch (e) {}
+        return null;
+      }
+
+      const ci = await getCMSData('contact_info', 'mas_contact_info');
+      if (ci) {
+        try {
+          if (ci.instagram) document.querySelectorAll('a[href*="instagram.com"]').forEach(a => { a.href = ci.instagram; });
+          if (ci.whatsapp) document.querySelectorAll('a[href*="wa.me"]').forEach(a => { a.href = 'https://wa.me/' + ci.whatsapp; });
+          if (ci.phone) document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = 'tel:' + ci.phone.replace(/\s/g, ''); });
+        } catch (e) {}
+      }
+
+      const fi = await getCMSData('footer_info', 'mas_footer_info');
+      if (fi) {
+        try {
+          const footerDesc = document.querySelector('.produk-footer__tagline');
+          if (footerDesc && fi.desc) footerDesc.textContent = fi.desc;
+          const footerCopy = document.querySelector('.produk-footer__bottom-inner p');
+          if (footerCopy && fi.year && fi.company) footerCopy.innerHTML = `&copy; ${fi.year} ${fi.company}. All rights reserved.`;
+        } catch (e) {}
+      }
+    })();
 
     // ==========================================
     // INIT

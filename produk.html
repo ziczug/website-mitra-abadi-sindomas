@@ -1352,7 +1352,7 @@
 <section class="catalog-section">
   <div class="container">
     <button class="btn-filter-mobile" onclick="toggleMobileSidebar()">
-      <i class="fas fa-filter"></i> Filter & Atur
+      <i class="fas fa-sliders-h"></i> Filter & Atur
     </button>
 
     <div class="catalog-layout">
@@ -1846,8 +1846,11 @@ const defaultProducts = [
 let products = [];
 let allBrands = [];
 let allCategories = []; // Loaded from categories.json
-let currentFilter = 'all';
-let currentBrand = 'all';
+
+// Inisialisasi filter dari URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+let currentFilter = urlParams.get('filter') || 'all';
+let currentBrand = urlParams.get('brand') || 'all';
 let currentSort = 'newest';
 
 
@@ -1919,7 +1922,7 @@ async function loadProductsFromCSV() {
         products = data;
         console.log('✅ Produk dimuat dari products.json:', products.length, 'item');
         updateBrandFilter();
-        renderProducts(products);
+        filterProducts();
         // Sinkronkan ke localStorage untuk backup offline
         localStorage.setItem('mas_products_synced', JSON.stringify(products));
         return;
@@ -1938,7 +1941,7 @@ async function loadProductsFromCSV() {
         products = parsed;
         console.log('✅ Produk dimuat dari localStorage Backup:', products.length, 'item');
         updateBrandFilter();
-        renderProducts(products);
+        filterProducts();
         return;
       }
     } catch (e) {
@@ -1958,7 +1961,7 @@ async function loadProductsFromCSV() {
     products = [...defaultProducts];
   }
   updateBrandFilter();
-  renderProducts(products);
+  filterProducts();
 }
 
 // Load Categories from JSON
@@ -2036,11 +2039,12 @@ function updateBrandFilter() {
   
   // Tetapkan kembali value if still valid
   if (currentBrand !== 'all') {
-    const brandInList = brandsToShow.find(b => b.name === currentBrand);
+    const brandInList = brandsToShow.find(b => b.name.toLowerCase() === currentBrand.toLowerCase());
     if (!brandInList) {
       currentBrand = 'all';
       brandSelect.value = 'all';
     } else {
+      currentBrand = brandInList.name; // Use canonical name from data
       brandSelect.value = currentBrand;
     }
   }
@@ -2230,7 +2234,7 @@ function filterProducts() {
 
   // 2. Filter by Brand
   if (currentBrand !== 'all') {
-    filtered = filtered.filter(p => p.brand === currentBrand);
+    filtered = filtered.filter(p => p.brand.toLowerCase() === currentBrand.toLowerCase());
   }
 
   // 3. Filter by Search Query
@@ -2493,7 +2497,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // Inisialisasi
 loadProductsFromCSV().then(() => {
-  const urlParams = new URLSearchParams(window.location.search);
   const searchId = urlParams.get('search');
   if (searchId) {
     // Give a small delay for DOM rendering
