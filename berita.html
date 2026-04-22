@@ -622,10 +622,11 @@
 
     .produk-footer__tagline {
       font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
       margin-bottom: 28px;
-      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
     .produk-footer__office {
@@ -940,10 +941,11 @@
       }
       .produk-footer__tagline {
         font-size: 13px;
-        line-height: 1.6;
+        line-height: 1.7;
         text-align: center;
         margin: 0 auto 24px;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255,255,255,0.7);
+        font-weight: 400;
       }
       .produk-footer__office-label {
         justify-content: center;
@@ -1299,8 +1301,8 @@
 <body>
 
   <!-- ==================== NAVBAR ==================== -->
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
-    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <div class="container">
       <a href="index.html" class="nav-logo">
         <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
@@ -1309,13 +1311,32 @@
         <button class="mobile-close" onclick="toggleNav()" aria-label="Close Menu">
           <i class="fas fa-times"></i>
         </button>
+        <div class="lang-dropdown mobile-only" id="langDropdownMobile">
+          <div class="lang-current" onclick="toggleLangDropdown(true)">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id">Indonesia</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
+            </div>
+          </div>
+        </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="index.html" class="nav-item" data-i18n="nav-home">Beranda</a>
+        <a href="index.html#beranda" class="nav-item" data-i18n="nav-home">Beranda</a>
         <a href="berita.html" class="nav-item active" data-i18n="nav-news">Berita</a>
         <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
         <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
         <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+
         <div class="nav-social mobile-only" style="margin-top: 20px;">
           <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
             <i class="fas fa-phone-alt"></i>
@@ -1329,6 +1350,22 @@
       <div class="nav-actions">
         <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text"
             data-i18n="nav-contact">Kontak</span></a>
+        <div class="search-wrapper" id="searchWrapper">
+          <button class="search-toggle" id="searchToggle" aria-label="Open Search">
+            <i class="fas fa-search"></i>
+          </button>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-wrapper">
+              <i class="fas fa-search search-icon-inside"></i>
+              <input type="text" placeholder="Cari produk atau merek..." id="headerSearchInput" autocomplete="off"
+                data-i18n="search-placeholder">
+            </div>
+            <div class="search-results" id="headerSearchResults">
+              <!-- Results will be injected here -->
+            </div>
+          </div>
+        </div>
+        <!-- Social icons moved to mobile menu only -->
         <div class="lang-dropdown desktop-only" id="langDropdown">
           <div class="lang-current" onclick="toggleLangDropdown()">
             <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
@@ -1337,13 +1374,13 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span>Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span>English</span>
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
-              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span>Mandarin</span>
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
             </div>
           </div>
         </div>
@@ -1352,7 +1389,10 @@
         <span></span><span></span><span></span>
       </div>
     </div>
+    </div>
   </nav>
+
+
 
   <!-- ==================== LISTING VIEW ==================== -->
   <div id="beritaListing">
@@ -1462,7 +1502,8 @@
           <div class="produk-footer__brand">
             <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="produk-footer__logo">
           </div>
-          <p class="produk-footer__tagline">Distributor produk makanan & minuman berkualitas tinggi dari brand internasional terkemuka.</p>
+          <p class="produk-footer__tagline">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi
+          dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
           
           <!-- Luxury Location Card -->
           <div class="luxury-place-card">
@@ -1769,19 +1810,17 @@
     const scrollTopBtn = document.getElementById('scrollTop');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-        scrollTopBtn.classList.add('visible');
-      } else {
-        navbar.classList.remove('scrolled');
-        scrollTopBtn.classList.remove('visible');
-      }
+      const scrolled = window.scrollY > 50;
+      navbar.classList.toggle('scrolled', scrolled);
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
     });
 
     function toggleNav() {
       const navLinks = document.getElementById('navLinks');
+      const mobileToggle = document.getElementById('mobileToggle');
       const overlay = document.getElementById('navOverlay');
       navLinks.classList.toggle('active');
+      if (mobileToggle) mobileToggle.classList.toggle('active');
       overlay.classList.toggle('active');
       document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
     }
@@ -1791,14 +1830,66 @@
       if (dd) dd.classList.toggle('active');
     }
 
-    function setLanguage(lang) {
-      localStorage.setItem('mas_lang', lang);
-      document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
-    }
 
     function openKatalog() {
       window.location.href = 'index.html#katalog';
     }
+
+    // --- NAVBAR SEARCH LOGIC ---
+    const searchToggle = document.getElementById('searchToggle');
+    const searchContainer = document.getElementById('searchContainer');
+    const headerSearchInput = document.getElementById('headerSearchInput');
+    const headerSearchResults = document.getElementById('headerSearchResults');
+
+    searchToggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isActive = searchContainer.classList.toggle('active');
+      searchToggle.classList.toggle('active');
+      const icon = searchToggle.querySelector('i');
+      if (isActive) {
+        icon.classList.replace('fa-search', 'fa-times');
+        headerSearchInput.focus();
+      } else {
+        icon.classList.replace('fa-times', 'fa-search');
+        headerSearchInput.value = '';
+        headerSearchResults.innerHTML = '';
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!document.getElementById('searchWrapper')?.contains(e.target)) {
+        searchContainer?.classList.remove('active');
+        searchToggle?.classList.remove('active');
+        searchToggle?.querySelector('i')?.classList.replace('fa-times', 'fa-search');
+      }
+    });
+
+    headerSearchInput?.addEventListener('input', async (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) {
+        headerSearchResults.innerHTML = '';
+        return;
+      }
+      try {
+        const resp = await fetch('database/cms/products.json');
+        const products = resp.ok ? await resp.json() : [];
+        const matches = products.filter(p => 
+          p.name.toLowerCase().includes(query) || 
+          p.brand.toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query)
+        ).slice(0, 5);
+
+        headerSearchResults.innerHTML = matches.map(p => `
+          <div class="search-result-item" onclick="window.location.href='produk.html?search=${p.id}'">
+            <img src="${p.imageData || p.image || ''}" alt="${p.name}">
+            <div>
+              <div class="search-result-title">${p.name}</div>
+              <div class="search-result-meta">${p.brand} • ${p.category}</div>
+            </div>
+          </div>
+        `).join('') || '<div class="search-no-results">Tidak ada produk ditemukan</div>';
+      } catch (e) {}
+    });
 
     // ==========================================
     // DYNAMIC CONTENT LOADER (from Admin Dashboard)

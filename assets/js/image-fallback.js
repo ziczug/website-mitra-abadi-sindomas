@@ -6,9 +6,12 @@
     function handleImageError(event) {
         const img = event.target;
         if (img.tagName.toLowerCase() === 'img') {
-            // Exclude flag icons from general fallback
+            // For flag icons, we might want a specific fallback if the CDN is down
             if (img.classList.contains('flag-icon')) {
-                img.style.display = 'none'; // Just hide the broken flag
+                // If it's already a fallback, don't loop
+                if (img.src.includes('assets/images/placeholder.png')) return;
+                img.src = 'https://flagcdn.com/id.svg'; // Fallback to ID flag if specific one fails? 
+                // Or just use a generic flag icon
                 return;
             }
 
@@ -30,7 +33,7 @@
         document.querySelectorAll('img').forEach(function(img) {
             if (img.naturalWidth === 0 && img.src) {
                 if (img.classList.contains('flag-icon')) {
-                    img.style.display = 'none';
+                    img.src = 'https://flagcdn.com/id.svg';
                 } else {
                     img.src = 'assets/images/placeholder.png';
                 }

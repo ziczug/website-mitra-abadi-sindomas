@@ -769,10 +769,11 @@
 
     .produk-footer__tagline {
       font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
       margin-bottom: 28px;
-      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
     .produk-footer__office {
@@ -1087,10 +1088,11 @@
       }
       .produk-footer__tagline {
         font-size: 13px;
-        line-height: 1.6;
+        line-height: 1.7;
         text-align: center;
         margin: 0 auto 24px;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255,255,255,0.7);
+        font-weight: 400;
       }
       .produk-footer__office-label {
         justify-content: center;
@@ -1213,8 +1215,8 @@
 <body>
 
   <!-- ==================== NAVBAR ==================== -->
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
-    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <div class="container">
       <a href="index.html" class="nav-logo">
         <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
@@ -1234,10 +1236,10 @@
               <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="EN" class="flag-icon"> <span data-i18n="lang-en">English</span>
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
-              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">Mandarin</span>
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
             </div>
           </div>
         </div>
@@ -1248,12 +1250,13 @@
         <a href="produk.html" class="nav-item active" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
         <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
-        
+
         <div class="nav-social mobile-only" style="margin-top: 20px;">
           <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
             <i class="fas fa-phone-alt"></i>
           </a>
-          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item" aria-label="Instagram">
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item"
+            aria-label="Instagram">
             <i class="fab fa-instagram"></i>
           </a>
         </div>
@@ -1283,13 +1286,13 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span>Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span>English</span>
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
-              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span>Mandarin</span>
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
             </div>
           </div>
         </div>
@@ -1298,7 +1301,10 @@
         <span></span><span></span><span></span>
       </div>
     </div>
+    </div>
   </nav>
+
+
 
 <!-- PAGE HERO -->
 <section class="page-hero">
@@ -1317,8 +1323,7 @@
 <section class="filter-section">
   <div class="container">
     <div class="section-title-premium">
-      <h2 data-i18n="prod-category-title">Pilih Berdasarkan Kategori</h2>
-      <div class="title-accent"></div>
+
       <p data-i18n="prod-category-subtitle">Temukan produk berkualitas dari berbagai kategori pilihan kami</p>
     </div>
   </div>
@@ -1553,7 +1558,8 @@
         <div class="produk-footer__brand">
           <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="produk-footer__logo">
         </div>
-        <p class="produk-footer__tagline">Distributor produk makanan & minuman berkualitas tinggi dari brand internasional terkemuka.</p>
+        <p class="produk-footer__tagline">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi
+        dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
         
         <!-- Luxury Location Card -->
         <div class="luxury-place-card">

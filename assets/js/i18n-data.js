@@ -2,11 +2,12 @@ const i18nData = {
   id: {
     // Navbar
     'nav-home': 'Beranda',
+    'nav-news': 'Berita',
     'nav-about': 'Tentang Kami',
     'nav-products': 'Produk',
     'nav-catalog': 'Katalog',
     'nav-distribution': 'Distribusi',
-    'nav-certification': 'Sertifikasi',
+    'nav-certification': 'Sertifikat',
     'nav-contact': 'Kontak',
     'search-placeholder': 'Cari produk atau merek...',
     'search-brand-placeholder': 'Cari nama brand...',
@@ -15,7 +16,7 @@ const i18nData = {
     // Languages
     'lang-id': 'Indonesia',
     'lang-en': 'Inggris',
-    'lang-cn': 'Mandarin',
+    'lang-cn': 'China',
     'lang-id-short': 'ID',
     'lang-en-short': 'EN',
     'lang-cn-short': 'CN',
@@ -90,7 +91,7 @@ const i18nData = {
     'dist-map-desc': 'Sistem distribusi terintegrasi yang menjangkau pulau-pulau utama di Indonesia, memastikan ketersediaan produk berkualitas di mana pun Anda berada.',
     'partners-title': 'Mitra Strategis Kami',
     'partners-desc': 'Produk kami tersedia di berbagai jaringan modern trade dan e-commerce terkemuka.',
-    'cert-tag': 'Sertifikasi',
+    'cert-tag': 'Sertifikat',
     'cert-title': 'Jaminan Kualitas & Keamanan',
     'cert-desc': 'Seluruh produk kami telah melewati standar keamanan dan sertifikasi pemerintah.',
     'cert-halal-title': 'Sertifikat Halal',
@@ -137,6 +138,7 @@ const i18nData = {
   en: {
     // Navbar
     'nav-home': 'Home',
+    'nav-news': 'News',
     'nav-about': 'About Us',
     'nav-products': 'Products',
     'nav-catalog': 'Catalog',
@@ -150,7 +152,7 @@ const i18nData = {
     // Languages
     'lang-id': 'Indonesian',
     'lang-en': 'English',
-    'lang-cn': 'Mandarin',
+    'lang-cn': 'China',
     'lang-id-short': 'ID',
     'lang-en-short': 'EN',
     'lang-cn-short': 'CN',
@@ -272,6 +274,7 @@ const i18nData = {
   cn: {
     // Navbar
     'nav-home': '首页',
+    'nav-news': '资讯',
     'nav-about': '关于我们',
     'nav-products': '产品中心',
     'nav-catalog': '产品目录',

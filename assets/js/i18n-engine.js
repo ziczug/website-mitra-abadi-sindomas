@@ -72,7 +72,7 @@ function setLanguage(lang) {
   const titleMap = {
     'id': 'Indonesia',
     'en': 'English',
-    'cn': 'Mandarin'
+    'cn': 'China'
   };
 
   // Update dropdown displays (Desktop & Mobile)

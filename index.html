@@ -20,8 +20,8 @@
 <body>
 
   <!-- ==================== NAVBAR ==================== -->
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
-    <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <div class="container">
       <a href="index.html" class="nav-logo">
         <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
@@ -38,28 +38,26 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
-                data-i18n="lang-id">Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="EN" class="flag-icon"> <span data-i18n="lang-en">English</span>
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
-              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span
-                data-i18n="lang-cn">Mandarin</span>
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
             </div>
           </div>
         </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
+        <a href="index.html#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
         <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
-        <a href="#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
+        <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
         <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
-        <a href="#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
 
         <div class="nav-social mobile-only" style="margin-top: 20px;">
-          <a href="#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
+          <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
             <i class="fas fa-phone-alt"></i>
           </a>
           <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item"
@@ -95,13 +93,13 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span>Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span>English</span>
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
-              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span>Mandarin</span>
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
             </div>
           </div>
         </div>
@@ -110,7 +108,10 @@
         <span></span><span></span><span></span>
       </div>
     </div>
+    </div>
   </nav>
+
+
 
   <!-- ==================== HERO ==================== -->
   <section class="hero" id="beranda">
@@ -172,19 +173,40 @@
 
   <div class="section-separator reveal fade-up visible"></div>
 
-  <!-- ==================== TOP SLIDER (16:9) ==================== -->
-  <section class="top-slider-section">
-    <div class="top-slider" id="topSlider">
-      <div class="top-slider-container" id="topSliderContainer">
-        <!-- Dynamic slides will be injected here -->
-      </div>
-      <button class="top-slider-btn prev" id="topPrev" aria-label="Previous Slide"><i
-          class="fas fa-chevron-left"></i></button>
-      <button class="top-slider-btn next" id="topNext" aria-label="Next Slide"><i
-          class="fas fa-chevron-right"></i></button>
-      <div class="top-slider-dots" id="topDots"></div>
+  <!-- ==================== PARALLAX DIVIDER ==================== -->
+  <section class="parallax-divider" id="parallaxSection">
+    <div class="parallax-img-wrapper" id="parallaxWrapper">
+      <img src="assets/images/hero-banner.png" alt="Mitra Abadi Parallax" class="parallax-img" loading="lazy" fetchpriority="low">
     </div>
   </section>
+
+  <script>
+    // Parallax scrolling effect for the image wrapper
+    (function() {
+      const section = document.getElementById('parallaxSection');
+      const wrapper = document.getElementById('parallaxWrapper');
+      if (!section || !wrapper) return;
+      
+      window.addEventListener('scroll', () => {
+        const rect = section.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        // Only run calculations if the section is visible in the viewport
+        if (rect.top <= viewportHeight && rect.bottom >= 0) {
+          const totalDistance = viewportHeight + rect.height;
+          const scrolled = viewportHeight - rect.top;
+          let percentage = scrolled / totalDistance;
+          
+          // Clamp between 0 and 1
+          percentage = Math.max(0, Math.min(1, percentage));
+          
+          // Move from 0% to -20% vertically (since wrapper is 130% height, this gives a smooth parallax)
+          const moveY = -(percentage * 20);
+          wrapper.style.transform = `translateY(${moveY}%)`;
+        }
+      }, { passive: true });
+    })();
+  </script>
 
   <!-- ==================== ABOUT ==================== -->
   <section class="section about" id="tentang">
@@ -421,18 +443,21 @@
       </div>
 
       <div class="section-separator reveal fade-up"></div>
+    </div>
+  </section>
 
-      <!-- Partner Logos (Merged) -->
-      <div class="partners-inside-dist reveal fade-up" style="margin-top: 20px;">
-        <div class="section-header reveal fade-up">
-          <h2 style="color: var(--white); font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;"
-            data-i18n="partners-title">Mitra Strategis Kami</h2>
-          <p style="color: rgba(255,255,255,0.6); font-size: 16px; max-width: 600px; margin: 0 auto;"
-            data-i18n="partners-desc">Produk kami tersedia di berbagai jaringan modern trade dan e-commerce terkemuka.
-          </p>
-        </div>
+  <!-- ==================== PARTNERS ==================== -->
+  <section class="section partners" id="mitra-strategis">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;"
+          data-i18n="partners-title">Mitra Strategis Kami</h2>
+        <p style="color: rgba(255,255,255,0.6); font-size: 16px; max-width: 600px; margin: 0 auto;"
+          data-i18n="partners-desc">Produk kami tersedia di berbagai jaringan modern trade dan e-commerce terkemuka.
+        </p>
+      </div>
 
-        <div class="partner-tabs-wrapper reveal fade-up">
+      <div class="partner-tabs-wrapper reveal fade-up">
           <button class="partner-tab-nav-btn prev" id="partnerTabNavPrev" aria-label="Previous Tabs"><i
               class="fas fa-chevron-left"></i></button>
           <div class="partner-tabs" id="partnerTabContainer">
@@ -448,7 +473,6 @@
         <div class="partner-grid reveal fade-up" id="partnerGrid">
           <!-- Partners will be loaded dynamically here -->
         </div>
-      </div>
     </div>
   </section>
 
@@ -604,9 +628,8 @@
       <div class="footer-grid">
         <div class="footer-about">
           <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-logo-img">
-          <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan & minuman berkualitas tinggi
-            dari brand internasional
-            terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
+          <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi
+            dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
         </div>
         <div>
           <h4 data-i18n="footer-nav-title">Navigasi</h4>
@@ -1055,6 +1078,17 @@
     // --- Navigation Indicators ---
     const navIndicator = document.getElementById('navIndicator');
     const navItems = document.querySelectorAll('.nav-item');
+
+    function updateIndicator(indicator, el) {
+      if (!indicator || !el || window.innerWidth <= 768) {
+        if (indicator) indicator.style.opacity = '0';
+        return;
+      }
+      indicator.style.opacity = '1';
+      indicator.style.width = `${el.offsetWidth}px`;
+      indicator.style.left = `${el.offsetLeft}px`;
+    }
+
     function initIndicators() {
       const activeNavItem = document.querySelector('.nav-item.active') || navItems[0];
       updateIndicator(navIndicator, activeNavItem);
@@ -1076,139 +1110,6 @@
       updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[0]);
     });
 
-    // --- Translations Dictionary ---
-    const enTranslations = {
-      '.nav-links a[href="#beranda"]': 'Home',
-      '.nav-links a[href="#tentang"]': 'About Us',
-      '.nav-links a[href="produk.html"]': 'Products',
-      '.nav-links a[onclick="openKatalog()"]': 'Catalog',
-      '.nav-links a[href="#distribusi"]': 'Distribution',
-      '.nav-links a[href="#sertifikasi"]': 'Certifications',
-      '.nav-cta .cta-text': 'Contact Us',
-      '.hero-badge': '<span class="dot"></span> Trusted Since 2016',
-      '.hero h1': 'Distributor & Importer of <span class="highlight">High-Quality Food</span> in Indonesia',
-      '.hero p': 'PT Mitra Abadi Sindomas brings high-quality imported food and beverages from leading international brands with guaranteed Halal and BPOM certification.',
-      '.hero-buttons .btn-primary .hero-btn-text': ' View Products',
-      '.hero-buttons .btn-outline .hero-btn-text': ' Contact Us',
-      '.hero-stats .stat-item:nth-child(1) .stat-label': 'Years Experience',
-      '.hero-stats .stat-item:nth-child(2) .stat-label': 'Products Distributed',
-      '.hero-stats .stat-item:nth-child(3) .stat-label': 'Cities Reached',
-      '.about .section-tag': '<i class="fas fa-building"></i> About Us',
-      '.about h2': 'PT Mitra Abadi Sindomas',
-      '.about p:nth-of-type(1)': 'Is an international & national company engaged in general trading, export, import, and distribution. Since 2016, we have partnered with leading international brands to bring high-quality imported food and beverages.',
-      '.about p:nth-of-type(2)': 'All our products are <strong>Halal</strong> certified and registered with <strong>BPOM</strong>, ensuring safety and quality for Indonesian consumers.',
-      '.about-feature:nth-child(1) h4': 'Trusted Importer',
-      '.about-feature:nth-child(1) p': 'Official partner of international brands',
-      '.about-feature:nth-child(2) h4': 'Halal & BPOM',
-      '.about-feature:nth-child(2) p': 'Complete & guaranteed certification',
-      '.about-feature:nth-child(3) h4': 'National Distribution',
-      '.about-feature:nth-child(3) p': 'Reach across Indonesia',
-      '.products .section-tag': '<i class="fas fa-utensils"></i> Our Products',
-      '.products .section-header h2': 'Featured Product Categories',
-      '.products .section-header p': 'We distribute a variety of high quality food and beverage products from top international brands.',
-      '.product-grid .product-card:nth-child(1) h3': 'Snacks',
-      '.product-grid .product-card:nth-child(1) p': 'Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring, Green Pea Snack and more.',
-      '.product-grid .product-card:nth-child(2) h3': 'Biscuits & Cookies',
-      '.product-grid .product-card:nth-child(2) p': 'Assorted biscuits, cream crackers, and premium cookies from international brands.',
-      '.product-grid .product-card:nth-child(3) h3': 'Wafers',
-      '.product-grid .product-card:nth-child(3) p': 'Chocolate, vanilla wafers, and various flavors from top manufacturers.',
-      '.product-grid .product-card:nth-child(4) h3': 'Cakes & Pastry',
-      '.product-grid .product-card:nth-child(4) p': 'Swiss rolls, layer cakes, muffins and assorted premium packaged cakes.',
-      '.product-grid .product-card:nth-child(5) h3': 'Beverages',
-      '.product-grid .product-card:nth-child(5) p': 'A variety of quality drinks including juice, tea, and fruit-flavored beverages.',
-      '.product-grid .product-card:nth-child(6) h3': 'Candy',
-      '.product-grid .product-card:nth-child(6) p': 'Various kinds of candy and sweets with refreshing flavors.',
-      '.product-grid .product-card:nth-child(7) h3': 'Condiments & Sauces',
-      '.product-grid .product-card:nth-child(7) p': 'Sauces, seasonings, and food complements to enhance flavor.',
-      '.product-grid .product-card:nth-child(8) h3': 'Instant Noodle',
-      '.product-grid .product-card:nth-child(8) p': 'Instant noodles with various flavor choices from top international brands.',
-      '.product-grid .product-card:nth-child(9) h3': 'Vegelicious',
-      '.product-grid .product-card:nth-child(9) p': 'Healthy and highly nutritious food options based on quality vegetables.',
-      '.products .btn-primary': '<i class="fas fa-th-large"></i> View All Products',
-      '.brands .section-tag': '<i class="fas fa-star"></i> Brand Partners',
-      '.brands .section-header h2': 'Our International Brands',
-      '.brands .section-header p': 'We are official distributors of the world\'s leading food brands.',
-      '.distribution .section-tag': '<i class="fas fa-truck"></i> Distribution Network',
-      '.distribution .section-header h2': 'Reach Across Indonesia',
-      '.distribution .section-header p': 'Our extensive distribution network ensures product availability across Indonesia.',
-      '.dist-content h3': 'Modern & Professional Infrastructure',
-      '.dist-content p': 'We have modern warehouse facilities equipped with cooling systems and optimal storage to maintain product quality. Supported by a reliable delivery fleet for distribution throughout Indonesia.',
-      '.dist-stats .dist-stat:nth-child(1) .label': 'Cities Reached',
-      '.dist-stats .dist-stat:nth-child(2) .label': 'Product SKUs',
-      '.dist-stats .dist-stat:nth-child(3) .label': 'Retail Partners',
-      '.dist-stats .dist-stat:nth-child(4) .label': 'Years Operating',
-      '.certifications .section-tag': '<i class="fas fa-certificate"></i> Certifications',
-      '.certifications .section-header h2': 'Quality & Safety Assurance',
-      '.certifications .section-header p': 'All our products have passed government safety standards and certifications.',
-      '.cert-grid .cert-card:nth-child(1) h3': 'Halal Certificate',
-      '.cert-grid .cert-card:nth-child(1) p': 'All products are halal certified by MUI, ensuring halal status for Indonesian Muslim consumers.',
-      '.cert-grid .cert-card:nth-child(2) h3': 'BPOM License',
-      '.cert-grid .cert-card:nth-child(2) p': 'Registered and monitored by the Indonesian FDA (BPOM), ensuring safe product consumption.',
-      '.cert-grid .cert-card:nth-child(3) h3': 'International Standards',
-      '.cert-grid .cert-card:nth-child(3) p': 'Products are manufactured according to international standards with passing strict quality control.',
-      '.contact .section-tag': '<i class="fas fa-envelope"></i> Contact',
-      '.contact .section-header h2': 'Get In Touch',
-      '.contact .section-header p': 'Interested in partnering? Contact us for more information about our products and distribution cooperation.',
-      '.contact-info .contact-card:nth-child(1) h4': 'Head Office Address',
-      '.contact-info .contact-card:nth-child(2) h4': 'Phone',
-      '.contact-info .contact-card:nth-child(4) h4': 'Operational Hours',
-      '.contact-info .contact-card:nth-child(4) p': 'Monday - Friday: 08:00 - 17:00 WIB<br>Saturday: 08:00 - 12:00 WIB',
-      '.footer-about p': 'An importer and distributor of high-quality food & beverage products from leading international brands, with a nationwide distribution network in Indonesia.',
-      '.footer-grid div:nth-child(2) h4': 'Navigation',
-      '.footer-grid div:nth-child(2) li:nth-child(1) a': 'Home',
-      '.footer-grid div:nth-child(2) li:nth-child(2) a': 'About Us',
-      '.footer-grid div:nth-child(2) li:nth-child(3) a': 'Products',
-      '.footer-grid div:nth-child(2) li:nth-child(4) a': 'Catalog',
-      '.footer-grid div:nth-child(2) li:nth-child(5) a': 'Distribution',
-      '.footer-grid div:nth-child(3) h4': 'Products',
-      '.footer-grid div:nth-child(3) li:nth-child(1) a': 'Snacks',
-      '.footer-grid div:nth-child(3) li:nth-child(2) a': 'Biscuits & Cookies',
-      '.footer-grid div:nth-child(3) li:nth-child(3) a': 'Wafers',
-      '.footer-grid div:nth-child(3) li:nth-child(4) a': 'Beverages',
-      '.footer-grid div:nth-child(4) h4': 'Contact',
-      '.footer-grid div:nth-child(4) li:nth-child(3) a': '<i class="fas fa-map-marker-alt" style="margin-right:8px;color:var(--accent)"></i>West Jakarta',
-      '.catalog-modal-header .modal-info h3': 'Product Catalog 2026',
-      '.btn-download-katalog .btn-text': 'Download Catalog'
-    };
-
-    const idTranslations = {};
-    Object.keys(enTranslations).forEach(sel => {
-      const el = document.querySelector(sel);
-      if (el) idTranslations[sel] = el.innerHTML;
-    });
-
-    function applyTranslation(lang) {
-      const dict = lang === 'en' ? enTranslations : idTranslations;
-      Object.keys(dict).forEach(sel => {
-        const el = document.querySelector(sel);
-        if (el) el.innerHTML = dict[sel];
-      });
-      localStorage.setItem('mas_lang', lang);
-      langBtns.forEach(b => b.classList.remove('active'));
-      const activeBtns = document.querySelectorAll(`.lang-btn[data-lang="${lang}"]`);
-      activeBtns.forEach(btn => {
-        btn.classList.add('active');
-      });
-      const firstActive = document.querySelector(`.lang-switch.desktop-only .lang-btn[data-lang="${lang}"]`);
-      if (firstActive && typeof langIndicator !== 'undefined' && window.innerWidth > 768) {
-        updateIndicator(langIndicator, firstActive);
-      }
-    }
-
-    const savedLang = localStorage.getItem('mas_lang');
-    if (savedLang === 'en') {
-      setTimeout(() => applyTranslation('en'), 50);
-    }
-
-    langBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        applyTranslation(btn.getAttribute('data-lang'));
-        if (langIndicator && window.innerWidth > 768) {
-          langIndicator.style.transform = 'translateY(-50%) scale(0.95)';
-          setTimeout(() => langIndicator.style.transform = 'translateY(-50%) scale(1)', 150);
-        }
-      });
-    });
 
     // --- Mobile Nav & Scroll Logic ---
     const navOverlay = document.getElementById('navOverlay');
@@ -1792,87 +1693,7 @@
     initCategories();
 
     // --- TOP SLIDER LOGIC ---
-    async function initTopSlider() {
-      const topContainer = document.getElementById('topSliderContainer');
-      const topPrev = document.getElementById('topPrev');
-      const topNext = document.getElementById('topNext');
-      const topDots = document.getElementById('topDots');
-
-      let topHeroes = null;
-      try {
-        const resp = await fetch('database/cms/top_heroes.json');
-        if (resp.ok) topHeroes = await resp.json();
-      } catch (e) { }
-
-      if (!topHeroes) {
-        const storedTop = localStorage.getItem('mas_top_heroes');
-        if (storedTop) {
-          try {
-            topHeroes = JSON.parse(storedTop);
-          } catch (e) { }
-        }
-      }
-
-      if (!topHeroes) topHeroes = [];
-      topHeroes = topHeroes.filter(h => h.active && (h.imageData || h.image));
-
-      // Default if empty
-      if (topHeroes.length === 0) {
-        topHeroes = [
-          { image: "assets/images/hero-banner.png", title: "Default 1" },
-          { image: "assets/images/snack.png", title: "Default 2" },
-          { image: "assets/images/biskuit.png", title: "Default 3" }
-        ];
-      }
-
-      if (!topContainer) return;
-
-      topContainer.innerHTML = topHeroes.map((h, i) => `
-        <div class="top-slide ${i === 0 ? 'active' : ''}">
-          <img src="${h.imageData || h.image}" alt="${h.title || 'Slide'}">
-        </div>
-      `).join('');
-
-      let topSlides = topContainer.querySelectorAll('.top-slide');
-      let currentTop = 0;
-      let topCount = topSlides.length;
-      let topInterval;
-
-      if (topDots) {
-        topDots.innerHTML = '';
-        topSlides.forEach((_, i) => {
-          const dot = document.createElement('div');
-          dot.classList.add('top-dot');
-          if (i === 0) dot.classList.add('active');
-          dot.addEventListener('click', () => goToTopSlide(i));
-          topDots.appendChild(dot);
-        });
-      }
-
-      const dots = topDots ? topDots.querySelectorAll('.top-dot') : [];
-
-      function goToTopSlide(index) {
-        topSlides[currentTop].classList.remove('active');
-        if (dots[currentTop]) dots[currentTop].classList.remove('active');
-        currentTop = (index + topCount) % topCount;
-        topSlides[currentTop].classList.add('active');
-        if (dots[currentTop]) dots[currentTop].classList.add('active');
-        resetTopInterval();
-      }
-
-      function nextTopSlide() { goToTopSlide(currentTop + 1); }
-      function prevTopSlide() { goToTopSlide(currentTop - 1); }
-
-      function startTopInterval() { topInterval = setInterval(nextTopSlide, 5000); }
-      function resetTopInterval() { clearInterval(topInterval); startTopInterval(); }
-
-      if (topNext) topNext.addEventListener('click', nextTopSlide);
-      if (topPrev) topPrev.addEventListener('click', prevTopSlide);
-      startTopInterval();
-    }
-
-    initTopSlider();
-
+    // Top slider has been removed in favor of a parallax divider
 
     // --- PROMO POPUP LOGIC ---
     document.addEventListener('DOMContentLoaded', () => {
