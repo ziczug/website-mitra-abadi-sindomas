@@ -105,7 +105,7 @@ section {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1100;
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -770,7 +770,12 @@ section {
   height: 2px;
   background: #222;
   border-radius: 10px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.mobile-toggle.active span {
+  background: var(--accent);
 }
 
 .mobile-toggle:hover span {
