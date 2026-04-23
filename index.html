@@ -38,7 +38,8 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
               <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
@@ -93,7 +94,8 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
               <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
@@ -175,30 +177,31 @@
   <!-- ==================== PARALLAX DIVIDER ==================== -->
   <section class="parallax-divider" id="parallaxSection">
     <div class="parallax-img-wrapper" id="parallaxWrapper">
-      <img src="assets/images/hero-banner.png" alt="Mitra Abadi Parallax" class="parallax-img" loading="lazy" fetchpriority="low">
+      <img src="assets/images/hero-banner.png" alt="Mitra Abadi Parallax" class="parallax-img" loading="lazy"
+        fetchpriority="low">
     </div>
   </section>
 
   <script>
     // Parallax scrolling effect for the image wrapper
-    (function() {
+    (function () {
       const section = document.getElementById('parallaxSection');
       const wrapper = document.getElementById('parallaxWrapper');
       if (!section || !wrapper) return;
-      
+
       window.addEventListener('scroll', () => {
         const rect = section.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        
+
         // Only run calculations if the section is visible in the viewport
         if (rect.top <= viewportHeight && rect.bottom >= 0) {
           const totalDistance = viewportHeight + rect.height;
           const scrolled = viewportHeight - rect.top;
           let percentage = scrolled / totalDistance;
-          
+
           // Clamp between 0 and 1
           percentage = Math.max(0, Math.min(1, percentage));
-          
+
           // Move from 0% to -20% vertically (since wrapper is 130% height, this gives a smooth parallax)
           const moveY = -(percentage * 20);
           wrapper.style.transform = `translateY(${moveY}%)`;
@@ -321,8 +324,12 @@
         <button class="product-slider-btn next" id="productNext" aria-label="Next Products"><i
             class="fas fa-chevron-right"></i></button>
       </div>
-      <div style="text-align:center;margin-top:48px"><a href="produk.html" class="btn-primary"><i
-            class="fas fa-th-large"></i> <span data-i18n="btn-view-all">Lihat Semua Produk</span></a></div>
+      <div style="text-align:center;margin-top:48px">
+        <a href="produk.html" class="btn-glassy-gold">
+          <span data-i18n="btn-view-all">Lihat Semua Produk</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -333,8 +340,10 @@
     <div class="container">
       <div class="section-header center pulse-on-scroll">
         <div class="section-badge" data-i18n="brands-badge">MEREK KAMI</div>
-        <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="brands-title">Menghadirkan Merek Internasional Terbaik</h2>
-        <p style="max-width: 700px; margin: 0 auto;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
+        <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="brands-title">
+          Menghadirkan Merek Internasional Terbaik</h2>
+        <p style="max-width: 700px; margin: 0 auto;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global
+          terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
 
 
@@ -359,7 +368,8 @@
       <div class="section-header reveal fade-up">
         <div class="section-tag"><i class="fas fa-truck"></i> Jaringan Distribusi</div>
         <h2 style="text-transform: uppercase;">Jangkauan & Mitra Distribusi</h2>
-        <p style="max-width: 850px; margin: 0 auto;">Jaringan kantor kami tersebar di berbagai kota besar, beserta dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
+        <p style="max-width: 850px; margin: 0 auto;">Jaringan kantor kami tersebar di berbagai kota besar, beserta
+          dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
       </div>
 
       <!-- Stats -->
@@ -440,21 +450,21 @@
       </div>
 
       <div class="partner-tabs-wrapper reveal fade-up">
-          <button class="partner-tab-nav-btn prev" id="partnerTabNavPrev" aria-label="Previous Tabs"><i
-              class="fas fa-chevron-left"></i></button>
-          <div class="partner-tabs" id="partnerTabContainer">
-            <button class="partner-tab active" data-category="NATIONAL KEY ACCOUNT">National Key Account</button>
-            <button class="partner-tab" data-category="MODERN TRADE">Modern Trade</button>
-            <button class="partner-tab" data-category="CONVENIENCE STORE">Convenience Store</button>
-            <button class="partner-tab" data-category="E-COMMERCE PLATFORM">E-Commerce</button>
-          </div>
-          <button class="partner-tab-nav-btn next" id="partnerTabNavNext" aria-label="Next Tabs"><i
-              class="fas fa-chevron-right"></i></button>
+        <button class="partner-tab-nav-btn prev" id="partnerTabNavPrev" aria-label="Previous Tabs"><i
+            class="fas fa-chevron-left"></i></button>
+        <div class="partner-tabs" id="partnerTabContainer">
+          <button class="partner-tab active" data-category="NATIONAL KEY ACCOUNT">National Key Account</button>
+          <button class="partner-tab" data-category="MODERN TRADE">Modern Trade</button>
+          <button class="partner-tab" data-category="CONVENIENCE STORE">Convenience Store</button>
+          <button class="partner-tab" data-category="E-COMMERCE PLATFORM">E-Commerce</button>
         </div>
+        <button class="partner-tab-nav-btn next" id="partnerTabNavNext" aria-label="Next Tabs"><i
+            class="fas fa-chevron-right"></i></button>
+      </div>
 
-        <div class="partner-grid reveal fade-up" id="partnerGrid">
-          <!-- Partners will be loaded dynamically here -->
-        </div>
+      <div class="partner-grid reveal fade-up" id="partnerGrid">
+        <!-- Partners will be loaded dynamically here -->
+      </div>
     </div>
   </section>
 
@@ -526,8 +536,10 @@
     <div class="container">
       <div class="cert-header reveal fade-up">
         <div class="section-tag"><i class="fas fa-certificate"></i> <span data-i18n="cert-tag">Sertifikat</span></div>
-        <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="cert-title">Jaminan Kualitas & Keamanan</h2>
-        <p class="cert-desc-premium" data-i18n="cert-desc">Seluruh produk kami telah melewati standar keamanan dan sertifikasi pemerintah.</p>
+        <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="cert-title">
+          Jaminan Kualitas & Keamanan</h2>
+        <p class="cert-desc-premium" data-i18n="cert-desc">Seluruh produk kami telah melewati standar keamanan dan
+          sertifikasi pemerintah.</p>
       </div>
 
       <div class="cert-main-grid">
@@ -547,7 +559,8 @@
             </div>
             <div class="cert-item-content">
               <h3 data-i18n="cert-halal-title">Sertifikat Halal</h3>
-              <p data-i18n="cert-halal-desc">Semua produk kami bersertifikat halal resmi dari MUI, menjamin kehalalan dan kenyamanan untuk konsumen Muslim Indonesia.</p>
+              <p data-i18n="cert-halal-desc">Semua produk kami bersertifikat halal resmi dari MUI, menjamin kehalalan
+                dan kenyamanan untuk konsumen Muslim Indonesia.</p>
             </div>
             <div class="cert-item-check"><i class="fas fa-check-circle"></i></div>
           </div>
@@ -559,7 +572,8 @@
             </div>
             <div class="cert-item-content">
               <h3 data-i18n="cert-bpom-title">Izin Edar BPOM</h3>
-              <p data-i18n="cert-bpom-desc">Terdaftar dan diawasi oleh BPOM RI, menjamin keamanan, kualitas, dan kelayakan konsumsi setiap produk yang kami distribusikan.</p>
+              <p data-i18n="cert-bpom-desc">Terdaftar dan diawasi oleh BPOM RI, menjamin keamanan, kualitas, dan
+                kelayakan konsumsi setiap produk yang kami distribusikan.</p>
             </div>
             <div class="cert-item-check"><i class="fas fa-check-circle"></i></div>
           </div>
@@ -571,7 +585,8 @@
             </div>
             <div class="cert-item-content">
               <h3 data-i18n="cert-std-title">Standar Internasional</h3>
-              <p data-i18n="cert-std-desc">Produk diproduksi sesuai standar internasional dengan quality control ketat dari negara asal.</p>
+              <p data-i18n="cert-std-desc">Produk diproduksi sesuai standar internasional dengan quality control ketat
+                dari negara asal.</p>
             </div>
             <div class="cert-item-check"><i class="fas fa-check-circle"></i></div>
           </div>
@@ -584,7 +599,8 @@
           <div class="commitment-icon"><i class="fas fa-shield-alt"></i></div>
           <div class="commitment-text">
             <h4 data-i18n="cert-commit-title">Komitmen Kami</h4>
-            <p data-i18n="cert-commit-desc">Kami berkomitmen untuk selalu menghadirkan produk berkualitas tinggi dengan standar keamanan terbaik.</p>
+            <p data-i18n="cert-commit-desc">Kami berkomitmen untuk selalu menghadirkan produk berkualitas tinggi dengan
+              standar keamanan terbaik.</p>
           </div>
         </div>
         <div class="commitment-grid">
@@ -627,7 +643,8 @@
       <div class="section-header reveal fade-up">
         <div class="section-tag"><i class="fas fa-envelope"></i> <span data-i18n="contact-tag">Kontak</span></div>
         <h2 data-i18n="contact-title">Hubungi Kami</h2>
-        <p style="max-width: 700px; margin: 0 auto;" data-i18n="contact-desc-idx">Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut tentang produk dan kerjasama distribusi.</p>
+        <p style="max-width: 700px; margin: 0 auto;" data-i18n="contact-desc-idx">Tertarik untuk bermitra? Hubungi kami
+          untuk informasi lebih lanjut tentang produk dan kerjasama distribusi.</p>
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal fade-right">
@@ -635,7 +652,8 @@
             <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
             <div class="card-content">
               <h4 data-i18n="contact-office-title">Alamat Head Office</h4>
-              <p>Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
+              <p>Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia
+              </p>
             </div>
             <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
           </a>
@@ -651,7 +669,8 @@
             <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
             <div class="card-content">
               <h4 data-i18n="contact-whatsapp-title">WhatsApp</h4>
-              <p><a href="https://wa.me/6281295001778" target="_blank" style="color:var(--accent);font-weight:600;" data-i18n="contact-whatsapp-link">Chat via WhatsApp</a></p>
+              <p><a href="https://wa.me/6281295001778" target="_blank" style="color:var(--accent);font-weight:600;"
+                  data-i18n="contact-whatsapp-link">Chat via WhatsApp</a></p>
             </div>
             <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
@@ -665,7 +684,9 @@
           </div>
         </div>
         <div class="contact-map reveal fade-left delay-200">
-          <iframe src="https://www.google.com/maps?q=PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark&hl=id&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
+          <iframe
+            src="https://www.google.com/maps?q=PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark&hl=id&z=17&output=embed"
+            allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
 
@@ -715,31 +736,42 @@
           <i class="fas fa-share-alt share-icon-main"></i>
           <span data-i18n="footer-share-text">Bagikan halaman ini</span>
           <div class="social-icons">
-            <a href="javascript:void(0)" onclick="sharePage('facebook')" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="javascript:void(0)" onclick="sharePage('twitter')" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
-            <a href="javascript:void(0)" onclick="sharePage('linkedin')" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="javascript:void(0)" onclick="sharePage('whatsapp')" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="javascript:void(0)" onclick="sharePage('facebook')" aria-label="Share on Facebook"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="javascript:void(0)" onclick="sharePage('twitter')" aria-label="Share on X"><i
+                class="fab fa-x-twitter"></i></a>
+            <a href="javascript:void(0)" onclick="sharePage('linkedin')" aria-label="Share on LinkedIn"><i
+                class="fab fa-linkedin-in"></i></a>
+            <a href="javascript:void(0)" onclick="sharePage('whatsapp')" aria-label="Share on WhatsApp"><i
+                class="fab fa-whatsapp"></i></a>
           </div>
         </div>
-        
+
         <div class="footer-cta-card">
           <div class="footer-cta-col">
             <h2 data-i18n="footer-cta-connect">Terhubung dengan kami</h2>
-            <p data-i18n="footer-cta-connect-desc">Kami selalu bersemangat untuk terhubung dengan mereka yang memiliki minat dan nilai yang sejalan untuk masa depan yang lebih baik, inklusif, dan berkelanjutan.</p>
+            <p data-i18n="footer-cta-connect-desc">Kami selalu bersemangat untuk terhubung dengan mereka yang memiliki
+              minat dan nilai yang sejalan untuk masa depan yang lebih baik, inklusif, dan berkelanjutan.</p>
             <div class="footer-cta-socials">
-              <a href="https://www.facebook.com/masfoodindonesia/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-              <a href="https://twitter.com/masfoodindonesia" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/company/pt-mitra-abadi-sindomas/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-              <a href="https://www.youtube.com/@masfoodindonesia" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.facebook.com/masfoodindonesia/" target="_blank" aria-label="Facebook"><i
+                  class="fab fa-facebook"></i></a>
+              <a href="https://twitter.com/masfoodindonesia" target="_blank" aria-label="X"><i
+                  class="fab fa-x-twitter"></i></a>
+              <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/pt-mitra-abadi-sindomas/" target="_blank"
+                aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://www.youtube.com/@masfoodindonesia" target="_blank" aria-label="YouTube"><i
+                  class="fab fa-youtube"></i></a>
             </div>
           </div>
-          
+
           <div class="footer-cta-divider"></div>
-          
+
           <div class="footer-cta-col">
             <h2 data-i18n="footer-cta-contact">Kontak Kami</h2>
-            <p data-i18n="footer-cta-contact-desc">Hubungi kami untuk informasi lebih lanjut mengenai produk, kerja sama, atau pertanyaan lainnya.</p>
+            <p data-i18n="footer-cta-contact-desc">Hubungi kami untuk informasi lebih lanjut mengenai produk, kerja
+              sama, atau pertanyaan lainnya.</p>
             <a href="#kontak" class="footer-cta-btn" data-i18n="nav-contact">Kontak kami</a>
           </div>
         </div>
@@ -752,14 +784,17 @@
           <div class="footer-v-divider"></div>
           <div class="footer-company-info">
             <h3 data-i18n="footer-company-name">PT Mitra Abadi Sindomas</h3>
-            <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
+            <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi
+              dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
           </div>
           <div class="footer-bottom-socials">
-            <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i
+                class="fab fa-whatsapp"></i></a>
           </div>
         </div>
-        
+
         <div class="footer-copyright-row">
           <p data-i18n="footer-copyright">© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
         </div>
@@ -1692,10 +1727,16 @@
       if (!track) return;
 
       const fallbackCategories = [
-        { key: "snack", title: "Makanan Ringan", desc: "Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring.", image: "assets/images/snacks.png" },
-        { key: "biskuit", title: "Biskuit & Cookies", desc: "Beragam biskuit dan cookies premium dari brand internasional.", image: "assets/images/biscuits.png" },
-        { key: "wafer", title: "Wafer", desc: "Wafer coklat, vanilla, dan berbagai varian rasa berkualitas.", image: "assets/images/wafers.png" },
-        { key: "kue", title: "Kue & Pastry", desc: "Swiss roll, layer cake, muffin dan berbagai kue kemasan.", image: "assets/images/cakes.png" }
+        { key: "snack", title: "Makanan Ringan", desc: "Super Ring, Cheese Balls, Rota, Rostik, Chicken Ring.", image: "assets/images/snack.png" },
+        { key: "biskuit", title: "Biskuit & Cookies", desc: "Beragam biskuit, cream crackers, dan cookies premium.", image: "assets/images/biskuit.png" },
+        { key: "wafer", title: "Wafer", desc: "Wafer coklat, vanilla, dan berbagai varian rasa.", image: "assets/images/wafer.png" },
+        { key: "kue", title: "Kue & Pastry", desc: "Swiss roll, layer cake, muffin dan berbagai kue kemasan.", image: "assets/images/kue.png" },
+        { key: "permen", title: "Permen", desc: "Berbagai macam permen dan manisan dengan rasa yang menyegarkan.", image: "assets/images/permen.png" },
+        { key: "vegelicious", title: "Vegelicious", desc: "Pilihan makanan sehat dan bernutrisi tinggi berbasis sayuran.", image: "assets/images/vegelicious.png" },
+        { key: "condiments", title: "Condiments", desc: "Saus, bumbu, dan bahan pelengkap makanan.", image: "assets/images/condiments.png" },
+        { key: "noodle", title: "Instant Noodle", desc: "Mie instan dengan berbagai pilihan rasa internasional.", image: "assets/images/noodle.png" },
+        { key: "minuman", title: "Minuman", desc: "Berbagai minuman berkualitas termasuk yogurt dan jus.", image: "assets/images/minuman.png" },
+        { key: "pudding", title: "Pudding", desc: "Produk pudding premium dengan rasa yang lezat.", image: "assets/images/pudding.png" }
       ];
 
       let cats = null;
@@ -1715,17 +1756,27 @@
         cats = fallbackCategories;
       }
 
-      track.innerHTML = cats.map(c => `
-        <div class="product-card reveal fade-up visible" onclick="window.location.href='produk.html?filter=${c.key}'">
-          <div class="product-card-image">
-            <img src="${c.imageData || c.image}" alt="${c.title}">
-            <div class="overlay"></div>
-          </div>
-          <div class="product-card-body">
-            <h3>${getCategoryLabel(c.key)}</h3>
-            <p>${c.desc}</p>
-            <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
+      // Group categories into slides of 4
+      const slideGroups = [];
+      for (let i = 0; i < cats.length; i += 4) {
+        slideGroups.push(cats.slice(i, i + 4));
+      }
+
+      track.innerHTML = slideGroups.map(slide => `
+        <div class="product-slide ${slide.length === 1 ? 'slide-single' : slide.length === 2 ? 'slide-2' : ''}">
+          ${slide.map((c, idx) => `
+            <div class="product-card card-variant-${idx + 1} reveal fade-up visible" onclick="window.location.href='produk.html?filter=${c.key}'">
+              <div class="product-card-image">
+                <img src="${c.imageData || c.image}" alt="${c.title}">
+                <div class="overlay"></div>
+              </div>
+              <div class="product-card-body">
+                <h3>${getCategoryLabel(c.key)}</h3>
+                <p>${c.desc}</p>
+                <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+          `).join('')}
         </div>
       `).join('');
 
@@ -1840,48 +1891,41 @@
       const prevBtn = document.getElementById('productPrev');
       if (!container || !track) return;
 
-      let currentPos = 0;
+      let currentIdx = 0;
 
       function updateSlider() {
-        const firstCard = track.querySelector('.product-card');
-        if (!firstCard) return;
+        const slides = track.querySelectorAll('.product-slide');
+        if (slides.length === 0) return;
 
-        const cardWidth = firstCard.offsetWidth + 24; // 24 is gap
-        const maxScroll = track.scrollWidth - container.offsetWidth;
+        if (currentIdx >= slides.length) currentIdx = 0;
+        if (currentIdx < 0) currentIdx = slides.length - 1;
 
-        if (currentPos > maxScroll) currentPos = maxScroll;
-        if (currentPos < 0) currentPos = 0;
-
-        track.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-        track.style.transform = `translateX(-${currentPos}px)`;
+        const slideWidth = container.offsetWidth;
+        track.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+        track.style.transform = `translateX(-${currentIdx * slideWidth}px)`;
       }
 
       function nextProd() {
-        const firstCard = track.querySelector('.product-card');
-        if (!firstCard) return;
-        const cardWidth = firstCard.offsetWidth + 24;
-        const maxScroll = track.scrollWidth - container.offsetWidth;
-        
-        currentPos += cardWidth;
-        if (currentPos > maxScroll) currentPos = 0; // Loop back to start
+        currentIdx++;
         updateSlider();
       }
 
       function prevProd() {
-        const firstCard = track.querySelector('.product-card');
-        if (!firstCard) return;
-        const cardWidth = firstCard.offsetWidth + 24;
-        const maxScroll = track.scrollWidth - container.offsetWidth;
-        
-        currentPos -= cardWidth;
-        if (currentPos < 0) currentPos = maxScroll; // Loop to end
+        currentIdx--;
         updateSlider();
       }
 
-      if (nextBtn) nextBtn.addEventListener('click', nextProd);
-      if (prevBtn) prevBtn.addEventListener('click', prevProd);
+      if (nextBtn) {
+        nextBtn.onclick = nextProd;
+      }
+      if (prevBtn) {
+        prevBtn.onclick = prevProd;
+      }
 
-      window.addEventListener('resize', () => { currentPos = 0; updateSlider(); });
+      window.addEventListener('resize', () => {
+        track.style.transition = 'none';
+        updateSlider();
+      });
     }
 
     initProductSlider();
@@ -2043,10 +2087,10 @@
         const translated = t(catKey);
         if (translated !== catKey) return translated;
       }
-      const labels = { 
-        snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry', 
-        minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments', 
-        noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding' 
+      const labels = {
+        snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
+        minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
+        noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
       };
       return labels[cat] || cat;
     }
@@ -2056,7 +2100,7 @@
       const url = window.location.href;
       const text = document.title;
       let shareUrl = '';
-      switch(platform) {
+      switch (platform) {
         case 'facebook': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`; break;
         case 'twitter': shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`; break;
         case 'linkedin': shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`; break;

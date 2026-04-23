@@ -32,19 +32,19 @@
     "imageData": ""
   },
   {
-    "key": "minuman",
-    "title": "Minuman",
-    "icon": "fas fa-glass-water",
-    "desc": "Berbagai minuman berkualitas termasuk yogurt, dan minuman rasa buah.",
-    "image": "assets/images/minuman.png",
-    "imageData": ""
-  },
-  {
     "key": "permen",
     "title": "Permen",
     "icon": "fas fa-candy-cane",
     "desc": "Berbagai macam permen dan manisan dengan rasa yang menyegarkan.",
     "image": "assets/images/permen.png",
+    "imageData": ""
+  },
+  {
+    "key": "vegelicious",
+    "title": "Vegelicious",
+    "icon": "fas fa-leaf",
+    "desc": "Pilihan makanan sehat dan bernutrisi tinggi berbasis sayuran berkualitas.",
+    "image": "assets/images/vegelicious.png",
     "imageData": ""
   },
   {
@@ -64,11 +64,11 @@
     "imageData": ""
   },
   {
-    "key": "vegelicious",
-    "title": "Vegelicious",
-    "icon": "fas fa-leaf",
-    "desc": "Pilihan makanan sehat dan bernutrisi tinggi berbasis sayuran berkualitas.",
-    "image": "assets/images/vegelicious.png",
+    "key": "minuman",
+    "title": "Minuman",
+    "icon": "fas fa-glass-water",
+    "desc": "Berbagai minuman berkualitas termasuk yogurt, dan minuman rasa buah.",
+    "image": "assets/images/minuman.png",
     "imageData": ""
   },
   {
