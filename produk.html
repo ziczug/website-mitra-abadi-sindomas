@@ -1309,7 +1309,6 @@
         <span></span><span></span><span></span>
       </div>
     </div>
-    </div>
   </nav>
 
 
@@ -1572,7 +1571,7 @@
 (async function loadDynamicContent() {
   async function getCMSData(fileKey, lsKey) {
     try {
-      const resp = await fetch(`/database/cms/${fileKey}.json`);
+      const resp = await fetch(`database/cms/${fileKey}.json`);
       if (resp.ok) {
         const data = await resp.json();
         if (data) {
@@ -1600,9 +1599,9 @@
   const fi = await getCMSData('footer_info', 'mas_footer_info');
   if (fi) {
     try {
-      const footerDesc = document.querySelector('.produk-footer__tagline');
+      const footerDesc = document.querySelector('.footer-company-info p');
       if (footerDesc && fi.desc) footerDesc.textContent = fi.desc;
-      const footerCopy = document.querySelector('.produk-footer__bottom-inner p');
+      const footerCopy = document.querySelector('.footer-copyright-row p');
       if (footerCopy && fi.year && fi.company) footerCopy.innerHTML = `&copy; ${fi.year} ${fi.company}. All rights reserved.`;
     } catch (e) {}
   }

@@ -57,7 +57,7 @@ const i18nData = {
     
     // Certifications
     'cert-badge': 'KOMITMEN KUALITAS',
-    'cert-title': 'Standar Keamanan Pangan Tertinggi',
+    'cert-desc-short': 'Standar Keamanan Pangan Tertinggi',
     'cert-desc': 'Kepercayaan Anda adalah prioritas kami. Semua produk yang kami distribusikan memenuhi standar regulasi ketat di Indonesia.',
 
     // Contact
@@ -224,8 +224,9 @@ const i18nData = {
     'dist-jakarta-title': 'Jakarta',
 
     // Certifications
-    'cert-badge': 'COMMITMENT TO QUALITY',
-    'cert-title': 'Highest Food Safety Standards',
+    'cert-badge': 'QUALITY COMMITMENT',
+    'cert-desc-short': 'Highest Food Safety Standards',
+    'cert-title': 'Quality & Safety Assurance',
     'cert-desc': 'Your trust is our priority. All products we distribute meet strict regulatory standards in Indonesia.',
 
     // Contact
@@ -260,8 +261,6 @@ const i18nData = {
     'partners-title': 'Our Strategic Partners',
     'partners-desc': 'Our products are available in various leading modern trade and e-commerce networks.',
     'cert-tag': 'Certification',
-    'cert-title': 'Quality & Safety Assurance',
-    'cert-desc': 'All our products have passed government safety standards and certifications.',
     'cert-halal-title': 'Halal Certificate',
     'cert-halal-desc': 'All products are halal certified by MUI, guaranteeing halal for Indonesian Muslim consumers.',
     'cert-bpom-title': 'BPOM Distribution Permit',
@@ -269,7 +268,6 @@ const i18nData = {
     'cert-std-title': 'International Standards',
     'cert-std-desc': 'Products are produced according to international standards with internal state quality control.',
     'contact-tag': 'Contact',
-    'contact-title': 'Contact Us',
     'contact-desc-idx': 'Interested in partnering? Contact us for more information about products and distribution cooperation.',
     'contact-office-title': 'Head Office Address',
     'contact-phone-title': 'Phone',
@@ -393,8 +391,9 @@ const i18nData = {
 
     // Certifications
     'cert-badge': '质量承诺',
-    'cert-title': '最高食品安全标准',
-    'cert-desc': '您的信任是我们的首要任务。我们分销的所有产品均符合印度尼西亚严格的监管标准。',
+    'cert-desc-short': '最高食品安全标准',
+    'cert-title': '质量与安全保证',
+    'cert-desc': '您的信任是我们的首要任务。我们分销的所有产品都符合印度尼西亚严格的监管标准。',
 
     // Contact
     'contact-badge': '联系我们',

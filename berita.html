@@ -1435,7 +1435,6 @@
         <span></span><span></span><span></span>
       </div>
     </div>
-    </div>
   </nav>
 
 
@@ -1900,6 +1899,7 @@
       }
     });
 
+    let cachedProducts = null;
     headerSearchInput?.addEventListener('input', async (e) => {
       const query = e.target.value.toLowerCase().trim();
       if (!query) {
@@ -1907,9 +1907,11 @@
         return;
       }
       try {
-        const resp = await fetch('database/cms/products.json');
-        const products = resp.ok ? await resp.json() : [];
-        const matches = products.filter(p => 
+        if (!cachedProducts) {
+          const resp = await fetch('database/cms/products.json');
+          cachedProducts = resp.ok ? await resp.json() : [];
+        }
+        const matches = cachedProducts.filter(p => 
           p.name.toLowerCase().includes(query) || 
           p.brand.toLowerCase().includes(query) ||
           p.category.toLowerCase().includes(query)
@@ -1961,9 +1963,9 @@
       const fi = await getCMSData('footer_info', 'mas_footer_info');
       if (fi) {
         try {
-          const footerDesc = document.querySelector('.produk-footer__tagline');
+          const footerDesc = document.querySelector('.footer-company-info p');
           if (footerDesc && fi.desc) footerDesc.textContent = fi.desc;
-          const footerCopy = document.querySelector('.produk-footer__bottom-inner p');
+          const footerCopy = document.querySelector('.footer-copyright-row p');
           if (footerCopy && fi.year && fi.company) footerCopy.innerHTML = `&copy; ${fi.year} ${fi.company}. All rights reserved.`;
         } catch (e) {}
       }
