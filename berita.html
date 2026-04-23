@@ -1445,9 +1445,9 @@
     <!-- Banner Hero -->
     <section class="berita-hero">
       <div class="berita-hero-content">
-        <div class="berita-hero-badge"><i class="fas fa-newspaper"></i> BERITA & INFORMASI</div>
-        <h1>Berita <span>Terbaru</span></h1>
-        <p>Temukan informasi terkini, update produk, dan berita seputar <span style="white-space: nowrap;">PT Mitra Abadi Sindomas</span>.</p>
+        <div class="berita-hero-badge"><i class="fas fa-newspaper"></i> <span data-i18n="nav-news">BERITA & INFORMASI</span></div>
+        <h1 data-i18n="news-hero-title">Berita & <span>Informasi</span></h1>
+        <p data-i18n="news-hero-desc">Berita terbaru, informasi produk, dan update dari PT Mitra Abadi Sindomas.</p>
       </div>
     </section>
 
@@ -1460,20 +1460,22 @@
             <div class="berita-search">
               <div class="berita-search-input">
                 <i class="fas fa-search"></i>
-                <input type="text" id="beritaSearch" placeholder="Pencarian kata kunci..." oninput="filterBerita()">
+                <input type="text" placeholder="Cari berita atau artikel..." id="beritaSearch" oninput="filterBerita()" data-i18n="news-search-placeholder">
               </div>
-              <button class="berita-search-btn" onclick="filterBerita()"><i class="fas fa-search"></i> Cari</button>
+              <button class="berita-search-btn" onclick="filterBerita()" data-i18n="nav-news"><i class="fas fa-search"></i> Cari</button>
             </div>
 
             <!-- Results Info -->
             <div class="berita-results-info">
-              <div class="berita-results-count">Menampilkan <strong id="beritaCount">0</strong> Hasil</div>
+              <div class="berita-results-count">
+                <strong id="beritaCount">0</strong> <span id="beritaResultsLabel">berita ditemukan</span>
+              </div>
               <div class="berita-sort">
                 <i class="fas fa-sliders-h"></i>
                 <select id="beritaSort" onchange="filterBerita()">
-                  <option value="newest" selected>Diterbitkan (terbaru)</option>
-                  <option value="oldest">Diterbitkan (terlama)</option>
-                  <option value="title">Judul (A-Z)</option>
+                  <option value="newest" data-i18n="prod-sort-newest">Terbaru</option>
+                  <option value="oldest">Terlama</option>
+                  <option value="title">Judul A-Z</option>
                 </select>
               </div>
             </div>
@@ -1521,7 +1523,7 @@
     </div>
 
     <div class="berita-related" id="relatedSection" style="display:none">
-      <h2>Berita Lainnya</h2>
+      <h2 data-i18n="news-related">Berita Lainnya</h2>
       <div class="berita-related-grid" id="relatedGrid"></div>
     </div>
   </div>
@@ -1608,12 +1610,16 @@
     // DATA
     // ==========================================
     let newsItems = [];
-    const MONTHS_ID = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-
-    function formatDateID(dateStr) {
+    function formatDate(dateStr) {
       if (!dateStr) return '';
+      const lang = typeof getCurrentLanguage === 'function' ? getCurrentLanguage() : 'id';
       const d = new Date(dateStr);
-      return `${d.getDate()} ${MONTHS_ID[d.getMonth() + 1]} ${d.getFullYear()}`;
+      const locales = { id: 'id-ID', en: 'en-US', cn: 'zh-CN' };
+      try {
+        return d.toLocaleDateString(locales[lang] || 'id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+      } catch (e) {
+        return dateStr;
+      }
     }
 
     // Load news data
@@ -1656,7 +1662,25 @@
         const sel = document.getElementById(id);
         if (sel) {
           const cur = sel.value;
-          sel.innerHTML = '<option value="">Tahun</option>' + allYears.map(y => `<option value="${y}">${y}</option>`).join('');
+          sel.innerHTML = `<option value="">${t('news-year')}</option>` + allYears.map(y => `<option value="${y}">${y}</option>`).join('');
+          sel.value = cur;
+        }
+      });
+      ['filterMonthFrom', 'filterMonthTo'].forEach(id => {
+        const sel = document.getElementById(id);
+        if (sel) {
+          const cur = sel.value;
+          const translatedMonthLabel = t('news-month');
+          let options = `<option value="">${translatedMonthLabel}</option>`;
+          const lang = typeof getCurrentLanguage === 'function' ? getCurrentLanguage() : 'id';
+          const locales = { id: 'id-ID', en: 'en-US', cn: 'zh-CN' };
+          
+          for(let m=1; m<=12; m++) {
+            const d = new Date(2024, m-1, 1);
+            const mName = d.toLocaleDateString(locales[lang] || 'id-ID', { month: 'long' });
+            options += `<option value="${m}">${mName}</option>`;
+          }
+          sel.innerHTML = options;
           sel.value = cur;
         }
       });
@@ -1713,11 +1737,18 @@
     function renderBeritaGrid(items) {
       const grid = document.getElementById('beritaGrid');
       const empty = document.getElementById('beritaEmpty');
-      document.getElementById('beritaCount').textContent = items.length;
+      const countEl = document.getElementById('beritaCount');
+      if (countEl) countEl.textContent = items.length;
+      
+      const resultsLabel = document.getElementById('beritaResultsLabel');
+      if (resultsLabel) resultsLabel.textContent = t('news-results-found');
 
       if (items.length === 0) {
         grid.innerHTML = '';
         empty.style.display = 'block';
+        const emptyH3 = empty.querySelector('h3');
+        const emptyP = empty.querySelector('p');
+        if (emptyH3) emptyH3.textContent = t('news-not-found');
         return;
       }
 
@@ -1730,10 +1761,10 @@
               <img src="${imgSrc}" alt="${n.title}" loading="lazy">
             </div>
             <div class="berita-card-body">
-              <div class="berita-card-date"><i class="fas fa-calendar-alt"></i> ${formatDateID(n.date)}</div>
+              <div class="berita-card-date"><i class="fas fa-calendar-alt"></i> ${formatDate(n.date)}</div>
               <h3>${n.title}</h3>
               <p class="berita-card-summary">${n.summary || ''}</p>
-              <span class="berita-card-readmore">Baca selengkapnya <i class="fas fa-arrow-right"></i></span>
+              <span class="berita-card-readmore">${t('news-read-more')} <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
         `;
@@ -1774,9 +1805,12 @@
 
       document.getElementById('detailBannerImg').src = imgSrc;
       document.getElementById('detailFeaturedImg').src = imgSrc;
-      document.getElementById('detailDate').textContent = 'Diterbitkan: ' + formatDateID(article.date);
+      document.getElementById('detailDate').textContent = t('news-published-at') + ' ' + formatDate(article.date);
       document.getElementById('detailTitle').textContent = article.title;
       document.getElementById('detailExcerpt').textContent = article.summary || '';
+      
+      const backBtn = document.querySelector('.berita-detail-back');
+      if (backBtn) backBtn.innerHTML = `<i class="fas fa-arrow-left"></i> ${t('news-back-to-news')}`;
 
       // Render content
       const contentEl = document.getElementById('detailContent');
@@ -1811,9 +1845,9 @@
                 <img src="${rImg}" alt="${n.title}" loading="lazy">
               </div>
               <div class="berita-card-body">
-                <div class="berita-card-date"><i class="fas fa-calendar-alt"></i> ${formatDateID(n.date)}</div>
+                <div class="berita-card-date"><i class="fas fa-calendar-alt"></i> ${formatDate(n.date)}</div>
                 <h3>${n.title}</h3>
-                <span class="berita-card-readmore">Baca selengkapnya <i class="fas fa-arrow-right"></i></span>
+                <span class="berita-card-readmore">${t('news-read-more')} <i class="fas fa-arrow-right"></i></span>
               </div>
             </div>
           `;
@@ -1987,6 +2021,22 @@
     // INIT
     // ==========================================
     loadNewsData();
+
+    // Listen for language changes
+    window.addEventListener('langChanged', () => {
+      populateYearFilters();
+      filterBerita();
+      
+      // Update related news if detail is open
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      if (id) {
+        showDetail(parseInt(id) || id);
+      }
+      
+      // Update page title
+      document.title = `${t('nav-news')} | PT Mitra Abadi Sindomas`;
+    });
   </script>
 </body>
 </html>

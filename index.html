@@ -1651,7 +1651,7 @@
             <div class="overlay"></div>
           </div>
           <div class="product-card-body">
-            <h3>${c.title}</h3>
+            <h3>${getCategoryLabel(c.key)}</h3>
             <p>${c.desc}</p>
             <div class="arrow"><i class="fas fa-arrow-right"></i></div>
           </div>
@@ -1932,16 +1932,7 @@
       prods.forEach(p => {
         // Get category label safely
         let catLabel = p.category;
-        if (typeof getCategoryLabel === 'function') {
-          catLabel = getCategoryLabel(p.category);
-        } else {
-          const labels = {
-            snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
-            minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
-            noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
-          };
-          catLabel = labels[p.category] || p.category;
-        }
+        catLabel = getCategoryLabel(p.category);
 
         const display = `${p.name} - ${p.brand} - ${catLabel}`;
         if (!seen.has(display)) {
@@ -1999,6 +1990,27 @@
       const encodedText = encodeURIComponent(text);
       window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
     }
+
+    function getCategoryLabel(cat) {
+      if (typeof t === 'function') {
+        const catKey = `cat-${cat}`;
+        const translated = t(catKey);
+        if (translated !== catKey) return translated;
+      }
+      const labels = { 
+        snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry', 
+        minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments', 
+        noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding' 
+      };
+      return labels[cat] || cat;
+    }
+
+    // Listen for language changes
+    window.addEventListener('langChanged', () => {
+      initCategories();
+      // Update page title
+      document.title = `PT Mitra Abadi Sindomas | ${t('hero-title')}`;
+    });
 
   </script>
 

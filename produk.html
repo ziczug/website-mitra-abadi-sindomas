@@ -2011,13 +2011,13 @@ function renderCategoryTabs() {
   
   const allBtn = `
     <button class="filter-tab ${currentFilter === 'all' ? 'active' : ''}" data-filter="all" onclick="setFilter('all', this)">
-      <i class="fas fa-th-large"></i> Semua
+      <i class="fas fa-th-large"></i> ${t('brands-all')}
     </button>
   `;
   
   const catBtns = allCategories.map(c => `
     <button class="filter-tab ${currentFilter === c.key ? 'active' : ''}" data-filter="${c.key}" onclick="setFilter('${c.key}', this)">
-      <i class="${c.icon || 'fas fa-tag'}"></i> ${c.title}
+      <i class="${c.icon || 'fas fa-tag'}"></i> ${getCategoryLabel(c.key)}
     </button>
   `).join('');
   
@@ -2048,7 +2048,7 @@ function updateBrandFilter() {
     return;
   }
 
-  brandSelect.innerHTML = `<option value="all">-- Semua Merek --</option>` + 
+  brandSelect.innerHTML = `<option value="all">${t('prod-brand-all')}</option>` + 
     brandsToShow.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
   
   // Tetapkan kembali value if still valid
@@ -2109,10 +2109,10 @@ function renderProducts(list) {
   }
   if (noResults) noResults.classList.remove('active');
   
-  const catLabel = currentFilter === 'all' ? 'Semua' : (document.querySelector('.filter-tab.active')?.innerText.trim() || 'Kategori');
+  const catLabel = currentFilter === 'all' ? t('brands-all') : (getCategoryLabel(currentFilter));
   const brandLabel = currentBrand === 'all' ? '' : ` · ${currentBrand}`;
   
-  if (info) info.innerHTML = `<span class="results-count-pill">${list.length}</span> Produk ditemukan · ${catLabel}${brandLabel}`;
+  if (info) info.innerHTML = `<span class="results-count-pill">${list.length}</span> ${t('prod-results-found')} · ${catLabel}${brandLabel}`;
 
   // Only show limited products initially
   const visibleList = list.slice(0, currentDisplayCount);
@@ -2125,7 +2125,7 @@ function renderProducts(list) {
       showMoreContainer.style.display = 'flex';
       if (btnShowMore) {
         const span = btnShowMore.querySelector('span');
-        if (span) span.textContent = 'Selengkapnya';
+        if (span) span.textContent = t('btn-view-all'); // Using view all as label
       }
     } else {
       showMoreContainer.style.display = 'none';
@@ -2207,12 +2207,24 @@ function showMoreProducts() {
 }
 
 function getCategoryLabel(cat) {
-  if (allCategories && allCategories.length > 0) {
-    const found = allCategories.find(c => c.key === cat);
-    if (found) return found.title;
-  }
-  const categoryLabels = { snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry', minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments', noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding' };
-  return categoryLabels[cat] || cat;
+  const catKey = `cat-${cat}`;
+  const translated = t(catKey);
+  if (translated !== catKey) return translated;
+
+  // Fallback to i18nData mapped labels if exists in data
+  const labels = { 
+    snack: 'Snack', 
+    biskuit: 'Biskuit', 
+    wafer: 'Wafer', 
+    kue: 'Kue & Pastry', 
+    minuman: 'Minuman', 
+    permen: 'Permen', 
+    condiments: 'Condiments', 
+    noodle: 'Instant Noodle', 
+    vegelicious: 'Vegelicious', 
+    pudding: 'Pudding' 
+  };
+  return labels[cat] || cat;
 }
 
 function setFilter(filter, btn) {
@@ -2520,6 +2532,16 @@ loadProductsFromCSV().then(() => {
       window.history.replaceState({}, document.title, window.location.pathname);
     }, 300);
   }
+});
+
+// Listen for language changes
+window.addEventListener('langChanged', () => {
+  renderCategoryTabs();
+  updateBrandFilter();
+  filterProducts();
+  
+  // Update static titles and breadcrumbs
+  document.title = `${t('nav-products')} | PT Mitra Abadi Sindomas`;
 });
 
     // --- Combined Navigation & Modal logic is handled above ---

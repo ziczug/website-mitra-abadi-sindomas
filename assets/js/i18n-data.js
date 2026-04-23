@@ -133,7 +133,30 @@ const i18nData = {
     'prod-spec-cat': 'Kategori',
     'prod-modal-wa': 'Pesan via WhatsApp',
     'prod-modal-close': 'Tutup',
-    'prod-not-found': 'Produk tidak ditemukan.'
+    'prod-not-found': 'Produk tidak ditemukan.',
+    'cat-snack': 'Snack',
+    'cat-biskuit': 'Biskuit & Cookies',
+    'cat-wafer': 'Wafer',
+    'cat-kue': 'Kue & Pastry',
+    'cat-minuman': 'Minuman',
+    'cat-permen': 'Permen',
+    'cat-condiments': 'Condiments & Sauces',
+    'cat-noodle': 'Instant Noodle',
+    'cat-vegelicious': 'Vegelicious',
+    'cat-pudding': 'Pudding',
+    
+    // News Page
+    'news-hero-title': 'Berita & <span>Informasi</span>',
+    'news-hero-desc': 'Berita terbaru, informasi produk, dan update dari PT Mitra Abadi Sindomas.',
+    'news-search-placeholder': 'Cari berita atau artikel...',
+    'news-results-found': 'berita ditemukan',
+    'news-read-more': 'Baca selengkapnya',
+    'news-back-to-news': 'Kembali ke Berita',
+    'news-published-at': 'Diterbitkan:',
+    'news-related': 'Berita Lainnya',
+    'news-not-found': 'Berita tidak ditemukan.',
+    'news-month': 'Bulan',
+    'news-year': 'Tahun'
   },
   en: {
     // Navbar
@@ -269,7 +292,30 @@ const i18nData = {
     'prod-spec-cat': 'Category',
     'prod-modal-wa': 'Order via WhatsApp',
     'prod-modal-close': 'Close',
-    'prod-not-found': 'Products not found.'
+    'prod-not-found': 'Products not found.',
+    'cat-snack': 'Snack',
+    'cat-biskuit': 'Biscuits & Cookies',
+    'cat-wafer': 'Wafer',
+    'cat-kue': 'Cakes & Pastry',
+    'cat-minuman': 'Beverages',
+    'cat-permen': 'Candy',
+    'cat-condiments': 'Condiments & Sauces',
+    'cat-noodle': 'Instant Noodle',
+    'cat-vegelicious': 'Vegelicious',
+    'cat-pudding': 'Pudding',
+
+    // News Page
+    'news-hero-title': 'News & <span>Information</span>',
+    'news-hero-desc': 'Latest news, product information, and updates from PT Mitra Abadi Sindomas.',
+    'news-search-placeholder': 'Search news or articles...',
+    'news-results-found': 'news items found',
+    'news-read-more': 'Read more',
+    'news-back-to-news': 'Back to News',
+    'news-published-at': 'Published:',
+    'news-related': 'Related News',
+    'news-not-found': 'News not found.',
+    'news-month': 'Month',
+    'news-year': 'Year'
   },
   cn: {
     // Navbar
@@ -403,7 +449,30 @@ const i18nData = {
     'prod-spec-cat': '类别',
     'prod-modal-wa': '通过 WhatsApp 订购',
     'prod-modal-close': '关闭',
-    'prod-not-found': '未找到产品。'
+    'prod-not-found': '未找到产品。',
+    'cat-snack': '零食',
+    'cat-biskuit': '饼干',
+    'cat-wafer': '威化饼',
+    'cat-kue': '蛋糕糕点',
+    'cat-minuman': '饮料',
+    'cat-permen': '糖果',
+    'cat-condiments': '调味品',
+    'cat-noodle': '方便面',
+    'cat-vegelicious': '素食产品',
+    'cat-pudding': '布丁',
+
+    // News Page
+    'news-hero-title': '新闻与<span>资讯</span>',
+    'news-hero-desc': '来自 PT Mitra Abadi Sindomas 的最新新闻、产品信息和更新。',
+    'news-search-placeholder': '搜索新闻或文章...',
+    'news-results-found': '找到的新闻',
+    'news-read-more': '阅读更多',
+    'news-back-to-news': '返回新闻',
+    'news-published-at': '发布于:',
+    'news-related': '相关新闻',
+    'news-not-found': '未找到新闻。',
+    'news-month': '月',
+    'news-year': '年'
   }
 };
 

@@ -3,6 +3,24 @@
  * Handles content translation across the site
  */
 
+/**
+ * Get current language from localStorage or default to 'id'
+ */
+function getCurrentLanguage() {
+  return localStorage.getItem('preferred_lang') || 'id';
+}
+
+/**
+ * Get translation for a specific key
+ */
+function t(key) {
+  const lang = getCurrentLanguage();
+  if (typeof i18nData !== 'undefined' && i18nData[lang] && i18nData[lang][key]) {
+    return i18nData[lang][key];
+  }
+  return key;
+}
+
 function translatePage(lang) {
   if (typeof i18nData === 'undefined') {
     console.error('Translation data not found!');
@@ -24,8 +42,12 @@ function translatePage(lang) {
         }
       } else {
         // Only update text content, preserving other children if it's a complex element
-        // but since we usually use it on spans/p/hX, it's safer to just set textContent
-        el.textContent = translations[key];
+        // We use innerHTML if the translation contains HTML, otherwise textContent
+        if (translations[key].includes('<') && translations[key].includes('>')) {
+          el.innerHTML = translations[key];
+        } else {
+          el.textContent = translations[key];
+        }
       }
     }
   });
@@ -42,22 +64,30 @@ function translatePage(lang) {
  */
 function updateDynamicContentLabels(lang) {
   const translations = i18nData[lang];
-  
-  // Category Labels in Product Page (if present)
-  if (typeof getCategoryLabel === 'function') {
-     // This logic might need product database integration
-  }
+  if (!translations) return;
   
   // Results info label in product page
-  const resultsInfo = document.querySelector('.results-info');
-  if (resultsInfo && translations['prod-results-found']) {
-     // Preserve the number if present
-     const strong = resultsInfo.querySelector('strong');
-     if (strong) {
-        const count = strong.textContent;
-        resultsInfo.innerHTML = `<strong>${count}</strong> ${translations['prod-results-found']}`;
+  const resultsInfo = document.getElementById('resultsInfo');
+  if (resultsInfo) {
+     const pill = resultsInfo.querySelector('.results-count-pill');
+     if (pill) {
+        const count = pill.textContent;
+        // Check for category/brand info which might be appended after a bullet
+        const parts = resultsInfo.innerHTML.split('·');
+        const extraInfo = parts.length > 1 ? ` · ${parts[1]}` : '';
+        
+        resultsInfo.innerHTML = `<span class="results-count-pill">${count}</span> ${translations['prod-results-found']}${extraInfo}`;
      }
   }
+
+  // Search placeholders in various pages
+  const searchInputs = document.querySelectorAll('#beritaSearch, #searchInput, .berita-search-input input, .search-wrapper-premium input');
+  searchInputs.forEach(input => {
+    const key = input.getAttribute('data-i18n') || 'prod-search-placeholder';
+    if (translations[key]) {
+      input.setAttribute('placeholder', translations[key]);
+    }
+  });
 }
 
 /**
@@ -127,5 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Small delay to ensure i18nData is ready if loaded async
   setTimeout(() => {
     setLanguage(saved);
-  }, 50);
+  }, 100);
 });
+
