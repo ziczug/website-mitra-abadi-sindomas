@@ -339,21 +339,207 @@
   <section class="section brands" id="merek">
     <div class="container">
       <div class="section-header center pulse-on-scroll">
-        <div class="section-badge" data-i18n="brands-badge">MEREK KAMI</div>
-        <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="brands-title">
-          Menghadirkan Merek Internasional Terbaik</h2>
-        <p style="max-width: 700px; margin: 0 auto;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global
+        <div class="brand-badge-wrapper">
+          <i class="fas fa-leaf fa-flip-horizontal"></i>
+          <span data-i18n="brands-badge-top">BRAND PARTNERSHIP</span>
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h2 class="text-shine" style="font-size: clamp(32px, 5vw, 56px); margin-bottom: 20px;" data-i18n="brands-title">
+          Menghadirkan Merek <span class="gold-text">Internasional Terbaik</span></h2>
+        <p style="max-width: 700px; margin: 0 auto; opacity: 0.8;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global
           terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
 
+      <!-- Optional Filters for exact ref match -->
+      <div class="brand-filters">
+        <button class="brand-filter-btn active" data-filter="all" data-i18n="filter-all">Semua</button>
+        <button class="brand-filter-btn" data-filter="snack" data-i18n="cat-snack">Snack</button>
+        <button class="brand-filter-btn" data-filter="biskuit" data-i18n="cat-biskuit">Biskuit & Cookies</button>
+        <button class="brand-filter-btn" data-filter="wafer" data-i18n="cat-wafer">Wafer</button>
+        <button class="brand-filter-btn" data-filter="kue" data-i18n="cat-kue">Kue & Pastry</button>
+        <button class="brand-filter-btn" data-filter="permen" data-i18n="cat-permen">Permen</button>
+        <button class="brand-filter-btn" data-filter="vegelicious" data-i18n="cat-vegelicious">Vegelicious</button>
+        <button class="brand-filter-btn" data-filter="condiments" data-i18n="cat-condiments">Condiments & Sauces</button>
+        <button class="brand-filter-btn" data-filter="noodle" data-i18n="cat-noodle">Instant Noodle</button>
+        <button class="brand-filter-btn" data-filter="minuman" data-i18n="cat-minuman">Minuman</button>
+        <button class="brand-filter-btn" data-filter="pudding" data-i18n="cat-pudding">Pudding</button>
+      </div>
 
-
-      <div class="brand-slider-container reveal fade-up">
+      <div class="brand-slider-container reveal fade-up visible">
         <button class="brand-nav-btn prev" id="brandPrev"><i class="fas fa-chevron-left"></i></button>
         <div class="brand-grid-wrapper">
-          <div class="brand-grid" id="brandGrid">
-            <!-- Brands will be loaded dynamically here -->
+          <div class="brand-grid" id="brandGrid" style="transform: translateX(0px);">
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=Oriental'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/oriental.jpg" alt="Oriental" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">Oriental</h4>
+            </div>
           </div>
+        
+          <div class="brand-card active" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=Jacker'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/jacker.jpg" alt="Jacker" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">Jacker</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=Zees'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/zess.jpg" alt="Zees" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">Zees</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=Fudo'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/fudo.jpg" alt="Fudo" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">Fudo</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=Win2'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/win2.jpg" alt="Win2" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">Win2</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=Ibu%20Mie'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/ibumie.jpg" alt="Ibu Mie" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">Ibu Mie</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=Telly'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/telly.jpg" alt="Telly" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">Telly</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=A-TASTE'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/a-taste.jpg" alt="A-TASTE" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">A-TASTE</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=HUANG%20XIAO%20GU!'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/huang-xiao-gu.jpg" alt="HUANG XIAO GU!" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">HUANG XIAO GU!</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=MASTER%20JH'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/master-jh.jpg" alt="MASTER JH" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">MASTER JH</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=VEGGILICIOUS'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/veggilicious.jpg" alt="VEGGILICIOUS" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">VEGGILICIOUS</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=VETRUE'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/vetrue.jpg" alt="VETRUE" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">VETRUE</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=TAWANDANG'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/tawandang.jpg" alt="TAWANDANG" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">TAWANDANG</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=MIKKU'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/mikku.jpg" alt="MIKKU" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">MIKKU</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=XIDUODONG'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/xiduodong.jpg" alt="XIDUODONG" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">XIDUODONG</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=SWECCO'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/swecco.jpg" alt="SWECCO" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">SWECCO</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=KISS%20DELICIAS'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/kiss-delicias.jpg" alt="KISS DELICIAS" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">KISS DELICIAS</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=YAMAMOTO%20KAWAHIRO'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/yamamoto-kawahiro.jpg" alt="YAMAMOTO KAWAHIRO" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">YAMAMOTO KAWAHIRO</h4>
+            </div>
+          </div>
+        
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=HUI%20XIANG%20ZHAI%20ZI'">
+            <div class="brand-img-container">
+              <img src="assets/logobrands/hui-xiang-zhai-zi.jpg" alt="HUI XIANG ZHAI ZI" class="brand-img">
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">HUI XIANG ZHAI ZI</h4>
+            </div>
+          </div>
+        </div>
         </div>
         <button class="brand-nav-btn next" id="brandNext"><i class="fas fa-chevron-right"></i></button>
       </div>
@@ -416,6 +602,7 @@
           <img src="assets/images/peta.gif" alt="Peta Jaringan Distribusi MAS" class="map-image">
         </div>
       </div>
+
 
       <div class="section-badge-center" style="display: flex; justify-content: center; margin-bottom: 20px;">
         <div class="section-tag"><i class="fas fa-warehouse"></i> <span data-i18n="dist-warehouse-tag">Lokasi Gudang &
@@ -1391,33 +1578,38 @@
       });
     }
 
-    function applyBrandFilters() {
-      renderBrands(allBrandsData);
+    function applyBrandFilters(filter = 'all') {
+      const filtered = filter === 'all'
+        ? allBrandsData
+        : allBrandsData.filter(b => (b.category || '').toLowerCase().includes(filter.toLowerCase()));
+      renderBrands(filtered);
       initBrandSlider();
     }
 
     function renderBrands(brands) {
       if (brands.length === 0) {
-        brandGrid.innerHTML = `<div style="padding: 40px; color: var(--gray-400);">Tidak ada brand ditemukan.</div>`;
+        brandGrid.innerHTML = `<div style="padding: 40px; color: var(--gray-400); text-align: center; width: 100%;">Tidak ada brand ditemukan.</div>`;
         return;
       }
 
       // Duplicate brands for seamless infinite loop (if enough brands)
-      const displayBrands = brands.length > 4 ? [...brands, ...brands] : brands;
+      const displayBrands = brands.length > 4 ? [...brands, ...brands, ...brands] : brands;
 
       brandGrid.innerHTML = displayBrands.map((brand, index) => {
         const initial = brand.name.trim().charAt(0).toUpperCase();
         const logoHtml = brand.logo && brand.logo.trim() !== ""
           ? `<img src="${brand.logo}" alt="${brand.name}" class="brand-img">`
           : `<div class="brand-placeholder">
-               <span class="initial">${initial}</span>
-               <span class="label">Logo</span>
+               <span class="initial" style="font-size: 48px; color: var(--accent); font-weight: 800;">${initial}</span>
              </div>`;
 
         return `
-          <div class="brand-card reveal zoom-in visible" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=${encodeURIComponent(brand.name)}'">
+          <div class="brand-card" style="cursor: pointer;" onclick="window.location.href='produk.html?brand=${encodeURIComponent(brand.name)}'">
             <div class="brand-img-container">
               ${logoHtml}
+            </div>
+            <div class="brand-info-overlay" style="position: absolute; bottom: 20px; text-align: center; opacity: 0; transition: 0.3s;">
+               <h4 style="color: #fff; margin: 0; font-size: 14px;">${brand.name}</h4>
             </div>
           </div>
         `;
@@ -1426,64 +1618,156 @@
 
 
 
+    function updateActiveBrand() {
+      const cards = brandGrid.querySelectorAll('.brand-card');
+      const wrapper = document.querySelector('.brand-grid-wrapper');
+      if (!wrapper || cards.length === 0) return;
+
+      const containerRect = wrapper.getBoundingClientRect();
+      const center = containerRect.left + containerRect.width / 2;
+
+      let closestCard = null;
+      let minDistance = Infinity;
+
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(center - cardCenter);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestCard = card;
+        }
+        card.classList.remove('active');
+      });
+
+      if (closestCard) closestCard.classList.add('active');
+    }
+
     function initBrandSlider() {
       clearInterval(scrollInterval);
-      scrollPos = 0;
-      brandGrid.style.transform = `translateX(0)`;
-
+      
       const wrapper = document.querySelector('.brand-grid-wrapper');
       if (!wrapper) return;
 
-      scrollInterval = setInterval(() => {
-        if (!isHovering) {
-          scrollPos += 0.8;
-          const maxScroll = brandGrid.scrollWidth / 2;
-          if (scrollPos >= maxScroll && allBrandsData.length > 4) {
-            scrollPos = 0;
-          }
-          brandGrid.style.transform = `translateX(-${scrollPos}px)`;
-        }
-      }, 30);
+      const cards = brandGrid.querySelectorAll('.brand-card');
+      const cardWidth = 220;
+      const gap = 30;
+      const step = cardWidth + gap;
 
-      // Mouse events for desktop
-      brandGrid.addEventListener('mouseenter', () => isHovering = true);
-      brandGrid.addEventListener('mouseleave', () => isHovering = false);
+      // Random start position
+      if (cards.length > 0) {
+        const randomIndex = Math.floor(Math.random() * cards.length);
+        scrollPos = randomIndex * step;
+        brandGrid.style.transform = `translateX(-${scrollPos}px)`;
+      }
 
-      // Touch events for mobile
-      let touchStartX = 0;
-      brandGrid.addEventListener('touchstart', (e) => {
-        isHovering = true;
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
-      brandGrid.addEventListener('touchend', () => {
-        setTimeout(() => isHovering = false, 2000);
-      }, { passive: true });
+      // Ensure the active card is set correctly
+      setTimeout(updateActiveBrand, 100);
+
+      // Handle swipe for mobile if needed
+      let isDragging = false;
+      let startX, currentScrollPos;
+
+      brandGrid.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - brandGrid.offsetLeft;
+        currentScrollPos = scrollPos;
+        brandGrid.style.transition = 'none';
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        brandGrid.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+        updateActiveBrand();
+      });
+
+      brandGrid.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - brandGrid.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        scrollPos = currentScrollPos - walk;
+        
+        const maxScroll = brandGrid.scrollWidth - wrapper.offsetWidth;
+        if (scrollPos < 0) scrollPos = 0;
+        if (scrollPos > maxScroll) scrollPos = maxScroll;
+        
+        brandGrid.style.transform = `translateX(-${scrollPos}px)`;
+        updateActiveBrand();
+      });
     }
 
     document.getElementById('brandNext')?.addEventListener('click', () => {
-      const step = 260;
+      const step = 250; // card 220 + gap 30
       scrollPos += step;
-      const maxScroll = brandGrid.scrollWidth / 2;
-      if (scrollPos > maxScroll) scrollPos = maxScroll;
+      const maxScroll = brandGrid.scrollWidth - document.querySelector('.brand-grid-wrapper').offsetWidth;
+      if (scrollPos > maxScroll) scrollPos = 0;
       brandGrid.style.transform = `translateX(-${scrollPos}px)`;
+      setTimeout(updateActiveBrand, 300);
     });
 
     document.getElementById('brandPrev')?.addEventListener('click', () => {
-      const step = 260;
-      scrollPos = Math.max(0, scrollPos - step);
+      const step = 250;
+      scrollPos -= step;
+      if (scrollPos < 0) {
+        const maxScroll = brandGrid.scrollWidth - document.querySelector('.brand-grid-wrapper').offsetWidth;
+        scrollPos = maxScroll;
+      }
       brandGrid.style.transform = `translateX(-${scrollPos}px)`;
+      setTimeout(updateActiveBrand, 300);
     });
 
-    document.getElementById('brandTabNavNext')?.addEventListener('click', () => {
-      if (brandTabContainer) {
-        brandTabContainer.scrollBy({ left: 150, behavior: 'smooth' });
+    // Filter button listeners with mouse follow and double-click logic
+    document.querySelectorAll('.brand-filter-btn').forEach(btn => {
+      // Wrap text in span for z-index
+      if (!btn.querySelector('span')) {
+        btn.innerHTML = `<span>${btn.innerHTML}</span>`;
       }
-    });
 
-    document.getElementById('brandTabNavPrev')?.addEventListener('click', () => {
-      if (brandTabContainer) {
-        brandTabContainer.scrollBy({ left: -150, behavior: 'smooth' });
-      }
+      btn.addEventListener('mousemove', e => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        btn.style.setProperty('--x', `${x}px`);
+        btn.style.setProperty('--y', `${y}px`);
+      });
+
+      let clickTimer = null;
+      btn.addEventListener('click', function() {
+        if (clickTimer) {
+          // Double tap / Second click: CANCEL (Batal milih)
+          clearTimeout(clickTimer);
+          clickTimer = null;
+          this.classList.remove('active');
+          // Optional: Re-filter slider to 'all'
+          if (typeof applyBrandFilters === 'function') {
+            applyBrandFilters('all');
+            document.querySelector('[data-filter="all"]')?.classList.add('active');
+          }
+          return;
+        }
+
+        // First click: Select and set timer to navigate
+        document.querySelectorAll('.brand-filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter slider immediately for visual feedback
+        if (typeof applyBrandFilters === 'function') {
+           applyBrandFilters(this.dataset.filter);
+        }
+
+        clickTimer = setTimeout(() => {
+          const filter = this.dataset.filter;
+          if (filter === 'all') {
+            window.location.href = 'produk.html';
+          } else {
+            window.location.href = `produk.html?filter=${encodeURIComponent(filter)}`;
+          }
+          clickTimer = null;
+        }, 500); // 500ms window for double-click cancellation
+      });
     });
 
     // Partner Tabs Scroll Logic
