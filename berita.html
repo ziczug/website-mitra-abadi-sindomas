@@ -1529,74 +1529,26 @@
   </div>
 
   <!-- PRODUCT PAGE CUSTOM FOOTER -->
-  <footer class="produk-footer" id="produkFooter">
-    <!-- Main Footer Content -->
-    <div class="produk-footer__main">
-      <div class="produk-footer__map-side">
-        <iframe 
-          src="https://maps.google.com/maps?q=-6.152833431830808,106.69462406229&hl=id&z=16&output=embed&maptype=roadmap" 
-          allowfullscreen 
-          loading="lazy"
-          title="Lokasi PT Mitra Abadi Sindomas"
-        ></iframe>
-        <!-- Map overlay gradient -->
-        <div class="produk-footer__map-overlay"></div>
-      </div>
-
-      <!-- Diagonal Gold Divider -->
-      <div class="produk-footer__divider">
-        <div class="produk-footer__divider-glow"></div>
-      </div>
-
-      <div class="produk-footer__info-side">
-        <div class="produk-footer__info-content">
-          <div class="produk-footer__brand">
-            <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="produk-footer__logo">
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main-bottom">
+        <div class="footer-logo-row">
+          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-bottom-logo">
+          <div class="footer-v-divider"></div>
+          <div class="footer-company-info">
+            <h3 data-i18n="footer-company-name">PT Mitra Abadi Sindomas</h3>
+            <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
           </div>
-          <p class="produk-footer__tagline">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi
-          dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
-          
-          <!-- Luxury Location Card -->
-          <div class="luxury-place-card">
-            <div class="luxury-place-info">
-              <span class="luxury-place-label"><i class="fas fa-building"></i> Head Office</span>
-              <h3 class="luxury-place-title">PT Mitra Abadi Sindomas</h3>
-              <p class="luxury-place-address">Green Sedayu Bizpark Blok DM 11 No. 65, Jl. Daan Mogot Raya KM.18, Jakarta Barat 11840, Indonesia</p>
-              <div class="luxury-place-meta">
-                <div class="luxury-place-rating">
-                  <span class="num">5.0</span>
-                  <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <span class="count">(48)</span>
-                </div>
-                <a href="https://maps.app.goo.gl/4BL2Duej9Yzwvrac8" target="_blank" class="produk-footer__branch-link" style="margin-top:0">
-                  Lihat di Maps <i class="fas fa-external-link-alt"></i>
-                </a>
-              </div>
-            </div>
-            <a href="https://www.google.com/maps/dir//PT+Mitra+Abadi+Sindomas/@-6.1528334,106.6946241,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f7dba373809b:0x5e87600674984b93!2m2!1d106.6946241!2d-6.1528334" target="_blank" class="luxury-directions-btn" title="Petunjuk Arah">
-              <i class="fas fa-location-arrow"></i>
-            </a>
-          </div>
-
-          <div class="produk-footer__actions">
-            <a href="https://wa.me/6281295001778" target="_blank" class="produk-footer__wa-btn">
-              <i class="fab fa-whatsapp"></i> Hubungi Kami
-            </a>
+          <div class="footer-bottom-socials">
+            <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="produk-footer__bottom">
-      <div class="produk-footer__bottom-inner">
-        <p>&copy; 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+        
+        <div class="footer-copyright-row">
+          <p data-i18n="footer-copyright">© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+        </div>
       </div>
     </div>
   </footer>
@@ -1893,7 +1845,7 @@
     const navbar = document.getElementById('navbar');
     const scrollTopBtn = document.getElementById('scrollTop');
 
-    window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', () => {
       const scrolled = window.scrollY > 50;
       navbar.classList.toggle('scrolled', scrolled);
       scrollTopBtn.classList.toggle('visible', window.scrollY > 400);

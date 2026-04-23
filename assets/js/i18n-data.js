@@ -110,6 +110,15 @@ const i18nData = {
     'contact-whatsapp-link': 'Chat via WhatsApp',
     'footer-nav-title': 'Navigasi',
     'footer-legal-title': 'Legal',
+    
+    // New Footer
+    'footer-share-text': 'Bagikan halaman ini',
+    'footer-cta-connect': 'Terhubung dengan kami',
+    'footer-cta-connect-desc': 'Kami selalu bersemangat untuk terhubung dengan mereka yang memiliki minat dan nilai yang sejalan untuk masa depan yang lebih baik, inklusif, dan berkelanjutan.',
+    'footer-cta-contact': 'Kontak Kami',
+    'footer-cta-contact-desc': 'Hubungi kami untuk informasi lebih lanjut mengenai produk, kerja sama, atau pertanyaan lainnya.',
+    'footer-company-name': 'PT Mitra Abadi Sindomas',
+    'footer-copyright': '© 2025 PT Mitra Abadi Sindomas. All rights reserved.',
 
     // Product Page
     'prod-hero-title': 'Katalog Produk',
@@ -270,6 +279,15 @@ const i18nData = {
     'footer-nav-title': 'Navigation',
     'footer-legal-title': 'Legal',
 
+    // New Footer
+    'footer-share-text': 'Share this page',
+    'footer-cta-connect': 'Connect with us',
+    'footer-cta-connect-desc': 'We are always excited to connect with those who have shared interests and values for a better, inclusive, and sustainable future.',
+    'footer-cta-contact': 'Contact Us',
+    'footer-cta-contact-desc': 'Contact us for further information regarding products, collaborations, or other inquiries.',
+    'footer-company-name': 'PT Mitra Abadi Sindomas',
+    'footer-copyright': '© 2025 PT Mitra Abadi Sindomas. All rights reserved.',
+
     // Product Page
     'prod-hero-title': 'Product Catalog',
     'prod-hero-desc': 'Discover a wide range of high quality food and beverage products from leading international brands.',
@@ -428,6 +446,15 @@ const i18nData = {
     'contact-whatsapp-link': '通过 WhatsApp 聊天',
     'footer-nav-title': '导航',
     'footer-legal-title': '法律条款',
+
+    // New Footer
+    'footer-share-text': '分享此页面',
+    'footer-cta-connect': '与我们联系',
+    'footer-cta-connect-desc': '我们一直热衷于与那些拥有共同兴趣和价值观的人建立联系，共同创造一个更美好、包容和可持续的未来。',
+    'footer-cta-contact': '联系我们',
+    'footer-cta-contact-desc': '如需了解有关产品、合作或其他咨询的更多信息，请联系我们。',
+    'footer-company-name': 'PT Mitra Abadi Sindomas',
+    'footer-copyright': '© 2025 PT Mitra Abadi Sindomas. 版权所有。',
     'prod-hero-title': '产品目录',
     'prod-hero-desc': '发现来自国际领先品牌的各种优质食品和饮料。',
     'prod-breadcrumb-home': '首页',
