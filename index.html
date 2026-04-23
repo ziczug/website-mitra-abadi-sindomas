@@ -334,9 +334,8 @@
     <div class="container">
       <div class="section-header center pulse-on-scroll">
         <div class="section-badge" data-i18n="brands-badge">MEREK KAMI</div>
-        <h2 data-i18n="brands-title">Menghadirkan Merek Internasional Terbaik</h2>
-        <p data-i18n="brands-desc">Kami bekerja sama dengan produsen global terpercaya untuk membawa cita rasa dunia ke
-          Indonesia.</p>
+        <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="brands-title">Menghadirkan Merek Internasional Terbaik</h2>
+        <p style="max-width: 700px; margin: 0 auto;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
 
       <div class="brand-filter-wrapper slide-up-on-scroll">
@@ -349,11 +348,6 @@
           <button class="brand-tab-nav-btn next" id="brandTabNavNext"><i class="fas fa-chevron-right"></i></button>
         </div>
 
-        <div class="brand-search-box">
-          <i class="fas fa-search"></i>
-          <input type="text" id="brandSearchInput" placeholder="Cari nama brand..."
-            data-i18n="search-brand-placeholder">
-        </div>
       </div>
 
       <div class="brand-slider-container reveal fade-up">
@@ -376,8 +370,7 @@
       <div class="section-header reveal fade-up">
         <div class="section-tag"><i class="fas fa-truck"></i> Jaringan Distribusi</div>
         <h2 style="text-transform: uppercase;">Jangkauan & Mitra Distribusi</h2>
-        <p>Jaringan kantor kami tersebar di berbagai kota besar, didukung oleh fasilitas pergudangan modern dan
-          kemitraan strategis dengan ritel terkemuka.</p>
+        <p style="max-width: 850px; margin: 0 auto;">Jaringan kantor kami tersebar di berbagai kota besar, beserta dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
       </div>
 
       <!-- Stats -->
@@ -577,9 +570,7 @@
       <div class="section-header reveal fade-up">
         <div class="section-tag"><i class="fas fa-envelope"></i> <span data-i18n="contact-tag">Kontak</span></div>
         <h2 data-i18n="contact-title">Hubungi Kami</h2>
-        <p data-i18n="contact-desc-idx">Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut tentang
-          produk dan kerjasama distribusi.
-        </p>
+        <p style="max-width: 700px; margin: 0 auto;" data-i18n="contact-desc-idx">Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut tentang produk dan kerjasama distribusi.</p>
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal fade-right">
@@ -1197,12 +1188,10 @@
     // --- Dynamic Brands Logic ---
     const brandGrid = document.getElementById('brandGrid');
     const brandTabContainer = document.getElementById('brandTabContainer');
-    const brandSearchInput = document.getElementById('brandSearchInput');
 
 
     let allBrandsData = [];
     let currentBrandCat = 'all';
-    let currentBrandQuery = '';
 
     // Slider state
     let scrollPos = 0;
@@ -1276,14 +1265,6 @@
 
       if (currentBrandCat !== 'all') {
         filtered = filtered.filter(b => b.category === currentBrandCat);
-      }
-
-      if (currentBrandQuery) {
-        const keywords = currentBrandQuery.split(' ').filter(k => k.trim() !== '');
-        filtered = filtered.filter(b => {
-          const searchableText = [b.name, b.category].filter(Boolean).join(' ').toLowerCase();
-          return keywords.every(kw => searchableText.includes(kw));
-        });
       }
 
       renderBrands(filtered);
@@ -1413,13 +1394,6 @@
         partnerTabContainer.scrollBy({ left: -150, behavior: 'smooth' });
       }
     });
-
-    if (brandSearchInput) {
-      brandSearchInput.addEventListener('input', (e) => {
-        currentBrandQuery = e.target.value;
-        applyBrandFilters();
-      });
-    }
 
     loadBrands();
 

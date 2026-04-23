@@ -2260,18 +2260,20 @@ section {
   align-items: center;
   justify-content: flex-start;
   padding: 6px;
-  background: var(--white);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
   backdrop-filter: blur(15px);
   border-radius: 100px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   margin: 0;
   gap: 4px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
   scroll-behavior: smooth;
-  max-width: 100%;
+  max-width: max-content;
   position: relative;
 }
 
@@ -2284,7 +2286,7 @@ section {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 100px;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.6);
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -2295,7 +2297,7 @@ section {
 }
 
 .brand-tab:hover {
-  color: var(--primary);
+  color: #fff;
 }
 
 .brand-tab.active {
@@ -2306,41 +2308,7 @@ section {
   font-weight: 700;
 }
 
-.brand-search-box {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.brand-search-box i {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--accent);
-  opacity: 0.7;
-}
-
-.brand-search-box input {
-  width: 100%;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-200);
-  padding: 16px 20px 16px 55px;
-  border-radius: 100px;
-  color: var(--primary);
-  font-size: 15px;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.brand-search-box input:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--accent);
-  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.15);
-}
+/* Brand search removed */
 
 @media (max-width: 768px) {
   .brand-filter-wrapper {
