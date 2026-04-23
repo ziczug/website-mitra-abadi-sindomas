@@ -337,17 +337,7 @@
         <p style="max-width: 700px; margin: 0 auto;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
 
-      <div class="brand-filter-wrapper slide-up-on-scroll">
-        <div class="brand-tabs-container">
-          <button class="brand-tab-nav-btn prev" id="brandTabNavPrev"><i class="fas fa-chevron-left"></i></button>
-          <div class="brand-tabs" id="brandTabContainer">
-            <button class="brand-tab active" data-category="all" data-i18n="brands-all">Semua</button>
-            <!-- Categories will be injected here -->
-          </div>
-          <button class="brand-tab-nav-btn next" id="brandTabNavNext"><i class="fas fa-chevron-right"></i></button>
-        </div>
 
-      </div>
 
       <div class="brand-slider-container reveal fade-up">
         <button class="brand-nav-btn prev" id="brandPrev"><i class="fas fa-chevron-left"></i></button>
@@ -1298,7 +1288,6 @@
 
 
     let allBrandsData = [];
-    let currentBrandCat = 'all';
 
     // Slider state
     let scrollPos = 0;
@@ -1368,13 +1357,7 @@
     }
 
     function applyBrandFilters() {
-      let filtered = allBrandsData;
-
-      if (currentBrandCat !== 'all') {
-        filtered = filtered.filter(b => b.category === currentBrandCat);
-      }
-
-      renderBrands(filtered);
+      renderBrands(allBrandsData);
       initBrandSlider();
     }
 
@@ -1406,26 +1389,7 @@
       }).join('');
     }
 
-    function renderBrandTabs(categories) {
-      if (!brandTabContainer) return;
-      const allBtn = `<button class="brand-tab active" data-category="all">Semua</button>`;
-      const tabsHtml = categories.map(cat => `
-        <button class="brand-tab" data-category="${cat.title}">${cat.title}</button>
-      `).join('');
 
-      brandTabContainer.innerHTML = allBtn + tabsHtml;
-
-      // Re-attach listeners to new tabs
-      const brandTabs = brandTabContainer.querySelectorAll('.brand-tab');
-      brandTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          brandTabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          currentBrandCat = tab.dataset.category;
-          applyBrandFilters();
-        });
-      });
-    }
 
     function initBrandSlider() {
       clearInterval(scrollInterval);
