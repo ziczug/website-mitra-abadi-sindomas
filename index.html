@@ -1841,8 +1841,6 @@
       if (!container || !track) return;
 
       let currentPos = 0;
-      let isPaused = false;
-      let autoPlayInterval;
 
       function updateSlider() {
         const firstCard = track.querySelector('.product-card');
@@ -1851,9 +1849,10 @@
         const cardWidth = firstCard.offsetWidth + 24; // 24 is gap
         const maxScroll = track.scrollWidth - container.offsetWidth;
 
-        if (currentPos > maxScroll) currentPos = 0;
-        if (currentPos < 0) currentPos = maxScroll;
+        if (currentPos > maxScroll) currentPos = maxScroll;
+        if (currentPos < 0) currentPos = 0;
 
+        track.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         track.style.transform = `translateX(-${currentPos}px)`;
       }
 
@@ -1861,7 +1860,10 @@
         const firstCard = track.querySelector('.product-card');
         if (!firstCard) return;
         const cardWidth = firstCard.offsetWidth + 24;
+        const maxScroll = track.scrollWidth - container.offsetWidth;
+        
         currentPos += cardWidth;
+        if (currentPos > maxScroll) currentPos = 0; // Loop back to start
         updateSlider();
       }
 
@@ -1869,44 +1871,17 @@
         const firstCard = track.querySelector('.product-card');
         if (!firstCard) return;
         const cardWidth = firstCard.offsetWidth + 24;
+        const maxScroll = track.scrollWidth - container.offsetWidth;
+        
         currentPos -= cardWidth;
+        if (currentPos < 0) currentPos = maxScroll; // Loop to end
         updateSlider();
       }
 
-      if (nextBtn) nextBtn.addEventListener('click', () => { nextProd(); resetAuto(); });
-      if (prevBtn) prevBtn.addEventListener('click', () => { prevProd(); resetAuto(); });
-
-      // Elegant Auto-Movement
-      function startAuto() {
-        autoPlayInterval = setInterval(() => {
-          if (!isPaused) {
-            currentPos += 1; // Slow constant drift
-            updateSliderSimple();
-          }
-        }, 30);
-      }
-
-      function updateSliderSimple() {
-        const maxScroll = track.scrollWidth - container.offsetWidth;
-        if (currentPos > maxScroll) currentPos = 0;
-        track.style.transform = `translateX(-${currentPos}px)`;
-        track.style.transition = isPaused ? 'none' : 'transform 0.1s linear';
-      }
-
-      function resetAuto() {
-        clearInterval(autoPlayInterval);
-        track.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-        setTimeout(() => {
-          startAuto();
-        }, 3000);
-      }
-
-      container.addEventListener('mouseenter', () => { isPaused = true; track.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'; });
-      container.addEventListener('mouseleave', () => { isPaused = false; });
+      if (nextBtn) nextBtn.addEventListener('click', nextProd);
+      if (prevBtn) prevBtn.addEventListener('click', prevProd);
 
       window.addEventListener('resize', () => { currentPos = 0; updateSlider(); });
-
-      startAuto();
     }
 
     initProductSlider();
