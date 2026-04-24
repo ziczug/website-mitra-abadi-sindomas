@@ -2668,10 +2668,10 @@ section {
   width: 220px;
   height: 165px;
   flex-shrink: 0;
-  background: rgba(10, 10, 10, 0.4); /* Glossy Black */
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03); /* Lighter Glass Base */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -2681,7 +2681,7 @@ section {
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 15px 45px rgba(0, 0, 0, 0.25),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   overflow: visible;
 }
@@ -2700,8 +2700,8 @@ section {
 }
 
 .brand-card:hover, .brand-card.active {
-  background: rgba(20, 20, 20, 0.6);
-  border-color: rgba(201, 168, 76, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(201, 168, 76, 0.5);
 }
 
 .brand-card.active {
@@ -2711,8 +2711,8 @@ section {
   transform: scale(1.1);
   border-color: rgba(201, 168, 76, 0.8);
   box-shadow: 
-    0 0 120px rgba(201, 168, 76, 0.2),
-    0 50px 120px rgba(0, 0, 0, 0.8);
+    0 0 100px rgba(201, 168, 76, 0.15),
+    0 40px 80px rgba(0, 0, 0, 0.35);
 }
 
 /* Gold Halo for Active Card */
@@ -3515,8 +3515,16 @@ section {
   flex-direction: row;
   align-items: center;
   text-align: left;
-  gap: 16px;
+  gap: 14px;
   transition: all 0.3s ease;
+  min-width: 0;
+}
+
+.commitment-item div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
 }
 
 .commitment-item i {
@@ -3541,15 +3549,18 @@ section {
 }
 
 .commitment-item h5 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  line-height: 1.2;
 }
 
 .commitment-item span {
-  font-size: 11px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.4);
+  line-height: 1.2;
+  display: block;
 }
 
 @media (max-width: 1200px) {
@@ -3560,6 +3571,11 @@ section {
   .cert-commitment-bar {
     padding: 30px;
     gap: 30px;
+  }
+
+  .commitment-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
   }
 }
 
