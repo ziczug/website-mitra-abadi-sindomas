@@ -120,7 +120,7 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge" data-i18n="hero-badge">TRUSTED SINCE 2016</div>
-        <h1 data-i18n="hero-title">Distributor & Importir Makanan Berkualitas Indonesia</h1>
+        <h1 class="text-shine" data-i18n="hero-title">Distributor & Importir Makanan Berkualitas Indonesia</h1>
         <p data-i18n="hero-desc">PT Mitra Abadi Sindomas menghadirkan produk makanan dan minuman impor berkualitas
           tinggi dari merek-merek
           internasional terkemuka dengan jaminan sertifikasi Halal dan BPOM.</p>
@@ -344,7 +344,7 @@
         </div>
         <h2 class="text-shine" style="font-size: clamp(32px, 5vw, 56px); margin-bottom: 20px;" data-i18n="brands-title">
           Menghadirkan Merek <span class="gold-text">Internasional Terbaik</span></h2>
-        <p style="max-width: 700px; margin: 0 auto; opacity: 0.8;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global
+        <p style="max-width: 700px; margin: 0 auto; opacity: 0.8; color: #fff;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global
           terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
 
@@ -556,7 +556,7 @@
       <!-- Left Content -->
       <div class="dist-hero-content">
         <div class="section-tag"><i class="fas fa-truck"></i> <span data-i18n="dist-tag">JANGKAUAN DISTRIBUSI</span></div>
-        <h2 class="dist-hero-title">JANGKAUAN &<br>MITRA DISTRIBUSI</h2>
+        <h2 class="dist-hero-title text-shine">JANGKAUAN &<br>MITRA DISTRIBUSI</h2>
         <p class="dist-hero-desc">Jaringan kami kuat tersebar di berbagai kota besar, bermitra dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
         <a href="#distribusi-detail" class="btn-dist-hero"><span>Lihat Jangkauan</span> <i class="fas fa-arrow-right"></i></a>
 
@@ -597,7 +597,7 @@
             <img src="assets/images/img-slider-distribution/truck2.png" alt="Truk Distribusi Masfood 2">
           </div>
         </div>
-        <div class="dist-hero-slide-num">01</div>
+
       </div>
     </div>
   </section>
@@ -644,11 +644,10 @@
     <div class="container-wide">
       <div class="dist-logistik-section reveal fade-up">
         <div class="dist-logistik-bg">
-          <img src="assets/images/peta.gif" alt="Peta Jaringan Distribusi MAS" class="dist-logistik-map">
-          <div class="dist-logistik-overlay"></div>
+          <img src="assets/images/peta-indonesia-gold.png" alt="Peta Jaringan Distribusi MAS" class="dist-logistik-map">
           <div class="dist-logistik-content">
             <span class="dist-logistik-badge">JANGKAUAN LOGISTIK NASIONAL</span>
-            <h3>Menghubungkan<br>Seluruh Indonesia</h3>
+            <h3 class="text-shine">Menghubungkan<br>Seluruh Indonesia</h3>
             <p>Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.</p>
             <div class="dist-logistik-features">
               <div class="dist-logistik-feat">
@@ -2177,6 +2176,7 @@
         <div class="product-slide ${slide.length === 1 ? 'slide-single' : slide.length === 2 ? 'slide-2' : ''}">
           ${slide.map((c, idx) => `
             <div class="product-card card-variant-${idx + 1} reveal fade-up visible" onclick="window.location.href='produk.html?filter=${c.key}'">
+              <div class="card-top-icon"><i class="fas fa-crown"></i></div>
               <div class="product-card-image">
                 <img src="${c.imageData || c.image}" alt="${c.title}">
                 <div class="overlay"></div>
@@ -2184,7 +2184,6 @@
               <div class="product-card-body">
                 <h3>${getCategoryLabel(c.key)}</h3>
                 <p>${c.desc}</p>
-                <div class="arrow"><i class="fas fa-arrow-right"></i></div>
               </div>
             </div>
           `).join('')}

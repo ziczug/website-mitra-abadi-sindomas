@@ -341,7 +341,7 @@ section {
 }
 
 .nav-cta:hover i {
-  transform: scale(1.2) rotate(15deg);
+  transform: scale(1.05);
 }
 
 .nav-cta:active {
@@ -2292,11 +2292,6 @@ section {
   overflow: hidden;
 }
 
-.product-card.card-variant-2 .product-card-image,
-.product-card.card-variant-3 .product-card-image {
-  height: 120px;
-  flex: none;
-}
 
 .product-card-image img {
   width: 100%;
@@ -2322,48 +2317,65 @@ section {
 }
 
 .product-card-body {
-  padding: 24px;
-  background: var(--white);
-  position: relative;
-  z-index: 2;
-}
-
-.product-card.card-variant-1 .product-card-body,
-.product-card.card-variant-4 .product-card-body {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-  color: white;
+  /* Strengthened the gradient for better text readability */
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, transparent 100%);
   padding: 40px 30px 30px;
+  z-index: 2;
+  transition: padding 0.3s ease;
 }
 
-.product-card.card-variant-1 .product-card-body h3,
-.product-card.card-variant-4 .product-card-body h3,
-.product-card.card-variant-1 .product-card-body p,
-.product-card.card-variant-4 .product-card-body p {
-  color: white;
+.product-card:hover .product-card-body {
+  padding-bottom: 40px; /* Slight lift effect on hover */
 }
 
 .product-card-body h3 {
-  color: var(--primary);
+  color: #ffffff; /* Changed to white */
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(16px, 1.5vw, 20px);
+  font-size: clamp(18px, 1.8vw, 22px);
   font-weight: 800;
   margin-bottom: 8px;
   line-height: 1.2;
 }
 
 .product-card-body p {
-  color: var(--text-secondary);
-  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85); /* Contrast with gradient */
+  font-size: 14px;
   line-height: 1.5;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.card-top-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(194, 153, 74, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c2994a;
+  z-index: 3;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 16px;
+  border: 1px solid rgba(194, 153, 74, 0.3);
+  transition: all 0.3s ease;
+}
+
+.product-card:hover .card-top-icon {
+  background: #c2994a;
+  color: #fff;
+  transform: scale(1.1);
 }
 
 .product-card-body .arrow {
@@ -3761,7 +3773,7 @@ section {
   background: var(--accent);
   color: var(--white);
   border-color: var(--accent);
-  transform: rotate(5deg);
+  transform: scale(1.1);
 }
 
 .contact-card:hover .card-arrow {
@@ -3841,7 +3853,7 @@ section {
 .contact-feature-item:hover .feature-icon {
   background: var(--accent);
   color: var(--white);
-  transform: scale(1.05) rotate(5deg);
+  transform: scale(1.05);
   box-shadow: var(--shadow-gold);
 }
 
@@ -5594,20 +5606,7 @@ section {
 .dist-hero-slide.active img {
   transform: scale(1.2) translateX(0);
 }
-.dist-hero-slide-num {
-  position: absolute;
-  top: 50%;
-  right: 5%;
-  transform: translateY(-50%);
-  font-size: clamp(100px, 15vw, 250px);
-  font-weight: 900;
-  color: rgba(194, 153, 74, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  font-family: 'Inter', sans-serif;
-  line-height: 1;
-  letter-spacing: -0.05em;
-}
+
 
 @media (max-width: 1024px) {
   .dist-hero-wrapper { grid-template-columns: 1fr; min-height: auto; }
@@ -5638,18 +5637,18 @@ section {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: #ffffff; /* Solid white as requested */
-  border-radius: 40px; /* Rounded rectangle style */
+  background: rgba(30, 30, 30, 0.45); /* Smoky dark glass as requested */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 100px; /* Capsule shape */
   padding: 40px 60px;
-  box-shadow: 
-    0 40px 80px rgba(0, 0, 0, 0.15),
-    0 0 30px rgba(255, 255, 255, 0.05); /* Subtle glass glow */
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
   margin: 0 auto 80px;
   max-width: 1200px;
   position: relative;
   z-index: 20;
   gap: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .dist-stat-premium {
   display: flex;
@@ -5667,14 +5666,14 @@ section {
   top: 20%;
   height: 60%;
   width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.08), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.15), transparent);
 }
 .dist-stat-premium:last-child::after { display: none; }
 
 .stat-icon-premium {
   width: 80px;
   height: 80px;
-  background: #fdfaf3; /* Soft cream/gold circle from ref */
+  background: rgba(194, 153, 74, 0.1); /* Translucent gold circle */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -5688,7 +5687,7 @@ section {
 .dist-stat-premium:hover .stat-icon-premium {
   background: #c2994a;
   color: #fff;
-  transform: scale(1.1) rotate(-10deg);
+  transform: scale(1.08);
 }
 .stat-info-premium {
   display: flex;
@@ -5704,13 +5703,13 @@ section {
 .dist-stat-premium .label {
   font-size: 15px;
   font-weight: 800;
-  color: #111; /* Dark text for contrast on white */
+  color: #ffffff; /* White text for contrast on dark glass */
   margin-bottom: 2px;
   text-transform: none;
 }
 .dist-stat-premium .sub-label {
   font-size: 13px;
-  color: #888;
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
 }
 
@@ -5733,7 +5732,7 @@ section {
   }
   .dist-stat-premium { 
     border-right: none; 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
     padding-bottom: 30px; 
     width: 100%; 
     justify-content: center;
@@ -5766,13 +5765,10 @@ section {
 }
 .dist-logistik-map {
   position: absolute;
-  top: 0; right: 0;
-  width: 80%;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  object-fit: contain;
-  filter: brightness(1.5) contrast(1.2) hue-rotate(10deg);
-  mix-blend-mode: screen;
-  opacity: 0.9;
+  object-fit: cover;
   z-index: 0;
 }
 .dist-logistik-overlay {
@@ -5827,6 +5823,17 @@ section {
   background: #c2994a;
   color: #000;
   transform: scale(1.1);
+}
+.dist-logistik-feat strong {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.dist-logistik-feat span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
 }
 
 @media (max-width: 1200px) {
@@ -6073,7 +6080,7 @@ section {
 .promo-close-btn:hover {
   background: var(--white);
   color: var(--primary);
-  transform: rotate(90deg) scale(1.1);
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
@@ -6614,7 +6621,7 @@ section {
 
 .contact-floating-btn:hover i {
   color: var(--primary);
-  transform: rotate(-10deg) scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Modal Styling */
