@@ -172,7 +172,6 @@
     </div>
   </section>
 
-  <div class="section-separator reveal fade-up visible"></div>
 
   <!-- ==================== PARALLAX DIVIDER ==================== -->
   <section class="parallax-divider" id="parallaxSection">
@@ -333,7 +332,6 @@
     </div>
   </section>
 
-  <div class="section-separator reveal fade-up"></div>
 
   <!-- ==================== BRANDS ==================== -->
   <section class="section brands" id="merek">
@@ -546,82 +544,183 @@
     </div>
   </section>
 
-  <div class="section-separator reveal fade-up"></div>
 
   <!-- ==================== DISTRIBUTION & PARTNERS ==================== -->
-  <section class="section distribution" id="distribusi">
-    <div class="container">
-      <div class="section-header reveal fade-up">
-        <div class="section-tag"><i class="fas fa-truck"></i> Jaringan Distribusi</div>
-        <h2 style="text-transform: uppercase;">Jangkauan & Mitra Distribusi</h2>
-        <p style="max-width: 850px; margin: 0 auto;">Jaringan kantor kami tersebar di berbagai kota besar, beserta
-          dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
-      </div>
 
-      <!-- Stats -->
-      <div class="dist-stats-row reveal fade-up">
-        <div class="dist-stat-premium">
-          <div class="stat-icon-wrap" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"><i
-              class="fas fa-city"></i></div>
-          <div class="number" data-count="34">34</div>
-          <div class="label">Cabang / Kota</div>
-          <div class="sub-label">di seluruh Indonesia</div>
-        </div>
-        <div class="dist-stat-premium">
-          <div class="stat-icon-wrap" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"><i
-              class="fas fa-warehouse"></i></div>
-          <div class="number" data-count="40000">40.000+</div>
-          <div class="label" data-i18n="dist-stat-warehouse-label">Meter Persegi</div>
-          <div class="sub-label" data-i18n="dist-stat-warehouse-sub">Luas Gudang</div>
-        </div>
-        <div class="dist-stat-premium">
-          <div class="stat-icon-wrap" style="color: var(--accent); font-size: 28px; margin-bottom: 10px;"><i
-              class="fas fa-box"></i></div>
-          <div class="number" data-count="500">500+</div>
-          <div class="label" data-i18n="dist-stat-sku-label">SKU</div>
-          <div class="sub-label" data-i18n="dist-stat-sku-sub">produk lokal dan internasional</div>
-        </div>
-      </div>
+  <!-- ===== PART 1: TRUCK HERO SLIDER (Top) ===== -->
+  <!-- ==================== DISTRIBUTION & PARTNERS ==================== -->
 
+  <!-- ===== PART 1: TRUCK HERO SLIDER (Top) ===== -->
+  <section class="dist-hero-section" id="distribusi">
+    <div class="dist-hero-wrapper">
+      <!-- Left Content -->
+      <div class="dist-hero-content">
+        <div class="section-tag"><i class="fas fa-truck"></i> <span data-i18n="dist-tag">JANGKAUAN DISTRIBUSI</span></div>
+        <h2 class="dist-hero-title">JANGKAUAN &<br>MITRA DISTRIBUSI</h2>
+        <p class="dist-hero-desc">Jaringan kami kuat tersebar di berbagai kota besar, bermitra dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
+        <a href="#distribusi-detail" class="btn-dist-hero"><span>Lihat Jangkauan</span> <i class="fas fa-arrow-right"></i></a>
 
-      <!-- Section Content Header -->
-      <div class="map-content-outside" style="text-align: center; margin-bottom: 40px;">
-        <h3
-          style="color: var(--accent); font-size: clamp(24px, 4vw, 32px); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;"
-          data-i18n="dist-map-title">Jangkauan Logistik Nasional</h3>
-        <p style="color: rgba(255, 255, 255, 0.7); font-size: clamp(15px, 2vw, 17px); max-width: 700px; line-height: 1.6; margin: 0 auto; font-weight: 400;"
-          data-i18n="dist-map-desc">Sistem distribusi terintegrasi yang menjangkau pulau-pulau utama di Indonesia,
-          memastikan ketersediaan produk berkualitas di mana pun Anda berada.</p>
-      </div>
-
-      <div class="section-separator reveal fade-up"></div>
-
-      <!-- Map Content -->
-      <div class="dist-map-hero reveal fade-up delay-200" style="margin-bottom: 60px;">
-        <div class="map-container">
-          <img src="assets/images/peta.gif" alt="Peta Jaringan Distribusi MAS" class="map-image">
-        </div>
-      </div>
-
-
-      <div class="section-badge-center" style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <div class="section-tag"><i class="fas fa-warehouse"></i> <span data-i18n="dist-warehouse-tag">Lokasi Gudang &
-            Cabang</span></div>
-      </div>
-
-      <!-- Branch / Warehouse Locations Slider -->
-      <div class="branch-slider-container reveal fade-up">
-        <div class="branch-slider" id="branchSlider">
-          <div
-            style="padding:80px 40px;text-align:center;color:rgba(255,255,255,0.3);font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;">
-            <i class="fas fa-spinner fa-spin"
-              style="font-size:32px;margin-bottom:16px;display:block;color:var(--accent);"></i>
-            Memuat data gudang...
+        <!-- Mini truck slider card -->
+        <div class="dist-truck-card">
+          <div class="dist-truck-slider" id="distTruckMiniSlider">
+            <div class="dist-truck-slide active">
+              <img src="assets/images/img-slider-distribution/truck1.png" alt="Truk Distribusi 10 Ton">
+              <div class="dist-truck-info">
+                <span class="dist-truck-counter">1 / 2</span>
+                <h4>Truk Distribusi 10 Ton</h4>
+                <p>Kapasitas besar untuk pengiriman antar kota & wilayah luas.</p>
+              </div>
+            </div>
+            <div class="dist-truck-slide">
+              <img src="assets/images/img-slider-distribution/truck2.png" alt="Truk Distribusi Ringan">
+              <div class="dist-truck-info">
+                <span class="dist-truck-counter">2 / 2</span>
+                <h4>Truk Distribusi Ringan</h4>
+                <p>Untuk distribusi cepat area perkotaan & pengiriman harian.</p>
+              </div>
+            </div>
+          </div>
+          <div class="dist-truck-nav">
+            <button class="dist-truck-btn" onclick="window._distTruckNav(-1)"><i class="fas fa-arrow-left"></i></button>
+            <button class="dist-truck-btn" onclick="window._distTruckNav(1)"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
       </div>
 
-      <div class="section-separator reveal fade-up"></div>
+      <!-- Right Hero Image -->
+      <div class="dist-hero-image-wrap">
+        <div class="dist-hero-slider" id="distHeroSlider">
+          <div class="dist-hero-slide active">
+            <img src="assets/images/img-slider-distribution/truck1.png" alt="Truk Distribusi Masfood 1">
+          </div>
+          <div class="dist-hero-slide">
+            <img src="assets/images/img-slider-distribution/truck2.png" alt="Truk Distribusi Masfood 2">
+          </div>
+        </div>
+        <div class="dist-hero-slide-num">01</div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ===== PART 2: STATS ROW (Floating Capsule) ===== -->
+  <section class="section-stats-wrap" id="distribusi-detail">
+    <div class="container">
+      <div class="dist-stats-row reveal fade-up">
+        <!-- Stat 1: Wilayah -->
+        <div class="dist-stat-premium">
+          <div class="stat-icon-premium"><i class="fas fa-map-marked-alt"></i></div>
+          <div class="stat-info-premium">
+            <div class="stat-value-premium">3</div>
+            <div class="label">Wilayah Indonesia</div>
+            <div class="sub-label">Jaringan distribusi</div>
+          </div>
+        </div>
+        <!-- Stat 2: Gudang -->
+        <div class="dist-stat-premium">
+          <div class="stat-icon-premium"><i class="fas fa-warehouse"></i></div>
+          <div class="stat-info-premium">
+            <div class="stat-value-premium">40.000+</div>
+            <div class="label">Lokasi Gudang</div>
+            <div class="sub-label">Tersebar di seluruh Indonesia</div>
+          </div>
+        </div>
+        <!-- Stat 3: Produk -->
+        <div class="dist-stat-premium">
+          <div class="stat-icon-premium"><i class="fas fa-shopping-bag"></i></div>
+          <div class="stat-info-premium">
+            <div class="stat-value-premium">500+</div>
+            <div class="label">Produk Lokal & Internasional</div>
+            <div class="sub-label">Siap memenuhi kebutuhan Anda</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PART 3: LOGISTIK NASIONAL ===== -->
+  <section class="section-logistik-wide">
+    <div class="container-wide">
+      <div class="dist-logistik-section reveal fade-up">
+        <div class="dist-logistik-bg">
+          <img src="assets/images/peta.gif" alt="Peta Jaringan Distribusi MAS" class="dist-logistik-map">
+          <div class="dist-logistik-overlay"></div>
+          <div class="dist-logistik-content">
+            <span class="dist-logistik-badge">JANGKAUAN LOGISTIK NASIONAL</span>
+            <h3>Menghubungkan<br>Seluruh Indonesia</h3>
+            <p>Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.</p>
+            <div class="dist-logistik-features">
+              <div class="dist-logistik-feat">
+                <i class="fas fa-shipping-fast"></i>
+                <div>
+                  <strong>Distribusi Cepat</strong>
+                  <span>Tepat waktu ke setiap titik</span>
+                </div>
+              </div>
+              <div class="dist-logistik-feat">
+                <i class="fas fa-globe-asia"></i>
+                <div>
+                  <strong>Jangkauan Luas</strong>
+                  <span>Seluruh wilayah Indonesia</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PART 4: B2B SECTION (Warehouse Slider) ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="dist-b2b-section reveal fade-up">
+        <div class="dist-b2b-wrapper">
+          <!-- Left: Branch/Warehouse Image Slider -->
+          <div class="dist-b2b-image-side">
+            <div class="branch-slider" id="branchSlider">
+              <div style="padding:80px 40px;text-align:center;color:rgba(0,0,0,0.3);font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;">
+                <i class="fas fa-spinner fa-spin" style="font-size:32px;margin-bottom:16px;display:block;color:#c2994a;"></i>
+                Memuat data gudang...
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: B2B Content -->
+          <div class="dist-b2b-content-side">
+            <div class="section-tag"><i class="fas fa-handshake"></i> SOLUSI B2B</div>
+            <h3>Solusi Distribusi B2B<br>Untuk Bisnis Anda</h3>
+            <p>Kami melayani kebutuhan distribusi dalam skala besar melalui jalur laut dan darat dengan sistem terintegrasi dan aman.</p>
+            
+            <div class="dist-b2b-features">
+              <div class="dist-b2b-feat">
+                <div class="dist-b2b-feat-icon"><i class="fas fa-ship"></i></div>
+                <div>
+                  <strong>Pengiriman Laut</strong>
+                  <span>Efisien & Terpercaya</span>
+                </div>
+              </div>
+              <div class="dist-b2b-feat">
+                <div class="dist-b2b-feat-icon"><i class="fas fa-warehouse"></i></div>
+                <div>
+                  <strong>Kapasitas Besar</strong>
+                  <span>Untuk Skala Industri</span>
+                </div>
+              </div>
+              <div class="dist-b2b-feat">
+                <div class="dist-b2b-feat-icon"><i class="fas fa-shield-alt"></i></div>
+                <div>
+                  <strong>Keamanan Terjamin</strong>
+                  <span>Setiap Pengiriman</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#kontak" class="btn-dist-b2b"><span>Kemitraan B2B</span> <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -656,7 +755,7 @@
   </section>
 
   <script>
-    // Self-contained branch slider initialization - independent from main script
+    // Self-contained branch slider initialization - B2B image-only layout
     (async function () {
       const slider = document.getElementById('branchSlider');
       if (!slider) return;
@@ -680,26 +779,26 @@
       // Hardcoded fallback
       if (!branches || !branches.length) {
         branches = [
-          { name: 'Jakarta', address: 'Sedayu Bizz Park, Jakarta Barat', path: 'assets/images/warehouse.gif' },
+          { name: 'Jakarta', address: 'Sedayu Bizz Park, Jakarta Barat', path: 'assets/images/mas-bangunan.jpg' },
           { name: 'Batam', address: 'Batam Centre, Kepulauan Riau', path: 'assets/images/mas-bangunan.jpg' },
-          { name: 'Surabaya', address: 'Kawasan Industri Margomulyo, Surabaya', path: 'assets/images/warehouse.gif' }
+          { name: 'Surabaya', address: 'Kawasan Industri Margomulyo, Surabaya', path: 'assets/images/mas-bangunan.jpg' }
         ];
       }
 
       const cnt = branches.length;
       slider.innerHTML = branches.map((b, i) => `
       <div class="branch-slide ${i === 0 ? 'active' : ''}">
-        <div class="branch-content">
-          <div class="branch-counter">${i + 1} / ${cnt}</div>
-          <h3 class="branch-name">${b.name}</h3>
-          <p class="branch-address">${b.address}</p>
-          <div class="branch-nav">
+        <div class="branch-image-b2b">
+          <img src="${b.imageData || b.path || 'assets/images/mas-bangunan.jpg'}" alt="${b.name} Warehouse" loading="lazy">
+          <div class="branch-overlay-info">
+            <div class="branch-counter">${i + 1} / ${cnt}</div>
+            <h3 class="branch-name">${b.name}</h3>
+            <p class="branch-address">${b.address}</p>
+          </div>
+          <div class="branch-nav-b2b">
             <button class="branch-nav-btn" onclick="window._branchNav(-1)" title="Previous"><i class="fas fa-arrow-left"></i></button>
             <button class="branch-nav-btn" onclick="window._branchNav(1)" title="Next"><i class="fas fa-arrow-right"></i></button>
           </div>
-        </div>
-        <div class="branch-image">
-          <img src="${b.imageData || b.path || 'assets/images/mas-bangunan.jpg'}" alt="${b.name} Warehouse" loading="lazy">
         </div>
       </div>
     `).join('');
@@ -715,6 +814,34 @@
       };
       window.nextBranch = function () { window._branchNav(1); };
       window.prevBranch = function () { window._branchNav(-1); };
+    })();
+
+    // Truck hero slider + mini slider
+    (function () {
+      // Hero slider
+      const heroSlider = document.getElementById('distHeroSlider');
+      const miniSlider = document.getElementById('distTruckMiniSlider');
+      if (!heroSlider || !miniSlider) return;
+
+      const heroSlides = heroSlider.querySelectorAll('.dist-hero-slide');
+      const miniSlides = miniSlider.querySelectorAll('.dist-truck-slide');
+      const slideNum = document.querySelector('.dist-hero-slide-num');
+      let cur = 0;
+      const cnt = heroSlides.length;
+
+      function goTo(idx) {
+        heroSlides[cur].classList.remove('active');
+        miniSlides[cur].classList.remove('active');
+        cur = ((idx % cnt) + cnt) % cnt;
+        heroSlides[cur].classList.add('active');
+        miniSlides[cur].classList.add('active');
+        if (slideNum) slideNum.textContent = String(cur + 1).padStart(2, '0');
+      }
+
+      window._distTruckNav = function (dir) { goTo(cur + dir); };
+
+      // Auto-slide every 5s
+      setInterval(() => goTo(cur + 1), 5000);
     })();
   </script>
 
