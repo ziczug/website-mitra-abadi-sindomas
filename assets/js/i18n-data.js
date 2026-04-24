@@ -21,7 +21,7 @@ const i18nData = {
     'lang-en-short': 'EN',
     'lang-cn-short': 'CN',
     'hero-badge': 'TERPERCAYA SEJAK 2016',
-    'hero-title': 'Distributor & Importir Makanan Berkualitas Indonesia',
+    'hero-title': 'Distributor & Importir<br><span class="gold-text">Makanan Berkualitas<br>Indonesia</span>',
     'hero-desc': 'PT Mitra Abadi Sindomas menghadirkan produk makanan dan minuman impor berkualitas tinggi dari merek-merek internasional terkemuka dengan jaminan sertifikasi Halal dan BPOM.',
     'hero-btn-products': 'Lihat Produk',
     'hero-btn-catalog': 'Unduh Katalog',
@@ -38,8 +38,9 @@ const i18nData = {
 
     // Brands
     'brands-badge': 'MEREK KAMI',
+    'brands-badge-top': 'BRAND PARTNERSHIP',
     'brands-title': 'Menghadirkan Merek Internasional Terbaik',
-    'brands-desc': 'Kami bekerja sama dengan produsen global terpercaya untuk membawa cita rasa dunia ke Indonesia.',
+    'brands-desc': 'Kami bekerja sama dengan produsen global terpercaya<br>untuk membawa cita rasa dunia ke Indonesia.',
     'brands-all': 'Semua',
 
     // Featured Products
@@ -88,8 +89,10 @@ const i18nData = {
     'dist-stat-sku-label': 'SKU',
     'dist-stat-sku-sub': 'Produk Lokal & Internasional',
     'dist-map-title': 'Jangkauan Logistik Nasional',
+    'dist-logistik-badge': 'JANGKAUAN LOGISTIK NASIONAL',
     'dist-map-desc': 'Sistem distribusi terintegrasi yang menjangkau pulau-pulau utama di Indonesia, memastikan ketersediaan produk berkualitas di mana pun Anda berada.',
     'partners-title': 'Mitra Strategis Kami',
+    'partners-badge': 'MITRA STRATEGIS',
     'partners-desc': 'Produk kami tersedia di berbagai jaringan modern trade dan e-commerce terkemuka.',
     'cert-tag': 'Sertifikat',
     'cert-title': 'Jaminan Kualitas & Keamanan',
@@ -102,7 +105,7 @@ const i18nData = {
     'cert-std-desc': 'Produk diproduksi sesuai standar internasional dengan quality control ketat dari negara asal.',
     'contact-tag': 'Kontak',
     'contact-title': 'Hubungi Kami',
-    'contact-desc-idx': 'Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut tentang produk dan kerjasama distribusi.',
+    'contact-desc-idx': 'Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut<br>tentang produk dan kerjasama distribusi.',
     'contact-office-title': 'Alamat Head Office',
     'contact-phone-title': 'Telepon',
     'contact-hours-title': 'Jam Operasional',
@@ -206,6 +209,7 @@ const i18nData = {
 
     // Brands
     'brands-badge': 'OUR BRANDS',
+    'brands-badge-top': 'BRAND PARTNERSHIP',
     'brands-title': 'Bringing You the Best International Brands',
     'brands-desc': 'We collaborate with trusted global manufacturers to bring world flavors to Indonesia.',
     'brands-all': 'All',
@@ -257,8 +261,10 @@ const i18nData = {
     'dist-stat-sku-label': 'SKU',
     'dist-stat-sku-sub': 'Local & International Products',
     'dist-map-title': 'National Logistics Reach',
+    'dist-logistik-badge': 'NATIONAL LOGISTICS COVERAGE',
     'dist-map-desc': 'Integrated distribution system covering major islands in Indonesia, ensuring the availability of quality products wherever you are.',
     'partners-title': 'Our Strategic Partners',
+    'partners-badge': 'STRATEGIC PARTNERS',
     'partners-desc': 'Our products are available in various leading modern trade and e-commerce networks.',
     'cert-tag': 'Certification',
     'cert-halal-title': 'Halal Certificate',
@@ -372,6 +378,7 @@ const i18nData = {
 
     // Brands
     'brands-badge': '我们的品牌',
+    'brands-badge-top': '品牌合作',
     'brands-title': '为您带来最好的国际品牌',
     'brands-desc': '我们与值得信赖的全球制造商合作，将世界风味带到印度尼西亚。',
     'brands-all': '全部',
@@ -423,8 +430,10 @@ const i18nData = {
     'dist-stat-sku-label': 'SKU',
     'dist-stat-sku-sub': '国内外产品',
     'dist-map-title': '全国物流覆盖',
+    'dist-logistik-badge': '全国物流服务',
     'dist-map-desc': '覆盖印度尼西亚主要岛屿的综合配送系统，确保无论您身在何处都能获得优质产品。',
     'partners-title': '我们的战略合作伙伴',
+    'partners-badge': '战略合作伙伴',
     'partners-desc': '我们的产品可在各种领先的现代贸易和电子商务网络中找到。',
     'cert-tag': '认证',
     'cert-title': '质量与安全保障',

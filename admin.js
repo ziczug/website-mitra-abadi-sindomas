@@ -14,7 +14,6 @@ let pendingImport = [];
 let katalogs = [];
 let promos = [];
 let heroBanners = [];
-let topHeroBanners = [];
 let branches = [];
 let partners = [];
 let newsItems = [];
@@ -120,7 +119,7 @@ async function syncAllFromFiles() {
       'certifications': 'mas_certifications',
       'footer_info': 'mas_footer_info',
       'heroes': 'mas_heroes',
-      'top_heroes': 'mas_top_heroes',
+
       'branches': 'mas_branches',
       'partners': 'mas_partners',
       'promos': 'mas_promos',
@@ -217,13 +216,12 @@ function showPage(page, btn) {
   document.getElementById('page-' + page).classList.add('active');
   document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  const titles = { dashboard:'Dashboard', products:'Manajemen Produk', images:'Gambar & Icon', importexport:'Import / Export', katalog:'Manajemen Katalog', promo: 'Manajemen Popup Promo', hero: 'Manajemen Banner Hero', 'top-slider': 'Manajemen Top Slider', news: 'Manajemen Berita', branches: 'Manajemen Cabang Gudang', company:'Profil Perusahaan', contact:'Informasi Kontak', statistics:'Statistik Website', brandpartner:'Brand Partner', partners:'Mitra Distribusi', categories:'Kategori Produk', certifications:'Manajemen Sertifikasi', footermgr:'Manajemen Footer', settings:'Pengaturan' };
+  const titles = { dashboard:'Dashboard', products:'Manajemen Produk', images:'Gambar & Icon', importexport:'Import / Export', katalog:'Manajemen Katalog', promo: 'Manajemen Popup Promo', hero: 'Manajemen Banner Hero', news: 'Manajemen Berita', branches: 'Manajemen Cabang Gudang', company:'Profil Perusahaan', contact:'Informasi Kontak', statistics:'Statistik Website', brandpartner:'Brand Partner', partners:'Mitra Distribusi', categories:'Kategori Produk', certifications:'Manajemen Sertifikasi', footermgr:'Manajemen Footer', settings:'Pengaturan' };
   document.getElementById('pageTitle').textContent = titles[page] || page;
   if (page === 'images') renderImageGrid();
   if (page === 'katalog') renderKatalogs();
   if (page === 'promo') renderPromos();
   if (page === 'hero') renderHeroes();
-  if (page === 'top-slider') renderTopHeroes();
   if (page === 'branches') renderBranches();
   if (page === 'news') renderNews();
   if (page === 'company') loadCompanyForm();
@@ -273,7 +271,6 @@ async function loadProducts() {
   loadKatalogs();
   loadPromos();
   loadHeroes();
-  loadTopHeroes();
   loadBranches();
   loadNews();
   await loadBrandPartners();
@@ -1166,137 +1163,6 @@ function deleteHero(id) {
   document.body.style.overflow = 'hidden';
 }
 
-// ==========================================
-// TOP SLIDER MANAGEMENT
-// ==========================================
-function loadTopHeroes() {
-  const stored = localStorage.getItem('mas_top_heroes');
-  if (stored) {
-    topHeroBanners = JSON.parse(stored);
-  } else {
-    topHeroBanners = [];
-  }
-}
-
-function saveTopHeroes() {
-  localStorage.setItem('mas_top_heroes', JSON.stringify(topHeroBanners));
-  saveToFile('top_heroes', topHeroBanners);
-}
-
-function renderTopHeroes() {
-  const tbody = document.getElementById('topHeroTableBody');
-  const empty = document.getElementById('topHeroEmptyState');
-  if(!tbody) return;
-
-  if (topHeroBanners.length === 0) {
-    tbody.innerHTML = '';
-    empty.style.display = 'block';
-    return;
-  }
-  
-  empty.style.display = 'none';
-  tbody.innerHTML = topHeroBanners.map(h => `
-    <tr>
-      <td style="text-align:center;">
-        <input type="checkbox" onchange="toggleTopHeroActive(${h.id})" ${h.active ? 'checked' : ''} style="cursor:pointer; transform:scale(1.2);">
-      </td>
-      <td>
-        <div style="width:120px; height:67px; background:#f0f0f0; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          ${h.imageData ? `<img src="${h.imageData}" style="width:100%;height:100%;object-fit:cover;">` : `<span style="font-size:10px;color:#999;text-align:center;">Tanpa<br>Gambar</span>`}
-        </div>
-      </td>
-      <td style="font-weight:600">${h.title}</td>
-      <td>
-        <div class="action-btns">
-          <button class="action-btn delete" title="Hapus" onclick="deleteTopHero(${h.id})"><i class="fas fa-trash"></i></button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function openTopHeroModal() {
-  document.getElementById('fTopHeroTitle').value = '';
-  document.getElementById('fTopHeroFile').value = '';
-  document.getElementById('fTopHeroFilename').value = '';
-  document.getElementById('fTopHeroImageData').value = '';
-  
-  const previewCont = document.querySelector('#topHeroUploadArea .upload-preview');
-  if(previewCont) previewCont.style.display = 'none';
-  const img = document.getElementById('fTopHeroPreview');
-  if(img) img.src = '';
-  
-  document.getElementById('topHeroModalManager').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeTopHeroModal() {
-  document.getElementById('topHeroModalManager').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function handleTopHeroUpload(event) {
-  const file = event.target.files[0];
-  if(file) {
-    if (file.size > 2 * 1024 * 1024) return toast('Ukuran file maksimal 2MB', 'error');
-    document.getElementById('fTopHeroFilename').value = file.name;
-    if(!document.getElementById('fTopHeroTitle').value) {
-      document.getElementById('fTopHeroTitle').value = file.name.replace(/\.[^/.]+$/, "");
-    }
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('fTopHeroImageData').value = e.target.result;
-      const previewCont = document.querySelector('#topHeroUploadArea .upload-preview');
-      const img = document.getElementById('fTopHeroPreview');
-      if(previewCont && img) {
-        img.src = e.target.result;
-        previewCont.style.display = 'block';
-      }
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-function saveTopHeroEntry() {
-  const title = document.getElementById('fTopHeroTitle').value.trim();
-  const imageData = document.getElementById('fTopHeroImageData').value;
-  if(!title || !imageData) return toast('Harap lengkapi judul dan pilih gambar banner!', 'error');
-  
-  topHeroBanners.push({
-    id: Date.now(),
-    title: title,
-    imageData: imageData,
-    active: true
-  });
-  
-  saveTopHeroes();
-  renderTopHeroes();
-  closeTopHeroModal();
-  toast('Banner Top Slider berhasil ditambahkan', 'success');
-}
-
-function toggleTopHeroActive(id) {
-  const h = topHeroBanners.find(x => x.id === id);
-  if(h) {
-    h.active = !h.active;
-    saveTopHeroes();
-    toast('Status banner berhasil diubah.', 'success');
-  }
-}
-
-function deleteTopHero(id) {
-  const h = topHeroBanners.find(x => x.id === id);
-  document.getElementById('confirmTitle').textContent = 'Hapus Top Banner?';
-  document.getElementById('confirmMsg').textContent = `"${h.title}" akan dihapus dari daftar top banner.`;
-  document.getElementById('confirmBtn').textContent = 'Ya, Hapus';
-  document.getElementById('confirmBtn').className = 'btn btn-danger';
-  document.getElementById('confirmBtn').onclick = () => { 
-    topHeroBanners = topHeroBanners.filter(x => x.id !== id);
-    saveTopHeroes(); renderTopHeroes(); closeConfirm(); toast('Banner berhasil dihapus', 'success');
-  };
-  document.getElementById('confirmModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
 
 
 
@@ -2398,7 +2264,7 @@ document.querySelectorAll('.image-upload-area, .upload-area').forEach(area => {
 // ESC to close modals
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','topHeroModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
+    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('active');
     });

@@ -50,7 +50,7 @@
       <button class="nav-item" onclick="showPage('katalog',this)"><i class="fas fa-file-pdf"></i> Katalog PDF</button>
       <button class="nav-item" onclick="showPage('promo',this)"><i class="fas fa-bullhorn"></i> Popup Promo</button>
       <button class="nav-item" onclick="showPage('hero',this)"><i class="fas fa-layer-group"></i> Banner Hero</button>
-      <button class="nav-item" onclick="showPage('top-slider',this)"><i class="fas fa-arrows-left-right"></i> Top Slider</button>
+
       <button class="nav-item" onclick="showPage('news',this)"><i class="fas fa-newspaper"></i> Berita</button>
       <button class="nav-item" onclick="showPage('branches',this)"><i class="fas fa-warehouse"></i> Cabang Gudang</button>
       <div class="nav-label">Konten Website</div>
@@ -281,33 +281,7 @@
         </div>
       </div>
 
-      <!-- ===== TOP SLIDER PAGE ===== -->
-      <div class="page-section" id="page-top-slider">
-        <div class="panel">
-          <div class="panel-header">
-            <h3><i class="fas fa-arrows-left-right"></i> Manajemen Top Slider</h3>
-            <button class="btn btn-gold btn-sm" onclick="openTopHeroModal()"><i class="fas fa-plus"></i> Tambah Banner Top</button>
-          </div>
-          <div class="panel-body">
-            <p style="font-size:13px;color:rgba(0, 0, 0, 0.6);margin-bottom:20px">
-              <i class="fas fa-info-circle" style="color:var(--accent);margin-right:4px"></i>
-              Banner ini muncul di bagian paling atas website (Landscape 16:9). Rekomendasi ada 7 banner.
-            </p>
-            <div style="overflow-x:auto">
-              <table class="data-table">
-                <thead><tr>
-                  <th style="width:60px">Aktif</th>
-                  <th style="width:140px">Preview</th>
-                  <th>Judul Banner</th>
-                  <th style="width:100px">Aksi</th>
-                </tr></thead>
-                <tbody id="topHeroTableBody"></tbody>
-              </table>
-            </div>
-            <div class="empty-state" id="topHeroEmptyState" style="display:none"><i class="fas fa-arrows-left-right"></i><h3>Belum ada Banner Top Slider</h3><p>Klik "Tambah Banner Top" untuk mulai.</p></div>
-          </div>
-        </div>
-      </div>
+
 
       <!-- ===== NEWS/BERITA PAGE ===== -->
       <div class="page-section" id="page-news">
@@ -698,7 +672,7 @@
           <div class="path-input-group">
             <input type="text" class="form-input" id="fBrandLogo" placeholder="assets/logobrands/brand.jpg">
             <script>
-              ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','topHeroModalManager','brandPartnerModal'].forEach(id => {
+              ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','brandPartnerModal'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('click', function(e) {
                   if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; }
@@ -830,41 +804,7 @@
   </div>
 </div>
 
-<!-- TOP HERO MODAL -->
-<div class="modal-overlay" id="topHeroModalManager">
-  <div class="modal limit-width" style="max-width:500px;">
-    <div class="modal-header">
-      <h3><i class="fas fa-arrows-left-right"></i> Tambah Banner Top Slider</h3>
-      <button class="modal-close" onclick="closeTopHeroModal()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Judul Banner <span class="required">*</span></label>
-        <input type="text" class="form-input" id="fTopHeroTitle" placeholder="Misal: Promo Seasonal 2026">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Upload Gambar Banner (Landscape 16:9 Inset) <span class="required">*</span></label>
-        <div class="upload-area" id="topHeroUploadArea" style="min-height: 120px; padding: 20px;">
-          <input type="file" id="fTopHeroFile" accept="image/*" onchange="handleTopHeroUpload(event)">
-          <div class="upload-placeholder">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Pilih file gambar atau tarik ke sini</p>
-          </div>
-          <div class="upload-preview" style="display:none;">
-            <img id="fTopHeroPreview" src="" alt="Preview">
-          </div>
-        </div>
-        <p class="form-hint" style="margin-top:4px;"><i class="fas fa-info-circle"></i> File gambar akan disimpan langsung di database browser.</p>
-        <input type="hidden" id="fTopHeroFilename">
-        <input type="hidden" id="fTopHeroImageData">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline-gray" onclick="closeTopHeroModal()">Batal</button>
-      <button class="btn btn-gold" onclick="saveTopHeroEntry()"><i class="fas fa-save"></i> Simpan</button>
-    </div>
-  </div>
-</div>
+
 
 <!-- CONFIRM MODAL -->
 <div class="modal-overlay" id="confirmModal">

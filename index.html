@@ -51,11 +51,11 @@
         </div>
         <div class="nav-indicator" id="navIndicator"></div>
         <a href="index.html#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
-        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
         <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
         <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
         <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
 
         <div class="nav-social mobile-only" style="margin-top: 20px;">
           <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
@@ -114,118 +114,99 @@
 
 
 
-  <!-- ==================== HERO ==================== -->
   <section class="hero" id="beranda">
-    <div class="hero-diagonal-bg"></div>
+    <!-- Background Slider -->
+    <div class="hero-bg-slider" id="heroSlider">
+      <div class="slider-container" id="heroSliderContainer">
+        <div class="slide active"><img src="assets/images/hero-home/1.jpg" alt="Oriental Products"></div>
+        <div class="slide"><img src="assets/images/hero-home/2.jpg" alt="Rota & Green Pea"></div>
+        <div class="slide"><img src="assets/images/hero-home/3.jpg" alt="Tomo Crunchy Sticks"></div>
+      </div>
+    </div>
+    <!-- Dark overlay for text readability -->
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-glow"></div>
+
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge" data-i18n="hero-badge">TRUSTED SINCE 2016</div>
-        <h1 class="text-shine" data-i18n="hero-title">Distributor & Importir Makanan Berkualitas Indonesia</h1>
-        <p data-i18n="hero-desc">PT Mitra Abadi Sindomas menghadirkan produk makanan dan minuman impor berkualitas
-          tinggi dari merek-merek
-          internasional terkemuka dengan jaminan sertifikasi Halal dan BPOM.</p>
+        <div class="hero-badge" data-i18n="hero-badge">TERPERCAYA SEJAK 2016</div>
+        <h1 class="text-shine" data-i18n="hero-title">Distributor & Importir<br><span class="gold-text">Makanan Berkualitas<br>Indonesia</span></h1>
+        <p data-i18n="hero-desc">PT Mitra Abadi Sindomas menghadirkan produk makanan dan minuman impor berkualitas tinggi dari merek-merek internasional terkemuka dengan jaminan sertifikasi Halal dan BPOM.</p>
+        
         <div class="hero-buttons">
-          <a href="produk.html" class="btn-primary"><i class="fas fa-box-open"></i><span class="hero-btn-text"
-              data-i18n="hero-btn-products"> Lihat Produk</span></a>
-          <a href="#kontak" class="btn-outline"><i class="fas fa-headset"></i><span class="hero-btn-text"> Hubungi
-              Kami</span></a>
+          <a href="produk.html" class="btn-primary">
+            <i class="fas fa-box-open"></i>
+            <span class="hero-btn-text" data-i18n="hero-btn-products">Lihat Produk</span>
+          </a>
+          <a href="#kontak" class="btn-outline">
+            <i class="fas fa-headset"></i>
+            <span class="hero-btn-text">Hubungi Kami</span>
+          </a>
         </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-circle">
-              <div class="stat-number" data-count="8">0</div>
+
+        <div class="hero-slider-nav">
+          <button id="heroPrev" class="hero-nav-btn"><i class="fas fa-arrow-left"></i></button>
+          <div class="hero-dots" id="heroDots"></div>
+          <button id="heroNext" class="hero-nav-btn"><i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="hero-stats-new">
+          <div class="stat-box-hero">
+            <div class="stat-icon-mini"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-num" data-count="8">0</span>
             </div>
-            <div class="stat-label">Tahun Pengalaman</div>
-            <div class="stat-line"></div>
+            <div class="stat-label-mini">TAHUN<br>PENGALAMAN</div>
           </div>
-          <div class="stat-item">
-            <div class="stat-circle">
-              <div class="stat-number" data-count="500">0</div>
+          <div class="stat-box-hero">
+            <div class="stat-icon-mini"><i class="fas fa-boxes"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-num" data-count="500">0</span><span class="plus">+</span>
             </div>
-            <div class="stat-label">Produk Terdistribusi</div>
-            <div class="stat-line"></div>
+            <div class="stat-label-mini">PRODUK<br>TERDISTRIBUSI</div>
           </div>
-          <div class="stat-item">
-            <div class="stat-circle">
-              <div class="stat-number" data-count="34">0</div>
+          <div class="stat-box-hero">
+            <div class="stat-icon-mini"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-num" data-count="34">0</span>
             </div>
-            <div class="stat-label">Kota Jangkauan</div>
-            <div class="stat-line"></div>
+            <div class="stat-label-mini">KOTA<br>JANGKAUAN</div>
           </div>
         </div>
-      </div>
-      <div class="hero-image" id="heroSlider">
-        <div class="slider-container" id="heroSliderContainer">
-          <div class="slide active"><img src="assets/images/hero-banner-chocochips.png" alt="ZESS Chocochips"></div>
-          <div class="slide"><img src="assets/images/hero-banner.png" alt="Slide 2"></div>
-          <div class="slide"><img src="assets/images/snack.png" alt="Snacks"></div>
-          <div class="slide"><img src="assets/images/biskuit.png" alt="Biscuits"></div>
-          <div class="slide"><img src="assets/images/wafer.png" alt="Wafers"></div>
-          <div class="slide"><img src="assets/images/kue.png" alt="Cakes"></div>
-        </div>
-        <button class="slider-btn prev-btn" id="heroPrev" aria-label="Previous Slide"><i
-            class="fas fa-chevron-left"></i></button>
-        <button class="slider-btn next-btn" id="heroNext" aria-label="Next Slide"><i
-            class="fas fa-chevron-right"></i></button>
-        <div class="slider-dots" id="heroDots"></div>
       </div>
     </div>
   </section>
 
 
-  <!-- ==================== PARALLAX DIVIDER ==================== -->
-  <section class="parallax-divider" id="parallaxSection">
-    <div class="parallax-img-wrapper" id="parallaxWrapper">
-      <img src="assets/images/hero-banner.png" alt="Mitra Abadi Parallax" class="parallax-img" loading="lazy"
-        fetchpriority="low">
-    </div>
-  </section>
 
-  <script>
-    // Parallax scrolling effect for the image wrapper
-    (function () {
-      const section = document.getElementById('parallaxSection');
-      const wrapper = document.getElementById('parallaxWrapper');
-      if (!section || !wrapper) return;
-
-      window.addEventListener('scroll', () => {
-        const rect = section.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-
-        // Only run calculations if the section is visible in the viewport
-        if (rect.top <= viewportHeight && rect.bottom >= 0) {
-          const totalDistance = viewportHeight + rect.height;
-          const scrolled = viewportHeight - rect.top;
-          let percentage = scrolled / totalDistance;
-
-          // Clamp between 0 and 1
-          percentage = Math.max(0, Math.min(1, percentage));
-
-          // Move from 0% to -20% vertically (since wrapper is 130% height, this gives a smooth parallax)
-          const moveY = -(percentage * 20);
-          wrapper.style.transform = `translateY(${moveY}%)`;
-        }
-      }, { passive: true });
-    })();
-  </script>
 
   <!-- ==================== ABOUT ==================== -->
   <section class="section about" id="tentang">
     <div class="container">
       <!-- TOP ROW: INFO -->
       <div class="about-grid">
-        <div class="about-image reveal fade-right">
-          <img src="assets/images/mas-bangunan.jpg" alt="PT Mitra Abadi Sindomas Office">
-          <div class="accent-frame"></div>
-        </div>
-        <div class="about-content reveal fade-left">
+        <div class="about-content reveal fade-right">
           <div class="about-badge" data-i18n="about-badge">TENTANG KAMI</div>
-          <h2 data-i18n="about-title">Dedikasi Untuk Kualitas Dan Keamanan Pangan</h2>
+          <h2>Dedikasi Untuk Kualitas<br><span class="gold-text">Dan Keamanan Pangan</span></h2>
+
           <p data-i18n="about-desc-1">PT Mitra Abadi Sindomas adalah perusahaan internasional & nasional yang bergerak
             di bidang perdagangan umum, ekspor, impor, dan distribusi. Sejak 2016, kami telah menjalin kerja sama dengan
             merek-merek internasional terkemuka untuk menghadirkan produk makanan dan minuman impor berkualitas.</p>
           <p data-i18n="about-desc-2">Seluruh produk kami telah bersertifikat Halal dan terdaftar di BPOM, menjamin
             keamanan dan kualitas untuk konsumen Indonesia.</p>
+        </div>
+        <div class="about-image reveal fade-left">
+          <img src="assets/images/mas-bangunan.jpg" alt="PT Mitra Abadi Sindomas Office">
+          <!-- Badge Terpercaya Sejak 2016 -->
+          <div class="about-image-badge">
+            <div class="badge-icon">
+              <i class="fas fa-award"></i>
+            </div>
+            <div class="badge-text">
+              <span data-i18n="about-badge-trusted">Terpercaya Sejak</span>
+              <strong>2016</strong>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -337,15 +318,15 @@
   <section class="section brands" id="merek">
     <div class="container">
       <div class="section-header center pulse-on-scroll">
-        <div class="brand-badge-wrapper">
+        <div class="section-badge-symbol">
           <i class="fas fa-leaf fa-flip-horizontal"></i>
           <span data-i18n="brands-badge-top">BRAND PARTNERSHIP</span>
           <i class="fas fa-leaf"></i>
         </div>
         <h2 class="text-shine" style="font-size: clamp(32px, 5vw, 56px); margin-bottom: 20px;" data-i18n="brands-title">
           Menghadirkan Merek <span class="gold-text">Internasional Terbaik</span></h2>
-        <p style="max-width: 700px; margin: 0 auto; opacity: 0.8; color: #fff;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global
-          terpercaya untuk membawa cita rasa dunia ke Indonesia.</p>
+        <p style="max-width: 700px; margin: 0 auto; opacity: 0.8; color: #fff;" data-i18n="brands-desc">Kami bekerja sama dengan produsen global terpercaya<br>
+          untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
 
       <!-- Optional Filters for exact ref match -->
@@ -640,29 +621,31 @@
   </section>
 
   <!-- ===== PART 3: LOGISTIK NASIONAL ===== -->
-  <section class="section-logistik-wide">
-    <div class="container-wide">
-      <div class="dist-logistik-section reveal fade-up">
-        <div class="dist-logistik-bg">
-          <img src="assets/images/peta-indonesia-gold.png" alt="Peta Jaringan Distribusi MAS" class="dist-logistik-map">
-          <div class="dist-logistik-content">
-            <span class="dist-logistik-badge">JANGKAUAN LOGISTIK NASIONAL</span>
-            <h3 class="text-shine">Menghubungkan<br>Seluruh Indonesia</h3>
-            <p>Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.</p>
-            <div class="dist-logistik-features">
-              <div class="dist-logistik-feat">
-                <i class="fas fa-shipping-fast"></i>
-                <div>
-                  <strong>Distribusi Cepat</strong>
-                  <span>Tepat waktu ke setiap titik</span>
-                </div>
+  <section class="section-logistik-wide" id="logistik-nasional">
+    <div class="dist-logistik-section reveal fade-up">
+      <div class="dist-logistik-bg">
+        <img src="assets/images/peta-indonesia-gold.png" alt="Peta Jaringan Distribusi MAS" class="dist-logistik-map">
+        <div class="dist-logistik-content">
+          <div class="section-badge-symbol left">
+            <i class="fas fa-map-marked-alt"></i>
+            <span class="dist-logistik-badge" data-i18n="dist-logistik-badge">JANGKAUAN LOGISTIK NASIONAL</span>
+            <i class="fas fa-shipping-fast"></i>
+          </div>
+          <h3 class="text-shine">Menghubungkan<br>Seluruh Indonesia</h3>
+          <p>Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.</p>
+          <div class="dist-logistik-features">
+            <div class="dist-logistik-feat">
+              <i class="fas fa-shipping-fast"></i>
+              <div>
+                <strong>Distribusi Cepat</strong>
+                <span>Tepat waktu ke setiap titik</span>
               </div>
-              <div class="dist-logistik-feat">
-                <i class="fas fa-globe-asia"></i>
-                <div>
-                  <strong>Jangkauan Luas</strong>
-                  <span>Seluruh wilayah Indonesia</span>
-                </div>
+            </div>
+            <div class="dist-logistik-feat">
+              <i class="fas fa-globe-asia"></i>
+              <div>
+                <strong>Jangkauan Luas</strong>
+                <span>Seluruh wilayah Indonesia</span>
               </div>
             </div>
           </div>
@@ -672,9 +655,7 @@
   </section>
 
   <!-- ===== PART 4: B2B SECTION (Warehouse Slider) ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="dist-b2b-section reveal fade-up">
+  <section class="dist-b2b-section" id="solusi-b2b">
         <div class="dist-b2b-wrapper">
           <!-- Left: Branch/Warehouse Image Slider -->
           <div class="dist-b2b-image-side">
@@ -688,28 +669,28 @@
 
           <!-- Right: B2B Content -->
           <div class="dist-b2b-content-side">
-            <div class="section-tag"><i class="fas fa-handshake"></i> SOLUSI B2B</div>
-            <h3>Solusi Distribusi B2B<br>Untuk Bisnis Anda</h3>
+            <div class="b2b-badge-capsule"><i class="fas fa-handshake"></i> SOLUSI B2B</div>
+            <h3>SOLUSI DISTRIBUSI B2B<br>UNTUK BISNIS ANDA</h3>
             <p>Kami melayani kebutuhan distribusi dalam skala besar melalui jalur laut dan darat dengan sistem terintegrasi dan aman.</p>
             
             <div class="dist-b2b-features">
               <div class="dist-b2b-feat">
                 <div class="dist-b2b-feat-icon"><i class="fas fa-ship"></i></div>
-                <div>
+                <div class="dist-b2b-feat-text">
                   <strong>Pengiriman Laut</strong>
                   <span>Efisien & Terpercaya</span>
                 </div>
               </div>
               <div class="dist-b2b-feat">
                 <div class="dist-b2b-feat-icon"><i class="fas fa-warehouse"></i></div>
-                <div>
+                <div class="dist-b2b-feat-text">
                   <strong>Kapasitas Besar</strong>
                   <span>Untuk Skala Industri</span>
                 </div>
               </div>
               <div class="dist-b2b-feat">
                 <div class="dist-b2b-feat-icon"><i class="fas fa-shield-alt"></i></div>
-                <div>
+                <div class="dist-b2b-feat-text">
                   <strong>Keamanan Terjamin</strong>
                   <span>Setiap Pengiriman</span>
                 </div>
@@ -727,11 +708,15 @@
   <section class="section partners" id="mitra-strategis">
     <div class="container">
       <div class="section-header reveal fade-up">
+        <div class="section-badge-symbol">
+          <i class="fas fa-star fa-flip-horizontal"></i>
+          <span data-i18n="partners-badge">MITRA STRATEGIS</span>
+          <i class="fas fa-star"></i>
+        </div>
         <h2 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;"
           data-i18n="partners-title">Mitra Strategis Kami</h2>
-        <p style="color: rgba(255,255,255,0.6); font-size: 16px; max-width: 600px; margin: 0 auto;"
-          data-i18n="partners-desc">Produk kami tersedia di berbagai jaringan modern trade dan e-commerce terkemuka.
-        </p>
+        <p style="color: rgba(255,255,255,0.7); font-size: clamp(14px, 1.8vw, 18px); margin: 0 auto; white-space: nowrap; text-align: center;"
+          data-i18n="partners-desc">Produk kami tersedia di berbagai jaringan modern trade dan e-commerce terkemuka.</p>
       </div>
 
       <div class="partner-tabs-wrapper reveal fade-up">
@@ -791,7 +776,7 @@
           <img src="${b.imageData || b.path || 'assets/images/mas-bangunan.jpg'}" alt="${b.name} Warehouse" loading="lazy">
           <div class="branch-overlay-info">
             <div class="branch-counter">${i + 1} / ${cnt}</div>
-            <h3 class="branch-name">${b.name}</h3>
+            <h4 class="branch-name">${b.name}</h4>
             <p class="branch-address">${b.address}</p>
           </div>
           <div class="branch-nav-b2b">
@@ -956,8 +941,8 @@
       <div class="section-header reveal fade-up">
         <div class="section-tag"><i class="fas fa-envelope"></i> <span data-i18n="contact-tag">Kontak</span></div>
         <h2 data-i18n="contact-title">Hubungi Kami</h2>
-        <p style="max-width: 700px; margin: 0 auto;" data-i18n="contact-desc-idx">Tertarik untuk bermitra? Hubungi kami
-          untuk informasi lebih lanjut tentang produk dan kerjasama distribusi.</p>
+        <p style="max-width: 700px; margin: 0 auto;" data-i18n="contact-desc-idx">Tertarik untuk bermitra? Hubungi kami untuk informasi lebih lanjut<br>
+          tentang produk dan kerjasama distribusi.</p>
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal fade-right">
@@ -1096,7 +1081,7 @@
           <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-bottom-logo">
           <div class="footer-v-divider"></div>
           <div class="footer-company-info">
-            <h3 data-i18n="footer-company-name">PT Mitra Abadi Sindomas</h3>
+            <h2 data-i18n="footer-company-name" class="footer-title-compact">PT Mitra Abadi Sindomas</h2>
             <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi
               dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
           </div>
@@ -2082,7 +2067,7 @@
             ).join('');
 
             // Re-initialize slides after injection
-            slides = document.querySelectorAll('.slide');
+            slides = sliderContainer.querySelectorAll('.slide');
             slideCount = slides.length;
             initSliderControls();
           }
@@ -2092,7 +2077,7 @@
       }
     }
 
-    let slides = document.querySelectorAll('.slide');
+    let slides = sliderContainer ? sliderContainer.querySelectorAll('.slide') : [];
     let currentSlide = 0;
     let slideCount = slides.length;
     let slideInterval;
