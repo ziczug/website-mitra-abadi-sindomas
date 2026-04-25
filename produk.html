@@ -17,14 +17,11 @@
     /* ====== PRODUCT PAGE SPECIFIC STYLES ====== */
     .page-hero {
       padding: clamp(120px, 15vh, 160px) 0 clamp(80px, 10vh, 120px);
-      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      background: url('assets/images/banner-page/store2.jpg');
+      background-size: cover;
+      background-position: center;
       position: relative; text-align: center;
       z-index: 1;
-    }
-    .page-hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 30% 50%, rgba(212,168,67,0.12) 0%, transparent 60%),
-                  radial-gradient(circle at 70% 80%, rgba(212,168,67,0.08) 0%, transparent 50%);
     }
     .page-hero .container { position: relative; z-index: 2; }
     .page-hero h1 { font-size: clamp(28px, 4.5vw, 42px); color: var(--white); margin-bottom: 12px; }
@@ -1222,7 +1219,7 @@
 </head>
 <body>
 
-  <!-- ==================== NAVBAR ==================== -->
+    <!-- ==================== NAVBAR ==================== -->
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
     <div class="container">
@@ -1241,7 +1238,8 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
               <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
@@ -1252,12 +1250,13 @@
           </div>
         </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="index.html#beranda" class="nav-item" data-i18n="nav-home">Beranda</a>
-        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
+        <a href="index.html#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
         <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
-        <a href="produk.html" class="nav-item active" data-i18n="nav-products">Produk</a>
+        <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
-        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikat</a>
+        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
 
         <div class="nav-social mobile-only" style="margin-top: 20px;">
           <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
@@ -1270,7 +1269,8 @@
         </div>
       </div>
       <div class="nav-actions">
-        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text" data-i18n="nav-contact">Kontak</span></a>
+        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text"
+            data-i18n="nav-contact">Kontak</span></a>
         <div class="search-wrapper" id="searchWrapper">
           <button class="search-toggle" id="searchToggle" aria-label="Open Search">
             <i class="fas fa-search"></i>
@@ -1278,7 +1278,8 @@
           <div class="search-container" id="searchContainer">
             <div class="search-input-wrapper">
               <i class="fas fa-search search-icon-inside"></i>
-              <input type="text" placeholder="Cari produk atau merek..." id="headerSearchInput" autocomplete="off" data-i18n="search-placeholder">
+              <input type="text" placeholder="Cari produk atau merek..." id="headerSearchInput" autocomplete="off"
+                data-i18n="search-placeholder">
             </div>
             <div class="search-results" id="headerSearchResults">
               <!-- Results will be injected here -->
@@ -1294,7 +1295,8 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
               <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
@@ -1310,7 +1312,6 @@
       </div>
     </div>
   </nav>
-
 
 
 <!-- PAGE HERO -->
@@ -1540,27 +1541,23 @@
     </div>
   </div>
 
-  <!-- ====== FOOTER ====== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-main-bottom">
-        <div class="footer-logo-row">
-          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-bottom-logo">
-          <div class="footer-v-divider"></div>
-          <div class="footer-company-info">
-            <h2 data-i18n="footer-company-name" style="white-space: nowrap;">PT Mitra Abadi Sindomas</h2>
-            <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
-          </div>
-          <div class="footer-bottom-socials">
-            <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-        
-        <div class="footer-copyright-row">
-          <p data-i18n="footer-copyright">© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="footer-red-split">
+      <div class="footer-red-map">
+        <iframe src="https://www.google.com/maps?q=PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark&hl=id&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="footer-red-content">
+        <div class="footer-red-text">
+          <span class="fr-subtitle">Kantor Utama</span>
+          <h2 class="fr-title">Kantor Jakarta</h2>
+          <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
+          <a href="index.html#kontak" class="fr-link">Kantor Daerah <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
+    </div>
+    <div class="footer-red-bottom">
+      <p>© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
     </div>
   </footer>
 
@@ -2687,3 +2684,4 @@ window.addEventListener('langChanged', () => {
 
 </body>
 </html>
+

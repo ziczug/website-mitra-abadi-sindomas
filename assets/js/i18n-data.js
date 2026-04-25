@@ -28,9 +28,10 @@ const i18nData = {
     
     // About
     'about-badge': 'TENTANG KAMI',
-    'about-title': 'Dedikasi Untuk Kualitas Dan Keamanan Pangan',
+    'about-title': 'Dedikasi Kami Untuk<br><span class="gold-text">Kualitas & Keamanan</span>',
     'about-desc-1': 'PT Mitra Abadi Sindomas adalah perusahaan internasional & nasional yang bergerak di bidang perdagangan umum, ekspor, impor, dan distribusi. Sejak 2016, kami telah menjalin kerja sama dengan merek-merek internasional terkemuka untuk menghadirkan produk makanan dan minuman impor berkualitas.',
     'about-desc-2': 'Seluruh produk kami telah bersertifikat Halal dan terdaftar di BPOM, menjamin keamanan dan kualitas untuk konsumen Indonesia.',
+    'about-btn-more': 'Selengkapnya',
     'about-stat-years': 'Tahun Pengalaman',
     'about-stat-products': 'Produk Berkualitas',
     'about-stat-partners': 'Mitra Strategis',
@@ -202,6 +203,7 @@ const i18nData = {
     'about-title': 'Dedicated to Food Quality and Safety',
     'about-desc-1': 'PT Mitra Abadi Sindomas is an international & national company engaged in general trade, export, import, and distribution. Since 2016, we have established cooperation with leading international brands to present quality imported food and beverage products.',
     'about-desc-2': 'All our products are Halal certified and registered with BPOM, ensuring safety and quality for Indonesian consumers.',
+    'about-btn-more': 'Read More',
     'about-stat-years': 'Years Experience',
     'about-stat-products': 'Quality Products',
     'about-stat-partners': 'Strategic Partners',
@@ -371,6 +373,7 @@ const i18nData = {
     'about-title': '致力于食品质量与安全',
     'about-desc-1': 'PT Mitra Abadi Sindomas 是一家从事一般贸易、进出口和分销的国际和国内公司。自 2016 年以来，我们与国际领先品牌建立了合作关系，提供优质的进口食品和饮料产品。',
     'about-desc-2': '我们所有的产品均通过清真认证并在 BPOM 注册，确保印度尼西亚消费者的安全和质量。',
+    'about-btn-more': '阅读更多',
     'about-stat-years': '年行业经验',
     'about-stat-products': '优质产品',
     'about-stat-partners': '战略合作伙伴',

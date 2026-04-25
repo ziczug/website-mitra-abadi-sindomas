@@ -1,0 +1,93 @@
+  <!-- ==================== NAVBAR ==================== -->
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <button class="mobile-close" onclick="toggleNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="lang-dropdown mobile-only" id="langDropdownMobile">
+          <div class="lang-current" onclick="toggleLangDropdown(true)">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id">Indonesia</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
+            </div>
+          </div>
+        </div>
+        <div class="nav-indicator" id="navIndicator"></div>
+        <a href="index.html#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
+        <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
+        <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
+        <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
+        <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikat</a>
+        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
+
+        <div class="nav-social mobile-only" style="margin-top: 20px;">
+          <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
+            <i class="fas fa-phone-alt"></i>
+          </a>
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item"
+            aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text"
+            data-i18n="nav-contact">Kontak</span></a>
+        <div class="search-wrapper" id="searchWrapper">
+          <button class="search-toggle" id="searchToggle" aria-label="Open Search">
+            <i class="fas fa-search"></i>
+          </button>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-wrapper">
+              <i class="fas fa-search search-icon-inside"></i>
+              <input type="text" placeholder="Cari produk atau merek..." id="searchInput" autocomplete="off"
+                data-i18n="search-placeholder">
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will be injected here -->
+            </div>
+          </div>
+        </div>
+        <!-- Social icons moved to mobile menu only -->
+        <div class="lang-dropdown desktop-only" id="langDropdown">
+          <div class="lang-current" onclick="toggleLangDropdown()">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id-short">ID</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,179 @@
+<script>
+    // --- CS FORM & SCROLL TOP LOGIC ---
+    function toggleContactModal() {
+      const modal = document.getElementById('contactModalOverlay');
+      if (modal) {
+        modal.classList.toggle('active');
+        if (modal.classList.contains('active')) {
+          initContactFormProducts();
+        }
+      }
+    }
+
+    async function initContactFormProducts() {
+      const productSelect = document.getElementById('waProduct');
+      if (!productSelect || productSelect.options.length > 1) return;
+
+      let prods = [];
+      // Use global 'products' if available (common in produk.html)
+      if (typeof products !== 'undefined' && products.length > 0) {
+        prods = products;
+      } else {
+        // Fetch if not available (common in index.html)
+        try {
+          const resp = await fetch('database/cms/products.json');
+          if (resp.ok) prods = await resp.json();
+          else {
+            const stored = localStorage.getItem('mas_products');
+            if (stored) prods = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn('CS Form fetch error:', e);
+        }
+      }
+
+      if (!prods || prods.length === 0) return;
+
+      const seen = new Set();
+      prods.forEach(p => {
+        // Get category label safely
+        let catLabel = p.category;
+        catLabel = getCategoryLabel(p.category);
+
+        const display = `${p.name} - ${p.brand} - ${catLabel}`;
+        if (!seen.has(display)) {
+          seen.add(display);
+          const opt = document.createElement('option');
+          opt.value = display;
+          opt.textContent = display;
+          opt.dataset.image = p.imageData || p.image || '';
+          productSelect.appendChild(opt);
+        }
+      });
+    }
+
+    function updateProductPreview() {
+      const select = document.getElementById('waProduct');
+      const box = document.getElementById('waProductPreviewBox');
+      const img = document.getElementById('waProductImg');
+      const placeholder = document.getElementById('waProductPlaceholder');
+      if (!select || select.selectedIndex < 0) return;
+      const selectedOption = select.options[select.selectedIndex];
+      const imgSrc = selectedOption.dataset.image;
+
+      if (imgSrc) {
+        img.src = imgSrc;
+        img.classList.add('loaded');
+        placeholder.style.display = 'none';
+        box.classList.add('active');
+      } else {
+        img.src = "";
+        img.classList.remove('loaded');
+        placeholder.style.display = 'block';
+        box.classList.remove('active');
+      }
+    }
+
+    function sendWhatsApp() {
+      const name = document.getElementById('waName').value.trim();
+      const phone = document.getElementById('waPhone').value.trim();
+      const region = document.getElementById('waRegion').value.trim();
+      const outlet = document.getElementById('waOutlet').value.trim();
+      const product = document.getElementById('waProduct').value;
+      const message = document.getElementById('waMessage').value.trim();
+
+      if (!name || !phone) {
+        alert('Mohon isi Nama dan No. WhatsApp Anda.');
+        return;
+      }
+
+      const targetPhone = '6281295001778';
+      const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
+        `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
+        `${message}\n\n` +
+        `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
+
+      const encodedText = encodeURIComponent(text);
+      window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
+    }
+
+    function getCategoryLabel(cat) {
+      if (typeof t === 'function') {
+        const catKey = `cat-${cat}`;
+        const translated = t(catKey);
+        if (translated !== catKey) return translated;
+      }
+      const labels = {
+        snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
+        minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
+        noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
+      };
+      return labels[cat] || cat;
+    }
+
+    // --- SHARE LOGIC ---
+
+</script>
+  <!-- ==================== FLOATING CONTACT FORM ==================== -->
+  <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
+    <i class="fas fa-headset"></i>
+  </div>
+
+  <div class="contact-modal-overlay" id="contactModalOverlay" onclick="if(event.target===this) toggleContactModal()">
+    <div class="contact-modal-container">
+      <div class="contact-modal-header">
+        <h3>Hubungi Kami</h3>
+        <button class="contact-modal-close" onclick="toggleContactModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="contact-modal-body">
+        <div class="contact-form-row">
+          <div class="contact-form-group">
+            <label><i class="fas fa-user"></i> Nama Lengkap</label>
+            <input type="text" id="waName" placeholder="Nama Anda...">
+          </div>
+          <div class="contact-form-group">
+            <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+            <input type="tel" id="waPhone" placeholder="0812...">
+          </div>
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-map-marker-alt"></i> Region (Provinsi / Kota)</label>
+          <input type="text" id="waRegion" placeholder="Lokasi Anda...">
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-store"></i> Nama Outlet</label>
+          <input type="text" id="waOutlet" placeholder="Nama toko / bisnis...">
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-box"></i> Tertarik Produk</label>
+          <div class="product-selection-wrapper">
+            <div class="wa-product-dropdown">
+              <select id="waProduct" onchange="updateProductPreview()">
+                <option value="">Pilih Produk (opsional)</option>
+              </select>
+            </div>
+            <div class="product-preview-box" id="waProductPreviewBox">
+              <img id="waProductImg" src="" alt="Preview">
+              <i class="fas fa-image" style="color:#333; font-size: 24px;" id="waProductPlaceholder"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-comment-alt"></i> Tinggalkan Pesan</label>
+          <textarea id="waMessage" rows="2" placeholder="Apa yang bisa kami bantu?"></textarea>
+        </div>
+        <button class="btn-send-wa" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+

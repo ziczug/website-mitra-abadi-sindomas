@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Kami | PT Mitra Abadi Sindomas</title>
+  <meta name="description" content="Kenali lebih dekat PT Mitra Abadi Sindomas, pemimpin distribusi makanan dan minuman impor berkualitas di Indonesia sejak 2016.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="assets/js/i18n-data.js"></script>
+  <script src="assets/js/i18n-engine.js"></script>
+  <script src="assets/js/image-fallback.js"></script>
+          <style>
+    body {
+      background: #ffffff;
+      color: #1a1a1a;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .page-header {
+      padding: 180px 0 120px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('assets/images/banner-page/team.jpg');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(to top, #ffffff, transparent);
+    }
+    .page-header h1 {
+      font-size: clamp(42px, 8vw, 64px);
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .page-breadcrumb {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+      font-weight: 500;
+      width: fit-content;
+      margin: 0 auto;
+      padding: 8px 24px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 100px;
+    }
+    .page-breadcrumb a { color: #E2C87A; text-decoration: none; }
+    
+    .about-intro-section { padding: 120px 0; }
+    .about-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-intro-text h2 { 
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 30px; 
+      line-height: 1.15; 
+      color: #111; 
+      font-weight: 800;
+    }
+    .about-intro-text p { 
+      font-size: 18px; 
+      color: rgba(0,0,0,0.6); 
+      margin-bottom: 24px; 
+      line-height: 1.8; 
+    }
+    .about-intro-image img { 
+      border-radius: 24px; 
+      box-shadow: 0 30px 70px rgba(0,0,0,0.07);
+      width: 100%;
+    }
+
+    .vision-mission-section {
+      padding: 120px 0;
+      background: #fafafa;
+    }
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .vm-card {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 60px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+    .vm-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
+    }
+    .vm-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #E2C87A, #C9A84C);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: #000;
+      margin-bottom: 35px;
+    }
+    .vm-card h3 { 
+      font-size: 30px; 
+      margin-bottom: 20px; 
+      color: #111; 
+      font-weight: 700;
+    }
+    .vm-card p { font-size: 17px; color: rgba(0,0,0,0.55); line-height: 1.7; }
+    .mission-list { list-style: none; padding: 0; margin-top: 25px; }
+    .mission-list li {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 18px;
+      color: rgba(0,0,0,0.7);
+      font-size: 16px;
+    }
+    .mission-list li i { 
+      color: #C9A84C; 
+      font-size: 16px;
+    }
+
+    .pillars-section { padding: 120px 0; }
+    .pillar-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      margin-bottom: 120px;
+      align-items: center;
+    }
+    .pillar-row:nth-child(even) { direction: rtl; }
+    .pillar-row:nth-child(even) .pillar-text { direction: ltr; }
+    .pillar-image img {
+      width: 100%;
+      border-radius: 32px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.06);
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      transition: transform 0.4s ease;
+    }
+    .pillar-row:hover .pillar-image img {
+      transform: translateY(-5px);
+    }
+    .pillar-text h3 { 
+      font-size: 36px; 
+      margin-bottom: 24px; 
+      color: #111; 
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .pillar-text p { 
+      font-size: 18px; 
+      color: rgba(0,0,0,0.55); 
+      line-height: 1.8; 
+    }
+
+    @media (max-width: 992px) {
+      .about-intro-grid, .vm-grid, .pillar-row { grid-template-columns: 1fr; gap: 40px; }
+      .pillar-row:nth-child(even) { direction: ltr; }
+    }
+  </style>
+</head>
+
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="nav-logo-img">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <button class="mobile-close" onclick="toggleNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="lang-dropdown mobile-only" id="langDropdownMobile">
+          <div class="lang-current" onclick="toggleLangDropdown(true)">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id">Indonesia</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesia</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">Inggris</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
+            </div>
+          </div>
+        </div>
+        <div class="nav-indicator" id="navIndicator"></div>
+        <a href="index.html#beranda" class="nav-item" data-i18n="nav-home">Beranda</a>
+        <a href="tentang.html" class="nav-item active" data-i18n="nav-about">Tentang Kami</a>
+        <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
+        <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
+        <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikat</a>
+        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
+
+        <div class="nav-social mobile-only" style="margin-top: 20px;">
+          <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
+            <i class="fas fa-phone-alt"></i>
+          </a>
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a href="tel:+6281295001778" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text" data-i18n="nav-contact">Kontak</span></a>
+        <div class="search-wrapper" id="searchWrapper">
+          <button class="search-toggle" id="searchToggle" aria-label="Open Search">
+            <i class="fas fa-search"></i>
+          </button>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-wrapper">
+              <i class="fas fa-search search-icon-inside"></i>
+              <input type="text" placeholder="Cari produk atau merek..." id="searchInput" autocomplete="off" data-i18n="search-placeholder">
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will be injected here -->
+            </div>
+          </div>
+        </div>
+        <!-- Social icons moved to mobile menu only -->
+        <div class="lang-dropdown desktop-only" id="langDropdown">
+          <div class="lang-current" onclick="toggleLangDropdown()">
+            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <span data-i18n="lang-id-short">ID</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lang-options">
+            <div class="lang-option active" onclick="setLanguage('id')">
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesia</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('en')">
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">Inggris</span>
+            </div>
+            <div class="lang-option" onclick="setLanguage('cn')">
+              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="text-shine reveal fade-up" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="nav-about">Tentang Kami</h1>
+      <div class="page-breadcrumb reveal fade-up" style="animation-delay: 0.2s;">
+        <a href="index.html">Beranda</a>
+        <span>/</span>
+        <span>Tentang Kami</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== INTRO ==================== -->
+  <section class="about-intro-section">
+    <div class="container">
+      <div class="about-intro-grid">
+        <div class="about-intro-text reveal fade-right">
+          <h2>Dedikasi Kami Untuk<br><span class="gold-text">Kualitas & Keamanan</span></h2>
+          <p>PT Mitra Abadi Sindomas adalah perusahaan internasional & nasional yang bergerak di bidang perdagangan umum, ekspor, impor, dan distribusi. Sejak didirikan pada tahun 2016, visi kami tetap konsisten: menghadirkan standar kualitas pangan terbaik bagi masyarakat Indonesia.</p>
+          <p>Kami memahami bahwa kepercayaan konsumen adalah aset terpenting. Oleh karena itu, setiap produk yang kami distribusikan telah melalui kurasi ketat dan memastikan kepatuhan penuh terhadap regulasi pemerintah, termasuk sertifikasi Halal dan BPOM.</p>
+        </div>
+        <div class="about-intro-image reveal fade-left">
+          <img src="assets/images/banner-page/team.jpg" alt="Office">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VISION & MISSION ==================== -->
+  <section class="vision-mission-section">
+    <div class="container">
+      <div class="vm-grid">
+        <!-- VISION -->
+        <div class="vm-card reveal fade-right">
+          <div class="vm-icon"><i class="fas fa-eye"></i></div>
+          <h3>Visi Kami</h3>
+          <p>Menjadi pemimpin pasar dalam distribusi produk makanan dan minuman impor yang inovatif, berkualitas tinggi, serta memiliki jangkauan nasional yang kuat dan terpercaya di seluruh penjuru Indonesia.</p>
+        </div>
+        <!-- MISSION -->
+        <div class="vm-card reveal fade-left">
+          <div class="vm-icon"><i class="fas fa-rocket"></i></div>
+          <h3>Misi Kami</h3>
+          <ul class="mission-list">
+            <li><i class="fas fa-check-circle"></i> Membangun kemitraan strategis dengan brand global terpercaya.</li>
+            <li><i class="fas fa-check-circle"></i> Mengembangkan jaringan distribusi nasional yang efisien dan modern.</li>
+            <li><i class="fas fa-check-circle"></i> Meningkatkan kualitas SDM profesional yang berorientasi pada layanan.</li>
+            <li><i class="fas fa-check-circle"></i> Mendorong pertumbuhan mitra bisnis secara berkelanjutan.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PILLARS / FEATURES ==================== -->
+  <section class="pillars-section">
+    <div class="container">
+      
+      <!-- PILLAR 1: GLOBAL PARTNERSHIP -->
+      <div class="pillar-row">
+        <div class="pillar-text reveal fade-right">
+          <h3>Sinergi Global untuk <span class="gold-text">Cita Rasa Dunia</span></h3>
+          <p>Kami bermitra dengan produsen mancanegara terpercaya guna menghadirkan ragam rasa autentik dari berbagai belahan dunia langsung ke meja konsumen Indonesia. Setiap kemitraan dibangun atas dasar keselarasan visi dalam menghadirkan kualitas tanpa kompromi.</p>
+        </div>
+        <div class="pillar-image reveal fade-left">
+          <img src="assets/images/banner-page/teamoffice.jpg" alt="Global Partnership">
+        </div>
+      </div>
+
+      <!-- PILLAR 2: INFRASTRUCTURE -->
+      <div class="pillar-row">
+        <div class="pillar-text reveal fade-left">
+          <h3>Infrastruktur Logistik & <span class="gold-text">Distribusi Modern</span></h3>
+          <p>Didukung oleh jaringan gudang mutakhir dan armada distribusi mandiri yang handal, kami memastikan rantai pasokan tetap terjaga. Jaringan kami tersebar luas di berbagai kota besar untuk memastikan distribusi produk yang cepat, tepat, dan aman ke seluruh pelanggan kami.</p>
+        </div>
+        <div class="pillar-image reveal fade-right">
+          <img src="assets/images/banner-page/work.jpg" alt="Logistics Infrastructure">
+        </div>
+      </div>
+
+      <!-- PILLAR 3: COMPLIANCE -->
+      <div class="pillar-row">
+        <div class="pillar-text reveal fade-right">
+          <h3>Standar Keamanan & <span class="gold-text">Kualitas Pangan</span></h3>
+          <p>Seluruh portofolio produk kami telah melewati standar keamanan pangan yang ketat dan memiliki sertifikasi resmi dari otoritas terkait (BPOM & Halal). Kami berkomitmen untuk hanya mendistribusikan produk yang aman dan bermanfaat bagi gaya hidup sehat konsumen.</p>
+        </div>
+        <div class="pillar-image reveal fade-left">
+          <img src="assets/images/imgtentang/meet.jpg" alt="Security Standard">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="footer-red-split">
+      <div class="footer-red-map">
+        <iframe src="https://www.google.com/maps?q=PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark&hl=id&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="footer-red-content">
+        <div class="footer-red-text">
+          <span class="fr-subtitle">Kantor Utama</span>
+          <h2 class="fr-title">Kantor Jakarta</h2>
+          <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
+          <a href="index.html#kontak" class="fr-link">Kantor Daerah <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-red-bottom">
+      <p>© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal animation logic
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("visible");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Initial check
+  </script>
+
+<script>
+    // --- CS FORM & SCROLL TOP LOGIC ---
+    function toggleContactModal() {
+      const modal = document.getElementById('contactModalOverlay');
+      if (modal) {
+        modal.classList.toggle('active');
+        if (modal.classList.contains('active')) {
+          initContactFormProducts();
+        }
+      }
+    }
+
+    async function initContactFormProducts() {
+      const productSelect = document.getElementById('waProduct');
+      if (!productSelect || productSelect.options.length > 1) return;
+
+      let prods = [];
+      // Use global 'products' if available (common in produk.html)
+      if (typeof products !== 'undefined' && products.length > 0) {
+        prods = products;
+      } else {
+        // Fetch if not available (common in index.html)
+        try {
+          const resp = await fetch('database/cms/products.json');
+          if (resp.ok) prods = await resp.json();
+          else {
+            const stored = localStorage.getItem('mas_products');
+            if (stored) prods = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn('CS Form fetch error:', e);
+        }
+      }
+
+      if (!prods || prods.length === 0) return;
+
+      const seen = new Set();
+      prods.forEach(p => {
+        // Get category label safely
+        let catLabel = p.category;
+        catLabel = getCategoryLabel(p.category);
+
+        const display = `${p.name} - ${p.brand} - ${catLabel}`;
+        if (!seen.has(display)) {
+          seen.add(display);
+          const opt = document.createElement('option');
+          opt.value = display;
+          opt.textContent = display;
+          opt.dataset.image = p.imageData || p.image || '';
+          productSelect.appendChild(opt);
+        }
+      });
+    }
+
+    function updateProductPreview() {
+      const select = document.getElementById('waProduct');
+      const box = document.getElementById('waProductPreviewBox');
+      const img = document.getElementById('waProductImg');
+      const placeholder = document.getElementById('waProductPlaceholder');
+      if (!select || select.selectedIndex < 0) return;
+      const selectedOption = select.options[select.selectedIndex];
+      const imgSrc = selectedOption.dataset.image;
+
+      if (imgSrc) {
+        img.src = imgSrc;
+        img.classList.add('loaded');
+        placeholder.style.display = 'none';
+        box.classList.add('active');
+      } else {
+        img.src = "";
+        img.classList.remove('loaded');
+        placeholder.style.display = 'block';
+        box.classList.remove('active');
+      }
+    }
+
+    function sendWhatsApp() {
+      const name = document.getElementById('waName').value.trim();
+      const phone = document.getElementById('waPhone').value.trim();
+      const region = document.getElementById('waRegion').value.trim();
+      const outlet = document.getElementById('waOutlet').value.trim();
+      const product = document.getElementById('waProduct').value;
+      const message = document.getElementById('waMessage').value.trim();
+
+      if (!name || !phone) {
+        alert('Mohon isi Nama dan No. WhatsApp Anda.');
+        return;
+      }
+
+      const targetPhone = '6281295001778';
+      const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
+        `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
+        `${message}\n\n` +
+        `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
+
+      const encodedText = encodeURIComponent(text);
+      window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
+    }
+
+    function getCategoryLabel(cat) {
+      if (typeof t === 'function') {
+        const catKey = `cat-${cat}`;
+        const translated = t(catKey);
+        if (translated !== catKey) return translated;
+      }
+      const labels = {
+        snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
+        minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
+        noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
+      };
+      return labels[cat] || cat;
+    }
+
+    // --- SHARE LOGIC ---
+
+</script>
+  <!-- ==================== FLOATING CONTACT FORM ==================== -->
+  <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
+    <i class="fas fa-headset"></i>
+  </div>
+
+  <div class="contact-modal-overlay" id="contactModalOverlay" onclick="if(event.target===this) toggleContactModal()">
+    <div class="contact-modal-container">
+      <div class="contact-modal-header">
+        <h3>Hubungi Kami</h3>
+        <button class="contact-modal-close" onclick="toggleContactModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="contact-modal-body">
+        <div class="contact-form-row">
+          <div class="contact-form-group">
+            <label><i class="fas fa-user"></i> Nama Lengkap</label>
+            <input type="text" id="waName" placeholder="Nama Anda...">
+          </div>
+          <div class="contact-form-group">
+            <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+            <input type="tel" id="waPhone" placeholder="0812...">
+          </div>
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-map-marker-alt"></i> Region (Provinsi / Kota)</label>
+          <input type="text" id="waRegion" placeholder="Lokasi Anda...">
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-store"></i> Nama Outlet</label>
+          <input type="text" id="waOutlet" placeholder="Nama toko / bisnis...">
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-box"></i> Tertarik Produk</label>
+          <div class="product-selection-wrapper">
+            <div class="wa-product-dropdown">
+              <select id="waProduct" onchange="updateProductPreview()">
+                <option value="">Pilih Produk (opsional)</option>
+              </select>
+            </div>
+            <div class="product-preview-box" id="waProductPreviewBox">
+              <img id="waProductImg" src="" alt="Preview">
+              <i class="fas fa-image" style="color:#333; font-size: 24px;" id="waProductPlaceholder"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-comment-alt"></i> Tinggalkan Pesan</label>
+          <textarea id="waMessage" rows="2" placeholder="Apa yang bisa kami bantu?"></textarea>
+        </div>
+        <button class="btn-send-wa" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+
+<script>
+    const navbar = document.getElementById('navbar');
+    const scrollTopBtn = document.getElementById('scrollTop');
+    const navLinks = document.getElementById('navLinks');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navOverlay = document.getElementById('navOverlay');
+    const navItems = document.querySelectorAll('.nav-item');
+    const navIndicator = document.getElementById('navIndicator');
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY > 50;
+      if (navbar) navbar.classList.toggle('scrolled', scrolled);
+      if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    function toggleNav() {
+      navLinks.classList.toggle('active');
+      if (mobileToggle) mobileToggle.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    }
+
+    function toggleLangDropdown(isMobile) {
+      const dd = isMobile ? document.getElementById('langDropdownMobile') : document.getElementById('langDropdown');
+      if (dd) dd.classList.toggle('active');
+    }
+
+    function openKatalog() {
+      window.location.href = 'index.html#katalog';
+    }
+
+    function updateIndicator(indicator, el) {
+      if (!indicator || !el || window.innerWidth <= 768) {
+        if (indicator) indicator.style.opacity = '0';
+        return;
+      }
+      indicator.style.opacity = '1';
+      indicator.style.width = el.offsetWidth + 'px';
+      indicator.style.left = el.offsetLeft + 'px';
+    }
+
+    function initIndicators() {
+      const activeNavItem = document.querySelector('.nav-item.active') || navItems[0];
+      updateIndicator(navIndicator, activeNavItem);
+    }
+
+    setTimeout(initIndicators, 300);
+    window.addEventListener('resize', initIndicators);
+
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
+      item.addEventListener('click', (e) => {
+        navItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        updateIndicator(navIndicator, item);
+      });
+    });
+
+    if (navLinks) {
+      navLinks.addEventListener('mouseleave', () => {
+        updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[0]);
+      });
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+  <!-- ==================== FLOATING CONTACT FORM ==================== -->
+  <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
+    <i class="fas fa-headset"></i>
+  </div>
+
+  <div class="contact-modal-overlay" id="contactModalOverlay" onclick="if(event.target===this) toggleContactModal()">
+    <div class="contact-modal-container">
+      <div class="contact-modal-header">
+        <h3>Hubungi Kami</h3>
+        <button class="contact-modal-close" onclick="toggleContactModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="contact-modal-body">
+        <div class="contact-form-row">
+          <div class="contact-form-group">
+            <label><i class="fas fa-user"></i> Nama Lengkap</label>
+            <input type="text" id="waName" placeholder="Nama Anda...">
+          </div>
+          <div class="contact-form-group">
+            <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+            <input type="tel" id="waPhone" placeholder="0812...">
+          </div>
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-map-marker-alt"></i> Region (Provinsi / Kota)</label>
+          <input type="text" id="waRegion" placeholder="Lokasi Anda...">
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-store"></i> Nama Outlet</label>
+          <input type="text" id="waOutlet" placeholder="Nama toko / bisnis...">
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-box"></i> Tertarik Produk</label>
+          <div class="product-selection-wrapper">
+            <div class="wa-product-dropdown">
+              <select id="waProduct" onchange="updateProductPreview()">
+                <option value="">Pilih Produk (opsional)</option>
+              </select>
+            </div>
+            <div class="product-preview-box" id="waProductPreviewBox">
+              <img id="waProductImg" src="" alt="Preview">
+              <i class="fas fa-image" style="color:#333; font-size: 24px;" id="waProductPlaceholder"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-comment-alt"></i> Tinggalkan Pesan</label>
+          <textarea id="waMessage" rows="2" placeholder="Apa yang bisa kami bantu?"></textarea>
+        </div>
+        <button class="btn-send-wa" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </div>

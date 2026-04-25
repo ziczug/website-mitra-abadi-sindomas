@@ -54,7 +54,8 @@
         <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
         <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
-        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikat</a>
         <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
 
         <div class="nav-social mobile-only" style="margin-top: 20px;">
@@ -144,10 +145,39 @@
           </a>
         </div>
 
-        <div class="hero-slider-nav">
-          <button id="heroPrev" class="hero-nav-btn"><i class="fas fa-arrow-left"></i></button>
-          <div class="hero-dots" id="heroDots"></div>
-          <button id="heroNext" class="hero-nav-btn"><i class="fas fa-arrow-right"></i></button>
+        <div class="hero-mini-card">
+          <div class="hero-mini-slider" id="heroMiniSlider">
+            <div class="hero-mini-slide active">
+              <img src="assets/images/hero-home/1.jpg" alt="Oriental Products">
+              <div class="hero-mini-info">
+                <span class="hero-mini-counter">1 / 3</span>
+                <h4>Oriental</h4>
+                <p>Oriental Products</p>
+              </div>
+            </div>
+            <div class="hero-mini-slide">
+              <img src="assets/images/hero-home/2.jpg" alt="Rota & Green Pea">
+              <div class="hero-mini-info">
+                <span class="hero-mini-counter">2 / 3</span>
+                <h4>Rota & Green Pea</h4>
+                <p>Kualitas produk terbaik untuk kebutuhan Anda.</p>
+              </div>
+            </div>
+            <div class="hero-mini-slide">
+              <img src="assets/images/hero-home/3.jpg" alt="Tomo Crunchy Sticks">
+              <div class="hero-mini-info">
+                <span class="hero-mini-counter">3 / 3</span>
+                <h4>Tomo Crunchy Sticks</h4>
+                <p>Kualitas produk terbaik untuk kebutuhan Anda.</p>
+              </div>
+            </div>
+          </div>
+          <div class="hero-mini-nav">
+            <button class="hero-mini-btn" id="heroPrev"><i class="fas fa-arrow-left"></i></button>
+            <button class="hero-mini-btn" id="heroNext"><i class="fas fa-arrow-right"></i></button>
+          </div>
+          <!-- Keep hidden dots for logic compatibility if needed -->
+          <div class="hero-dots" id="heroDots" style="display:none;"></div>
         </div>
 
         <div class="hero-stats-new">
@@ -186,14 +216,20 @@
       <!-- TOP ROW: INFO -->
       <div class="about-grid">
         <div class="about-content reveal fade-right">
-          <div class="about-badge" data-i18n="about-badge">TENTANG KAMI</div>
-          <h2>Dedikasi Untuk Kualitas<br><span class="gold-text">Dan Keamanan Pangan</span></h2>
+          <h2 data-i18n="about-title">Dedikasi Kami Untuk<br><span class="gold-text">Kualitas & Keamanan</span></h2>
 
           <p data-i18n="about-desc-1">PT Mitra Abadi Sindomas adalah perusahaan internasional & nasional yang bergerak
             di bidang perdagangan umum, ekspor, impor, dan distribusi. Sejak 2016, kami telah menjalin kerja sama dengan
             merek-merek internasional terkemuka untuk menghadirkan produk makanan dan minuman impor berkualitas.</p>
           <p data-i18n="about-desc-2">Seluruh produk kami telah bersertifikat Halal dan terdaftar di BPOM, menjamin
             keamanan dan kualitas untuk konsumen Indonesia.</p>
+          
+          <div style="margin-top: 35px;">
+            <a href="tentang.html" class="btn-glassy-gold">
+              <span data-i18n="about-btn-more">Selengkapnya</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
         <div class="about-image reveal fade-left">
           <img src="assets/images/mas-bangunan.jpg" alt="PT Mitra Abadi Sindomas Office">
@@ -319,9 +355,8 @@
     <div class="container">
       <div class="section-header center pulse-on-scroll">
         <div class="section-badge-symbol">
-          <i class="fas fa-leaf fa-flip-horizontal"></i>
+          <i class="fas fa-handshake"></i>
           <span data-i18n="brands-badge-top">BRAND PARTNERSHIP</span>
-          <i class="fas fa-leaf"></i>
         </div>
         <h2 class="text-shine" style="font-size: clamp(32px, 5vw, 56px); margin-bottom: 20px;" data-i18n="brands-title">
           Menghadirkan Merek <span class="gold-text">Internasional Terbaik</span></h2>
@@ -329,19 +364,23 @@
           untuk membawa cita rasa dunia ke Indonesia.</p>
       </div>
 
-      <!-- Optional Filters for exact ref match -->
-      <div class="brand-filters">
-        <button class="brand-filter-btn active" data-filter="all" data-i18n="filter-all">Semua</button>
-        <button class="brand-filter-btn" data-filter="snack" data-i18n="cat-snack">Snack</button>
-        <button class="brand-filter-btn" data-filter="biskuit" data-i18n="cat-biskuit">Biskuit & Cookies</button>
-        <button class="brand-filter-btn" data-filter="wafer" data-i18n="cat-wafer">Wafer</button>
-        <button class="brand-filter-btn" data-filter="kue" data-i18n="cat-kue">Kue & Pastry</button>
-        <button class="brand-filter-btn" data-filter="permen" data-i18n="cat-permen">Permen</button>
-        <button class="brand-filter-btn" data-filter="vegelicious" data-i18n="cat-vegelicious">Vegelicious</button>
-        <button class="brand-filter-btn" data-filter="condiments" data-i18n="cat-condiments">Condiments & Sauces</button>
-        <button class="brand-filter-btn" data-filter="noodle" data-i18n="cat-noodle">Instant Noodle</button>
-        <button class="brand-filter-btn" data-filter="minuman" data-i18n="cat-minuman">Minuman</button>
-        <button class="brand-filter-btn" data-filter="pudding" data-i18n="cat-pudding">Pudding</button>
+      <!-- Brand Filters with Partner-Tabs Style -->
+      <div class="brand-filters-wrapper">
+        <button class="brand-nav-btn prev" id="brandFilterPrev" aria-label="Previous Filters"><i class="fas fa-chevron-left"></i></button>
+        <div class="brand-filters" id="brandFilterContainer">
+          <button class="brand-filter-btn active" data-filter="all" data-i18n="filter-all">Semua</button>
+          <button class="brand-filter-btn" data-filter="snack" data-i18n="cat-snack">Snack</button>
+          <button class="brand-filter-btn" data-filter="biskuit" data-i18n="cat-biskuit">Biskuit & Cookies</button>
+          <button class="brand-filter-btn" data-filter="wafer" data-i18n="cat-wafer">Wafer</button>
+          <button class="brand-filter-btn" data-filter="kue" data-i18n="cat-kue">Kue & Pastry</button>
+          <button class="brand-filter-btn" data-filter="permen" data-i18n="cat-permen">Permen</button>
+          <button class="brand-filter-btn" data-filter="vegelicious" data-i18n="cat-vegelicious">Vegelicious</button>
+          <button class="brand-filter-btn" data-filter="condiments" data-i18n="cat-condiments">Condiments & Sauces</button>
+          <button class="brand-filter-btn" data-filter="noodle" data-i18n="cat-noodle">Instant Noodle</button>
+          <button class="brand-filter-btn" data-filter="minuman" data-i18n="cat-minuman">Minuman</button>
+          <button class="brand-filter-btn" data-filter="pudding" data-i18n="cat-pudding">Pudding</button>
+        </div>
+        <button class="brand-nav-btn next" id="brandFilterNext" aria-label="Next Filters"><i class="fas fa-chevron-right"></i></button>
       </div>
 
       <div class="brand-slider-container reveal fade-up visible">
@@ -536,7 +575,11 @@
     <div class="dist-hero-wrapper">
       <!-- Left Content -->
       <div class="dist-hero-content">
-        <div class="section-tag"><i class="fas fa-truck"></i> <span data-i18n="dist-tag">JANGKAUAN DISTRIBUSI</span></div>
+        <div class="section-badge-symbol left compact">
+            <i class="fas fa-truck"></i>
+            <span data-i18n="dist-tag">JANGKAUAN DISTRIBUSI</span>
+            <i class="fas fa-truck"></i>
+          </div>
         <h2 class="dist-hero-title text-shine">JANGKAUAN &<br>MITRA DISTRIBUSI</h2>
         <p class="dist-hero-desc">Jaringan kami kuat tersebar di berbagai kota besar, bermitra dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
         <a href="#distribusi-detail" class="btn-dist-hero"><span>Lihat Jangkauan</span> <i class="fas fa-arrow-right"></i></a>
@@ -627,9 +670,9 @@
         <img src="assets/images/peta-indonesia-gold.png" alt="Peta Jaringan Distribusi MAS" class="dist-logistik-map">
         <div class="dist-logistik-content">
           <div class="section-badge-symbol left">
-            <i class="fas fa-map-marked-alt"></i>
+            <i class="fas fa-project-diagram"></i>
             <span class="dist-logistik-badge" data-i18n="dist-logistik-badge">JANGKAUAN LOGISTIK NASIONAL</span>
-            <i class="fas fa-shipping-fast"></i>
+            <i class="fas fa-project-diagram"></i>
           </div>
           <h3 class="text-shine">Menghubungkan<br>Seluruh Indonesia</h3>
           <p>Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.</p>
@@ -671,13 +714,13 @@
           <div class="dist-b2b-content-side">
             <div class="b2b-badge-capsule"><i class="fas fa-handshake"></i> SOLUSI B2B</div>
             <h3>SOLUSI DISTRIBUSI B2B<br>UNTUK BISNIS ANDA</h3>
-            <p>Kami melayani kebutuhan distribusi dalam skala besar melalui jalur laut dan darat dengan sistem terintegrasi dan aman.</p>
+            <p>Kami melayani kebutuhan distribusi dalam skala besar melalui jalur darat dengan sistem terintegrasi dan aman.</p>
             
             <div class="dist-b2b-features">
               <div class="dist-b2b-feat">
-                <div class="dist-b2b-feat-icon"><i class="fas fa-ship"></i></div>
+                <div class="dist-b2b-feat-icon"><i class="fas fa-truck-moving"></i></div>
                 <div class="dist-b2b-feat-text">
-                  <strong>Pengiriman Laut</strong>
+                  <strong>Armada Handal</strong>
                   <span>Efisien & Terpercaya</span>
                 </div>
               </div>
@@ -1078,26 +1121,22 @@
       <!-- Bottom Footer -->
       <div class="footer-main-bottom reveal fade-up">
         <div class="footer-logo-row">
-          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-bottom-logo">
+          <div class="footer-logo-box">
+            <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-bottom-logo">
+          </div>
           <div class="footer-v-divider"></div>
           <div class="footer-company-info">
-            <h2 data-i18n="footer-company-name" class="footer-title-compact">PT Mitra Abadi Sindomas</h2>
-            <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi
-              dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
-          </div>
-          <div class="footer-bottom-socials">
-            <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i
-                class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i
-                class="fab fa-whatsapp"></i></a>
+            <h2 data-i18n="footer-company-name" class="footer-title-compact" style="color: var(--accent);">PT Mitra Abadi Sindomas</h2>
+            <p data-i18n="footer-desc">Importir dan distributor makanan minuman berkualitas tinggi <br> dengan jaminan Halal dan BPOM sejak 2016.</p>
           </div>
         </div>
 
         <div class="footer-copyright-row">
-          <p data-i18n="footer-copyright">© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+          <p data-i18n="footer-copyright" style="color: rgba(255,255,255,0.3); font-size: 13px;">© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
         </div>
-        <div class="footer-bottom-line"></div>
+        <div class="footer-bottom-line" style="opacity: 0.1;"></div>
       </div>
+
     </div>
   </footer>
 
@@ -1550,11 +1589,15 @@
       });
     });
 
-    window.addEventListener('scroll', () => {
+    const checkScroll = () => {
       const scrolled = window.scrollY > 50;
       navbar.classList.toggle('scrolled', scrolled);
       scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-    });
+    };
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+    // Initialize immediately
+    checkScroll();
 
     // --- Animations & Interaction ---
     const staggerGrids = document.querySelectorAll('.product-grid, .brand-grid, .cert-grid');
@@ -1896,6 +1939,21 @@
       }
     });
 
+    // Brand Filter Scroll Logic
+    document.getElementById('brandFilterNext')?.addEventListener('click', () => {
+      const brandFilterContainer = document.getElementById('brandFilterContainer');
+      if (brandFilterContainer) {
+        brandFilterContainer.scrollBy({ left: 150, behavior: 'smooth' });
+      }
+    });
+
+    document.getElementById('brandFilterPrev')?.addEventListener('click', () => {
+      const brandFilterContainer = document.getElementById('brandFilterContainer');
+      if (brandFilterContainer) {
+        brandFilterContainer.scrollBy({ left: -150, behavior: 'smooth' });
+      }
+    });
+
     loadBrands();
 
     // Smooth Scroll
@@ -2040,62 +2098,39 @@
     const heroPrev = document.getElementById('heroPrev');
     const heroNext = document.getElementById('heroNext');
     const heroDots = document.getElementById('heroDots');
+    const heroMiniSlider = document.getElementById('heroMiniSlider');
 
     // Inject dynamic banners if available
     async function initHeroSlider() {
-      let heroes = null;
-      try {
-        const resp = await fetch('database/cms/heroes.json');
-        if (resp.ok) heroes = await resp.json();
-      } catch (e) { }
-
-      if (!heroes) {
-        const storedHeroes = localStorage.getItem('mas_heroes');
-        if (storedHeroes) {
-          try {
-            heroes = JSON.parse(storedHeroes);
-          } catch (e) { }
-        }
-      }
-
-      if (heroes) {
-        try {
-          const activeHeroes = heroes.filter(h => h.active && (h.imageData || h.image));
-          if (activeHeroes.length > 0 && sliderContainer) {
-            sliderContainer.innerHTML = activeHeroes.map((h, index) =>
-              `<div class="slide ${index === 0 ? 'active' : ''}"><img src="${h.imageData || h.image}" alt="${h.title}"></div>`
-            ).join('');
-
-            // Re-initialize slides after injection
-            slides = sliderContainer.querySelectorAll('.slide');
-            slideCount = slides.length;
-            initSliderControls();
-          }
-        } catch (e) {
-          console.error('Error loading heroes:', e);
-        }
-      }
+      // Disabled to ensure local hero images are always used
+      return;
     }
 
     let slides = sliderContainer ? sliderContainer.querySelectorAll('.slide') : [];
+    let miniSlides = heroMiniSlider ? heroMiniSlider.querySelectorAll('.hero-mini-slide') : [];
     let currentSlide = 0;
     let slideCount = slides.length;
     let slideInterval;
 
     function goToSlide(index) {
       const dots = document.querySelectorAll('.slider-dot');
-      slides[currentSlide].classList.remove('active');
+      if (slides[currentSlide]) slides[currentSlide].classList.remove('active');
+      if (miniSlides[currentSlide]) miniSlides[currentSlide].classList.remove('active');
       if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+      
       currentSlide = (index + slideCount) % slideCount;
-      slides[currentSlide].classList.add('active');
+      
+      if (slides[currentSlide]) slides[currentSlide].classList.add('active');
+      if (miniSlides[currentSlide]) miniSlides[currentSlide].classList.add('active');
       if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+      
       resetInterval();
     }
 
     function nextSlide() { goToSlide(currentSlide + 1); }
     function prevSlide() { goToSlide(currentSlide - 1); }
 
-    function startInterval() { slideInterval = setInterval(nextSlide, 3000); }
+    function startInterval() { slideInterval = setInterval(nextSlide, 5000); }
     function resetInterval() { clearInterval(slideInterval); startInterval(); }
 
     function initSliderControls() {

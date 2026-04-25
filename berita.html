@@ -23,9 +23,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 40%, #111 100%);
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)), url('assets/images/banner-page/berita1.jpg');
+      background-size: cover;
+      background-position: center;
       overflow: hidden;
-      margin-top: 76px;
+      padding-top: 130px;
     }
 
     .berita-hero::before {
@@ -49,7 +51,11 @@
     .berita-hero-content {
       position: relative;
       z-index: 2;
-      padding: 100px 24px 80px;
+      padding: 40px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     .berita-hero-badge {
@@ -1346,7 +1352,7 @@
 
 <body>
 
-  <!-- ==================== NAVBAR ==================== -->
+    <!-- ==================== NAVBAR ==================== -->
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
     <div class="container">
@@ -1365,7 +1371,8 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
               <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
@@ -1376,12 +1383,13 @@
           </div>
         </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="index.html#beranda" class="nav-item" data-i18n="nav-home">Beranda</a>
-        <a href="berita.html" class="nav-item active" data-i18n="nav-news">Berita</a>
+        <a href="index.html#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
         <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
         <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
-        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikasi</a>
+        <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
+        <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikat</a>
+        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
 
         <div class="nav-social mobile-only" style="margin-top: 20px;">
           <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
@@ -1420,7 +1428,8 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesian</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
               <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
@@ -1438,14 +1447,13 @@
   </nav>
 
 
-
   <!-- ==================== LISTING VIEW ==================== -->
   <div id="beritaListing">
     <!-- Banner Hero -->
     <section class="berita-hero">
       <div class="berita-hero-content">
-        <div class="berita-hero-badge"><i class="fas fa-newspaper"></i> <span data-i18n="nav-news">BERITA & INFORMASI</span></div>
-        <h1 data-i18n="news-hero-title">Berita & <span>Informasi</span></h1>
+        <div class="berita-hero-badge"><i class="fas fa-newspaper"></i> <span data-i18n="nav-news">Berita</span></div>
+        <h1 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="news-hero-title">Berita & <span>Informasi</span></h1>
         <p data-i18n="news-hero-desc">Berita terbaru, informasi produk, dan update dari PT Mitra Abadi Sindomas.</p>
       </div>
     </section>
@@ -1528,33 +1536,27 @@
   </div>
 
   <!-- PRODUCT PAGE CUSTOM FOOTER -->
-  <!-- ====== FOOTER ====== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-main-bottom">
-        <div class="footer-logo-row">
-          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="footer-bottom-logo">
-          <div class="footer-v-divider"></div>
-          <div class="footer-company-info">
-            <h2 data-i18n="footer-company-name" style="white-space: nowrap;">PT Mitra Abadi Sindomas</h2>
-            <p data-i18n="footer-desc">Perusahaan importir dan distributor produk makanan, minuman berkualitas tinggi dari brand internasional terkemuka, dengan jaringan distribusi seluruh Indonesia.</p>
-          </div>
-          <div class="footer-bottom-socials">
-            <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/6281295001778" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-        
-        <div class="footer-copyright-row">
-          <p data-i18n="footer-copyright">© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="footer-red-split">
+      <div class="footer-red-map">
+        <iframe src="https://www.google.com/maps?q=PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark&hl=id&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="footer-red-content">
+        <div class="footer-red-text">
+          <span class="fr-subtitle">Kantor Utama</span>
+          <h2 class="fr-title">Kantor Jakarta</h2>
+          <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
+          <a href="index.html#kontak" class="fr-link">Kantor Daerah <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
+    <div class="footer-red-bottom">
+      <p>© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+    </div>
   </footer>
 
-  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    <i class="fas fa-chevron-up"></i>
-  </div>
+  
 
   <script>
     // ==========================================
@@ -1705,7 +1707,7 @@
 
       empty.style.display = 'none';
       grid.innerHTML = items.map(n => {
-        const imgSrc = n.imageData || n.imagePath || 'assets/images/mas-bangunan.jpg';
+        const imgSrc = n.imageData || n.imagePath || 'assets/images/berita/indonesiatimur.jpg';
         return `
           <div class="berita-card" onclick="showDetail(${n.id})">
             <div class="berita-card-img">
@@ -1752,7 +1754,7 @@
       // Update URL
       history.pushState({ newsId: id }, '', `berita.html?id=${id}`);
 
-      const imgSrc = article.imageData || article.imagePath || 'assets/images/mas-bangunan.jpg';
+      const imgSrc = article.imageData || article.imagePath || 'assets/images/berita/indonesiatimur.jpg';
 
       document.getElementById('detailBannerImg').src = imgSrc;
       document.getElementById('detailFeaturedImg').src = imgSrc;
@@ -1789,7 +1791,7 @@
       if (related.length > 0) {
         relatedSection.style.display = '';
         document.getElementById('relatedGrid').innerHTML = related.map(n => {
-          const rImg = n.imageData || n.imagePath || 'assets/images/mas-bangunan.jpg';
+          const rImg = n.imageData || n.imagePath || 'assets/images/berita/indonesiatimur.jpg';
           return `
             <div class="berita-card" onclick="showDetail(${n.id})">
               <div class="berita-card-img">
@@ -1849,6 +1851,45 @@
       navbar.classList.toggle('scrolled', scrolled);
       scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
     });
+
+        function updateIndicator(indicator, el) {
+      if (!indicator || !el || window.innerWidth <= 768) {
+        if (indicator) indicator.style.opacity = '0';
+        return;
+      }
+      indicator.style.opacity = '1';
+      indicator.style.width = el.offsetWidth + 'px';
+      indicator.style.left = el.offsetLeft + 'px';
+    }
+
+    function initIndicators() {
+      const navItems = document.querySelectorAll('.nav-item');
+      const navIndicator = document.getElementById('navIndicator');
+      const activeNavItem = document.querySelector('.nav-item.active') || navItems[0];
+      updateIndicator(navIndicator, activeNavItem);
+    }
+
+    setTimeout(initIndicators, 300);
+    window.addEventListener('resize', initIndicators);
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      const navIndicator = document.getElementById('navIndicator');
+      item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
+      item.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        updateIndicator(navIndicator, item);
+      });
+    });
+
+    const nl = document.getElementById('navLinks');
+    if (nl) {
+      nl.addEventListener('mouseleave', () => {
+        const navIndicator = document.getElementById('navIndicator');
+        const activeNavItem = document.querySelector('.nav-item.active') || document.querySelectorAll('.nav-item')[0];
+        updateIndicator(navIndicator, activeNavItem);
+      });
+    }
 
     function toggleNav() {
       const navLinks = document.getElementById('navLinks');
@@ -1992,5 +2033,189 @@
       document.title = `${t('nav-news')} | PT Mitra Abadi Sindomas`;
     });
   </script>
+<script>
+    // --- CS FORM & SCROLL TOP LOGIC ---
+    function toggleContactModal() {
+      const modal = document.getElementById('contactModalOverlay');
+      if (modal) {
+        modal.classList.toggle('active');
+        if (modal.classList.contains('active')) {
+          initContactFormProducts();
+        }
+      }
+    }
+
+    async function initContactFormProducts() {
+      const productSelect = document.getElementById('waProduct');
+      if (!productSelect || productSelect.options.length > 1) return;
+
+      let prods = [];
+      // Use global 'products' if available (common in produk.html)
+      if (typeof products !== 'undefined' && products.length > 0) {
+        prods = products;
+      } else {
+        // Fetch if not available (common in index.html)
+        try {
+          const resp = await fetch('database/cms/products.json');
+          if (resp.ok) prods = await resp.json();
+          else {
+            const stored = localStorage.getItem('mas_products');
+            if (stored) prods = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn('CS Form fetch error:', e);
+        }
+      }
+
+      if (!prods || prods.length === 0) return;
+
+      const seen = new Set();
+      prods.forEach(p => {
+        // Get category label safely
+        let catLabel = p.category;
+        catLabel = getCategoryLabel(p.category);
+
+        const display = `${p.name} - ${p.brand} - ${catLabel}`;
+        if (!seen.has(display)) {
+          seen.add(display);
+          const opt = document.createElement('option');
+          opt.value = display;
+          opt.textContent = display;
+          opt.dataset.image = p.imageData || p.image || '';
+          productSelect.appendChild(opt);
+        }
+      });
+    }
+
+    function updateProductPreview() {
+      const select = document.getElementById('waProduct');
+      const box = document.getElementById('waProductPreviewBox');
+      const img = document.getElementById('waProductImg');
+      const placeholder = document.getElementById('waProductPlaceholder');
+      if (!select || select.selectedIndex < 0) return;
+      const selectedOption = select.options[select.selectedIndex];
+      const imgSrc = selectedOption.dataset.image;
+
+      if (imgSrc) {
+        img.src = imgSrc;
+        img.classList.add('loaded');
+        placeholder.style.display = 'none';
+        box.classList.add('active');
+      } else {
+        img.src = "";
+        img.classList.remove('loaded');
+        placeholder.style.display = 'block';
+        box.classList.remove('active');
+      }
+    }
+
+    function sendWhatsApp() {
+      const name = document.getElementById('waName').value.trim();
+      const phone = document.getElementById('waPhone').value.trim();
+      const region = document.getElementById('waRegion').value.trim();
+      const outlet = document.getElementById('waOutlet').value.trim();
+      const product = document.getElementById('waProduct').value;
+      const message = document.getElementById('waMessage').value.trim();
+
+      if (!name || !phone) {
+        alert('Mohon isi Nama dan No. WhatsApp Anda.');
+        return;
+      }
+
+      const targetPhone = '6281295001778';
+      const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
+        `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
+        `${message}\n\n` +
+        `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
+
+      const encodedText = encodeURIComponent(text);
+      window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
+    }
+
+    function getCategoryLabel(cat) {
+      if (typeof t === 'function') {
+        const catKey = `cat-${cat}`;
+        const translated = t(catKey);
+        if (translated !== catKey) return translated;
+      }
+      const labels = {
+        snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
+        minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
+        noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
+      };
+      return labels[cat] || cat;
+    }
+
+    // --- SHARE LOGIC ---
+
+</script>
+  <!-- ==================== FLOATING CONTACT FORM ==================== -->
+  <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
+    <i class="fas fa-headset"></i>
+  </div>
+
+  <div class="contact-modal-overlay" id="contactModalOverlay" onclick="if(event.target===this) toggleContactModal()">
+    <div class="contact-modal-container">
+      <div class="contact-modal-header">
+        <h3>Hubungi Kami</h3>
+        <button class="contact-modal-close" onclick="toggleContactModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="contact-modal-body">
+        <div class="contact-form-row">
+          <div class="contact-form-group">
+            <label><i class="fas fa-user"></i> Nama Lengkap</label>
+            <input type="text" id="waName" placeholder="Nama Anda...">
+          </div>
+          <div class="contact-form-group">
+            <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+            <input type="tel" id="waPhone" placeholder="0812...">
+          </div>
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-map-marker-alt"></i> Region (Provinsi / Kota)</label>
+          <input type="text" id="waRegion" placeholder="Lokasi Anda...">
+        </div>
+        <div class="contact-form-group">
+          <label><i class="fas fa-store"></i> Nama Outlet</label>
+          <input type="text" id="waOutlet" placeholder="Nama toko / bisnis...">
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-box"></i> Tertarik Produk</label>
+          <div class="product-selection-wrapper">
+            <div class="wa-product-dropdown">
+              <select id="waProduct" onchange="updateProductPreview()">
+                <option value="">Pilih Produk (opsional)</option>
+              </select>
+            </div>
+            <div class="product-preview-box" id="waProductPreviewBox">
+              <img id="waProductImg" src="" alt="Preview">
+              <i class="fas fa-image" style="color:#333; font-size: 24px;" id="waProductPlaceholder"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-group">
+          <label><i class="fas fa-comment-alt"></i> Tinggalkan Pesan</label>
+          <textarea id="waMessage" rows="2" placeholder="Apa yang bisa kami bantu?"></textarea>
+        </div>
+        <button class="btn-send-wa" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+
 </body>
 </html>
+
+
+
+
