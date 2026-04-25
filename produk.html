@@ -1250,9 +1250,9 @@
           </div>
         </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="index.html#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
+        <a href="index.html#beranda" class="nav-item" data-i18n="nav-home">Beranda</a>
         <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
-        <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
+        <a href="produk.html" class="nav-item active" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
         <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
         <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikat</a>
@@ -1278,10 +1278,10 @@
           <div class="search-container" id="searchContainer">
             <div class="search-input-wrapper">
               <i class="fas fa-search search-icon-inside"></i>
-              <input type="text" placeholder="Cari produk atau merek..." id="headerSearchInput" autocomplete="off"
+              <input type="text" placeholder="Cari produk atau merek..." id="searchInput" autocomplete="off"
                 data-i18n="search-placeholder">
             </div>
-            <div class="search-results" id="headerSearchResults">
+            <div class="search-results" id="searchResults">
               <!-- Results will be injected here -->
             </div>
           </div>
@@ -1322,7 +1322,7 @@
       <span>/</span>
       <span style="color:rgba(255,255,255,0.7)" data-i18n="prod-breadcrumb-all">Semua Produk</span>
     </div>
-    <h1 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="prod-hero-title">Katalog Produk</h1>
+    <h1 class="dist-hero-title text-shine" data-i18n="prod-hero-title">Katalog Produk</h1>
     <p data-i18n="prod-hero-desc">Temukan beragam produk makanan dan minuman berkualitas tinggi dari brand internasional terkemuka.</p>
   </div>
 </section>
@@ -1340,7 +1340,7 @@
       <!-- Search Bar -->
       <div class="search-wrapper-premium">
         <i class="fas fa-search"></i>
-        <input type="text" id="searchInput" placeholder="Cari nama produk atau brand..." oninput="filterProducts()" data-i18n="prod-search-placeholder">
+        <input type="text" id="productFilterInput" placeholder="Cari nama produk atau brand..." oninput="filterProducts()" data-i18n="prod-search-placeholder">
       </div>
 
       <!-- Categories Carousel -->
@@ -1549,10 +1549,12 @@
       </div>
       <div class="footer-red-content">
         <div class="footer-red-text">
-          <span class="fr-subtitle">Kantor Utama</span>
-          <h2 class="fr-title">Kantor Jakarta</h2>
-          <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
-          <a href="index.html#kontak" class="fr-link">Kantor Daerah <i class="fas fa-arrow-right"></i></a>
+          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="fr-logo">
+          <div class="fr-info">
+            <h2 class="fr-title">PT Mitra Abadi Sindomas</h2>
+            <p class="fr-desc">Importir dan distributor makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.</p>
+            <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1611,8 +1613,8 @@ const mobileToggle = document.getElementById('mobileToggle');
 const searchWrapper = document.getElementById('searchWrapper');
 const searchToggle = document.getElementById('searchToggle');
 const searchContainer = document.getElementById('searchContainer');
-const headerSearchInput = document.getElementById('headerSearchInput');
-const headerSearchResults = document.getElementById('headerSearchResults');
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
 
 // ==========================================
 // KATALOG PDF VIEWER LOGIC
@@ -1704,10 +1706,10 @@ headerSearchInput?.addEventListener('input', (e) => {
   }).slice(0, 6);
 
   if (matches.length === 0) {
-    headerSearchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i> Tidak ada produk ditemukan</div>';
+    searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i> Tidak ada produk ditemukan</div>';
     return;
   }
-  headerSearchResults.innerHTML = matches.map(p => `
+  searchResults.innerHTML = matches.map(p => `
     <div class="search-result-item" onclick="handleHeaderSearchClick('${p.id}')">
       <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img">
       <div class="search-result-info">
@@ -1723,7 +1725,7 @@ function closeSearch() {
   searchContainer.classList.remove('active');
   searchToggle?.classList.remove('active');
   searchToggle?.querySelector('i')?.classList.replace('fa-times', 'fa-search');
-  headerSearchInput.value = ''; headerSearchResults.innerHTML = '';
+  searchInput.value = ''; searchResults.innerHTML = '';
 }
 
 document.addEventListener('click', (e) => {
@@ -1780,11 +1782,15 @@ document.querySelectorAll('.nav-links a').forEach(a => {
     document.body.style.overflow = '';
   });
 });
-  window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 50);
-  const st = document.getElementById('scrollTop');
-  if(st) st.classList.toggle('visible', window.scrollY > 400);
-});// =====================================================
+  const checkScroll = () => {
+    const scrolled = window.scrollY > 50;
+    navbar.classList.toggle('scrolled', scrolled);
+    const st = document.getElementById('scrollTop');
+    if(st) st.classList.toggle('visible', window.scrollY > 400);
+  };
+  window.addEventListener('scroll', checkScroll);
+  window.addEventListener('load', checkScroll);
+  checkScroll();// =====================================================
 // DATA PRODUK - Dimuat dari database/produk.csv
 // =====================================================
 
@@ -2190,7 +2196,7 @@ function setFilter(filter, btn) {
 }
 
 function filterProducts() {
-  const searchInp = document.getElementById('searchInput');
+  const searchInp = document.getElementById('productFilterInput');
   const sortInp = document.getElementById('sortSelect');
   const brandInp = document.getElementById('brandSelect');
   

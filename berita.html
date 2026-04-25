@@ -1160,13 +1160,14 @@
 
     .berita-detail-featured-image img {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      border-radius: 40px;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+      border-radius: 24px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       display: block;
-      background: #111;
+      background: rgba(0,0,0,0.05);
     }
 
     @media (max-width: 768px) {
@@ -1383,13 +1384,13 @@
           </div>
         </div>
         <div class="nav-indicator" id="navIndicator"></div>
-        <a href="index.html#beranda" class="nav-item active" data-i18n="nav-home">Beranda</a>
+        <a href="index.html#beranda" class="nav-item" data-i18n="nav-home">Beranda</a>
         <a href="index.html#tentang" class="nav-item" data-i18n="nav-about">Tentang Kami</a>
         <a href="produk.html" class="nav-item" data-i18n="nav-products">Produk</a>
         <a href="javascript:void(0)" class="nav-item" onclick="openKatalog()" data-i18n="nav-catalog">Katalog</a>
         <a href="index.html#distribusi" class="nav-item" data-i18n="nav-distribution">Distribusi</a>
         <a href="index.html#sertifikasi" class="nav-item" data-i18n="nav-certification">Sertifikat</a>
-        <a href="berita.html" class="nav-item" data-i18n="nav-news">Berita</a>
+        <a href="berita.html" class="nav-item active" data-i18n="nav-news">Berita</a>
 
         <div class="nav-social mobile-only" style="margin-top: 20px;">
           <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
@@ -1411,10 +1412,10 @@
           <div class="search-container" id="searchContainer">
             <div class="search-input-wrapper">
               <i class="fas fa-search search-icon-inside"></i>
-              <input type="text" placeholder="Cari produk atau merek..." id="headerSearchInput" autocomplete="off"
+              <input type="text" placeholder="Cari produk atau merek..." id="searchInput" autocomplete="off"
                 data-i18n="search-placeholder">
             </div>
-            <div class="search-results" id="headerSearchResults">
+            <div class="search-results" id="searchResults">
               <!-- Results will be injected here -->
             </div>
           </div>
@@ -1453,7 +1454,7 @@
     <section class="berita-hero">
       <div class="berita-hero-content">
         <div class="berita-hero-badge"><i class="fas fa-newspaper"></i> <span data-i18n="nav-news">Berita</span></div>
-        <h1 class="text-shine" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="news-hero-title">Berita & <span>Informasi</span></h1>
+        <h1 class="dist-hero-title text-shine" data-i18n="news-hero-title">Berita & Informasi</h1>
         <p data-i18n="news-hero-desc">Berita terbaru, informasi produk, dan update dari PT Mitra Abadi Sindomas.</p>
       </div>
     </section>
@@ -1511,7 +1512,7 @@
       <div class="berita-detail-banner-overlay">
         <div class="container">
           <div class="berita-detail-date"><i class="fas fa-calendar-alt"></i> <span id="detailDate"></span></div>
-          <h1 id="detailTitle"></h1>
+          <h1 id="detailTitle" class="dist-hero-title text-shine"></h1>
           <p class="berita-detail-excerpt" id="detailExcerpt"></p>
         </div>
       </div>
@@ -1530,7 +1531,7 @@
     </div>
 
     <div class="berita-related" id="relatedSection" style="display:none">
-      <h2 data-i18n="news-related">Berita Lainnya</h2>
+      <h2 class="dist-hero-title text-shine" data-i18n="news-related" style="font-size: 32px; margin-bottom: 30px;">Berita Lainnya</h2>
       <div class="berita-related-grid" id="relatedGrid"></div>
     </div>
   </div>
@@ -1544,10 +1545,12 @@
       </div>
       <div class="footer-red-content">
         <div class="footer-red-text">
-          <span class="fr-subtitle">Kantor Utama</span>
-          <h2 class="fr-title">Kantor Jakarta</h2>
-          <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
-          <a href="index.html#kontak" class="fr-link">Kantor Daerah <i class="fas fa-arrow-right"></i></a>
+          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="fr-logo">
+          <div class="fr-info">
+            <h2 class="fr-title">PT Mitra Abadi Sindomas</h2>
+            <p class="fr-desc">Importir dan distributor makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.</p>
+            <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1577,34 +1580,63 @@
 
     // Load news data
     async function loadNewsData() {
+      console.log('loadNewsData started');
       try {
         const resp = await fetch(`database/cms/news.json?t=${Date.now()}`);
+        console.log('Fetch response status:', resp.status);
         if (resp.ok) {
           newsItems = await resp.json();
+          console.log('Loaded newsItems count from JSON:', Array.isArray(newsItems) ? newsItems.length : 'not an array');
           if (!Array.isArray(newsItems)) newsItems = [];
+        } else {
+          console.warn('Fetch failed with status:', resp.status);
         }
       } catch (e) {
-        console.warn('Failed to load news from file:', e);
+        console.error('Failed to load news from file:', e);
       }
 
-      // Fallback to localStorage
+      // Fallback to localStorage if fetch failed or empty
       if (!newsItems || newsItems.length === 0) {
         try {
           const stored = localStorage.getItem('mas_news');
-          if (stored) newsItems = JSON.parse(stored);
-        } catch (e) { }
+          if (stored) {
+             newsItems = JSON.parse(stored);
+             console.log('Loaded from localStorage:', newsItems.length);
+          }
+        } catch (e) { 
+          console.error('Error parsing localStorage:', e);
+        }
       }
 
-      // Filter only active
-      newsItems = (newsItems || []).filter(n => n.active !== false);
+      // Final safety check
+      if (!Array.isArray(newsItems)) {
+        console.warn('newsItems is still not an array, initializing to empty');
+        newsItems = [];
+      }
 
-      // Sort by date descending (newest first) by default
-      newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+      // Filter only active (keeping if true or undefined, removing if false)
+      const beforeFilterCount = newsItems.length;
+      newsItems = newsItems.filter(n => n && n.active !== false);
+      console.log(`Filtered active news: ${newsItems.length} (before: ${beforeFilterCount})`);
+
+      // Sort by date descending
+      newsItems.sort((a, b) => {
+        try {
+          return new Date(b.date) - new Date(a.date);
+        } catch(e) { return 0; }
+      });
 
       populateYearFilters();
       filterBerita();
       checkUrlForDetail();
+      
+      // DIAGNOSTIC: Force update a label to show we reached this point
+      const countLabel = document.getElementById('beritaCount');
+      if (countLabel) {
+        console.log('Updating count label to:', newsItems.length);
+      }
     }
+
 
     function populateYearFilters() {
       const years = [...new Set(newsItems.map(n => new Date(n.date).getFullYear()))].sort((a, b) => b - a);
@@ -1650,13 +1682,17 @@
       const monthTo = parseInt(document.getElementById('filterMonthTo')?.value) || 0;
       const yearTo = parseInt(document.getElementById('filterYearTo')?.value) || 0;
 
-      let filtered = newsItems.filter(n => {
+      let filtered = newsItems;
+      console.log('filterBerita started with', filtered.length, 'items. Query:', query);
+
+      filtered = filtered.filter(n => {
         // Search
         if (query) {
           const searchText = [n.title, n.summary, n.content].filter(Boolean).join(' ').toLowerCase();
           const keywords = query.split(' ').filter(k => k);
           if (!keywords.every(kw => searchText.includes(kw))) return false;
         }
+
 
         // Date from
         if (yearFrom) {
@@ -1684,8 +1720,10 @@
         filtered.sort((a, b) => a.title.localeCompare(b.title));
       }
 
+      console.log('filterBerita returning', filtered.length, 'items');
       renderBeritaGrid(filtered);
     }
+
 
     function renderBeritaGrid(items) {
       const grid = document.getElementById('beritaGrid');
@@ -1846,13 +1884,17 @@
     const navbar = document.getElementById('navbar');
     const scrollTopBtn = document.getElementById('scrollTop');
 
-  window.addEventListener('scroll', () => {
+    const checkScroll = () => {
       const scrolled = window.scrollY > 50;
       navbar.classList.toggle('scrolled', scrolled);
       scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-    });
+    };
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+    // Initialize immediately
+    checkScroll();
 
-        function updateIndicator(indicator, el) {
+    function updateIndicator(indicator, el) {
       if (!indicator || !el || window.innerWidth <= 768) {
         if (indicator) indicator.style.opacity = '0';
         return;
@@ -1914,8 +1956,8 @@
     // --- NAVBAR SEARCH LOGIC ---
     const searchToggle = document.getElementById('searchToggle');
     const searchContainer = document.getElementById('searchContainer');
-    const headerSearchInput = document.getElementById('headerSearchInput');
-    const headerSearchResults = document.getElementById('headerSearchResults');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
 
     searchToggle?.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1924,11 +1966,11 @@
       const icon = searchToggle.querySelector('i');
       if (isActive) {
         icon.classList.replace('fa-search', 'fa-times');
-        headerSearchInput.focus();
+        searchInput.focus();
       } else {
         icon.classList.replace('fa-times', 'fa-search');
-        headerSearchInput.value = '';
-        headerSearchResults.innerHTML = '';
+        searchInput.value = '';
+        searchResults.innerHTML = '';
       }
     });
 
@@ -1941,10 +1983,10 @@
     });
 
     let cachedProducts = null;
-    headerSearchInput?.addEventListener('input', async (e) => {
+    searchInput?.addEventListener('input', async (e) => {
       const query = e.target.value.toLowerCase().trim();
       if (!query) {
-        headerSearchResults.innerHTML = '';
+        searchResults.innerHTML = '';
         return;
       }
       try {
@@ -1958,7 +2000,7 @@
           p.category.toLowerCase().includes(query)
         ).slice(0, 5);
 
-        headerSearchResults.innerHTML = matches.map(p => `
+        searchResults.innerHTML = matches.map(p => `
           <div class="search-result-item" onclick="window.location.href='produk.html?search=${p.id}'">
             <img src="${p.imageData || p.image || ''}" alt="${p.name}">
             <div>

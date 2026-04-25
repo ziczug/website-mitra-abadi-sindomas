@@ -276,7 +276,7 @@
   <!-- ==================== HEADER ==================== -->
   <header class="page-header">
     <div class="container">
-      <h1 class="text-shine reveal fade-up" style="font-size: clamp(32px, 4vw, 42px); margin-bottom: 20px;" data-i18n="nav-about">Tentang Kami</h1>
+      <h1 class="dist-hero-title text-shine reveal fade-up" data-i18n="nav-about">Tentang Kami</h1>
       <div class="page-breadcrumb reveal fade-up" style="animation-delay: 0.2s;">
         <a href="index.html">Beranda</a>
         <span>/</span>
@@ -374,10 +374,12 @@
       </div>
       <div class="footer-red-content">
         <div class="footer-red-text">
-          <span class="fr-subtitle">Kantor Utama</span>
-          <h2 class="fr-title">Kantor Jakarta</h2>
-          <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
-          <a href="index.html#kontak" class="fr-link">Kantor Daerah <i class="fas fa-arrow-right"></i></a>
+          <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="fr-logo">
+          <div class="fr-info">
+            <h2 class="fr-title">PT Mitra Abadi Sindomas</h2>
+            <p class="fr-desc">Importir dan distributor makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.</p>
+            <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
+          </div>
         </div>
       </div>
     </div>
@@ -592,11 +594,14 @@
     const navItems = document.querySelectorAll('.nav-item');
     const navIndicator = document.getElementById('navIndicator');
 
-    window.addEventListener('scroll', () => {
+    const checkScroll = () => {
       const scrolled = window.scrollY > 50;
       if (navbar) navbar.classList.toggle('scrolled', scrolled);
       if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-    });
+    };
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+    checkScroll();
 
     function toggleNav() {
       navLinks.classList.toggle('active');
