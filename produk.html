@@ -1689,13 +1689,13 @@ searchToggle?.addEventListener('click', (e) => {
   const isActive = searchContainer.classList.toggle('active');
   searchToggle.classList.toggle('active');
   const icon = searchToggle.querySelector('i');
-  if (isActive) { icon.classList.replace('fa-search', 'fa-times'); headerSearchInput.focus(); }
+  if (isActive) { icon.classList.replace('fa-search', 'fa-times'); searchInput?.focus(); }
   else { closeSearch(); }
 });
 
-headerSearchInput?.addEventListener('input', (e) => {
+searchInput?.addEventListener('input', (e) => {
   const query = e.target.value.toLowerCase().trim();
-  if (!query) { headerSearchResults.innerHTML = ''; return; }
+  if (!query) { searchResults.innerHTML = ''; return; }
   const keywords = query.split(' ').filter(k => k.trim() !== '');
   const matches = products.filter(p => {
     const searchableText = [
@@ -1928,6 +1928,15 @@ async function loadProductsFromCSV() {
   }
   updateBrandFilter();
   filterProducts();
+
+  // Handle URL Parameters (open modal if search=ID is present)
+  const searchId = urlParams.get('search');
+  if (searchId) {
+    const id = parseInt(searchId);
+    if (!isNaN(id)) {
+      setTimeout(() => openModal(id), 500);
+    }
+  }
 }
 
 // Load Categories from JSON
@@ -2239,7 +2248,7 @@ function filterProducts() {
 }
 
 function resetFilters() {
-  const searchInp = document.getElementById('searchInput');
+  const searchInp = document.getElementById('productFilterInput');
   const sortInp = document.getElementById('sortSelect');
   const brandInp = document.getElementById('brandSelect');
   const filterTabs = document.querySelectorAll('.filter-tab');

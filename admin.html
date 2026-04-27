@@ -671,14 +671,6 @@
           <label class="form-label">Path Logo Brand</label>
           <div class="path-input-group">
             <input type="text" class="form-input" id="fBrandLogo" placeholder="assets/logobrands/brand.jpg">
-            <script>
-              ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','brandPartnerModal'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.addEventListener('click', function(e) {
-                  if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; }
-                });
-              });
-            </script>
             <button type="button" class="btn-preview-path" onclick="document.getElementById('brandLogoInput').click()" title="Pilih Logo Brand"><i class="fas fa-upload"></i></button>
             <input type="file" id="brandLogoInput" accept="image/*" style="display:none" onchange="previewBrandLogo(event)">
           </div>

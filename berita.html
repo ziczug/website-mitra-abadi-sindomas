@@ -1219,8 +1219,60 @@
 
     .berita-detail-content li {
       list-style: disc;
-      margin-bottom: 4px;
+      margin-bottom: 12px;
     }
+
+    /* Share Buttons */
+    .berita-detail-share {
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 30px 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .share-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .share-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: var(--white);
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(201,168,76,0.1);
+    }
+
+    .share-btn.whatsapp:hover { border-color: #25D366; color: #25D366; background: rgba(37,211,102,0.1); }
+    .share-btn.facebook:hover { border-color: #1877F2; color: #1877F2; background: rgba(24,119,242,0.1); }
+    .share-btn.twitter:hover { border-color: #1DA1F2; color: #1DA1F2; background: rgba(29,161,242,0.1); }
+
 
     .berita-detail-content blockquote {
       border-left: 4px solid var(--accent);
@@ -1523,6 +1575,26 @@
         <img id="detailFeaturedImg" src="" alt="">
       </div>
       <div class="berita-detail-content" id="detailContent"></div>
+      
+      <!-- Sharing Section -->
+      <div class="berita-detail-share">
+        <span class="share-label" data-i18n="news-share-this">Bagikan berita ini:</span>
+        <div class="share-buttons">
+          <button onclick="shareBerita('whatsapp')" class="share-btn whatsapp" title="Share to WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </button>
+          <button onclick="shareBerita('facebook')" class="share-btn facebook" title="Share to Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button onclick="shareBerita('twitter')" class="share-btn twitter" title="Share to Twitter">
+            <i class="fab fa-x-twitter"></i>
+          </button>
+          <button onclick="shareBerita('copy')" class="share-btn copy" id="btnCopyLink" title="Copy Link">
+            <i class="fas fa-link"></i>
+          </button>
+        </div>
+      </div>
+
       <div style="max-width:760px;margin:0 auto;padding:0 24px;">
         <a href="javascript:void(0)" class="berita-detail-back" onclick="closeDetail()">
           <i class="fas fa-arrow-left"></i> Kembali ke Berita
@@ -1886,8 +1958,8 @@
 
     const checkScroll = () => {
       const scrolled = window.scrollY > 50;
-      navbar.classList.toggle('scrolled', scrolled);
-      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+      navbar?.classList.toggle('scrolled', scrolled);
+      scrollTopBtn?.classList.toggle('visible', window.scrollY > 400);
     };
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('load', checkScroll);
@@ -2189,6 +2261,40 @@
     }
 
     // --- SHARE LOGIC ---
+    function shareBerita(platform) {
+      const url = window.location.href;
+      const title = document.getElementById('detailTitle').textContent;
+      const text = `${title}\n\nBaca selengkapnya di:\n${url}`;
+
+      let shareUrl = '';
+      switch (platform) {
+        case 'whatsapp':
+          shareUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+          break;
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+          break;
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+          break;
+        case 'copy':
+          navigator.clipboard.writeText(url).then(() => {
+            const btn = document.getElementById('btnCopyLink');
+            const icon = btn.querySelector('i');
+            icon.className = 'fas fa-check';
+            btn.style.background = '#10B981';
+            setTimeout(() => {
+              icon.className = 'fas fa-link';
+              btn.style.background = '';
+            }, 2000);
+          });
+          return;
+      }
+
+      if (shareUrl) {
+        window.open(shareUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
 
 </script>
   <!-- ==================== FLOATING CONTACT FORM ==================== -->

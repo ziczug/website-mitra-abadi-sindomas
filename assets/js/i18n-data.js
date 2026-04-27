@@ -169,7 +169,8 @@ const i18nData = {
     'news-related': 'Berita Lainnya',
     'news-not-found': 'Berita tidak ditemukan.',
     'news-month': 'Bulan',
-    'news-year': 'Tahun'
+    'news-year': 'Tahun',
+    'news-share-this': 'Bagikan berita ini:'
   },
   en: {
     // Navbar
@@ -339,7 +340,8 @@ const i18nData = {
     'news-related': 'Related News',
     'news-not-found': 'News not found.',
     'news-month': 'Month',
-    'news-year': 'Year'
+    'news-year': 'Year',
+    'news-share-this': 'Share this news:'
   },
   cn: {
     // Navbar
@@ -510,7 +512,9 @@ const i18nData = {
     'news-related': '相关新闻',
     'news-not-found': '未找到新闻。',
     'news-month': '月',
-    'news-year': '年'
+    'news-year': '年',
+    'news-share-this': '分享此新闻:'
+  }
   }
 };
 

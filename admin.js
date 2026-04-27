@@ -2254,7 +2254,7 @@ document.querySelectorAll('.image-upload-area, .upload-area').forEach(area => {
 });
 
 // Close modals on overlay click
-['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','topHeroModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
+['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','branchesModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('click', function(e) {
     if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; }
@@ -2264,7 +2264,7 @@ document.querySelectorAll('.image-upload-area, .upload-area').forEach(area => {
 // ESC to close modals
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
+    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','branchesModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('active');
     });
