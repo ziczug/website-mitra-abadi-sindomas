@@ -1219,7 +1219,7 @@
 </head>
 <body>
 
-    <!-- ==================== NAVBAR ==================== -->
+  <!-- ==================== NAVBAR ==================== -->
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
     <div class="container">
@@ -1312,7 +1312,6 @@
       </div>
     </div>
   </nav>
-
 
 <!-- PAGE HERO -->
 <section class="page-hero">
@@ -2233,7 +2232,7 @@ function filterProducts() {
   } else if (currentSort === 'alpha-desc') {
     filtered.sort((a, b) => b.name.localeCompare(a.name));
   } else if (currentSort === 'newest') {
-    filtered.sort((a, b) => b.id - a.id);
+    filtered.sort((a, b) => a.id - b.id);
   }
 
   renderProducts(filtered);
@@ -2623,6 +2622,11 @@ window.addEventListener('langChanged', () => {
       const encodedText = encodeURIComponent(text);
       window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
     }
+
+    // Initialize products
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProductsFromCSV();
+    });
   </script>
 
   <!-- ==================== SCROLL TOP ==================== -->
