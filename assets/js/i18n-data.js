@@ -515,7 +515,6 @@ const i18nData = {
     'news-year': '年',
     'news-share-this': '分享此新闻:'
   }
-  }
 };
 
 if (typeof module !== 'undefined') {
