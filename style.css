@@ -1728,10 +1728,32 @@ section {
   overflow: hidden;
 }
 
+.hero-mini-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.hero-mini-progress {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin-right: 15px;
+  overflow: hidden;
+  max-width: 150px;
+}
+
+.hero-mini-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--accent);
+}
+
 .hero-mini-nav {
   display: flex;
   gap: 10px;
-  margin-top: 15px;
   justify-content: flex-end;
 }
 
@@ -1754,6 +1776,146 @@ section {
   background: var(--accent);
   color: #000;
   border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* Branch/Warehouse Mini Card Styles */
+.branch-slide {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.branch-slide.active {
+  display: block;
+  animation: premiumFadeInVertical 0.6s ease;
+}
+
+.branch-main-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.branch-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.branch-mini-card {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: calc(100% - 40px);
+  max-width: 380px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.branch-mini-content {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.branch-mini-thumb {
+  width: 100px;
+  height: 70px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+}
+
+.branch-mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.branch-mini-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.branch-mini-counter {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.branch-mini-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.branch-mini-address {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.branch-mini-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.branch-progress {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  margin-right: 15px;
+  overflow: hidden;
+}
+
+.branch-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #fff;
+}
+
+.branch-mini-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.branch-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  transition: 0.3s;
+}
+
+.branch-nav-btn:hover {
+  background: var(--accent);
+  color: #000;
   transform: scale(1.1);
 }
 
