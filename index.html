@@ -2021,39 +2021,40 @@
         btn.style.setProperty('--y', `${y}px`);
       });
 
-      let clickTimer = null;
       btn.addEventListener('click', function() {
-        if (clickTimer) {
-          // Double tap / Second click: CANCEL (Batal milih)
-          clearTimeout(clickTimer);
-          clickTimer = null;
-          this.classList.remove('active');
-          // Optional: Re-filter slider to 'all'
+        const filter = this.dataset.filter;
+        
+        if (this.classList.contains('active') && filter !== 'all') {
+          // Second click on the same active button: CANCEL (Batal milih)
+          document.querySelectorAll('.brand-filter-btn').forEach(b => b.classList.remove('active'));
+          const allBtn = document.querySelector('.brand-filter-btn[data-filter="all"]');
+          if (allBtn) allBtn.classList.add('active');
+          
           if (typeof applyBrandFilters === 'function') {
             applyBrandFilters('all');
-            document.querySelector('[data-filter="all"]')?.classList.add('active');
           }
           return;
         }
 
-        // First click: Select and set timer to navigate
+        // First click: Select
         document.querySelectorAll('.brand-filter-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         
-        // Filter slider immediately for visual feedback
         if (typeof applyBrandFilters === 'function') {
-           applyBrandFilters(this.dataset.filter);
+           applyBrandFilters(filter);
         }
 
-        clickTimer = setTimeout(() => {
-          const filter = this.dataset.filter;
-          if (filter === 'all') {
-            window.location.href = 'produk.html';
-          } else {
-            window.location.href = `produk.html?filter=${encodeURIComponent(filter)}`;
+        // Navigate to produk.html after a delay
+        setTimeout(() => {
+          // Only navigate if the button is still active (wasn't toggled off)
+          if (this.classList.contains('active')) {
+            if (filter === 'all') {
+              window.location.href = 'produk.html';
+            } else {
+              window.location.href = `produk.html?filter=${encodeURIComponent(filter)}`;
+            }
           }
-          clickTimer = null;
-        }, 500); // 500ms window for double-click cancellation
+        }, 1000); 
       });
     });
 
@@ -2361,8 +2362,8 @@
     }
 
     initSliderControls();
-    initHeroSlider();
     initCategories();
+    initBranchSlider();
 
     // --- TOP SLIDER LOGIC ---
     // Top slider has been removed in favor of a parallax divider
@@ -2425,17 +2426,17 @@
 
       slider.innerHTML = branches.map((b, i) => `
         <div class="branch-slide ${i === 0 ? 'active' : ''}">
-          <div class="branch-content">
+          <div class="branch-image-b2b">
+            <img src="${b.imageData || b.path}" alt="${b.name} Warehouse Branch Office" loading="lazy">
+          </div>
+          <div class="branch-overlay-info">
             <div class="branch-counter">${i + 1} / ${bCount}</div>
             <h3 class="branch-name">${b.name}</h3>
             <p class="branch-address">${b.address}</p>
-            <div class="branch-nav">
-              <button class="branch-nav-btn" onclick="prevBranch()" title="Previous Warehouse"><i class="fas fa-arrow-left"></i></button>
-              <button class="branch-nav-btn" onclick="nextBranch()" title="Next Warehouse"><i class="fas fa-arrow-right"></i></button>
-            </div>
           </div>
-          <div class="branch-image">
-            <img src="${b.imageData || b.path}" alt="${b.name} Warehouse Branch Office" loading="lazy">
+          <div class="branch-nav-b2b">
+            <button class="branch-nav-btn" onclick="prevBranch()" title="Previous Warehouse"><i class="fas fa-arrow-left"></i></button>
+            <button class="branch-nav-btn" onclick="nextBranch()" title="Next Warehouse"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
       `).join('');
