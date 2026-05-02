@@ -119,8 +119,9 @@ section {
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: 100%;
   z-index: 1100;
   background: transparent;
   padding: 0 50px;
@@ -128,19 +129,24 @@ section {
   /* Menambah tinggi agar lebih lega */
   display: flex;
   align-items: center;
-  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              width 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: none;
   border-bottom: none;
   will-change: width, height, transform, top;
-  transform: translate3d(0px, 0px, 0px);
+  /* transform handled above */
   transform-style: preserve-3d;
   overflow: visible !important;
 }
 
 .navbar.scrolled {
   top: 20px;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
   width: 92% !important;
   /* Diperlebar agar tidak sesak */
   max-width: 1300px;
@@ -152,7 +158,14 @@ section {
   padding: 0 40px;
   /* Padding sisi diperbesar */
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              width 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 
@@ -357,7 +370,7 @@ section {
 }
 
 .nav-cta i {
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-cta:hover {
@@ -1992,7 +2005,7 @@ section {
 
 .btn-glassy-gold i {
   font-size: 13px;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-glassy-gold:hover i {
@@ -2847,7 +2860,7 @@ section {
   justify-content: center;
   cursor: pointer;
   z-index: 20;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
 }
 
@@ -4053,7 +4066,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 
@@ -5963,7 +5976,7 @@ section {
   font-weight: 800;
   font-size: 15px;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   align-self: flex-start;
   margin-bottom: 50px;
   text-transform: uppercase;

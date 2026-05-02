@@ -9,6 +9,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="assets/js/i18n-data.js"></script>
   <script src="assets/js/i18n-engine.js"></script>
   <script src="assets/js/image-fallback.js"></script>
@@ -1074,6 +1075,7 @@
 
     .berita-detail-overlay.active {
       display: block;
+      background: #ffffff;
     }
 
     .berita-detail-banner {
@@ -1308,18 +1310,27 @@
 
     /* Related News */
     .berita-related {
-      background: #050505;
+      background: #ffffff;
       padding: 80px 0;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid #f0f0f0;
     }
 
-    .berita-related h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 32px;
+    .berita-related h2.dist-hero-title {
+      font-size: 32px !important;
+      margin-bottom: 30px !important;
+      color: var(--accent-dark) !important;
       text-align: center;
+    }
+
+    .berita-related .berita-card {
+      background: #ffffff;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    }
+
+    .berita-related .berita-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
     }
 
     .berita-related-grid {
@@ -1404,7 +1415,7 @@
 
 <body>
 
-    <!-- ==================== NAVBAR ==================== -->
+      <!-- ==================== NAVBAR ==================== -->
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
     <div class="container">
@@ -1596,14 +1607,14 @@
 
       <div style="max-width:760px;margin:0 auto;padding:0 24px;">
         <a href="javascript:void(0)" class="berita-detail-back" onclick="closeDetail()">
-          <i class="fas fa-arrow-left"></i> Kembali ke Berita
+          <i class="fas fa-arrow-left"></i> <span data-i18n="news-back">Kembali ke Berita</span>
         </a>
       </div>
     </div>
 
     <div class="berita-related" id="relatedSection" style="display:none">
       <div style="text-align: center;">
-        <h2 class="dist-hero-title text-shine" data-i18n="news-related" style="font-size: 32px; margin-bottom: 30px;">Berita Lainnya</h2>
+        <h2 class="dist-hero-title" data-i18n="news-related">Berita Lainnya</h2>
       </div>
       <div class="berita-related-grid" id="relatedGrid"></div>
     </div>
@@ -1621,14 +1632,14 @@
           <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="fr-logo">
           <div class="fr-info">
             <h2 class="fr-title">PT Mitra Abadi Sindomas</h2>
-            <p class="fr-desc">Importir dan distributor makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.</p>
+            <p data-i18n="footer-desc">Importir dan distributor makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.</p>
             <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-red-bottom">
-      <p>© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+      <p><span data-i18n="footer-copyright"> 2025 PT Mitra Abadi Sindomas</span>. All rights reserved.</p>
     </div>
   </footer>
 
@@ -1954,19 +1965,40 @@
     // ==========================================
     // NAVBAR LOGIC (replicated from index.html)
     // ==========================================
+    
+    // --- NAVBAR & SEARCH LOGIC ---
     const navbar = document.getElementById('navbar');
+    const navLinks = document.getElementById('navLinks');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navOverlay = document.getElementById('navOverlay');
+    const navItems = document.querySelectorAll('.nav-item');
+    const navIndicator = document.getElementById('navIndicator');
+    const searchWrapper = document.getElementById('searchWrapper');
+    const searchToggle = document.getElementById('searchToggle');
+    const searchContainer = document.getElementById('searchContainer');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
     const scrollTopBtn = document.getElementById('scrollTop');
 
+    // Scroll handler
     const checkScroll = () => {
       const scrolled = window.scrollY > 50;
-      navbar?.classList.toggle('scrolled', scrolled);
-      scrollTopBtn?.classList.toggle('visible', window.scrollY > 400);
+      if (navbar) navbar.classList.toggle('scrolled', scrolled);
+      if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
     };
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('load', checkScroll);
-    // Initialize immediately
     checkScroll();
 
+    // Mobile nav toggle
+    function toggleNav() {
+      if (navLinks) navLinks.classList.toggle('active');
+      if (mobileToggle) mobileToggle.classList.toggle('active');
+      if (navOverlay) navOverlay.classList.toggle('active');
+      document.body.style.overflow = (navLinks && navLinks.classList.contains('active')) ? 'hidden' : '';
+    }
+
+    // Indicator logic
     function updateIndicator(indicator, el) {
       if (!indicator || !el || window.innerWidth <= 768) {
         if (indicator) indicator.style.opacity = '0';
@@ -1978,8 +2010,6 @@
     }
 
     function initIndicators() {
-      const navItems = document.querySelectorAll('.nav-item');
-      const navIndicator = document.getElementById('navIndicator');
       const activeNavItem = document.querySelector('.nav-item.active') || navItems[0];
       updateIndicator(navIndicator, activeNavItem);
     }
@@ -1987,167 +2017,111 @@
     setTimeout(initIndicators, 300);
     window.addEventListener('resize', initIndicators);
 
-    document.querySelectorAll('.nav-item').forEach(item => {
-      const navIndicator = document.getElementById('navIndicator');
+    navItems.forEach(item => {
       item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
-      item.addEventListener('click', (e) => {
-        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        updateIndicator(navIndicator, item);
-      });
     });
 
-    const nl = document.getElementById('navLinks');
-    if (nl) {
-      nl.addEventListener('mouseleave', () => {
-        const navIndicator = document.getElementById('navIndicator');
-        const activeNavItem = document.querySelector('.nav-item.active') || document.querySelectorAll('.nav-item')[0];
-        updateIndicator(navIndicator, activeNavItem);
+    if (navLinks) {
+      navLinks.addEventListener('mouseleave', () => {
+        updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[0]);
       });
     }
 
-    function toggleNav() {
-      const navLinks = document.getElementById('navLinks');
-      const mobileToggle = document.getElementById('mobileToggle');
-      const overlay = document.getElementById('navOverlay');
-      navLinks.classList.toggle('active');
-      if (mobileToggle) mobileToggle.classList.toggle('active');
-      overlay.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    }
-
+    // Language dropdown
     function toggleLangDropdown(isMobile) {
       const dd = isMobile ? document.getElementById('langDropdownMobile') : document.getElementById('langDropdown');
       if (dd) dd.classList.toggle('active');
     }
 
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.lang-dropdown')) {
+        document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
+      }
+    });
 
-    function openKatalog() {
-      window.location.href = 'index.html#katalog';
+    // Search Logic
+    let searchProducts = [];
+    function initSearchData() {
+      if (typeof Papa !== 'undefined') {
+        Papa.parse("database/produk.csv", {
+          download: true, header: true,
+          complete: (results) => {
+            searchProducts = results.data.filter(p => p.name);
+          },
+          error: () => { searchProducts = []; }
+        });
+      }
+    }
+    initSearchData();
+
+    if (searchToggle) {
+      searchToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = searchContainer.classList.toggle('active');
+        searchToggle.classList.toggle('active');
+        const icon = searchToggle.querySelector('i');
+        if (isActive) {
+          icon.classList.replace('fa-search', 'fa-times');
+          if (searchInput) searchInput.focus();
+        } else {
+          icon.classList.replace('fa-times', 'fa-search');
+          if (searchInput) searchInput.value = '';
+          if (searchResults) searchResults.innerHTML = '';
+        }
+      });
     }
 
-    // --- NAVBAR SEARCH LOGIC ---
-    const searchToggle = document.getElementById('searchToggle');
-    const searchContainer = document.getElementById('searchContainer');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-
-    searchToggle?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isActive = searchContainer.classList.toggle('active');
-      searchToggle.classList.toggle('active');
-      const icon = searchToggle.querySelector('i');
-      if (isActive) {
-        icon.classList.replace('fa-search', 'fa-times');
-        searchInput.focus();
-      } else {
-        icon.classList.replace('fa-times', 'fa-search');
-        searchInput.value = '';
-        searchResults.innerHTML = '';
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!document.getElementById('searchWrapper')?.contains(e.target)) {
-        searchContainer?.classList.remove('active');
-        searchToggle?.classList.remove('active');
-        searchToggle?.querySelector('i')?.classList.replace('fa-times', 'fa-search');
-      }
-    });
-
-    let cachedProducts = null;
-    searchInput?.addEventListener('input', async (e) => {
-      const query = e.target.value.toLowerCase().trim();
-      if (!query) {
-        searchResults.innerHTML = '';
-        return;
-      }
-      try {
-        if (!cachedProducts) {
-          const resp = await fetch('database/cms/products.json');
-          cachedProducts = resp.ok ? await resp.json() : [];
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) {
+          searchResults.innerHTML = '';
+          return;
         }
-        const matches = cachedProducts.filter(p => 
+        const results = searchProducts.filter(p => 
           p.name.toLowerCase().includes(query) || 
-          p.brand.toLowerCase().includes(query) ||
-          p.category.toLowerCase().includes(query)
+          (p.brand && p.brand.toLowerCase().includes(query)) ||
+          (p.category && p.category.toLowerCase().includes(query))
         ).slice(0, 5);
 
-        searchResults.innerHTML = matches.map(p => `
-          <div class="search-result-item" onclick="window.location.href='produk.html?search=${p.id}'">
-            <img src="${p.imageData || p.image || ''}" alt="${p.name}">
-            <div>
-              <div class="search-result-title">${p.name}</div>
-              <div class="search-result-meta">${p.brand} • ${p.category}</div>
+        searchResults.innerHTML = results.map(p => `
+          <div class="search-result-item" onclick="goToProduct('${p.id}')">
+            <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img" onerror="this.src='assets/images/placeholder.png'">
+            <div class="search-result-info">
+              <span class="search-result-title">${p.name}</span>
+              <span class="search-result-meta">${p.brand || ''} • ${p.category || ''}</span>
             </div>
           </div>
-        `).join('') || '<div class="search-no-results">Tidak ada produk ditemukan</div>';
-      } catch (e) {}
+        `).join('');
+      });
+    }
+
+    function goToProduct(id) {
+      window.location.href = `produk.html?search=${id}`;
+    }
+
+    function closeSearch() {
+      if (searchContainer) searchContainer.classList.remove('active');
+      if (searchToggle) {
+        searchToggle.classList.remove('active');
+        const icon = searchToggle.querySelector('i');
+        if (icon) icon.classList.replace('fa-times', 'fa-search');
+      }
+      if (searchInput) searchInput.value = '';
+      if (searchResults) searchResults.innerHTML = '';
+    }
+
+    document.addEventListener('click', (e) => {
+      if (searchWrapper && !searchWrapper.contains(e.target) && searchContainer && searchContainer.classList.contains('active')) {
+        closeSearch();
+      }
     });
 
-    // ==========================================
-    // DYNAMIC CONTENT LOADER (from Admin Dashboard)
-    // ==========================================
-    (async function loadDynamicContent() {
-      async function getCMSData(fileKey, lsKey) {
-        try {
-          const resp = await fetch(`database/cms/${fileKey}.json`);
-          if (resp.ok) {
-            const data = await resp.json();
-            if (data) {
-              localStorage.setItem(lsKey, JSON.stringify(data));
-              return data;
-            }
-          }
-        } catch (e) {}
-        try {
-          const stored = localStorage.getItem(lsKey);
-          if (stored) return JSON.parse(stored);
-        } catch (e) {}
-        return null;
-      }
-
-      const ci = await getCMSData('contact_info', 'mas_contact_info');
-      if (ci) {
-        try {
-          if (ci.instagram) document.querySelectorAll('a[href*="instagram.com"]').forEach(a => { a.href = ci.instagram; });
-          if (ci.whatsapp) document.querySelectorAll('a[href*="wa.me"]').forEach(a => { a.href = 'https://wa.me/' + ci.whatsapp; });
-          if (ci.phone) document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = 'tel:' + ci.phone.replace(/\s/g, ''); });
-        } catch (e) {}
-      }
-
-      const fi = await getCMSData('footer_info', 'mas_footer_info');
-      if (fi) {
-        try {
-          const footerDesc = document.querySelector('.footer-company-info p');
-          if (footerDesc && fi.desc) footerDesc.textContent = fi.desc;
-          const footerCopy = document.querySelector('.footer-copyright-row p');
-          if (footerCopy && fi.year && fi.company) footerCopy.innerHTML = `&copy; ${fi.year} ${fi.company}. All rights reserved.`;
-        } catch (e) {}
-      }
-    })();
-
-    // ==========================================
-    // INIT
-    // ==========================================
-    loadNewsData();
-
-    // Listen for language changes
-    window.addEventListener('langChanged', () => {
-      populateYearFilters();
-      filterBerita();
-      
-      // Update related news if detail is open
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      if (id) {
-        showDetail(parseInt(id) || id);
-      }
-      
-      // Update page title
-      document.title = `${t('nav-news')} | PT Mitra Abadi Sindomas`;
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSearch();
     });
-  </script>
+
+</script>
 <script>
     // --- CS FORM & SCROLL TOP LOGIC ---
     function toggleContactModal() {
@@ -2362,8 +2336,11 @@
   </div>
 
 
-</body>
+<div id='google_translate_element' style='display:none'></div><script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script></body>
 </html>
+
+
+
 
 
 

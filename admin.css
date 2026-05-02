@@ -509,6 +509,8 @@ input, select, textarea { font-family: inherit; }
 .action-btn.delete:hover { background: var(--danger); color: var(--white); border-color: var(--danger); }
 .action-btn.view { color: var(--accent-dark); }
 .action-btn.view:hover { background: var(--accent); color: var(--primary); border-color: var(--accent); }
+.action-btn.copy { color: #8B5CF6; }
+.action-btn.copy:hover { background: #8B5CF6; color: var(--white); border-color: #8B5CF6; }
 
 /* Checkbox */
 .custom-check {

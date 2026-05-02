@@ -229,8 +229,8 @@ function showPage(page, btn) {
   if (page === 'statistics') loadStatisticsForm();
   if (page === 'brandpartner') renderBrandPartners();
   if (page === 'partners') renderPartners();
-  if (page === 'categories') renderCategoriesEditor();
-  if (page === 'certifications') renderCertEditor();
+  if (page === 'categories') renderCategories();
+  if (page === 'certifications') renderCerts();
   if (page === 'footermgr') loadFooterForm();
   closeSidebar();
 }
@@ -818,6 +818,8 @@ function renderKatalogs() {
       <td><code>${k.filename}</code></td>
       <td>
         <div class="action-btns">
+          <button class="action-btn edit" title="Edit" onclick="editKatalog(${k.id})"><i class="fas fa-pen"></i></button>
+          <button class="action-btn copy" title="Duplikat" onclick="duplicateKatalog(${k.id})"><i class="fas fa-copy"></i></button>
           <button class="action-btn delete" title="Hapus" onclick="deleteKatalog(${k.id})" ${k.active?'disabled style="opacity:0.5;cursor:not-allowed;"':''}><i class="fas fa-trash"></i></button>
         </div>
       </td>
@@ -825,12 +827,32 @@ function renderKatalogs() {
   `).join('');
 }
 
-function openKatalogModal() {
+function openKatalogModal(editId) {
   document.getElementById('fKatalogTitle').value = '';
   document.getElementById('fKatalogFile').value = '';
   document.getElementById('fKatalogFilename').value = '';
+  if (!editId) {
+    window._editKatalogId = null;
+  }
   document.getElementById('katalogModalManager').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function editKatalog(id) {
+  const k = katalogs.find(x => x.id === id);
+  if (!k) return;
+  window._editKatalogId = id;
+  openKatalogModal(id);
+  document.getElementById('fKatalogTitle').value = k.name;
+  document.getElementById('fKatalogFilename').value = k.filename;
+}
+
+function duplicateKatalog(id) {
+  const k = katalogs.find(x => x.id === id);
+  if (!k) return;
+  katalogs.push({ ...k, id: Date.now(), name: k.name + ' (Copy)', active: false });
+  saveKatalogs(); renderKatalogs();
+  toast('Katalog berhasil diduplikat!', 'success');
 }
 
 function closeKatalogModal() {
@@ -854,17 +876,19 @@ function saveKatalogEntry() {
   
   if(!title || !filename) return toast('Harap lengkapi judul dan pilih file PDF', 'error');
   
-  katalogs.push({
-    id: Date.now(),
-    name: title,
-    filename: filename,
-    active: katalogs.length === 0
-  });
+  if (window._editKatalogId) {
+    const idx = katalogs.findIndex(x => x.id === window._editKatalogId);
+    if (idx >= 0) { katalogs[idx].name = title; katalogs[idx].filename = filename; }
+    window._editKatalogId = null;
+    toast('Katalog berhasil diperbarui', 'success');
+  } else {
+    katalogs.push({ id: Date.now(), name: title, filename: filename, active: katalogs.length === 0 });
+    toast('Katalog baru berhasil ditambahkan', 'success');
+  }
   
   saveKatalogs();
   renderKatalogs();
   closeKatalogModal();
-  toast('Katalog baru berhasil ditambahkan', 'success');
 }
 
 function setKatalogActive(id) {
@@ -933,6 +957,8 @@ function renderPromos() {
       <td style="font-weight:600">${p.title}</td>
       <td>
         <div class="action-btns">
+          <button class="action-btn edit" title="Edit" onclick="editPromo(${p.id})"><i class="fas fa-pen"></i></button>
+          <button class="action-btn copy" title="Duplikat" onclick="duplicatePromo(${p.id})"><i class="fas fa-copy"></i></button>
           <button class="action-btn delete" title="Hapus" onclick="deletePromo(${p.id})"><i class="fas fa-trash"></i></button>
         </div>
       </td>
@@ -940,11 +966,12 @@ function renderPromos() {
   `).join('');
 }
 
-function openPromoModal() {
+function openPromoModal(editId) {
   document.getElementById('fPromoTitle').value = '';
   document.getElementById('fPromoFile').value = '';
   document.getElementById('fPromoFilename').value = '';
   document.getElementById('fPromoImageData').value = '';
+  if (!editId) window._editPromoId = null;
   
   const previewCont = document.querySelector('#promoUploadArea .upload-preview');
   if(previewCont) previewCont.style.display = 'none';
@@ -953,6 +980,29 @@ function openPromoModal() {
   
   document.getElementById('promoModalManager').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function editPromo(id) {
+  const p = promos.find(x => x.id === id);
+  if (!p) return;
+  window._editPromoId = id;
+  openPromoModal(id);
+  document.getElementById('fPromoTitle').value = p.title;
+  document.getElementById('fPromoFilename').value = p.filename || '';
+  document.getElementById('fPromoImageData').value = p.imageData || '';
+  if (p.imageData) {
+    const pc = document.querySelector('#promoUploadArea .upload-preview');
+    const img = document.getElementById('fPromoPreview');
+    if (pc && img) { img.src = p.imageData; pc.style.display = 'block'; }
+  }
+}
+
+function duplicatePromo(id) {
+  const p = promos.find(x => x.id === id);
+  if (!p) return;
+  promos.push({ ...p, id: Date.now(), title: p.title + ' (Copy)', active: false });
+  savePromos(); renderPromos();
+  toast('Promo berhasil diduplikat!', 'success');
 }
 
 function closePromoModalManager() {
@@ -994,18 +1044,23 @@ function savePromoEntry() {
   
   if(!title || !imageData) return toast('Harap lengkapi nama promosi dan pilih gambar!', 'error');
   
-  promos.push({
-    id: Date.now(),
-    title: title,
-    filename: filename,
-    imageData: imageData,   // base64 — bisa langsung ditampilkan
-    active: promos.length === 0
-  });
+  if (window._editPromoId) {
+    const idx = promos.findIndex(x => x.id === window._editPromoId);
+    if (idx >= 0) {
+      promos[idx].title = title;
+      promos[idx].filename = filename;
+      if (imageData) promos[idx].imageData = imageData;
+    }
+    window._editPromoId = null;
+    toast('Promo berhasil diperbarui', 'success');
+  } else {
+    promos.push({ id: Date.now(), title, filename, imageData, active: promos.length === 0 });
+    toast('Promo berhasil ditambahkan', 'success');
+  }
   
   savePromos();
   renderPromos();
   closePromoModalManager();
-  toast('Promo berhasil ditambahkan', 'success');
 }
 
 function setPromoActive(id) {
@@ -1071,6 +1126,8 @@ function renderHeroes() {
       <td style="font-weight:600">${h.title}</td>
       <td>
         <div class="action-btns">
+          <button class="action-btn edit" title="Edit" onclick="editHero(${h.id})"><i class="fas fa-pen"></i></button>
+          <button class="action-btn copy" title="Duplikat" onclick="duplicateHero(${h.id})"><i class="fas fa-copy"></i></button>
           <button class="action-btn delete" title="Hapus" onclick="deleteHero(${h.id})"><i class="fas fa-trash"></i></button>
         </div>
       </td>
@@ -1078,11 +1135,12 @@ function renderHeroes() {
   `).join('');
 }
 
-function openHeroModal() {
+function openHeroModal(editId) {
   document.getElementById('fHeroTitle').value = '';
   document.getElementById('fHeroFile').value = '';
   document.getElementById('fHeroFilename').value = '';
   document.getElementById('fHeroImageData').value = '';
+  if (!editId) window._editHeroId = null;
   
   const previewCont = document.querySelector('#heroUploadArea .upload-preview');
   if(previewCont) previewCont.style.display = 'none';
@@ -1091,6 +1149,29 @@ function openHeroModal() {
   
   document.getElementById('heroModalManager').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function editHero(id) {
+  const h = heroBanners.find(x => x.id === id);
+  if (!h) return;
+  window._editHeroId = id;
+  openHeroModal(id);
+  document.getElementById('fHeroTitle').value = h.title;
+  document.getElementById('fHeroFilename').value = h.filename || '';
+  document.getElementById('fHeroImageData').value = h.imageData || '';
+  if (h.imageData) {
+    const pc = document.querySelector('#heroUploadArea .upload-preview');
+    const img = document.getElementById('fHeroPreview');
+    if (pc && img) { img.src = h.imageData; pc.style.display = 'block'; }
+  }
+}
+
+function duplicateHero(id) {
+  const h = heroBanners.find(x => x.id === id);
+  if (!h) return;
+  heroBanners.push({ ...h, id: Date.now(), title: h.title + ' (Copy)', active: true });
+  saveHeroes(); renderHeroes();
+  toast('Banner hero berhasil diduplikat!', 'success');
 }
 
 function closeHeroModal() {
@@ -1127,17 +1208,22 @@ function saveHeroEntry() {
   
   if(!title || !imageData) return toast('Harap lengkapi judul dan pilih gambar banner!', 'error');
   
-  heroBanners.push({
-    id: Date.now(),
-    title: title,
-    imageData: imageData,
-    active: true
-  });
+  if (window._editHeroId) {
+    const idx = heroBanners.findIndex(x => x.id === window._editHeroId);
+    if (idx >= 0) {
+      heroBanners[idx].title = title;
+      if (imageData) heroBanners[idx].imageData = imageData;
+    }
+    window._editHeroId = null;
+    toast('Banner hero berhasil diperbarui', 'success');
+  } else {
+    heroBanners.push({ id: Date.now(), title, imageData, active: true });
+    toast('Banner hero berhasil ditambahkan', 'success');
+  }
   
   saveHeroes();
   renderHeroes();
   closeHeroModal();
-  toast('Banner hero berhasil ditambahkan', 'success');
 }
 
 function toggleHeroActive(id) {
@@ -1207,6 +1293,7 @@ function renderBranches() {
       <td>
         <div class="action-btns">
           <button class="action-btn edit" title="Edit" onclick="editBranch(${b.id})"><i class="fas fa-pen"></i></button>
+          <button class="action-btn copy" title="Duplikat" onclick="duplicateBranch(${b.id})"><i class="fas fa-copy"></i></button>
           <button class="action-btn delete" title="Hapus" onclick="deleteBranch(${b.id})"><i class="fas fa-trash"></i></button>
         </div>
       </td>
@@ -1219,6 +1306,7 @@ function openBranchesModal() {
   document.getElementById('fBranchName').value = '';
   document.getElementById('fBranchAddress').value = '';
   document.getElementById('fBranchImageData').value = '';
+  document.getElementById('fBranchImagePath').value = '';
   document.getElementById('branchesModalTitle').textContent = 'Tambah Cabang';
   
   const previewCont = document.querySelector('#branchesUploadArea .upload-preview');
@@ -1245,6 +1333,7 @@ function editBranch(id) {
   document.getElementById('fBranchName').value = b.name;
   document.getElementById('fBranchAddress').value = b.address;
   document.getElementById('fBranchImageData').value = b.imageData || '';
+  document.getElementById('fBranchImagePath').value = b.path || '';
   
   if (b.imageData || b.path) {
     const previewCont = document.querySelector('#branchesUploadArea .upload-preview');
@@ -1279,6 +1368,7 @@ function saveBranchesEntry() {
   const name = document.getElementById('fBranchName').value.trim();
   const address = document.getElementById('fBranchAddress').value.trim();
   const imageData = document.getElementById('fBranchImageData').value;
+  const imagePath = document.getElementById('fBranchImagePath').value.trim();
   const id = document.getElementById('fBranchId').value;
   
   if(!name || !address) return toast('Harap lengkapi nama dan lokasi cabang', 'error');
@@ -1289,6 +1379,7 @@ function saveBranchesEntry() {
       branches[idx].name = name;
       branches[idx].address = address;
       if(imageData) branches[idx].imageData = imageData;
+      branches[idx].path = imagePath;
     }
   } else {
     branches.push({
@@ -1296,7 +1387,7 @@ function saveBranchesEntry() {
       name: name,
       address: address,
       imageData: imageData,
-      path: '' 
+      path: imagePath 
     });
   }
   
@@ -1319,6 +1410,19 @@ function deleteBranch(id) {
   document.getElementById('confirmModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
+
+function duplicateBranch(id) {
+  const b = branches.find(x => x.id === id);
+  if (!b) return;
+  branches.push({ ...b, id: Date.now(), name: b.name + ' (Copy)' });
+  saveBranches(); renderBranches();
+  toast('Cabang berhasil diduplikat!', 'success');
+}
+
+// Ensure data is fresh
+window.addEventListener('load', () => {
+  console.log('CMS Branch Data Initialized with File Path logic');
+});
 
 // ==========================================
 // COMPANY PROFILE MANAGEMENT
@@ -1530,8 +1634,9 @@ function renderBrandPartners() {
         ${b.logo ? `<div class="img-path" title="${b.logo}">${b.logo}</div>` : ''}
       </div>
       <div class="img-actions">
-        <button onclick="editBrandPartner(${b.id})" title="Edit"><i class="fas fa-pen"></i> Edit</button>
-        <button onclick="deleteBrandPartner(${b.id})" title="Hapus"><i class="fas fa-trash"></i> Hapus</button>
+        <button class="action-btn edit" onclick="editBrandPartner(${b.id})" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="action-btn copy" onclick="duplicateBrandPartner(${b.id})" title="Duplikat"><i class="fas fa-copy"></i></button>
+        <button class="action-btn delete" onclick="deleteBrandPartner(${b.id})" title="Hapus"><i class="fas fa-trash"></i></button>
       </div>
     </div>`;
   }).join('');
@@ -1628,6 +1733,14 @@ function deleteBrandPartner(id) {
   document.body.style.overflow = 'hidden';
 }
 
+function duplicateBrandPartner(id) {
+  const b = brandPartners.find(x => x.id === id);
+  if (!b) return;
+  brandPartners.push({ ...b, id: Date.now(), name: b.name + ' (Copy)' });
+  saveBrandPartners(); renderBrandPartners();
+  toast('Brand berhasil diduplikat!', 'success');
+}
+
 // ==========================================
 // DISTRIBUTION PARTNER MANAGEMENT
 // ==========================================
@@ -1701,8 +1814,9 @@ function renderPartners() {
         <div class="img-path" style="font-size:10px">${p.category}</div>
       </div>
       <div class="img-actions">
-        <button onclick="editPartner(${p.id})" title="Edit"><i class="fas fa-pen"></i> Edit</button>
-        <button onclick="deletePartner(${p.id})" title="Hapus"><i class="fas fa-trash"></i> Hapus</button>
+        <button class="action-btn edit" onclick="editPartner(${p.id})" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="action-btn copy" onclick="duplicatePartner(${p.id})" title="Duplikat"><i class="fas fa-copy"></i></button>
+        <button class="action-btn delete" onclick="deletePartner(${p.id})" title="Hapus"><i class="fas fa-trash"></i></button>
       </div>
     </div>`).join('');
 }
@@ -1833,6 +1947,14 @@ function deletePartner(id) {
   document.body.style.overflow = 'hidden';
 }
 
+function duplicatePartner(id) {
+  const p = partners.find(x => x.id === id);
+  if (!p) return;
+  partners.push({ ...p, id: Date.now(), name: p.name + ' (Copy)' });
+  savePartners(); renderPartners();
+  toast('Mitra berhasil diduplikat!', 'success');
+}
+
 // ==========================================
 // CATEGORIES MANAGEMENT
 // ==========================================
@@ -1849,62 +1971,157 @@ const defaultCategories = [
   { key: 'pudding', title: 'Pudding', desc: 'Berbagai produk pudding premium dengan rasa yang lezat dan menyegarkan.', image: 'assets/images/pudding.png', imageData: '' }
 ];
 
-function renderCategoriesEditor() {
+function renderCategories() {
   const stored = localStorage.getItem('mas_categories');
   const cats = stored ? JSON.parse(stored) : defaultCategories;
-  const editor = document.getElementById('categoriesEditor');
-  if (!editor) return;
-  editor.innerHTML = cats.map((c, i) => `
-    <div style="border:1px solid var(--gray-100);border-radius:12px;padding:20px;margin-bottom:16px;background:var(--gray-50)">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-        <span class="category-badge ${c.key}" style="font-size:11px;">${c.key.toUpperCase()}</span>
-        <strong style="color:var(--primary)">${c.title}</strong>
+  const grid = document.getElementById('categoriesGrid');
+  const empty = document.getElementById('categoriesEmptyState');
+  if (!grid) return;
+
+  if (cats.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  grid.innerHTML = cats.map((c, i) => `
+    <div class="image-manager-card">
+      <div class="img-thumb">
+        <img src="${c.imageData || c.image}" alt="${c.title}">
       </div>
-      <div class="form-grid">
-        <div class="form-group"><label class="form-label">Judul</label><input type="text" class="form-input" id="fCat${i}Title" value="${c.title}"></div>
-        <div class="form-group full"><label class="form-label">Deskripsi</label><input type="text" class="form-input" id="fCat${i}Desc" value="${c.desc}"></div>
-        <div class="form-group full">
-          <label class="form-label">Gambar Kategori</label>
-          <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:80px;height:60px;border-radius:8px;overflow:hidden;background:#eee;flex-shrink:0;display:flex;align-items:center;justify-content:center">
-              <img id="fCat${i}Preview" src="${c.imageData || c.image}" style="width:100%;height:100%;object-fit:cover">
-            </div>
-            <input type="file" accept="image/*" onchange="handleCatImageUpload(event,${i})" style="font-size:12px">
-            <input type="hidden" id="fCat${i}ImageData" value="${c.imageData || ''}">
-          </div>
-        </div>
+      <div class="img-info">
+        <div class="img-name">${c.title}</div>
+        <div class="img-path">Key: ${c.key}</div>
+      </div>
+      <div class="img-actions">
+        <button class="action-btn edit" onclick="editCategory(${i})" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="action-btn copy" onclick="duplicateCategory(${i})" title="Duplikat"><i class="fas fa-copy"></i></button>
+        <button class="action-btn delete" onclick="deleteCategory(${i})" title="Hapus"><i class="fas fa-trash"></i></button>
       </div>
     </div>
   `).join('');
 }
 
-function handleCatImageUpload(event, index) {
-  const file = event.target.files[0];
-  if (!file) return;
-  if (file.size > 2 * 1024 * 1024) return toast('Max 2MB', 'error');
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById(`fCat${index}ImageData`).value = e.target.result;
-    const preview = document.getElementById(`fCat${index}Preview`);
-    if (preview) preview.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
+function openCategoryModal() {
+  window._editCatIdx = null;
+  document.getElementById('fCategoryId').value = '';
+  document.getElementById('fCategoryKey').value = '';
+  document.getElementById('fCategoryTitle').value = '';
+  document.getElementById('fCategoryDesc').value = '';
+  document.getElementById('fCategoryImageData').value = '';
+  document.getElementById('fCategoryImagePath').value = '';
+  document.getElementById('categoryModalTitle').textContent = 'Tambah Kategori';
+  
+  const previewCont = document.querySelector('#categoryUploadArea .upload-preview');
+  if (previewCont) previewCont.style.display = 'none';
+  
+  document.getElementById('categoriesModalManager').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
-function saveCategories() {
+function closeCategoryModal() {
+  document.getElementById('categoriesModalManager').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function editCategory(index) {
   const stored = localStorage.getItem('mas_categories');
   const cats = stored ? JSON.parse(stored) : defaultCategories;
-  for (let i = 0; i < cats.length; i++) {
-    const title = document.getElementById(`fCat${i}Title`);
-    const desc = document.getElementById(`fCat${i}Desc`);
-    const imgData = document.getElementById(`fCat${i}ImageData`);
-    if (title) cats[i].title = title.value.trim();
-    if (desc) cats[i].desc = desc.value.trim();
-    if (imgData && imgData.value) cats[i].imageData = imgData.value;
+  const c = cats[index];
+  if (!c) return;
+
+  window._editCatIdx = index;
+  openCategoryModal();
+  document.getElementById('categoryModalTitle').textContent = 'Edit Kategori';
+  document.getElementById('fCategoryKey').value = c.key;
+  document.getElementById('fCategoryTitle').value = c.title;
+  document.getElementById('fCategoryDesc').value = c.desc;
+  document.getElementById('fCategoryImageData').value = c.imageData || '';
+  document.getElementById('fCategoryImagePath').value = c.image || '';
+
+  if (c.imageData || c.image) {
+    const pc = document.querySelector('#categoryUploadArea .upload-preview');
+    const img = document.getElementById('fCategoryPreview');
+    if (pc && img) {
+      img.src = c.imageData || c.image;
+      pc.style.display = 'block';
+    }
   }
+}
+
+function handleCategoryUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('fCategoryImageData').value = e.target.result;
+      document.getElementById('fCategoryImagePath').value = `assets/images/${file.name}`;
+      const previewCont = document.querySelector('#categoryUploadArea .upload-preview');
+      const img = document.getElementById('fCategoryPreview');
+      if (previewCont && img) {
+        img.src = e.target.result;
+        previewCont.style.display = 'block';
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function saveCategoryEntry() {
+  const key = document.getElementById('fCategoryKey').value.trim();
+  const title = document.getElementById('fCategoryTitle').value.trim();
+  const desc = document.getElementById('fCategoryDesc').value.trim();
+  const imageData = document.getElementById('fCategoryImageData').value;
+  const imagePath = document.getElementById('fCategoryImagePath').value;
+
+  if (!key || !title || !desc) return toast('Harap isi semua field wajib!', 'error');
+
+  const stored = localStorage.getItem('mas_categories');
+  const cats = stored ? JSON.parse(stored) : [...defaultCategories];
+
+  const data = { key, title, desc, image: imagePath, imageData };
+
+  if (window._editCatIdx !== null) {
+    cats[window._editCatIdx] = data;
+    toast('Kategori diperbarui!', 'success');
+  } else {
+    cats.push(data);
+    toast('Kategori ditambahkan!', 'success');
+  }
+
   localStorage.setItem('mas_categories', JSON.stringify(cats));
   saveToFile('categories', cats);
-  toast('Kategori berhasil disimpan!', 'success');
+  renderCategories();
+  closeCategoryModal();
+}
+
+function deleteCategory(index) {
+  const stored = localStorage.getItem('mas_categories');
+  const cats = stored ? JSON.parse(stored) : [...defaultCategories];
+  
+  document.getElementById('confirmTitle').textContent = 'Hapus Kategori?';
+  document.getElementById('confirmMsg').textContent = `Kategori "${cats[index].title}" akan dihapus.`;
+  document.getElementById('confirmBtn').onclick = () => {
+    cats.splice(index, 1);
+    localStorage.setItem('mas_categories', JSON.stringify(cats));
+    saveToFile('categories', cats);
+    renderCategories();
+    closeConfirm();
+    toast('Kategori dihapus.', 'success');
+  };
+  document.getElementById('confirmModal').classList.add('active');
+}
+
+function duplicateCategory(index) {
+  const stored = localStorage.getItem('mas_categories');
+  const cats = stored ? JSON.parse(stored) : [...defaultCategories];
+  const c = cats[index];
+  cats.push({ ...c, title: c.title + ' (Copy)' });
+  localStorage.setItem('mas_categories', JSON.stringify(cats));
+  saveToFile('categories', cats);
+  renderCategories();
+  toast('Kategori diduplikat!', 'success');
 }
 
 // ==========================================
@@ -1916,59 +2133,154 @@ const defaultCertifications = [
   { title: 'Standar Internasional', desc: 'Produk diproduksi sesuai standar internasional dengan quality control ketat dari negara asal.', image: 'assets/images/icon/world.png', imageData: '' }
 ];
 
-function renderCertEditor() {
+function renderCerts() {
   const stored = localStorage.getItem('mas_certifications');
   const certs = stored ? JSON.parse(stored) : defaultCertifications;
-  const editor = document.getElementById('certEditor');
-  if (!editor) return;
-  editor.innerHTML = certs.map((c, i) => `
-    <div style="border:1px solid var(--gray-100);border-radius:12px;padding:20px;margin-bottom:16px;background:var(--gray-50)">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-        <div style="width:40px;height:40px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.05)">
-          <img id="fCert${i}IconPreview" src="${c.imageData || c.image}" style="width:28px;height:28px;object-fit:contain">
-        </div>
-        <strong style="color:var(--primary)">${c.title}</strong>
+  const grid = document.getElementById('certGrid');
+  const empty = document.getElementById('certEmptyState');
+  if (!grid) return;
+
+  if (certs.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  grid.innerHTML = certs.map((c, i) => `
+    <div class="image-manager-card">
+      <div class="img-thumb">
+        <img src="${c.imageData || c.image}" alt="${c.title}">
       </div>
-      <div class="form-grid">
-        <div class="form-group"><label class="form-label">Judul</label><input type="text" class="form-input" id="fCert${i}Title" value="${c.title}"></div>
-        <div class="form-group full"><label class="form-label">Deskripsi</label><textarea class="form-textarea" id="fCert${i}Desc" rows="2">${c.desc}</textarea></div>
-        <div class="form-group">
-          <label class="form-label">Gambar Icon</label>
-          <input type="file" accept="image/*" onchange="handleCertImageUpload(event,${i})" style="font-size:12px">
-          <input type="hidden" id="fCert${i}ImageData" value="${c.imageData || ''}">
-        </div>
+      <div class="img-info">
+        <div class="img-name">${c.title}</div>
+        <div class="img-path" style="font-size:10px">${c.desc.substring(0,50)}...</div>
+      </div>
+      <div class="img-actions">
+        <button class="action-btn edit" onclick="editCert(${i})" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="action-btn copy" onclick="duplicateCert(${i})" title="Duplikat"><i class="fas fa-copy"></i></button>
+        <button class="action-btn delete" onclick="deleteCert(${i})" title="Hapus"><i class="fas fa-trash"></i></button>
       </div>
     </div>
   `).join('');
 }
 
-function handleCertImageUpload(event, index) {
-  const file = event.target.files[0];
-  if (!file) return;
-  if (file.size > 2 * 1024 * 1024) return toast('Max 2MB', 'error');
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById(`fCert${index}ImageData`).value = e.target.result;
-    const preview = document.getElementById(`fCert${index}IconPreview`);
-    if (preview) preview.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
+function openCertModal() {
+  window._editCertIdx = null;
+  document.getElementById('fCertId').value = '';
+  document.getElementById('fCertTitle').value = '';
+  document.getElementById('fCertDesc').value = '';
+  document.getElementById('fCertImageData').value = '';
+  document.getElementById('fCertImagePath').value = '';
+  document.getElementById('certModalTitle').textContent = 'Tambah Sertifikasi';
+  
+  const previewCont = document.querySelector('#certUploadArea .upload-preview');
+  if (previewCont) previewCont.style.display = 'none';
+  
+  document.getElementById('certModalManager').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
-function saveCertifications() {
+function closeCertModal() {
+  document.getElementById('certModalManager').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function editCert(index) {
   const stored = localStorage.getItem('mas_certifications');
   const certs = stored ? JSON.parse(stored) : defaultCertifications;
-  for (let i = 0; i < certs.length; i++) {
-    const title = document.getElementById(`fCert${i}Title`);
-    const desc = document.getElementById(`fCert${i}Desc`);
-    const imgData = document.getElementById(`fCert${i}ImageData`);
-    if (title) certs[i].title = title.value.trim();
-    if (desc) certs[i].desc = desc.value.trim();
-    if (imgData && imgData.value) certs[i].imageData = imgData.value;
+  const c = certs[index];
+  if (!c) return;
+
+  window._editCertIdx = index;
+  openCertModal();
+  document.getElementById('certModalTitle').textContent = 'Edit Sertifikasi';
+  document.getElementById('fCertTitle').value = c.title;
+  document.getElementById('fCertDesc').value = c.desc;
+  document.getElementById('fCertImageData').value = c.imageData || '';
+  document.getElementById('fCertImagePath').value = c.image || '';
+
+  if (c.imageData || c.image) {
+    const pc = document.querySelector('#certUploadArea .upload-preview');
+    const img = document.getElementById('fCertPreview');
+    if (pc && img) {
+      img.src = c.imageData || c.image;
+      pc.style.display = 'block';
+    }
   }
+}
+
+function handleCertUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('fCertImageData').value = e.target.result;
+      document.getElementById('fCertImagePath').value = `assets/images/icon/${file.name}`;
+      const previewCont = document.querySelector('#certUploadArea .upload-preview');
+      const img = document.getElementById('fCertPreview');
+      if (previewCont && img) {
+        img.src = e.target.result;
+        previewCont.style.display = 'block';
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function saveCertEntry() {
+  const title = document.getElementById('fCertTitle').value.trim();
+  const desc = document.getElementById('fCertDesc').value.trim();
+  const imageData = document.getElementById('fCertImageData').value;
+  const imagePath = document.getElementById('fCertImagePath').value;
+
+  if (!title || !desc) return toast('Harap isi judul dan deskripsi!', 'error');
+
+  const stored = localStorage.getItem('mas_certifications');
+  const certs = stored ? JSON.parse(stored) : [...defaultCertifications];
+
+  const data = { title, desc, image: imagePath, imageData };
+
+  if (window._editCertIdx !== null) {
+    certs[window._editCertIdx] = data;
+    toast('Sertifikasi diperbarui!', 'success');
+  } else {
+    certs.push(data);
+    toast('Sertifikasi ditambahkan!', 'success');
+  }
+
   localStorage.setItem('mas_certifications', JSON.stringify(certs));
   saveToFile('certifications', certs);
-  toast('Sertifikasi berhasil disimpan!', 'success');
+  renderCerts();
+  closeCertModal();
+}
+
+function deleteCert(index) {
+  const stored = localStorage.getItem('mas_certifications');
+  const certs = stored ? JSON.parse(stored) : [...defaultCertifications];
+  
+  document.getElementById('confirmTitle').textContent = 'Hapus Sertifikasi?';
+  document.getElementById('confirmMsg').textContent = `Sertifikasi "${certs[index].title}" akan dihapus.`;
+  document.getElementById('confirmBtn').onclick = () => {
+    certs.splice(index, 1);
+    localStorage.setItem('mas_certifications', JSON.stringify(certs));
+    saveToFile('certifications', certs);
+    renderCerts();
+    closeConfirm();
+    toast('Sertifikasi dihapus.', 'success');
+  };
+  document.getElementById('confirmModal').classList.add('active');
+}
+
+function duplicateCert(index) {
+  const stored = localStorage.getItem('mas_certifications');
+  const certs = stored ? JSON.parse(stored) : [...defaultCertifications];
+  const c = certs[index];
+  certs.push({ ...c, title: c.title + ' (Copy)' });
+  localStorage.setItem('mas_certifications', JSON.stringify(certs));
+  saveToFile('certifications', certs);
+  renderCerts();
+  toast('Sertifikasi diduplikat!', 'success');
 }
 
 // ==========================================
@@ -2040,6 +2352,7 @@ function renderNews() {
       <td>
         <div class="action-btns">
           <button class="action-btn edit" title="Edit" onclick="editNews(${n.id})"><i class="fas fa-pen"></i></button>
+          <button class="action-btn copy" title="Duplikat" onclick="duplicateNews(${n.id})"><i class="fas fa-copy"></i></button>
           <button class="action-btn delete" title="Hapus" onclick="deleteNews(${n.id})"><i class="fas fa-trash"></i></button>
         </div>
       </td>
@@ -2188,6 +2501,14 @@ function deleteNews(id) {
   document.body.style.overflow = 'hidden';
 }
 
+function duplicateNews(id) {
+  const n = newsItems.find(x => x.id === id || x.id == id);
+  if (!n) return;
+  newsItems.push({ ...n, id: Date.now(), title: n.title + ' (Copy)', active: false });
+  saveNews(); renderNews();
+  toast('Berita berhasil diduplikat!', 'success');
+}
+
 function saveFooterInfo() {
   const info = {
     desc: document.getElementById('fFooterDesc').value.trim(),
@@ -2254,7 +2575,7 @@ document.querySelectorAll('.image-upload-area, .upload-area').forEach(area => {
 });
 
 // Close modals on overlay click
-['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','branchesModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
+['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','branchesModalManager','partnerModal','brandPartnerModal','newsModalManager','categoriesModalManager','certModalManager'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('click', function(e) {
     if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; }
@@ -2264,7 +2585,7 @@ document.querySelectorAll('.image-upload-area, .upload-area').forEach(area => {
 // ESC to close modals
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','branchesModalManager','partnerModal','brandPartnerModal','newsModalManager'].forEach(id => {
+    ['productModal','confirmModal','importModal','katalogModalManager','promoModalManager','heroModalManager','branchesModalManager','partnerModal','brandPartnerModal','newsModalManager','categoriesModalManager','certModalManager'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('active');
     });
@@ -2276,3 +2597,23 @@ document.addEventListener('keydown', e => {
 // INIT
 // ==========================================
 checkSession();
+syncAllFromFiles().then(() => {
+  loadProducts();
+  loadKatalogs();
+  loadPromos();
+  loadHeroes();
+  loadBranches();
+  loadNews();
+  loadBrandPartners();
+  loadPartners();
+  
+  renderKatalogs();
+  renderPromos();
+  renderHeroes();
+  renderBranches();
+  renderNews();
+  renderBrandPartners();
+  renderPartners();
+  renderCategories();
+  renderCerts();
+});

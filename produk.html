@@ -1497,43 +1497,62 @@
   <!-- ==================== KATALOG MODAL ==================== -->
   <div class="catalog-modal-overlay" id="catalogModal">
     <div class="catalog-modal-container">
+      <!-- Header -->
       <div class="catalog-modal-header">
         <div class="modal-info">
           <i class="fas fa-file-pdf modal-icon"></i>
           <div>
-            <h3>Katalog Produk 2026</h3>
+            <h3 data-i18n="nav-catalog">Katalog Produk 2026</h3>
             <p>PT Mitra Abadi Sindomas</p>
           </div>
         </div>
         <div class="modal-controls">
-          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog"
-            id="btnDownloadKatalog">
-            <i class="fas fa-download"></i> <span class="btn-text">Download Katalog</span>
+          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog" id="btnDownloadKatalog">
+            <i class="fas fa-download"></i> <span class="btn-text" data-i18n="catalog-download">Unduh Katalog</span>
           </a>
-          <button class="modal-close-btn" onclick="closeKatalog()" aria-label="Close Modal">
+          <button class="modal-close-btn" onclick="closeKatalog()" aria-label="Close">
             <i class="fas fa-times"></i>
           </button>
         </div>
       </div>
-      <div class="catalog-modal-content"
-        style="background:#e5e7eb; overflow:hidden; display:flex; flex-direction:column; contain: content;">
+
+      <!-- PDF Content Area -->
+      <div class="catalog-modal-content">
         <div class="pdf-loading" id="pdfLoading">
           <div class="loader"></div>
-          <p>Sedang memuat katalog...</p>
+          <p data-i18n="catalog-loading">Sedang memuat katalog...</p>
         </div>
-        <div id="pdfViewer" style="display:none; flex-direction:column; height:100%; width:100%;">
-          <div class="pdf-controls"
-            style="display:flex; justify-content:center; align-items:center; gap:15px; padding:12px; background:#111; color:#fff; flex-shrink:0; border-bottom:1px solid #333;">
-            <button id="pdfPrev" class="btn-primary" style="padding:6px 12px; font-size:14px;"><i
-                class="fas fa-chevron-left"></i> Prev</button>
-            <span style="font-weight:600; min-width:100px; text-align:center;">Halaman: <span id="pdfPageNum">1</span> /
-              <span id="pdfPageCount">?</span></span>
-            <button id="pdfNext" class="btn-primary" style="padding:6px 12px; font-size:14px;">Next <i
-                class="fas fa-chevron-right"></i></button>
+        <div id="pdfViewer">
+          <!-- Page Navigation Bar -->
+          <div class="pdf-nav-bar">
+            <button id="pdfPrev" class="pdf-nav-btn" title="Sebelumnya">
+              <i class="fas fa-chevron-left"></i> <span data-i18n="catalog-prev">Sebelumnya</span>
+            </button>
+            <span class="pdf-page-info">
+              <span data-i18n="catalog-page">Halaman</span>: <strong id="pdfPageNum">1</strong> / <strong id="pdfPageCount">?</strong>
+            </span>
+            <button id="pdfNext" class="pdf-nav-btn" title="Berikutnya">
+              <span data-i18n="catalog-next">Berikutnya</span> <i class="fas fa-chevron-right"></i>
+            </button>
           </div>
-          <div style="flex-grow:1; overflow:auto; display:flex; justify-content:center; align-items:flex-start; padding:10px; background:#333;">
-            <canvas id="pdfCanvas"
-              style="box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width:100%; height:auto; display:block;"></canvas>
+
+          <!-- Canvas Viewport -->
+          <div id="pdfViewport">
+            <canvas id="pdfCanvas"></canvas>
+          </div>
+
+          <!-- Zoom Controls -->
+          <div class="pdf-zoom-bar">
+            <button id="pdfZoomOut" class="pdf-zoom-btn" title="Perkecil">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <span id="pdfZoomLevel" class="pdf-zoom-label">50%</span>
+            <button id="pdfZoomIn" class="pdf-zoom-btn" title="Perbesar">
+              <i class="fas fa-search-plus"></i>
+            </button>
+            <button id="pdfZoomReset" class="pdf-zoom-btn pdf-zoom-reset" title="Reset Zoom">
+              <i class="fas fa-compress-alt"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -1606,1051 +1625,164 @@
 })();
 
 // Elements
-const navbar = document.getElementById('navbar');
-const navLinks = document.getElementById('navLinks');
-const mobileToggle = document.getElementById('mobileToggle');
-const searchWrapper = document.getElementById('searchWrapper');
-const searchToggle = document.getElementById('searchToggle');
-const searchContainer = document.getElementById('searchContainer');
-const searchInput = document.getElementById('searchInput');
-const searchResults = document.getElementById('searchResults');
 
-// ==========================================
-// KATALOG PDF VIEWER LOGIC
-// ==========================================
-let pdfDoc = null, pageNum = 1, pageIsRendering = false, pageNumIsPending = null;
-const scale = 1.5, canvas = document.getElementById('pdfCanvas'), ctx = canvas.getContext('2d');
-const catalogModal = document.getElementById('catalogModal');
-const pdfLoading = document.getElementById('pdfLoading');
-const pdfViewer = document.getElementById('pdfViewer');
+    // --- NAVBAR & SEARCH LOGIC ---
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.getElementById('navLinks');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navOverlay = document.getElementById('navOverlay');
+    const navItems = document.querySelectorAll('.nav-item');
+    const navIndicator = document.getElementById('navIndicator');
+    const searchWrapper = document.getElementById('searchWrapper');
+    const searchToggle = document.getElementById('searchToggle');
+    const searchContainer = document.getElementById('searchContainer');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const scrollTopBtn = document.getElementById('scrollTop');
 
-function renderPage(num) {
-  pageIsRendering = true;
-  pdfDoc.getPage(num).then(page => {
-    // Auto scale to fit mobile elegantly
-    const parentWidth = canvas.parentElement.clientWidth - 20;
-    const initialViewport = page.getViewport({ scale: 1 });
-    let currentScale = 1.5; // base scale
+    // Scroll handler
+    const checkScroll = () => {
+      const scrolled = window.scrollY > 50;
+      if (navbar) navbar.classList.toggle('scrolled', scrolled);
+      if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+    };
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+    checkScroll();
 
-    if (initialViewport.width * currentScale > parentWidth) {
-      currentScale = parentWidth / initialViewport.width;
+    // Mobile nav toggle
+    function toggleNav() {
+      if (navLinks) navLinks.classList.toggle('active');
+      if (mobileToggle) mobileToggle.classList.toggle('active');
+      if (navOverlay) navOverlay.classList.toggle('active');
+      document.body.style.overflow = (navLinks && navLinks.classList.contains('active')) ? 'hidden' : '';
     }
 
-    const viewport = page.getViewport({ scale: currentScale });
-    canvas.height = viewport.height; canvas.width = viewport.width;
-    const renderCtx = { canvasContext: ctx, viewport };
-    page.render(renderCtx).promise.then(() => {
-      pageIsRendering = false;
-      if (pageNumIsPending !== null) { renderPage(pageNumIsPending); pageNumIsPending = null; }
-    });
-    document.getElementById('pdfPageNum').textContent = num;
-  });
-}
-function queueRenderPage(num) { if (pageIsRendering) pageNumIsPending = num; else renderPage(num); }
-
-document.getElementById('pdfPrev')?.addEventListener('click', () => {
-  if (pageNum <= 1) return;
-  pageNum--; queueRenderPage(pageNum);
-  document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
-});
-document.getElementById('pdfNext')?.addEventListener('click', () => {
-  if (pageNum >= pdfDoc.numPages) return;
-  pageNum++; queueRenderPage(pageNum);
-  document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
-});
-
-function openKatalog() {
-  catalogModal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  if (!pdfDoc) {
-    pdfLoading.style.display = 'flex';
-    const savedKatalog = localStorage.getItem('mas_katalog_path') || 'Catalog PTMAS 2026_compressed.pdf';
-    document.getElementById('btnDownloadKatalog').href = 'database/asset-katalog/' + savedKatalog;
-    const loadingTask = pdfjsLib.getDocument('database/asset-katalog/' + savedKatalog);
-    loadingTask.promise.then(function (pdfDoc_) {
-      pdfDoc = pdfDoc_;
-      document.getElementById('pdfPageCount').textContent = pdfDoc.numPages;
-      pdfLoading.style.display = 'none'; pdfViewer.style.display = 'flex';
-      renderPage(pageNum);
-    }).catch(function (err) {
-      console.error("PDFJS Error: ", err);
-      pdfLoading.innerHTML = '<p>Gagal memuat katalog. Pastikan jalur file benar.</p>';
-    });
-  }
-}
-function closeKatalog() { catalogModal.classList.remove('active'); document.body.style.overflow = ''; }
-catalogModal?.addEventListener('click', (e) => { if (e.target === catalogModal) closeKatalog(); });
-
-// ==========================================
-// HEADER SEARCH LOGIC
-// ==========================================
-searchToggle?.addEventListener('click', (e) => {
-  e.stopPropagation();
-  const isActive = searchContainer.classList.toggle('active');
-  searchToggle.classList.toggle('active');
-  const icon = searchToggle.querySelector('i');
-  if (isActive) { icon.classList.replace('fa-search', 'fa-times'); searchInput?.focus(); }
-  else { closeSearch(); }
-});
-
-searchInput?.addEventListener('input', (e) => {
-  const query = e.target.value.toLowerCase().trim();
-  if (!query) { searchResults.innerHTML = ''; return; }
-  const keywords = query.split(' ').filter(k => k.trim() !== '');
-  const matches = products.filter(p => {
-    const searchableText = [
-      p.name, p.brand, p.category, p.desc, p.weight, p.origin, p.info
-    ].filter(Boolean).join(' ').toLowerCase();
-    return keywords.every(kw => searchableText.includes(kw));
-  }).slice(0, 6);
-
-  if (matches.length === 0) {
-    searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i> Tidak ada produk ditemukan</div>';
-    return;
-  }
-  searchResults.innerHTML = matches.map(p => `
-    <div class="search-result-item" onclick="handleHeaderSearchClick('${p.id}')">
-      <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img">
-      <div class="search-result-info">
-        <span class="search-result-title">${p.name}</span>
-        <span class="search-result-meta">${p.brand || ''} • ${p.category || ''}</span>
-      </div>
-    </div>
-  `).join('');
-});
-
-function handleHeaderSearchClick(id) { closeSearch(); openModal(parseInt(id)); }
-function closeSearch() {
-  searchContainer.classList.remove('active');
-  searchToggle?.classList.remove('active');
-  searchToggle?.querySelector('i')?.classList.replace('fa-times', 'fa-search');
-  searchInput.value = ''; searchResults.innerHTML = '';
-}
-
-document.addEventListener('click', (e) => {
-  if (searchWrapper && !searchWrapper.contains(e.target) && searchContainer.classList.contains('active')) closeSearch();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && searchContainer.classList.contains('active')) closeSearch();
-  if (e.key === 'Escape' && catalogModal.classList.contains('active')) closeKatalog();
-});
-
-// ==========================================
-// NAVIGATION INDICATORS
-// ==========================================
-const navIndicator = document.getElementById('navIndicator');
-const navItems = document.querySelectorAll('.nav-item');
-
-function updateIndicator(indicator, el) {
-  if (!indicator || !el || window.innerWidth <= 768) {
-    if (indicator) indicator.style.opacity = '0';
-    return;
-  }
-  indicator.style.opacity = '1';
-  indicator.style.width = `${el.offsetWidth}px`;
-  indicator.style.left = `${el.offsetLeft}px`;
-}
-function initIndicators() {
-  const activeNavItem = document.querySelector('.nav-item.active') || navItems[2];
-  updateIndicator(navIndicator, activeNavItem);
-}
-setTimeout(initIndicators, 300);
-window.addEventListener('resize', initIndicators);
-navItems.forEach(item => {
-  item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
-});
-if (navLinks) {
-  navLinks.addEventListener('mouseleave', () => {
-    updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[2]);
-  });
-}
-// --- Mobile Nav & Scroll Logic ---
-const navOverlay = document.getElementById('navOverlay');
-function toggleNav() {
-  navLinks.classList.toggle('active');
-  mobileToggle.classList.toggle('active');
-  navOverlay.classList.toggle('active');
-  document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-}
-
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('active');
-    mobileToggle.classList.remove('active');
-    navOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-  });
-});
-  const checkScroll = () => {
-    const scrolled = window.scrollY > 50;
-    navbar.classList.toggle('scrolled', scrolled);
-    const st = document.getElementById('scrollTop');
-    if(st) st.classList.toggle('visible', window.scrollY > 400);
-  };
-  window.addEventListener('scroll', checkScroll);
-  window.addEventListener('load', checkScroll);
-  checkScroll();// =====================================================
-// DATA PRODUK - Dimuat dari database/produk.csv
-// =====================================================
-
-// Data default (digunakan jika CSV gagal dimuat)
-const defaultProducts = [
-  { id: 1, name: "Super Ring", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/super-ring.png", desc: "Snack Makanan ringan berbentuk cincin dengan rasa keju premium renyah di mulut. Snack keju yang gurih dan renyah.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
-  { id: 2, name: "Cheese Balls", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/cheese-balls.png", desc: "Puff balls dengan rasa keju yang lezat, tekstur ringan and crunchy. Snack populer dari Malaysia.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
-  { id: 3, name: "Prawn Crackers", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/prawn-crackers.png", desc: "Kerupuk udang renyah dengan rasa seafood autentik. Cocok untuk camilan sehari-hari.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
-  { id: 4, name: "Green Pea Snack", category: "snack", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/green-pea.png", desc: "Snack kacang polong hijau yang renyah dan gurih. Camilan sehat dan lezat.", origin: "Malaysia", weight: "60g", cert: "Halal, BPOM", info: "60g x 10 Bags x 6 Balls | QTY: 60 Pcs | 0.1104 m³/Ctn" },
-  { id: 5, name: "Potato Chips", category: "snack", brand: "Jacker", brand_logo: "assets/logobrands/jacker.jpg", image: "assets/images/products/potato-chips.png", desc: "Keripik kentang premium dengan bumbu original yang gurih. Dipotong tipis dan digoreng sempurna.", origin: "Malaysia", weight: "100g", cert: "Halal, BPOM", info: "100g x 12 Cans | QTY: 12 Pcs | 0.054 m³/Ctn" },
-  { id: 6, name: "Butter Cookies", category: "biskuit", brand: "Zess", brand_logo: "assets/logobrands/zess.jpg", image: "assets/images/products/butter-cookies.png", desc: "Biskuit mentega premium dalam kemasan kaleng elegan. Berbagai bentuk dan varian rasa.", origin: "Malaysia", weight: "454g", cert: "Halal, BPOM", info: "454g x 12 Tins | QTY: 12 Pcs | 0.082 m³/Ctn" },
-  { id: 7, name: "Cream Crackers", category: "biskuit", brand: "Zess", brand_logo: "assets/logobrands/zess.jpg", image: "assets/images/products/cream-crackers.png", desc: "Biskuit cream cracker klasik yang renyah dan gurih. Cocok untuk sarapan dan camilan.", origin: "Malaysia", weight: "350g", cert: "Halal, BPOM", info: "350g x 24 Packs | QTY: 24 Pcs | 0.095 m³/Ctn" },
-  { id: 8, name: "Chocolate Wafer", category: "wafer", brand: "Jacker", brand_logo: "assets/logobrands/jacker.jpg", image: "assets/images/products/chocolate-wafer.png", desc: "Wafer berlapis dengan krim coklat premium. Tekstur renyah dengan rasa coklat yang kaya.", origin: "Malaysia", weight: "150g", cert: "Halal, BPOM", info: "150g x 24 Packs | QTY: 24 Pcs | 0.076 m³/Ctn" },
-  { id: 9, name: "Vanilla Wafer Rolls", category: "wafer", brand: "Jacker", brand_logo: "assets/logobrands/jacker.jpg", image: "assets/images/products/vanilla-wafer.png", desc: "Wafer roll renyah dengan isian krim vanilla yang lembut. Bentuk stick yang mudah dinikmati.", origin: "Malaysia", weight: "120g", cert: "Halal, BPOM", info: "120g x 24 Packs | QTY: 24 Pcs | 0.068 m³/Ctn" },
-  { id: 10, name: "Swiss Roll Chocolate", category: "kue", brand: "Fudo", brand_logo: "assets/logobrands/fudo.jpg", image: "assets/images/products/swiss-roll.png", desc: "Swiss roll lembut dengan lapisan krim coklat. Kue gulung premium dengan tekstur moist.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM", info: "432g (18g x 24) x 12 Boxes | QTY: 288 Pcs | 0.045 m³/Ctn" },
-  { id: 11, name: "Layer Cake Strawberry", category: "kue", brand: "Fudo", brand_logo: "assets/logobrands/fudo.jpg", image: "assets/images/products/layer-cake.png", desc: "Layer cake dengan krim strawberry yang lezat. Lapisan sponge cake lembut berlapis krim.", origin: "Malaysia", weight: "18g x 24", cert: "Halal, BPOM", info: "432g (18g x 24) x 12 Boxes | QTY: 288 Pcs | 0.045 m³/Ctn" },
-  { id: 12, name: "Tropical Fruit Juice", category: "minuman", brand: "Oriental", brand_logo: "assets/logobrands/oriental.jpg", image: "assets/images/products/fruit-juice.png", desc: "Jus buah tropis segar dengan rasa mangga alami. Dibuat dari konsentrat buah pilihan.", origin: "Malaysia", weight: "250ml", cert: "Halal, BPOM", info: "250ml x 24 Tins | QTY: 24 Pcs | 0.032 m³/Ctn" }
-];
-
-let products = [];
-let allBrands = [];
-let allCategories = []; // Loaded from categories.json
-
-// Inisialisasi filter dari URL parameters
-const urlParams = new URLSearchParams(window.location.search);
-let currentFilter = urlParams.get('filter') || 'all';
-let currentBrand = urlParams.get('brand') || 'all';
-let currentSort = 'newest';
-
-
-// Parse data CSV menjadi array produk
-function parseCSVData(csvText) {
-  const result = Papa.parse(csvText, {
-    header: true,
-    skipEmptyLines: true,
-    transformHeader: h => h.trim().toLowerCase()
-  });
-
-  if (result.errors.length > 0) { console.warn('⚠️ CSV parse warnings:', result.errors); }
-
-  const parsed = result.data
-    .filter(row => row.id && row.name)
-    .map(row => ({
-      id: parseInt(row.id),
-      name: (row.name || '').trim(),
-      category: (row.category || '').toLowerCase().trim(),
-      brand: (row.brand || '').trim(),
-      brand_logo: (row.brand_logo || '').trim(),
-      image: (row.image || '').trim(),
-      desc: (row.desc || '').trim(),
-      origin: (row.origin || '').trim(),
-      weight: (row.weight || '').trim(),
-      cert: (row.cert || '').trim(),
-      info: (row.info || '').trim()
-    }));
-
-  if (parsed.length === 0) { throw new Error('Tidak ada data produk valid di CSV'); }
-  return parsed;
-}
-
-// Muat merek dari file CSV
-async function loadBrandsFromCSV() {
-  try {
-    const response = await fetch('database/brands.csv');
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    const csvText = await response.text();
-    const result = Papa.parse(csvText, {
-      header: true,
-      skipEmptyLines: true,
-      transformHeader: h => h.trim().toLowerCase()
-    });
-    allBrands = result.data.map(row => ({
-      id: row.id,
-      name: (row.name || '').trim(),
-      category: (row.category || '').toLowerCase().trim(),
-      logo: (row.logo || '').trim()
-    }));
-    console.log('✅ Merek dimuat dari CSV:', allBrands.length, 'item');
-  } catch (err) {
-    console.warn('⚠️ Gagal memuat brands.csv:', err.message);
-    allBrands = [];
-  }
-}
-
-// Muat produk — prioritas: localStorage (sync admin) → CSV → default
-async function loadProductsFromCSV() {
-  await loadBrandsFromCSV();
-  await loadCategories();
-
-  // 1. Prioritas Utama: Ambil dari products.json di server (Synced via Admin)
-  try {
-    const resp = await fetch(`database/cms/products.json?t=${Date.now()}`);
-    if (resp.ok) {
-      const data = await resp.json();
-      if (Array.isArray(data) && data.length > 0) {
-        products = data;
-        console.log('✅ Produk dimuat dari products.json:', products.length, 'item');
-        updateBrandFilter();
-        filterProducts();
-        // Sinkronkan ke localStorage untuk backup offline
-        localStorage.setItem('mas_products_synced', JSON.stringify(products));
+    // Indicator logic
+    function updateIndicator(indicator, el) {
+      if (!indicator || !el || window.innerWidth <= 768) {
+        if (indicator) indicator.style.opacity = '0';
         return;
       }
+      indicator.style.opacity = '1';
+      indicator.style.width = el.offsetWidth + 'px';
+      indicator.style.left = el.offsetLeft + 'px';
     }
-  } catch (e) {
-    console.warn('⚠️ Gagal memuat products.json, mencoba localStorage/CSV');
-  }
 
-  // 2. Cek data sync dari Admin Panel (localStorage - Backup)
-  const syncedData = localStorage.getItem('mas_products_synced');
-  if (syncedData) {
-    try {
-      const parsed = JSON.parse(syncedData);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        products = parsed;
-        console.log('✅ Produk dimuat dari localStorage Backup:', products.length, 'item');
-        updateBrandFilter();
-        filterProducts();
-        return;
-      }
-    } catch (e) {
-      console.warn('⚠️ Data sync tidak valid, fallback ke CSV');
+    function initIndicators() {
+      const activeNavItem = document.querySelector('.nav-item.active') || navItems[0];
+      updateIndicator(navIndicator, activeNavItem);
     }
-  }
 
-  // 3. Fallback ke CSV
-  try {
-    const response = await fetch('database/produk.csv');
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    const csvText = await response.text();
-    products = parseCSVData(csvText);
-    console.log('✅ Produk dimuat dari CSV:', products.length, 'item');
-  } catch (err) {
-    console.warn('⚠️ Gagal memuat CSV, menggunakan data default:', err.message);
-    products = [...defaultProducts];
-  }
-  updateBrandFilter();
-  filterProducts();
+    setTimeout(initIndicators, 300);
+    window.addEventListener('resize', initIndicators);
 
-  // Handle URL Parameters (open modal if search=ID is present)
-  const searchId = urlParams.get('search');
-  if (searchId) {
-    const id = parseInt(searchId);
-    if (!isNaN(id)) {
-      setTimeout(() => openModal(id), 500);
-    }
-  }
-}
-
-// Load Categories from JSON
-async function loadCategories() {
-  try {
-    const resp = await fetch('database/cms/categories.json');
-    if (resp.ok) {
-      allCategories = await resp.json();
-      renderCategoryTabs();
-      console.log('✅ Kategori dimuat:', allCategories.length);
-    }
-  } catch (e) {
-    console.warn('⚠️ Gagal memuat categories.json');
-    allCategories = [
-      { key: 'snack', title: 'Makanan Ringan', icon: 'fas fa-cookie-bite' },
-      { key: 'biskuit', title: 'Biskuit & Cookies', icon: 'fas fa-cookie' },
-      { key: 'wafer', title: 'Wafer', icon: 'fas fa-bread-slice' },
-      { key: 'kue', title: 'Kue & Pastry', icon: 'fas fa-cake-candles' },
-      { key: 'minuman', title: 'Minuman', icon: 'fas fa-glass-water' },
-      { key: 'permen', title: 'Permen', icon: 'fas fa-candy-cane' },
-      { key: 'condiments', title: 'Condiments & Sauces', icon: 'fas fa-bottle-droplet' },
-      { key: 'noodle', title: 'Instant Noodle', icon: 'fas fa-bowl-food' },
-      { key: 'vegelicious', title: 'Vegelicious', icon: 'fas fa-leaf' },
-      { key: 'pudding', title: 'Pudding', icon: 'fas fa-ice-cream' }
-    ];
-    renderCategoryTabs();
-  }
-}
-
-function renderCategoryTabs() {
-  const tabs = document.getElementById('filterTabs');
-  if (!tabs) return;
-  
-  const allBtn = `
-    <button class="filter-tab ${currentFilter === 'all' ? 'active' : ''}" data-filter="all" onclick="setFilter('all', this)">
-      <i class="fas fa-th-large"></i> ${t('brands-all')}
-    </button>
-  `;
-  
-  const catBtns = allCategories.map(c => `
-    <button class="filter-tab ${currentFilter === c.key ? 'active' : ''}" data-filter="${c.key}" onclick="setFilter('${c.key}', this)">
-      <i class="${c.icon || 'fas fa-tag'}"></i> ${getCategoryLabel(c.key)}
-    </button>
-  `).join('');
-  
-  tabs.innerHTML = allBtn + catBtns;
-}
-
-// Populate Brand Filter Dropdown based on active Category
-function updateBrandFilter() {
-  const brandSelect = document.getElementById('brandSelect');
-  if (!brandSelect) return;
-  
-  let brandsToShow = allBrands;
-  
-  // Jika ada kategori yang dipilih, filter daftar brand
-  if (currentFilter !== 'all') {
-    brandsToShow = allBrands.filter(b => {
-      if (!b.category) return false;
-      const cats = b.category.split(',').map(c => c.trim());
-      return cats.includes(currentFilter);
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
     });
-  }
 
-  // Jika tidak ada data di allBrands (fail-safe), ambil dari produk yang tersedia
-  if (brandsToShow.length === 0 && allBrands.length === 0) {
-    const uniqueFromProducts = [...new Set(products.map(p => p.brand))].sort();
-    brandSelect.innerHTML = `<option value="all">-- Semua Merek --</option>` + 
-      uniqueFromProducts.map(b => `<option value="${b}">${b}</option>`).join('');
-    return;
-  }
-
-  brandSelect.innerHTML = `<option value="all">${t('prod-brand-all')}</option>` + 
-    brandsToShow.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
-  
-  // Tetapkan kembali value if still valid
-  if (currentBrand !== 'all') {
-    const brandInList = brandsToShow.find(b => b.name.toLowerCase() === currentBrand.toLowerCase());
-    if (!brandInList) {
-      currentBrand = 'all';
-      brandSelect.value = 'all';
-    } else {
-      currentBrand = brandInList.name; // Use canonical name from data
-      brandSelect.value = currentBrand;
-    }
-  }
-}
-
-// Toggle Mobile Sidebar
-function toggleMobileSidebar() {
-  const sidebar = document.querySelector('.filter-sidebar');
-  if (sidebar) {
-    sidebar.classList.toggle('active');
-    document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
-  }
-}
-
-
-// --- Category Slider Scroll ---
-function scrollTabs(distance) {
-  const tabs = document.getElementById('filterTabs');
-  if (tabs) {
-    tabs.scrollBy({ left: distance, behavior: 'smooth' });
-  }
-}
-
-// Show More / Load More logic
-const PRODUCTS_PER_PAGE = 6;
-let currentDisplayCount = PRODUCTS_PER_PAGE;
-let currentFilteredList = [];
-
-function renderProducts(list) {
-  const grid = document.getElementById('catalogGrid');
-  const noResults = document.getElementById('noResults');
-  const info = document.getElementById('resultsInfo');
-  const showMoreContainer = document.getElementById('showMoreContainer');
-  const btnShowMore = document.getElementById('btnShowMore');
-
-  if (!grid) return;
-
-  // Store the full filtered list
-  currentFilteredList = list;
-  currentDisplayCount = PRODUCTS_PER_PAGE;
-
-  if (list.length === 0) {
-    grid.innerHTML = '';
-    if (noResults) noResults.classList.add('active');
-    if (info) info.innerHTML = '<span class="results-count-pill">0</span> Produk ditemukan';
-    if (showMoreContainer) showMoreContainer.style.display = 'none';
-    return;
-  }
-  if (noResults) noResults.classList.remove('active');
-  
-  const catLabel = currentFilter === 'all' ? t('brands-all') : (getCategoryLabel(currentFilter));
-  const brandLabel = currentBrand === 'all' ? '' : ` · ${currentBrand}`;
-  
-  if (info) info.innerHTML = `<span class="results-count-pill">${list.length}</span> ${t('prod-results-found')} · ${catLabel}${brandLabel}`;
-
-  // Only show limited products initially
-  const visibleList = list.slice(0, currentDisplayCount);
-  
-  renderProductCards(visibleList);
-
-  // Show/hide the "Show More" button
-  if (showMoreContainer) {
-    if (list.length > currentDisplayCount) {
-      showMoreContainer.style.display = 'flex';
-      if (btnShowMore) {
-        const span = btnShowMore.querySelector('span');
-        if (span) span.textContent = t('btn-view-all'); // Using view all as label
-      }
-    } else {
-      showMoreContainer.style.display = 'none';
-    }
-  }
-}
-
-function renderProductCards(visibleList) {
-  const grid = document.getElementById('catalogGrid');
-  if (!grid) return;
-
-  grid.innerHTML = visibleList.map((p, i) => `
-    <div class="catalog-card reveal fade-up" style="transition-delay: ${i * 40}ms" onclick="openModal(${p.id})">
-      <div class="card-image">
-        <img src="${p.imageData || p.image}" alt="${p.name}">
-        <div class="card-badge badge-${p.category}">${getCategoryLabel(p.category)}</div>
-        <div class="card-brand">
-          ${p.brand_logo ? `<img src="${p.brand_logo}" alt="${p.brand}">` : p.brand[0]}
-        </div>
-      </div>
-      <div class="card-body">
-        <h3>${p.name}</h3>
-        <p class="card-desc">${p.desc}</p>
-        <div class="card-footer">
-          <span class="brand-name">${p.brand}</span>
-          <span class="detail-btn">Detail <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </div>
-    </div>
-  `).join('');
-  
-  // Observe new cards
-  const revealCards = grid.querySelectorAll('.reveal');
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
-  revealCards.forEach(c => cardObserver.observe(c));
-}
-
-function showMoreProducts() {
-  const previousCount = currentDisplayCount;
-  currentDisplayCount += PRODUCTS_PER_PAGE;
-  const showMoreContainer = document.getElementById('showMoreContainer');
-  const btnShowMore = document.getElementById('btnShowMore');
-  
-  const newList = currentFilteredList.slice(0, currentDisplayCount);
-  renderProductCards(newList);
-
-  // Add animation class to new items
-  const cards = document.querySelectorAll('.catalog-card');
-  cards.forEach((card, index) => {
-    if (index >= previousCount) {
-      card.classList.add('new-item');
-      card.style.animationDelay = `${(index - previousCount) * 100}ms`;
-    }
-  });
-
-  if (currentDisplayCount >= currentFilteredList.length) {
-    if (showMoreContainer) {
-       // Smoothly hide the container
-       showMoreContainer.style.opacity = '1';
-       const fadeEffect = setInterval(() => {
-         if (!showMoreContainer.style.opacity) showMoreContainer.style.opacity = '1';
-         if (parseFloat(showMoreContainer.style.opacity) > 0) {
-           showMoreContainer.style.opacity = (parseFloat(showMoreContainer.style.opacity) - 0.1).toString();
-         } else {
-           showMoreContainer.style.display = 'none';
-           clearInterval(fadeEffect);
-         }
-       }, 50);
-    }
-  }
-}
-
-function getCategoryLabel(cat) {
-  const catKey = `cat-${cat}`;
-  const translated = t(catKey);
-  if (translated !== catKey) return translated;
-
-  // Fallback to i18nData mapped labels if exists in data
-  const labels = { 
-    snack: 'Snack', 
-    biskuit: 'Biskuit', 
-    wafer: 'Wafer', 
-    kue: 'Kue & Pastry', 
-    minuman: 'Minuman', 
-    permen: 'Permen', 
-    condiments: 'Condiments', 
-    noodle: 'Instant Noodle', 
-    vegelicious: 'Vegelicious', 
-    pudding: 'Pudding' 
-  };
-  return labels[cat] || cat;
-}
-
-function setFilter(filter, btn) {
-  // Toggle logic: if clicking already active filter, go back to 'all'
-  if (currentFilter === filter && filter !== 'all') {
-    currentFilter = 'all';
-    // Update active tab UI
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    const allTab = document.querySelector('.filter-tab[data-filter="all"]');
-    if (allTab) allTab.classList.add('active');
-  } else {
-    currentFilter = filter;
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    else {
-      // Find button by data-filter if btn is not provided (e.g. from URL or other scripts)
-      const targetBtn = document.querySelector(`.filter-tab[data-filter="${filter}"]`);
-      if (targetBtn) targetBtn.classList.add('active');
-    }
-  }
-
-  // Reset brand filter when category changes
-  currentBrand = 'all';
-  const brandSelect = document.getElementById('brandSelect');
-  if (brandSelect) brandSelect.value = 'all';
-
-  updateBrandFilter(); // Refresh Brand dropdown logic
-  filterProducts();
-  window.scrollTo({ top: document.querySelector('.filter-section').offsetTop - 100, behavior: 'smooth' });
-}
-
-function filterProducts() {
-  const searchInp = document.getElementById('productFilterInput');
-  const sortInp = document.getElementById('sortSelect');
-  const brandInp = document.getElementById('brandSelect');
-  
-  const query = searchInp ? searchInp.value.toLowerCase() : '';
-  currentSort = sortInp ? sortInp.value : 'newest';
-  currentBrand = brandInp ? brandInp.value : 'all';
-
-  let filtered = [...products];
-
-  // 1. Filter by Category
-  if (currentFilter !== 'all') {
-    filtered = filtered.filter(p => p.category === currentFilter);
-  }
-
-  // 2. Filter by Brand
-  if (currentBrand !== 'all') {
-    filtered = filtered.filter(p => p.brand.toLowerCase() === currentBrand.toLowerCase());
-  }
-
-  // 3. Filter by Search Query
-  if (query) {
-    const keywords = query.split(' ').filter(k => k.trim() !== '');
-    filtered = filtered.filter(p => {
-      const searchableText = [
-        p.name, p.brand, p.category, p.desc, p.weight, p.origin, p.info
-      ].filter(Boolean).join(' ').toLowerCase();
-      return keywords.every(kw => searchableText.includes(kw));
-    });
-  }
-
-  // 4. Sort
-  if (currentSort === 'alpha-asc') {
-    filtered.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (currentSort === 'alpha-desc') {
-    filtered.sort((a, b) => b.name.localeCompare(a.name));
-  } else if (currentSort === 'newest') {
-    filtered.sort((a, b) => a.id - b.id);
-  }
-
-  renderProducts(filtered);
-}
-
-function resetFilters() {
-  const searchInp = document.getElementById('productFilterInput');
-  const sortInp = document.getElementById('sortSelect');
-  const brandInp = document.getElementById('brandSelect');
-  const filterTabs = document.querySelectorAll('.filter-tab');
-  
-  if (searchInp) searchInp.value = '';
-  if (sortInp) sortInp.value = 'newest';
-  if (brandInp) brandInp.value = 'all';
-  
-  currentFilter = 'all';
-  currentBrand = 'all';
-  currentSort = 'newest';
-  
-  filterTabs.forEach(t => t.classList.remove('active'));
-  const allTab = document.querySelector('[data-filter="all"]');
-  if (allTab) allTab.classList.add('active');
-  
-  updateBrandFilter();
-  filterProducts();
-}
-
-// Helper untuk menampilkan gambar atau placeholder jika path kosong
-function getImageOrPlaceholder(path, label = "Image", className = "") {
-  if (path && path.trim() !== '') {
-    return `<img src="${path}" alt="${label}" class="${className}">`;
-  }
-  return `
-    <div class="img-placeholder">
-      <i class="fas fa-image"></i>
-      <span>${label}</span>
-    </div>
-  `;
-}
-
-function openModal(id) {
-  const p = products.find(x => x.id === id);
-  if (!p) return;
-
-  // Header Elements
-  const brandLogoContainer = document.getElementById('modalBrandLogoContainer');
-  const mainImgContainer = document.getElementById('modalMainImgContainer');
-  
-  // Body Elements
-  const categoryPill = document.getElementById('modalCategoryPill');
-  const brandName = document.getElementById('modalBrandName');
-  const modalDesc = document.getElementById('modalDesc');
-  const specAsal = document.getElementById('specAsal');
-  const specBerat = document.getElementById('specBerat');
-  const specSertifikasi = document.getElementById('specSertifikasi');
-  const specKategori = document.getElementById('specKategori');
-  const modalInfo = document.getElementById('modalInfo');
-  const modalWaBtn = document.getElementById('modalWaBtn');
-
-  // Populate Content
-  if (brandLogoContainer) brandLogoContainer.innerHTML = getImageOrPlaceholder(p.brand_logo, "Logo Brand");
-  if (mainImgContainer) mainImgContainer.innerHTML = getImageOrPlaceholder(p.imageData || p.image, "Gambar Produk", "main-product-img");
-  
-  if (categoryPill) {
-    categoryPill.textContent = getCategoryLabel(p.category);
-    // You could adjust colors based on category if desired
-  }
-  
-  if (brandName) brandName.textContent = p.brand;
-  if (modalDesc) modalDesc.textContent = p.desc;
-  
-  if (specAsal) specAsal.textContent = p.origin || '-';
-  if (specBerat) specBerat.textContent = p.weight || '-';
-  if (specSertifikasi) specSertifikasi.textContent = p.cert || '-';
-  if (specKategori) specKategori.textContent = getCategoryLabel(p.category);
-  
-  if (modalInfo) modalInfo.textContent = p.info || 'Hubungi kami untuk informasi lebih lanjut.';
-  
-  if (modalWaBtn) {
-    const message = `Halo, saya tertarik dengan produk ${p.name} (${p.brand}). Mohon informasi lebih lanjut.`;
-    modalWaBtn.onclick = () => window.open(`https://wa.me/6281295001778?text=${encodeURIComponent(message)}`, '_blank');
-  }
-
-  const modal = document.getElementById('productModal');
-  if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-}
-
-function closeModal() {
-  const modal = document.getElementById('productModal');
-  if (modal) { 
-    modal.classList.remove('active'); 
-    document.body.style.overflow = '';
-    // Reset zoom state if any
-    if (typeof resetProductZoom === 'function') resetProductZoom();
-  }
-}
-
-// Interactive Zoom & Touch Logic for Modal
-let resetProductZoom = () => {};
-
-document.addEventListener('DOMContentLoaded', () => {
-  const modalHeader = document.querySelector('.modal-header');
-  if (!modalHeader) return;
-
-  let state = {
-    isZoomed: false,
-    scale: 1,
-    lastScale: 1,
-    posX: 0,
-    posY: 0,
-    lastPosX: 0,
-    lastPosY: 0,
-    startX: 0,
-    startY: 0,
-    initialDistance: 0,
-    isDragging: false,
-    wasDragging: false
-  };
-
-  const img = modalHeader.querySelector('.main-product-img');
-
-  resetProductZoom = function() {
-    state = { ...state, isZoomed: false, scale: 1, lastScale: 1, posX: 0, posY: 0, lastPosX: 0, lastPosY: 0, isDragging: false, wasDragging: false };
-    if (img) {
-      img.style.transform = '';
-      img.style.transformOrigin = 'center center';
-    }
-    modalHeader.classList.remove('zoomed');
-    modalHeader.style.touchAction = '';
-  };
-
-  function applyTransform(isInteracting = false) {
-    if (!img) return;
-    if (isInteracting) img.classList.add('interacting');
-    else img.classList.remove('interacting');
-    img.style.transform = `translate(${state.posX}px, ${state.posY}px) scale(${state.scale})`;
-  }
-
-  // Desktop Click Toggle
-  modalHeader.addEventListener('click', function(e) {
-    if (e.target.closest('.modal-close') || e.target.closest('.brand-logo-container')) return;
-    
-    // Prevent zoom toggle if we just finished dragging
-    if (state.wasDragging) {
-      state.wasDragging = false;
-      return;
+    if (navLinks) {
+      navLinks.addEventListener('mouseleave', () => {
+        updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[0]);
+      });
     }
 
-    state.isZoomed = !state.isZoomed;
-    if (state.isZoomed) {
-      this.classList.add('zoomed');
-      state.scale = 2.2;
-      modalHeader.style.touchAction = 'none';
-      if (e.type === 'click' && !('ontouchstart' in window)) {
-        const rect = this.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width);
-        const y = ((e.clientY - rect.top) / rect.height);
-        // Center zoom on click point
-        state.posX = (0.5 - x) * rect.width * (state.scale - 1);
-        state.posY = (0.5 - y) * rect.height * (state.scale - 1);
-      }
-    } else {
-      resetProductZoom();
-    }
-    applyTransform();
-  });
-
-  // Desktop Mouse Move (only if zoomed by click)
-  modalHeader.addEventListener('mousemove', function(e) {
-    if (state.isZoomed && !('ontouchstart' in window)) {
-      const rect = this.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width);
-      const y = ((e.clientY - rect.top) / rect.height);
-      state.posX = (0.5 - x) * rect.width * (state.scale - 1);
-      state.posY = (0.5 - y) * rect.height * (state.scale - 1);
-      applyTransform(true);
-    }
-  });
-
-  // --- Mobile Touch Events ---
-  modalHeader.addEventListener('touchstart', (e) => {
-    if (e.target.closest('.modal-close') || e.target.closest('.brand-logo-container')) return;
-    
-    state.isDragging = true;
-
-    if (e.touches.length === 2) {
-      state.initialDistance = Math.hypot(
-        e.touches[0].pageX - e.touches[1].pageX,
-        e.touches[0].pageY - e.touches[1].pageY
-      );
-      state.lastScale = state.scale;
-    } else if (e.touches.length === 1) {
-      state.startX = e.touches[0].pageX - state.posX;
-      state.startY = e.touches[0].pageY - state.posY;
-    }
-  }, { passive: false });
-
-  modalHeader.addEventListener('touchmove', (e) => {
-    if (!state.isDragging) return;
-    
-    if (e.touches.length === 2) {
-      e.preventDefault();
-      // Pinch to Zoom
-      const currentDistance = Math.hypot(
-        e.touches[0].pageX - e.touches[1].pageX,
-        e.touches[0].pageY - e.touches[1].pageY
-      );
-      const delta = currentDistance / state.initialDistance;
-      state.scale = Math.min(Math.max(state.lastScale * delta, 1), 5);
-      
-      if (state.scale > 1.05) {
-        state.isZoomed = true;
-        modalHeader.classList.add('zoomed');
-        modalHeader.style.touchAction = 'none';
-      } else {
-        resetProductZoom();
-      }
-    } else if (e.touches.length === 1 && state.isZoomed) {
-      e.preventDefault();
-      // Pan
-      state.posX = e.touches[0].pageX - state.startX;
-      state.posY = e.touches[0].pageY - state.startY;
-      state.wasDragging = true;
-    }
-    applyTransform(true);
-  }, { passive: false });
-
-  modalHeader.addEventListener('touchend', (e) => {
-    state.isDragging = false;
-    img.classList.remove('interacting');
-    if (state.scale <= 1.05) resetProductZoom();
-  });
-});
-
-const modalOverlay = document.getElementById('productModal');
-if (modalOverlay) {
-  modalOverlay.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// Inisialisasi
-loadProductsFromCSV().then(() => {
-  const searchId = urlParams.get('search');
-  if (searchId) {
-    // Give a small delay for DOM rendering
-    setTimeout(() => {
-      openModal(parseInt(searchId));
-      // Remove query param without refresh
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }, 300);
-  }
-});
-
-// Listen for language changes
-window.addEventListener('langChanged', () => {
-  renderCategoryTabs();
-  updateBrandFilter();
-  filterProducts();
-  
-  // Update static titles and breadcrumbs
-  document.title = `${t('nav-products')} | PT Mitra Abadi Sindomas`;
-});
-
-    // --- Combined Navigation & Modal logic is handled above ---
-    function animateIcon(el) {
-      el.classList.add('animate-click');
-      setTimeout(() => el.classList.remove('animate-click'), 600);
+    // Language dropdown
+    function toggleLangDropdown(isMobile) {
+      const dd = isMobile ? document.getElementById('langDropdownMobile') : document.getElementById('langDropdown');
+      if (dd) dd.classList.toggle('active');
     }
 
-    // --- LANGUAGE DROPDOWN LOGIC ---
-    function toggleLangDropdown(isMobile = false) {
-      const id = isMobile ? 'langDropdownMobile' : 'langDropdown';
-      const el = document.getElementById(id);
-      if (el) el.classList.toggle('active');
-    }
-
-    // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.lang-dropdown')) {
         document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
       }
     });
 
-    // --- CS FORM & SCROLL TOP LOGIC ---
-    function toggleContactModal() {
-      const modal = document.getElementById('contactModalOverlay');
-      if (modal) {
-        modal.classList.toggle('active');
-        if (modal.classList.contains('active')) {
-          initContactFormProducts();
-        }
+    // Search Logic
+    let searchProducts = [];
+    function initSearchData() {
+      if (typeof Papa !== 'undefined') {
+        Papa.parse("database/produk.csv", {
+          download: true, header: true,
+          complete: (results) => {
+            searchProducts = results.data.filter(p => p.name);
+          },
+          error: () => { searchProducts = []; }
+        });
       }
     }
+    initSearchData();
 
-    async function initContactFormProducts() {
-      const productSelect = document.getElementById('waProduct');
-      if (!productSelect || productSelect.options.length > 1) return;
-
-      let prods = [];
-      // Use global 'products' if available (common in produk.html)
-      if (typeof products !== 'undefined' && products.length > 0) {
-        prods = products;
-      } else {
-        // Fetch if not available (backup)
-        try {
-          const resp = await fetch('database/cms/products.json');
-          if (resp.ok) prods = await resp.json();
-          else {
-            const stored = localStorage.getItem('mas_products');
-            if (stored) prods = JSON.parse(stored);
-          }
-        } catch (e) {
-          console.warn('CS Form fetch error:', e);
-        }
-      }
-
-      if (!prods || prods.length === 0) return;
-
-      const seen = new Set();
-      prods.forEach(p => {
-        // Get category label safely
-        let catLabel = p.category;
-        if (typeof getCategoryLabel === 'function') {
-          catLabel = getCategoryLabel(p.category);
+    if (searchToggle) {
+      searchToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = searchContainer.classList.toggle('active');
+        searchToggle.classList.toggle('active');
+        const icon = searchToggle.querySelector('i');
+        if (isActive) {
+          icon.classList.replace('fa-search', 'fa-times');
+          if (searchInput) searchInput.focus();
         } else {
-          const labels = {
-            snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
-            minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
-            noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
-          };
-          catLabel = labels[p.category] || p.category;
-        }
-
-        const display = `${p.name} - ${p.brand} - ${catLabel}`;
-        if (!seen.has(display)) {
-          seen.add(display);
-          const opt = document.createElement('option');
-          opt.value = display;
-          opt.textContent = display;
-          opt.dataset.image = p.imageData || p.image || '';
-          productSelect.appendChild(opt);
+          icon.classList.replace('fa-times', 'fa-search');
+          if (searchInput) searchInput.value = '';
+          if (searchResults) searchResults.innerHTML = '';
         }
       });
     }
 
-    function updateProductPreview() {
-      const select = document.getElementById('waProduct');
-      const box = document.getElementById('waProductPreviewBox');
-      const img = document.getElementById('waProductImg');
-      const placeholder = document.getElementById('waProductPlaceholder');
-      if (!select || select.selectedIndex < 0) return;
-      const selectedOption = select.options[select.selectedIndex];
-      const imgSrc = selectedOption.dataset.image;
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) {
+          searchResults.innerHTML = '';
+          return;
+        }
+        const results = searchProducts.filter(p => 
+          p.name.toLowerCase().includes(query) || 
+          (p.brand && p.brand.toLowerCase().includes(query)) ||
+          (p.category && p.category.toLowerCase().includes(query))
+        ).slice(0, 5);
 
-      if (imgSrc) {
-        img.src = imgSrc;
-        img.classList.add('loaded');
-        placeholder.style.display = 'none';
-        box.classList.add('active');
-      } else {
-        img.src = "";
-        img.classList.remove('loaded');
-        placeholder.style.display = 'block';
-        box.classList.remove('active');
-      }
+        searchResults.innerHTML = results.map(p => `
+          <div class="search-result-item" onclick="goToProductGlobal('${p.id}')">
+            <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img" onerror="this.src='assets/images/placeholder.png'">
+            <div class="search-result-info">
+              <span class="search-result-title">${p.name}</span>
+              <span class="search-result-meta">${p.brand || ''} • ${p.category || ''}</span>
+            </div>
+          </div>
+        `).join('');
+      });
     }
 
-    function sendWhatsApp() {
-      const name = document.getElementById('waName').value.trim();
-      const phone = document.getElementById('waPhone').value.trim();
-      const region = document.getElementById('waRegion').value.trim();
-      const outlet = document.getElementById('waOutlet').value.trim();
-      const product = document.getElementById('waProduct').value;
-      const message = document.getElementById('waMessage').value.trim();
-
-      if (!name || !phone) {
-        alert('Mohon isi Nama dan No. WhatsApp Anda.');
-        return;
-      }
-
-      const targetPhone = '6281295001778';
-      const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
-        `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
-        `${message}\n\n` +
-        `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
-
-      const encodedText = encodeURIComponent(text);
-      window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
+    function goToProductGlobal(id) {
+      // In produk.html, we might want to just filter the current view or reload with search
+      window.location.href = `produk.html?search=${id}`;
     }
 
-    // Initialize products
-    document.addEventListener('DOMContentLoaded', () => {
-      loadProductsFromCSV();
+    function closeSearch() {
+      if (searchContainer) searchContainer.classList.remove('active');
+      if (searchToggle) {
+        searchToggle.classList.remove('active');
+        const icon = searchToggle.querySelector('i');
+        if (icon) icon.classList.replace('fa-times', 'fa-search');
+      }
+      if (searchInput) searchInput.value = '';
+      if (searchResults) searchResults.innerHTML = '';
+    }
+
+    document.addEventListener('click', (e) => {
+      if (searchWrapper && !searchWrapper.contains(e.target) && searchContainer && searchContainer.classList.contains('active')) {
+        closeSearch();
+      }
     });
-  </script>
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSearch();
+    });
+
+</script>
 
   <!-- ==================== SCROLL TOP ==================== -->
   <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">

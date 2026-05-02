@@ -7,7 +7,15 @@
  * Get current language from localStorage or default to 'id'
  */
 function getCurrentLanguage() {
-  return localStorage.getItem('preferred_lang') || 'id';
+  const saved = localStorage.getItem('preferred_lang');
+  if (saved) return saved;
+  
+  // Auto-detect browser language
+  const browserLang = navigator.language || navigator.userLanguage;
+  if (browserLang.startsWith('zh')) return 'cn';
+  if (browserLang.startsWith('en')) return 'en';
+  
+  return 'id'; // Default
 }
 
 /**
@@ -22,41 +30,53 @@ function t(key) {
 }
 
 function translatePage(lang) {
-  if (typeof i18nData === 'undefined') {
-    console.error('Translation data not found!');
-    return;
-  }
-
+  if (typeof i18nData === 'undefined') return;
   const translations = i18nData[lang];
   if (!translations) return;
 
-  // 1. Translate elements with data-i18n attribute
-  const elements = document.querySelectorAll('[data-i18n]');
-  elements.forEach(el => {
+  // 1. Explicit Translation (Fastest & most reliable)
+  document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (translations[key]) {
-      // Check if it's an input/textarea with placeholder
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        if (el.hasAttribute('placeholder')) {
-           el.setAttribute('placeholder', translations[key]);
-        }
+        el.setAttribute('placeholder', translations[key]);
       } else {
-        // Only update text content, preserving other children if it's a complex element
-        // We use innerHTML if the translation contains HTML, otherwise textContent
-        if (translations[key].includes('<') && translations[key].includes('>')) {
-          el.innerHTML = translations[key];
-        } else {
-          el.textContent = translations[key];
-        }
+        el.innerHTML = translations[key];
       }
     }
   });
 
-  // 2. Specific logic for components that might be dynamic
-  updateDynamicContentLabels(lang);
+  // 2. Universal Injector (Fallback for missing data-i18n)
+  if (lang !== 'id') {
+     const idDict = i18nData['id'];
+     const phrases = Object.keys(idDict).map(k => ({
+        key: k,
+        text: idDict[k].replace(/<[^>]*>/g, '').trim()
+     })).filter(p => p.text.length > 2);
+
+     // Function to translate text nodes recursively
+     function scan(node) {
+        if (node.nodeType === 3) { // Text node
+           const content = node.textContent.trim();
+           const match = phrases.find(p => p.text === content);
+           if (match) {
+              node.textContent = translations[match.key].replace(/<[^>]*>/g, '');
+           }
+        } else if (node.nodeType === 1 && !['SCRIPT', 'STYLE', 'IFRAME'].includes(node.tagName)) {
+           // Skip elements that already have data-i18n attribute
+           if (node.hasAttribute('data-i18n') || node.classList.contains('notranslate')) return;
+           node.childNodes.forEach(scan);
+        }
+     }
+     scan(document.body);
+  }
+  // 3. Update HTML attribute for CSS scoping
+  document.documentElement.setAttribute('data-lang', lang);
   
-  // 3. Update HTML lang attribute
-  document.documentElement.lang = lang;
+  // Keep original lang for Google Translate engine
+  // document.documentElement.setAttribute('lang', lang); 
+
+  updateDynamicContentLabels(lang);
 }
 
 /**
@@ -90,73 +110,200 @@ function updateDynamicContentLabels(lang) {
   });
 }
 
+// Google Translate Initialization
+window.googleTranslateElementInit = function() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'id',
+    includedLanguages: 'en,zh-CN,id',
+    autoDisplay: false,
+    multilanguagePage: true
+  }, 'google_translate_element');
+};
+
+// Prevent Google Translate from adding padding-top to body
+(function() {
+  const originalSetProperty = HTMLElement.prototype.style.setProperty;
+  HTMLElement.prototype.style.setProperty = function(prop, val, priority) {
+    if ((prop === 'top' || prop === 'padding-top' || prop === 'position') && this === document.body && val !== '0' && val !== '0px') {
+      return;
+    }
+    return originalSetProperty.apply(this, arguments);
+  };
+})();
+
 /**
  * Global setLanguage override/helper
  */
-function setLanguage(lang) {
-  const flags = {
-    'id': 'https://flagcdn.com/id.svg',
-    'en': 'https://flagcdn.com/us.svg',
-    'cn': 'https://flagcdn.com/cn.svg'
+function setLanguage(lang, isInitial = false) {
+  // 1. Language Labels for Loader
+  const loaderData = {
+    'id': { name: 'Indonesia', native: 'Bahasa Indonesia', flag: 'id' },
+    'en': { name: 'English', native: 'English', flag: 'us' },
+    'cn': { name: '\u4e2d\u6587', native: '\u666e\u901a\u8bdd', flag: 'cn' }
   };
-  const titleMap = {
-    'id': 'Indonesia',
-    'en': 'English',
-    'cn': 'China'
-  };
+  const target = loaderData[lang];
 
-  // Update dropdown displays (Desktop & Mobile)
-  const containers = ['langDropdown', 'langDropdownMobile'];
-  containers.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      const current = el.querySelector('.lang-current');
-      if (current) {
-        const img = current.querySelector('img');
-        const span = current.querySelector('span');
-        if (img) img.src = flags[lang];
-        if (span) {
-          // Use short code for desktop, full name for mobile
-          const key = (id === 'langDropdownMobile') ? `lang-${lang}` : `lang-${lang}-short`;
-          const translations = (typeof i18nData !== 'undefined') ? i18nData[lang] : null;
-          
-          if (translations && translations[key]) {
-             span.textContent = translations[key];
-             span.setAttribute('data-i18n', key);
-          } else {
-             // Fallback
-             span.textContent = (id === 'langDropdownMobile') ? titleMap[lang] : lang.toUpperCase();
-          }
-        }
-      }
-      
-      // Update active state in options
-      el.querySelectorAll('.lang-option').forEach(opt => {
-        const clickAttr = opt.getAttribute('onclick');
-        const isActive = clickAttr && clickAttr.includes(`'${lang}'`);
-        opt.classList.toggle('active', isActive);
-      });
-      
-      el.classList.remove('active');
-    }
+  // 2. Initialize/Update Loader
+  let loader = document.getElementById('i18n-loader');
+  if (!loader) {
+    loader = document.createElement('div');
+    loader.id = 'i18n-loader';
+    document.body.appendChild(loader);
+  }
+  
+  const loaderLabels = {
+    'id': 'Mengganti Bahasa ke',
+    'en': 'Switching Language to',
+    'cn': '\u5207\u6362\u8bed\u8a00\u4e3a'
+  };
+  const loadingLabel = loaderLabels[lang] || 'Mengganti Bahasa ke';
+
+  loader.innerHTML = `
+    <div class="i18n-spinner"></div>
+    <div class="i18n-status">
+      <img src="https://flagcdn.com/w40/${target.flag}.png" class="i18n-flag">
+      <div class="i18n-text">${loadingLabel} ${target.name.toUpperCase()}</div>
+      <div class="i18n-native">${target.native}</div>
+    </div>
+  `;
+
+  // Show Loader ONLY if not initial load
+  if (!isInitial) {
+    loader.classList.add('active');
+  }
+
+  // 3. Auto-close Dropdown for elegance
+  document.querySelectorAll('.lang-dropdown').forEach(dd => {
+    dd.classList.remove('active');
+    // Update Active States
+    dd.querySelectorAll('.lang-option').forEach(opt => {
+      const clickAttr = opt.getAttribute('onclick');
+      const isActive = clickAttr && clickAttr.includes(`'${lang}'`);
+      opt.classList.toggle('active', isActive);
+    });
   });
 
-  // Execute translation
+  // 3. Update Navbar Flags & Labels (Immediate Feedback)
+  const updateFlagsAndLabels = (l) => {
+    const langSpans = document.querySelectorAll('.lang-current span');
+    langSpans.forEach(span => {
+      const parent = span.closest('.lang-dropdown');
+      const id = parent ? parent.id : null;
+      const key = (id === 'langDropdownMobile') ? `lang-${l}` : `lang-${l}-short`;
+      const translations = (typeof i18nData !== 'undefined') ? i18nData[l] : null;
+      if (translations && translations[key]) span.textContent = translations[key];
+    });
+
+    const flags = document.querySelectorAll('.lang-current img, .i18n-flag');
+    const flagUrls = { 'id': 'id', 'en': 'us', 'cn': 'cn' };
+    flags.forEach(img => {
+      img.src = `https://flagcdn.com/w40/${flagUrls[l]}.png`;
+    });
+  };
+
+  updateFlagsAndLabels(lang);
+
+  // 4. Trigger Engines
   translatePage(lang);
-  
-  // Store preference
+
+  const triggerGoogle = (targetLang) => {
+    const googleCombo = document.querySelector('.goog-te-combo');
+    if (googleCombo) {
+      googleCombo.value = targetLang;
+      googleCombo.dispatchEvent(new Event('change'));
+      const event = new Event('change', { bubbles: true, cancelable: true });
+      googleCombo.dispatchEvent(event);
+    }
+  };
+
+  if (lang === 'id') {
+    const showOriginal = document.querySelector('.goog-te-banner-frame')?.contentWindow?.document?.querySelector('#\\:0\\.restore');
+    if (showOriginal) showOriginal.click();
+  }
+
+  const gLang = (lang === 'cn') ? 'zh-CN' : lang;
+  triggerGoogle(gLang);
+
   localStorage.setItem('preferred_lang', lang);
-  
-  // Broadcast change for other pages if needed
   window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang } }));
+
+  // 5. Sticky Completion & Hide Loader (only if needed)
+  if (!isInitial) {
+    let count = 0;
+    const sticky = setInterval(() => {
+      translatePage(lang);
+      updateFlagsAndLabels(lang);
+      if (++count > 4) {
+        clearInterval(sticky);
+        setTimeout(() => {
+          if (loader) loader.classList.remove('active');
+        }, 300);
+      }
+    }, 300);
+    // Fallback safety
+    setTimeout(() => { if(loader) loader.classList.remove('active'); }, 3000);
+  } else {
+    // Initial load: Just translate once or twice quietly
+    translatePage(lang);
+    setTimeout(() => translatePage(lang), 500);
+  }
 }
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('preferred_lang') || 'id';
-  // Small delay to ensure i18nData is ready if loaded async
-  setTimeout(() => {
-    setLanguage(saved);
-  }, 100);
-});
 
+  // Instant flag restore - no loader, no delay
+  const flagUrls = { 'id': 'id', 'en': 'us', 'cn': 'cn' };
+  document.querySelectorAll('.lang-current img').forEach(img => {
+    img.src = `https://flagcdn.com/w40/${flagUrls[saved]}.png`;
+  });
+  document.querySelectorAll('.lang-current span').forEach(span => {
+    const parent = span.closest('.lang-dropdown');
+    const id = parent ? parent.id : null;
+    const key = (id === 'langDropdownMobile') ? `lang-${saved}` : `lang-${saved}-short`;
+    if (typeof i18nData !== 'undefined' && i18nData[saved] && i18nData[saved][key]) {
+      span.textContent = i18nData[saved][key];
+    }
+  });
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    const clickAttr = opt.getAttribute('onclick');
+    opt.classList.toggle('active', clickAttr && clickAttr.includes(`'${saved}'`));
+  });
+
+  // Full language init - immediate for core content, delayed for dynamic plugins
+  setLanguage(saved, true);
+  setTimeout(() => setLanguage(saved, true), 1000);
+
+  // Setup MutationObserver for dynamic content (News details, etc.)
+  const observer = new MutationObserver(() => {
+    const currentLang = localStorage.getItem('preferred_lang') || 'id';
+    if (currentLang !== 'id') {
+      clearTimeout(window.i18nTimeout);
+      window.i18nTimeout = setTimeout(() => translatePage(currentLang), 100);
+    }
+    
+    // Constantly hide and REMOVE Google Translate bar if it pops up
+    const googleBar = document.querySelector('.goog-te-banner-frame') || 
+                      document.querySelector('iframe.goog-te-banner-frame') ||
+                      document.getElementById(':1.container');
+    if (googleBar) {
+      googleBar.style.setProperty('display', 'none', 'important');
+      googleBar.remove(); // Kill it from DOM
+    }
+    document.body.style.top = '0';
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Fallback Interval for Google Bar
+  setInterval(() => {
+    const googleBar = document.querySelector('.goog-te-banner-frame') || 
+                      document.querySelector('iframe.goog-te-banner-frame') ||
+                      document.getElementById(':1.container');
+    if (googleBar) {
+      googleBar.remove();
+    }
+    document.body.style.top = '0';
+    document.body.style.position = 'static';
+  }, 200);
+});

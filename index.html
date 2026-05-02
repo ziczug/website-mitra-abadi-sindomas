@@ -639,41 +639,41 @@
             <div class="dist-truck-slide active">
               <img src="assets/images/img-slider-distribution/truck1.png" alt="Truk Distribusi 10 Ton">
               <div class="dist-truck-info">
-                <span class="dist-truck-counter">1 / 4</span>
-                <h4>Truk Distribusi 10 Ton</h4>
-                <p>Kapasitas besar untuk pengiriman antar kota & wilayah luas.</p>
+                <span class="dist-truck-counter">01/04</span>
+                <h4 data-i18n="dist-truck-1-name">Truk Distribusi 10 Ton</h4>
+                <p data-i18n="dist-truck-1-desc">Kapasitas besar untuk pengiriman antar kota & wilayah luas.</p>
               </div>
             </div>
             <div class="dist-truck-slide">
               <img src="assets/images/img-slider-distribution/truck2.png" alt="Truk Distribusi Ringan">
               <div class="dist-truck-info">
-                <span class="dist-truck-counter">2 / 4</span>
-                <h4>Truk Distribusi Ringan</h4>
-                <p>Untuk distribusi cepat area perkotaan & pengiriman harian.</p>
+                <span class="dist-truck-counter">02/04</span>
+                <h4 data-i18n="dist-truck-2-name">Truk Distribusi Ringan</h4>
+                <p data-i18n="dist-truck-2-desc">Lincah untuk pengiriman dalam kota dengan akses terbatas.</p>
               </div>
             </div>
             <div class="dist-truck-slide">
-              <img src="assets/images/img-slider-distribution/truck3.png" alt="Armada Lintas Provinsi">
+              <img src="assets/images/img-slider-distribution/truck3.png" alt="Mobil Box Pendingin">
               <div class="dist-truck-info">
-                <span class="dist-truck-counter">3 / 4</span>
-                <h4>Armada Lintas Provinsi</h4>
-                <p>Mendukung distribusi jarak jauh dengan standar keamanan maksimal.</p>
+                <span class="dist-truck-counter">03/04</span>
+                <h4 data-i18n="dist-truck-3-name">Mobil Box Pendingin</h4>
+                <p data-i18n="dist-truck-3-desc">Menjaga suhu produk tetap stabil selama perjalanan.</p>
               </div>
             </div>
             <div class="dist-truck-slide">
-              <img src="assets/images/img-slider-distribution/truck4.png" alt="Truk Distribusi Retail">
+              <img src="assets/images/img-slider-distribution/truck4.png" alt="Armada Van Pengiriman">
               <div class="dist-truck-info">
-                <span class="dist-truck-counter">4 / 4</span>
-                <h4>Truk Distribusi Retail</h4>
-                <p>Sistem pengiriman terjadwal untuk menyuplai jaringan minimarket dan supermarket.</p>
+                <span class="dist-truck-counter">04/04</span>
+                <h4 data-i18n="dist-truck-4-name">Armada Van Pengiriman</h4>
+                <p data-i18n="dist-truck-4-desc">Efisien untuk pengiriman paket kecil dan cepat.</p>
               </div>
             </div>
           </div>
-          <div class="dist-truck-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-            <div class="dist-truck-progress" style="flex: 1; height: 6px; background: rgba(255,255,255,0.15); border-radius: 10px; margin-right: 20px; overflow: hidden; max-width: 180px;">
-              <div class="dist-truck-progress-bar" id="distTruckProgress" style="width: 0%; height: 100%; background: #fff;"></div>
+          <div class="dist-truck-footer">
+            <div class="dist-truck-progress">
+              <div class="dist-truck-progress-bar" id="distTruckProgress"></div>
             </div>
-            <div class="dist-truck-nav" style="margin-top: 0;">
+            <div class="dist-truck-nav">
               <button class="dist-truck-btn" onclick="window._distTruckNav(-1)"><i class="fas fa-arrow-left"></i></button>
               <button class="dist-truck-btn" onclick="window._distTruckNav(1)"><i class="fas fa-arrow-right"></i></button>
             </div>
@@ -867,12 +867,12 @@
 
       // Try fetch from file
       try {
-        const r = await fetch('database/cms/branches.json');
+        const r = await fetch('database/cms/branches.json?t=' + Date.now(), { cache: 'no-store' });
         if (r.ok) branches = await r.json();
       } catch (e) { console.warn('Branch fetch failed:', e); }
 
       // Fallback to localStorage
-      if (!branches) {
+      if (!branches || !branches.length) {
         try {
           const s = localStorage.getItem('mas_branches');
           if (s) branches = JSON.parse(s);
@@ -883,7 +883,7 @@
       if (!branches || !branches.length) {
         branches = [
           { name: 'Jakarta', address: 'Sedayu Bizz Park, Jakarta Barat', path: 'assets/images/mas-bangunan.jpg' },
-          { name: 'Batam', address: 'Batam Centre, Kepulauan Riau', path: 'assets/images/mas-bangunan.jpg' },
+          { name: 'Medan', address: 'Medan, Sumatera Utara', path: 'assets/images/mas-bangunan.jpg' },
           { name: 'Surabaya', address: 'Kawasan Industri Margomulyo, Surabaya', path: 'assets/images/mas-bangunan.jpg' }
         ];
       }
@@ -893,15 +893,22 @@
       let cur = 0;
       let branchTimer;
 
+      const defaultImg = 'assets/images/mas-bangunan.jpg';
+
       slider.innerHTML = branches.map((b, i) => `
       <div class="branch-slide ${i === 0 ? 'active' : ''}">
         <div class="branch-main-image">
-           <img src="${b.imageData || b.path || 'assets/images/mas-bangunan.jpg'}" alt="${b.name} Warehouse" loading="lazy">
+           <img src="${b.imageData || b.path || defaultImg}" 
+                alt="${b.name} Warehouse" 
+                loading="lazy" 
+                onerror="this.src='${defaultImg}'; this.onerror=null;">
         </div>
         <div class="branch-mini-card">
           <div class="branch-mini-content">
             <div class="branch-mini-thumb">
-              <img src="${b.imageData || b.path || 'assets/images/mas-bangunan.jpg'}" alt="${b.name} Thumb">
+              <img src="${b.imageData || b.path || defaultImg}" 
+                   alt="${b.name} Thumb" 
+                   onerror="this.src='${defaultImg}'; this.onerror=null;">
             </div>
             <div class="branch-mini-info">
               <div class="branch-mini-counter">${i + 1} / ${cnt}</div>
@@ -990,19 +997,20 @@
         if (slideNum) slideNum.textContent = String(cur + 1).padStart(2, '0');
         
         startProgress();
-        resetTimer();
       }
 
-      function resetTimer() {
-        clearInterval(slideTimer);
-        slideTimer = setInterval(() => goTo(cur + 1), slideDuration);
+      if (progressBar) {
+        progressBar.addEventListener('transitionend', (e) => {
+          if (e.propertyName === 'width' && progressBar.style.width === '100%') {
+            goTo(cur + 1);
+          }
+        });
       }
 
       window._distTruckNav = function (dir) { goTo(cur + dir); };
 
       // Auto-slide init
       startProgress();
-      resetTimer();
     })();
   </script>
 
@@ -1025,7 +1033,7 @@
         </div>
 
         <!-- Right Column: Card List -->
-        <div class="cert-right reveal fade-left">
+        <div class="cert-right reveal fade-left" id="certificationsContainer">
           <!-- Halal -->
           <div class="cert-item-card">
             <div class="cert-item-icon halal">
@@ -1122,11 +1130,11 @@
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal fade-right">
-          <a href="https://maps.app.goo.gl/4BL2Duej9Yzwvrac8" target="_blank" class="contact-card">
+          <a href="https://maps.app.goo.gl/4BL2Duej9Yzwvrac8" target="_blank" class="contact-card" id="contactAddressCard">
             <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
             <div class="card-content">
               <h4 data-i18n="contact-office-title">Alamat Head Office</h4>
-              <p>Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia
+              <p id="contactAddress">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia
               </p>
             </div>
             <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
@@ -1135,7 +1143,7 @@
             <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
             <div class="card-content">
               <h4 data-i18n="contact-phone-title">Telepon</h4>
-              <p>+62 812-9500-1778</p>
+              <p id="contactPhone">+62 812-9500-1778</p>
             </div>
             <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
@@ -1143,7 +1151,7 @@
             <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
             <div class="card-content">
               <h4 data-i18n="contact-whatsapp-title">WhatsApp</h4>
-              <p><a href="https://wa.me/6281295001778" target="_blank" style="color:var(--accent);font-weight:600;"
+              <p><a href="https://wa.me/6281295001778" id="contactWhatsAppLink" target="_blank" style="color:var(--accent);font-weight:600;"
                   data-i18n="contact-whatsapp-link">Chat via WhatsApp</a></p>
             </div>
             <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
@@ -1152,15 +1160,48 @@
             <div class="icon-box"><i class="fas fa-clock"></i></div>
             <div class="card-content">
               <h4 data-i18n="contact-hours-title">Jam Operasional</h4>
-              <p data-i18n="contact-hours-desc">Senin - Jumat: 08:00 - 17:00 WIB<br>Sabtu: 08:00 - 12:00 WIB</p>
+              <p id="contactHours" data-i18n="contact-hours-desc">Senin - Jumat: 08:00 - 17:00 WIB<br>Sabtu: 08:00 - 12:00 WIB</p>
             </div>
             <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
-        <div class="contact-map reveal fade-left delay-200">
+        <div class="contact-map reveal fade-left delay-200" style="position: relative;">
           <iframe
             src="https://www.google.com/maps?q=PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark&hl=id&z=17&output=embed"
             allowfullscreen="" loading="lazy"></iframe>
+          
+          <!-- Custom Map Detail Card Overlay -->
+          <div class="map-overlay-container">
+            <div class="map-detail-card">
+              <div class="card-header">
+                <h3 class="card-title">PT. Mitra Abadi Sindomas</h3>
+                <div class="card-actions-top">
+                  <a href="https://www.google.com/maps?q=PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark" target="_blank" class="action-btn-mini" aria-label="View on Maps">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                </div>
+              </div>
+              <p class="card-address">
+                PERGUDANGAN GREEN SEDAYU BIZPARK, DM 11. 65, RT.3/RW.8, Kalideres, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11840, Indonesia
+              </p>
+              <div class="card-footer-row">
+                <div class="card-rating">
+                  <span class="rating-num">4.6</span>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <span class="rating-count">(12)</span>
+                </div>
+                <a href="https://www.google.com/maps/dir//PT.+Mitra+Abadi+Sindomas+Green+Sedayu+Bizpark" target="_blank" class="btn-directions" aria-label="Get Directions">
+                  <i class="fas fa-directions"></i>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1259,8 +1300,8 @@
           </div>
           <div class="footer-v-divider"></div>
           <div class="footer-company-info">
-            <h2 data-i18n="footer-company-name" class="footer-title-compact" style="color: var(--accent);">PT Mitra Abadi Sindomas</h2>
-            <p data-i18n="footer-desc">Importir dan distributor makanan minuman berkualitas tinggi <br> dengan jaminan Halal dan BPOM sejak 2016.</p>
+            <h2 data-i18n="footer-company-name" id="footerCompanyName" class="footer-title-compact" style="color: var(--accent);">PT Mitra Abadi Sindomas</h2>
+            <p data-i18n="footer-desc" id="footerDesc">Importir dan distributor makanan minuman berkualitas tinggi <br> dengan jaminan Halal dan BPOM sejak 2016.</p>
           </div>
         </div>
 
@@ -1364,30 +1405,50 @@
     }
 
     (async function loadDynamicContent() {
+      // --- Hero Banners ---
+      const heroes = await getCMSData('heroes', 'mas_heroes');
+      if (heroes && heroes.length > 0) {
+        const activeHeroes = heroes.filter(h => h.active);
+        if (activeHeroes.length > 0) {
+          try {
+            const sliderCont = document.getElementById('heroSliderContainer');
+            const miniSliderCont = document.getElementById('heroMiniSlider');
+            if (sliderCont && miniSliderCont) {
+              sliderCont.innerHTML = activeHeroes.map((h, i) => `
+                <div class="slide ${i === 0 ? 'active' : ''}">
+                  <img src="${h.imageData || h.image}" alt="${h.title}">
+                </div>
+              `).join('');
+              miniSliderCont.innerHTML = activeHeroes.map((h, i) => `
+                <div class="hero-mini-slide ${i === 0 ? 'active' : ''}">
+                  <img src="${h.imageData || h.image}" alt="${h.title}">
+                  <div class="hero-mini-info">
+                    <span class="hero-mini-counter">${i + 1} / ${activeHeroes.length}</span>
+                    <h4>${h.title}</h4>
+                    <p>Kualitas produk terbaik untuk kebutuhan Anda.</p>
+                  </div>
+                </div>
+              `).join('');
+              // Update global variables for slider logic
+              slides = sliderCont.querySelectorAll('.slide');
+              miniSlides = miniSliderCont.querySelectorAll('.hero-mini-slide');
+              slideCount = activeHeroes.length;
+              currentSlide = 0;
+              if (typeof initSliderControls === 'function') initSliderControls();
+            }
+          } catch (e) { console.error('Hero render error:', e); }
+        }
+      }
+
       // --- Company Profile ---
       const c = await getCMSData('company_info', 'mas_company_info');
       if (c) {
         try {
-          const aboutH2 = document.querySelector('.about-content h2');
-          if (aboutH2 && c.name) aboutH2.textContent = c.name;
           const aboutPs = document.querySelectorAll('.about-content > p');
           if (aboutPs[0] && c.desc1) aboutPs[0].innerHTML = c.desc1;
           if (aboutPs[1] && c.desc2) aboutPs[1].innerHTML = c.desc2;
           const aboutImg = document.querySelector('.about-image img');
           if (aboutImg && c.imageData) aboutImg.src = c.imageData;
-          if (c.features && c.features.length === 4) {
-            const featureEls = document.querySelectorAll('.about-feature');
-            c.features.forEach((f, i) => {
-              if (featureEls[i]) {
-                const icon = featureEls[i].querySelector('.icon i');
-                const h4 = featureEls[i].querySelector('h4');
-                const p = featureEls[i].querySelector('p');
-                if (icon && f.icon) icon.className = f.icon;
-                if (h4 && f.title) h4.textContent = f.title;
-                if (p && f.desc) p.textContent = f.desc;
-              }
-            });
-          }
         } catch (e) { console.error('Company render error:', e); }
       }
 
@@ -1395,76 +1456,74 @@
       const s = await getCMSData('statistics', 'mas_statistics');
       if (s) {
         try {
-          const heroStats = document.querySelectorAll('.stats-grid .stat-item');
-          if (heroStats[0] && s.heroYears) {
-            const num = heroStats[0].querySelector('.counter');
-            if (num) { num.dataset.count = s.heroYears; num.textContent = '0'; }
-          }
-          if (heroStats[1] && s.heroProducts) {
-            const num = heroStats[1].querySelector('.counter');
-            if (num) { num.dataset.count = s.heroProducts; num.textContent = '0'; }
-          }
-          if (heroStats[2] && s.heroCities) {
-            const num = heroStats[2].querySelector('.counter');
-            if (num) { num.dataset.count = s.heroCities; num.textContent = '0'; }
-          }
-          // Distribution stats
-          const distStats = document.querySelectorAll('.dist-stat-premium');
-          if (distStats[0] && s.distCities) {
-            const num = distStats[0].querySelector('.number');
-            if (num) { num.dataset.count = s.distCities; num.textContent = s.distCities; }
-          }
-          if (distStats[1] && s.distWarehouse) {
-            const num = distStats[1].querySelector('.number');
-            if (num) { num.dataset.count = s.distWarehouse; num.textContent = s.distWarehouse.toLocaleString() + '+'; }
-          }
-          if (distStats[2] && s.distSKU) {
-            const num = distStats[2].querySelector('.number');
-            if (num) { num.dataset.count = s.distSKU; num.textContent = s.distSKU + '+'; }
-          }
-          // Distribution description
-          const distHeader = document.querySelector('.distribution .section-header');
-          if (distHeader) {
-            const distPs = distHeader.querySelectorAll('p');
-            if (distPs[0] && s.distDesc1) distPs[0].textContent = s.distDesc1;
-            if (distPs[1] && s.distDesc2) distPs[1].textContent = s.distDesc2;
-          }
+          const heroStatNums = document.querySelectorAll('.hero-stats-new .stat-num');
+          if (heroStatNums[0] && s.heroYears) heroStatNums[0].dataset.count = s.heroYears;
+          if (heroStatNums[1] && s.heroProducts) heroStatNums[1].dataset.count = s.heroProducts;
+          if (heroStatNums[2] && s.heroCities) heroStatNums[2].dataset.count = s.heroCities;
+          
+          const aboutCounters = document.querySelectorAll('.about-stats-box .counter');
+          if (aboutCounters[0] && s.heroYears) aboutCounters[0].dataset.count = s.heroYears;
+          if (aboutCounters[1] && s.heroProducts) aboutCounters[1].dataset.count = s.heroProducts;
+          
+          const distVals = document.querySelectorAll('.dist-stat-premium .stat-value-premium');
+          if (distVals[0] && s.distCities) distVals[0].textContent = s.distCities;
+          if (distVals[1] && s.distWarehouse) distVals[1].textContent = s.distWarehouse.toLocaleString() + '+';
+          if (distVals[2] && s.distSKU) distVals[2].textContent = s.distSKU + '+';
+          
+          const distDesc = document.querySelector('.dist-hero-desc');
+          if (distDesc && s.distDesc1) distDesc.textContent = s.distDesc1;
         } catch (e) { console.error('Stats render error:', e); }
       }
 
       // --- Categories ---
       const cats = await getCMSData('categories', 'mas_categories');
-      if (cats) {
+      if (cats && cats.length > 0) {
         try {
-          const cards = document.querySelectorAll('.product-grid .product-card');
-          cats.forEach((c, i) => {
-            if (cards[i]) {
-              const img = cards[i].querySelector('.product-card-image img');
-              const h3 = cards[i].querySelector('.product-card-body h3');
-              const p = cards[i].querySelector('.product-card-body p');
-              if (img && (c.imageData || c.image)) img.src = c.imageData || c.image;
-              if (h3 && c.title) h3.textContent = c.title;
-              if (p && c.desc) p.textContent = c.desc;
-            }
-          });
+          const track = document.getElementById('productTrack');
+          if (track) {
+            const slideGroups = [];
+            for (let i = 0; i < cats.length; i += 4) { slideGroups.push(cats.slice(i, i + 4)); }
+            track.innerHTML = slideGroups.map(slide => `
+              <div class="product-slide ${slide.length === 1 ? 'slide-single' : slide.length === 2 ? 'slide-2' : ''}">
+                ${slide.map((cat, idx) => `
+                  <div class="product-card card-variant-${idx + 1} reveal fade-up visible" onclick="window.location.href='produk.html?filter=${cat.key}'">
+                    <div class="card-top-icon"><i class="fas fa-crown"></i></div>
+                    <div class="product-card-image">
+                      <img src="${cat.imageData || cat.image}" alt="${cat.title}">
+                      <div class="overlay"></div>
+                    </div>
+                    <div class="product-card-body">
+                      <h3>${cat.title}</h3>
+                      <p>${cat.desc}</p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `).join('');
+            if (typeof initProductSlider === 'function') setTimeout(initProductSlider, 100);
+          }
         } catch (e) { console.error('Categories render error:', e); }
       }
 
       // --- Certifications ---
       const certs = await getCMSData('certifications', 'mas_certifications');
-      if (certs) {
+      if (certs && certs.length > 0) {
         try {
-          const certCards = document.querySelectorAll('.certifications .cert-item-card');
-          certs.forEach((c, i) => {
-            if (certCards[i]) {
-              const img = certCards[i].querySelector('.cert-item-icon img');
-              const h3 = certCards[i].querySelector('.cert-item-content h3');
-              const p = certCards[i].querySelector('.cert-item-content p');
-              if (img && (c.imageData || c.image)) img.src = c.imageData || c.image;
-              if (h3 && c.title) h3.textContent = c.title;
-              if (p && c.desc) p.textContent = c.desc;
-            }
-          });
+          const certCont = document.getElementById('certificationsContainer');
+          if (certCont) {
+            certCont.innerHTML = certs.map(cert => `
+              <div class="cert-item-card">
+                <div class="cert-item-icon">
+                  <img src="${cert.imageData || cert.image}" alt="${cert.title}" class="cert-card-img">
+                </div>
+                <div class="cert-item-content">
+                  <h3>${cert.title}</h3>
+                  <p>${cert.desc}</p>
+                </div>
+                <div class="cert-item-check"><i class="fas fa-check-circle"></i></div>
+              </div>
+            `).join('');
+          }
         } catch (e) { console.error('Cert render error:', e); }
       }
 
@@ -1472,36 +1531,23 @@
       const ci = await getCMSData('contact_info', 'mas_contact_info');
       if (ci) {
         try {
-          // Address
-          const addrP = document.querySelector('.contact-info .contact-card:nth-child(1) p');
+          const addrP = document.getElementById('contactAddress');
           if (addrP && ci.address) addrP.innerHTML = ci.address.replace(/\n/g, '<br>');
-          // Phone
-          const phoneP = document.querySelector('.contact-info .contact-card:nth-child(2) p');
+          
+          const phoneP = document.getElementById('contactPhone');
           if (phoneP && ci.phone) phoneP.textContent = ci.phone;
-          // WhatsApp
-          const waLink = document.querySelector('.contact-info .contact-card:nth-child(3) a');
+          
+          const waLink = document.getElementById('contactWhatsAppLink');
           if (waLink && ci.whatsapp) waLink.href = 'https://wa.me/' + ci.whatsapp;
-          // Hours
-          const hoursP = document.querySelector('.contact-info .contact-card:nth-child(4) p');
+          
+          const hoursP = document.getElementById('contactHours');
           if (hoursP && ci.hours1) hoursP.innerHTML = ci.hours1 + (ci.hours2 ? '<br>' + ci.hours2 : '');
-          // Maps
+          
           const iframe = document.querySelector('.contact-map iframe');
           if (iframe && ci.mapsUrl) iframe.src = ci.mapsUrl;
-          // Nav CTA phone
+          
           const navCTA = document.querySelector('.nav-cta');
           if (navCTA && ci.phone) navCTA.href = 'tel:' + ci.phone.replace(/\s/g, '');
-          // Instagram links
-          if (ci.instagram) {
-            document.querySelectorAll('a[href*="instagram.com"]').forEach(a => { a.href = ci.instagram; });
-          }
-          // WhatsApp links in footer
-          if (ci.whatsapp) {
-            document.querySelectorAll('a[href*="wa.me"]').forEach(a => { a.href = 'https://wa.me/' + ci.whatsapp; });
-          }
-          // Phone links in footer
-          if (ci.phone) {
-            document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = 'tel:' + ci.phone.replace(/\s/g, ''); });
-          }
         } catch (e) { console.error('Contact render error:', e); }
       }
 
@@ -1509,13 +1555,25 @@
       const fi = await getCMSData('footer_info', 'mas_footer_info');
       if (fi) {
         try {
-          const footerDesc = document.querySelector('.footer-about p');
+          const footerCompany = document.getElementById('footerCompanyName');
+          if (footerCompany && fi.company) footerCompany.textContent = fi.company;
+          const footerDesc = document.getElementById('footerDesc');
           if (footerDesc && fi.desc) footerDesc.textContent = fi.desc;
-          const footerCopy = document.querySelector('.footer-bottom p');
-          if (footerCopy && fi.year && fi.company) {
-            footerCopy.innerHTML = `&copy; ${fi.year} ${fi.company}. All rights reserved.`;
-          }
         } catch (e) { console.error('Footer render error:', e); }
+      }
+
+      // --- Katalog ---
+      const kData = await getCMSData('katalogs', 'mas_katalogs');
+      if (kData && kData.length > 0) {
+        try {
+          const activeK = kData.find(k => k.active);
+          if (activeK) {
+            const downloadBtn = document.getElementById('btnDownloadKatalog');
+            if (downloadBtn) downloadBtn.href = 'database/asset-katalog/' + activeK.filename;
+            const modalTitle = document.querySelector('.catalog-modal-header .modal-info h3');
+            if (modalTitle) modalTitle.textContent = activeK.name;
+          }
+        } catch (e) { console.error('Katalog render error:', e); }
       }
 
       // --- Partners ---
@@ -1547,18 +1605,20 @@
             }).join('');
           }
 
-          renderPartnersSection('NATIONAL KEY ACCOUNT');
-
-          pTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-              pTabs.forEach(t => t.classList.remove('active'));
-              tab.classList.add('active');
-              renderPartnersSection(tab.dataset.category);
+          if (pGrid) {
+            const activeTab = document.querySelector('.partner-tab.active');
+            renderPartnersSection(activeTab ? activeTab.dataset.category : 'all');
+            pTabs.forEach(tab => {
+              tab.addEventListener('click', () => {
+                pTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderPartnersSection(tab.dataset.category);
+              });
             });
-          });
+          }
         } catch (e) { console.error('Partners render error:', e); }
       }
-    })();
+    })();;
 
     // Elements
     const navbar = document.getElementById('navbar');
@@ -2363,7 +2423,7 @@
 
     initSliderControls();
     initCategories();
-    initBranchSlider();
+    // Branch slider is initialized by its own self-contained script above
 
     // --- TOP SLIDER LOGIC ---
     // Top slider has been removed in favor of a parallax divider
@@ -2403,60 +2463,6 @@
     });
 
 
-
-    // --- BRANCH SLIDER LOGIC ---
-    let currentBranchIdx = 0;
-    let bCount = 0;
-    let bSlides = [];
-
-    async function initBranchSlider() {
-      const slider = document.getElementById('branchSlider');
-      if (!slider) return;
-
-      const branches = await getCMSData('branches', 'mas_branches') || [
-        { id: 1, name: 'Batam', address: 'Batam Centre, Kepulauan Riau', path: 'assets/images/mas-bangunan.jpg' },
-        { id: 2, name: 'Jakarta', address: 'Sedayu Bizpark Blok DM, Daan Mogot KM 18', path: 'assets/images/warehouse.gif' }
-      ];
-
-      bCount = branches.length;
-      if (bCount === 0) {
-        slider.innerHTML = '<div style="padding:100px;text-align:center;width:100%;color:var(--gray-400); font-family:var(--font-heading);">No warehouse data found.</div>';
-        return;
-      }
-
-      slider.innerHTML = branches.map((b, i) => `
-        <div class="branch-slide ${i === 0 ? 'active' : ''}">
-          <div class="branch-image-b2b">
-            <img src="${b.imageData || b.path}" alt="${b.name} Warehouse Branch Office" loading="lazy">
-          </div>
-          <div class="branch-overlay-info">
-            <div class="branch-counter">${i + 1} / ${bCount}</div>
-            <h3 class="branch-name">${b.name}</h3>
-            <p class="branch-address">${b.address}</p>
-          </div>
-          <div class="branch-nav-b2b">
-            <button class="branch-nav-btn" onclick="prevBranch()" title="Previous Warehouse"><i class="fas fa-arrow-left"></i></button>
-            <button class="branch-nav-btn" onclick="nextBranch()" title="Next Warehouse"><i class="fas fa-arrow-right"></i></button>
-          </div>
-        </div>
-      `).join('');
-
-      bSlides = slider.querySelectorAll('.branch-slide');
-      currentBranchIdx = 0;
-    }
-
-    function showBranch(index) {
-      if (bCount <= 1 || !bSlides[currentBranchIdx] || !bSlides[index]) return;
-
-      const prevIdx = currentBranchIdx;
-      currentBranchIdx = (index + bCount) % bCount;
-
-      bSlides[prevIdx].classList.remove('active');
-      bSlides[currentBranchIdx].classList.add('active');
-    }
-
-    function nextBranch() { showBranch(currentBranchIdx + 1); }
-    function prevBranch() { showBranch(currentBranchIdx - 1); }
 
     // Branch slider is now initialized by its own self-contained script above
 

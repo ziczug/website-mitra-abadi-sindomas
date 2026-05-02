@@ -555,14 +555,15 @@
         <div class="panel">
           <div class="panel-header">
             <h3><i class="fas fa-th"></i> Kategori Produk (Halaman Utama)</h3>
-            <button class="btn btn-gold btn-sm" onclick="saveCategories()"><i class="fas fa-save"></i> Simpan</button>
+            <button class="btn btn-gold btn-sm" onclick="openCategoryModal()"><i class="fas fa-plus"></i> Tambah Kategori</button>
           </div>
           <div class="panel-body">
             <p style="font-size:13px;color:rgba(0, 0, 0, 0.6);margin-bottom:20px">
               <i class="fas fa-info-circle" style="color:var(--accent);margin-right:4px"></i>
-              Edit judul, deskripsi, dan gambar setiap kartu kategori yang tampil di halaman utama.
+              Kelola kategori yang tampil sebagai kartu di halaman utama.
             </p>
-            <div id="categoriesEditor"></div>
+            <div class="image-manager-grid" id="categoriesGrid"></div>
+            <div class="empty-state" id="categoriesEmptyState" style="display:none"><i class="fas fa-th"></i><h3>Belum ada Kategori</h3><p>Klik "Tambah Kategori" untuk mulai.</p></div>
           </div>
         </div>
       </div>
@@ -572,14 +573,15 @@
         <div class="panel">
           <div class="panel-header">
             <h3><i class="fas fa-certificate"></i> Manajemen Sertifikasi</h3>
-            <button class="btn btn-gold btn-sm" onclick="saveCertifications()"><i class="fas fa-save"></i> Simpan</button>
+            <button class="btn btn-gold btn-sm" onclick="openCertModal()"><i class="fas fa-plus"></i> Tambah Sertifikasi</button>
           </div>
           <div class="panel-body">
             <p style="font-size:13px;color:rgba(0, 0, 0, 0.6);margin-bottom:20px">
               <i class="fas fa-info-circle" style="color:var(--accent);margin-right:4px"></i>
               Kelola kartu sertifikasi yang tampil di section "Jaminan Kualitas & Keamanan".
             </p>
-            <div id="certEditor"></div>
+            <div class="image-manager-grid" id="certGrid"></div>
+            <div class="empty-state" id="certEmptyState" style="display:none"><i class="fas fa-certificate"></i><h3>Belum ada Sertifikasi</h3><p>Klik "Tambah Sertifikasi" untuk mulai.</p></div>
           </div>
         </div>
       </div>
@@ -844,6 +846,11 @@
         <p class="form-hint" style="margin-top:4px;"><i class="fas fa-info-circle"></i> File gambar akan disimpan langsung di database browser.</p>
         <input type="hidden" id="fBranchImageData">
       </div>
+      <div class="form-group">
+        <label class="form-label">Atau Jalur File Gambar (Direkomendasikan)</label>
+        <input type="text" class="form-input" id="fBranchImagePath" placeholder="Misal: assets/images/branches/jakarta.jpg">
+        <p class="form-hint" style="font-size:12px;color:#666;margin-top:4px">Gunakan jalur file untuk performa lebih ringan. Kosongkan jika sudah upload di atas.</p>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-outline-gray" onclick="closeBranchesModal()">Batal</button>
@@ -957,6 +964,90 @@
   </div>
 </div>
 
+<!-- CATEGORY MODAL -->
+<div class="modal-overlay" id="categoriesModalManager">
+  <div class="modal limit-width" style="max-width:500px;">
+    <div class="modal-header">
+      <h3><i class="fas fa-th"></i> <span id="categoryModalTitle">Tambah Kategori</span></h3>
+      <button class="modal-close" onclick="closeCategoryModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="fCategoryId">
+      <div class="form-group">
+        <label class="form-label">Key Kategori (Slug) <span class="required">*</span></label>
+        <input type="text" class="form-input" id="fCategoryKey" placeholder="Misal: snack, biskuit, wafer">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nama Kategori <span class="required">*</span></label>
+        <input type="text" class="form-input" id="fCategoryTitle" placeholder="Misal: Makanan Ringan">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Deskripsi <span class="required">*</span></label>
+        <textarea class="form-textarea" id="fCategoryDesc" rows="3" placeholder="Deskripsi kategori..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Upload Gambar Kategori</label>
+        <div class="upload-area" id="categoryUploadArea" style="min-height: 120px; padding: 20px;">
+          <input type="file" id="fCategoryFile" accept="image/*" onchange="handleCategoryUpload(event)">
+          <div class="upload-placeholder">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Pilih file gambar atau tarik ke sini</p>
+          </div>
+          <div class="upload-preview" style="display:none;">
+            <img id="fCategoryPreview" src="" alt="Preview">
+          </div>
+        </div>
+        <input type="hidden" id="fCategoryImageData">
+        <input type="hidden" id="fCategoryImagePath">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-gray" onclick="closeCategoryModal()">Batal</button>
+      <button class="btn btn-gold" onclick="saveCategoryEntry()"><i class="fas fa-save"></i> Simpan Kategori</button>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICATION MODAL -->
+<div class="modal-overlay" id="certModalManager">
+  <div class="modal limit-width" style="max-width:500px;">
+    <div class="modal-header">
+      <h3><i class="fas fa-certificate"></i> <span id="certModalTitle">Tambah Sertifikasi</span></h3>
+      <button class="modal-close" onclick="closeCertModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="fCertId">
+      <div class="form-group">
+        <label class="form-label">Judul Sertifikasi <span class="required">*</span></label>
+        <input type="text" class="form-input" id="fCertTitle" placeholder="Misal: Sertifikat Halal">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Deskripsi <span class="required">*</span></label>
+        <textarea class="form-textarea" id="fCertDesc" rows="3" placeholder="Deskripsi sertifikasi..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Upload Icon Sertifikasi</label>
+        <div class="upload-area" id="certUploadArea" style="min-height: 120px; padding: 20px;">
+          <input type="file" id="fCertFile" accept="image/*" onchange="handleCertUpload(event)">
+          <div class="upload-placeholder">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Pilih file icon atau tarik ke sini</p>
+          </div>
+          <div class="upload-preview" style="display:none;">
+            <img id="fCertPreview" src="" alt="Preview">
+          </div>
+        </div>
+        <input type="hidden" id="fCertImageData">
+        <input type="hidden" id="fCertImagePath">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-gray" onclick="closeCertModal()">Batal</button>
+      <button class="btn btn-gold" onclick="saveCertEntry()"><i class="fas fa-save"></i> Simpan Sertifikasi</button>
+    </div>
+  </div>
+</div>
+
 <!-- NEWS MODAL -->
 <div class="modal-overlay" id="newsModalManager">
   <div class="modal wide">
@@ -1019,5 +1110,8 @@
 <div class="toast-container" id="toastContainer"></div>
 
 <script src="admin.js"></script>
-</body>
+<div id='google_translate_element' style='display:none'></div><script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script></body>
 </html>
+
+
+

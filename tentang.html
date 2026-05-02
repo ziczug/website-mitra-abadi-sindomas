@@ -9,6 +9,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="assets/js/i18n-data.js"></script>
   <script src="assets/js/i18n-engine.js"></script>
   <script src="assets/js/image-fallback.js"></script>
@@ -184,7 +185,7 @@
 
 <body>
 
-    <!-- ==================== NAVBAR ==================== -->
+  <!-- ==================== NAVBAR ==================== -->
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <nav class="navbar" id="navbar">
     <div class="container">
@@ -203,10 +204,11 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesia</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">Inggris</span>
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
               <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
@@ -226,13 +228,15 @@
           <a href="index.html#kontak" class="nav-social-item" onclick="toggleNav()" aria-label="Kontak">
             <i class="fas fa-phone-alt"></i>
           </a>
-          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item" aria-label="Instagram">
+          <a href="https://www.instagram.com/masfoodindonesia/" target="_blank" class="nav-social-item"
+            aria-label="Instagram">
             <i class="fab fa-instagram"></i>
           </a>
         </div>
       </div>
       <div class="nav-actions">
-        <a href="tel:+6281295001778" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text" data-i18n="nav-contact">Kontak</span></a>
+        <a href="index.html#kontak" class="nav-cta"><i class="fas fa-phone-alt cta-icon"></i><span class="cta-text"
+            data-i18n="nav-contact">Kontak</span></a>
         <div class="search-wrapper" id="searchWrapper">
           <button class="search-toggle" id="searchToggle" aria-label="Open Search">
             <i class="fas fa-search"></i>
@@ -240,7 +244,8 @@
           <div class="search-container" id="searchContainer">
             <div class="search-input-wrapper">
               <i class="fas fa-search search-icon-inside"></i>
-              <input type="text" placeholder="Cari produk atau merek..." id="searchInput" autocomplete="off" data-i18n="search-placeholder">
+              <input type="text" placeholder="Cari produk atau merek..." id="searchInput" autocomplete="off"
+                data-i18n="search-placeholder">
             </div>
             <div class="search-results" id="searchResults">
               <!-- Results will be injected here -->
@@ -256,10 +261,11 @@
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span data-i18n="lang-id">Indonesia</span>
+              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+                data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">Inggris</span>
+              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
               <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
@@ -276,11 +282,11 @@
   <!-- ==================== HEADER ==================== -->
   <header class="page-header">
     <div class="container">
-      <h1 class="dist-hero-title text-shine reveal fade-up" data-i18n="nav-about">Tentang Kami</h1>
+      <h1 class="dist-hero-title text-shine reveal fade-up" data-i18n="about-page-title">Tentang Kami</h1>
       <div class="page-breadcrumb reveal fade-up" style="animation-delay: 0.2s;">
-        <a href="index.html">Beranda</a>
+        <a href="index.html" data-i18n="nav-home">Beranda</a>
         <span>/</span>
-        <span>Tentang Kami</span>
+        <span data-i18n="nav-about">Tentang Kami</span>
       </div>
     </div>
   </header>
@@ -290,9 +296,11 @@
     <div class="container">
       <div class="about-intro-grid">
         <div class="about-intro-text reveal fade-right">
-          <h2>Dedikasi Kami Untuk<br><span class="gold-text">Kualitas & Keamanan</span></h2>
-          <p>PT Mitra Abadi Sindomas adalah perusahaan internasional & nasional yang bergerak di bidang perdagangan umum, ekspor, impor, dan distribusi. Sejak didirikan pada tahun 2016, visi kami tetap konsisten: menghadirkan standar kualitas pangan terbaik bagi masyarakat Indonesia.</p>
-          <p>Kami memahami bahwa kepercayaan konsumen adalah aset terpenting. Oleh karena itu, setiap produk yang kami distribusikan telah melalui kurasi ketat dan memastikan kepatuhan penuh terhadap regulasi pemerintah, termasuk sertifikasi Halal dan BPOM.</p>
+          <h2 class="dist-hero-title reveal fade-up" data-i18n="about-intro-title">Dedikasi Kami Untuk<br><span class="gold-text">Kualitas & Keamanan</span></h2>
+          <div class="about-intro-text">
+            <p class="reveal fade-up" data-i18n="about-intro-p1">PT Mitra Abadi Sindomas adalah perusahaan internasional & nasional yang bergerak di bidang perdagangan umum, ekspor, impor, dan distribusi. Sejak didirikan pada tahun 2016, visi kami tetap konsisten: menghadirkan standar kualitas pangan terbaik bagi masyarakat Indonesia.</p>
+            <p class="reveal fade-up" style="animation-delay: 0.1s;" data-i18n="about-intro-p2">Seluruh portofolio produk kami telah melewati standar keamanan pangan yang ketat dan memiliki sertifikasi resmi dari otoritas terkait (BPOM & Halal). Kami berkomitmen untuk hanya mendistribusikan produk yang aman dan bermanfaat bagi gaya hidup sehat konsumen.</p>
+          </div>
         </div>
         <div class="about-intro-image reveal fade-left">
           <img src="assets/images/banner-page/team.jpg" alt="Office">
@@ -306,20 +314,19 @@
     <div class="container">
       <div class="vm-grid">
         <!-- VISION -->
-        <div class="vm-card reveal fade-right">
+        <div class="vm-card reveal fade-up">
           <div class="vm-icon"><i class="fas fa-eye"></i></div>
-          <h3>Visi Kami</h3>
-          <p>Menjadi pemimpin pasar dalam distribusi produk makanan dan minuman impor yang inovatif, berkualitas tinggi, serta memiliki jangkauan nasional yang kuat dan terpercaya di seluruh penjuru Indonesia.</p>
+          <h3 data-i18n="about-vision-title">Visi Kami</h3>
+          <p data-i18n="about-vision-desc">Menjadi pemimpin pasar dalam distribusi produk makanan dan minuman impor yang inovatif, berkualitas tinggi, serta memiliki jangkauan nasional yang kuat dan terpercaya di seluruh penjuru Indonesia.</p>
         </div>
         <!-- MISSION -->
-        <div class="vm-card reveal fade-left">
-          <div class="vm-icon"><i class="fas fa-rocket"></i></div>
-          <h3>Misi Kami</h3>
+        <div class="vm-card reveal fade-up" style="animation-delay: 0.1s;">
+          <div class="vm-icon"><i class="fas fa-bullseye"></i></div>
+          <h3 data-i18n="about-mission-title">Misi Kami</h3>
           <ul class="mission-list">
-            <li><i class="fas fa-check-circle"></i> Membangun kemitraan strategis dengan brand global terpercaya.</li>
-            <li><i class="fas fa-check-circle"></i> Mengembangkan jaringan distribusi nasional yang efisien dan modern.</li>
-            <li><i class="fas fa-check-circle"></i> Meningkatkan kualitas SDM profesional yang berorientasi pada layanan.</li>
-            <li><i class="fas fa-check-circle"></i> Mendorong pertumbuhan mitra bisnis secara berkelanjutan.</li>
+            <li data-i18n="about-mission-1"><i class="fas fa-check-circle"></i> Membangun kemitraan strategis dengan brand internasional terbaik.</li>
+            <li data-i18n="about-mission-2"><i class="fas fa-check-circle"></i> Menjamin kualitas dan keamanan pangan melalui sertifikasi resmi.</li>
+            <li data-i18n="about-mission-3"><i class="fas fa-check-circle"></i> Mengoptimalkan jaringan distribusi ke seluruh wilayah Indonesia.</li>
           </ul>
         </div>
       </div>
@@ -377,14 +384,14 @@
           <img src="assets/images/logo.png" alt="PT Mitra Abadi Sindomas" class="fr-logo">
           <div class="fr-info">
             <h2 class="fr-title">PT Mitra Abadi Sindomas</h2>
-            <p class="fr-desc">Importir dan distributor makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.</p>
+            <p data-i18n="footer-desc">Importir dan distributor makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.</p>
             <p class="fr-address">Green Sedayu Bizpark Blok DM 11 No. 65<br>Jl. Daan Mogot Raya KM.18<br>Jakarta Barat 11840, Indonesia</p>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-red-bottom">
-      <p>© 2025 PT Mitra Abadi Sindomas. All rights reserved.</p>
+      <p>Â<span data-i18n="footer-copyright">© 2025 PT Mitra Abadi Sindomas</span>. All rights reserved.</p>
     </div>
   </footer>
 
@@ -586,14 +593,21 @@
 
 
 <script>
+    // --- NAVBAR & SEARCH LOGIC ---
     const navbar = document.getElementById('navbar');
-    const scrollTopBtn = document.getElementById('scrollTop');
     const navLinks = document.getElementById('navLinks');
     const mobileToggle = document.getElementById('mobileToggle');
     const navOverlay = document.getElementById('navOverlay');
     const navItems = document.querySelectorAll('.nav-item');
     const navIndicator = document.getElementById('navIndicator');
+    const searchWrapper = document.getElementById('searchWrapper');
+    const searchToggle = document.getElementById('searchToggle');
+    const searchContainer = document.getElementById('searchContainer');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const scrollTopBtn = document.getElementById('scrollTop');
 
+    // Scroll handler
     const checkScroll = () => {
       const scrolled = window.scrollY > 50;
       if (navbar) navbar.classList.toggle('scrolled', scrolled);
@@ -603,22 +617,15 @@
     window.addEventListener('load', checkScroll);
     checkScroll();
 
+    // Mobile nav toggle
     function toggleNav() {
-      navLinks.classList.toggle('active');
+      if (navLinks) navLinks.classList.toggle('active');
       if (mobileToggle) mobileToggle.classList.toggle('active');
-      navOverlay.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+      if (navOverlay) navOverlay.classList.toggle('active');
+      document.body.style.overflow = (navLinks && navLinks.classList.contains('active')) ? 'hidden' : '';
     }
 
-    function toggleLangDropdown(isMobile) {
-      const dd = isMobile ? document.getElementById('langDropdownMobile') : document.getElementById('langDropdown');
-      if (dd) dd.classList.toggle('active');
-    }
-
-    function openKatalog() {
-      window.location.href = 'index.html#katalog';
-    }
-
+    // Indicator logic
     function updateIndicator(indicator, el) {
       if (!indicator || !el || window.innerWidth <= 768) {
         if (indicator) indicator.style.opacity = '0';
@@ -639,11 +646,6 @@
 
     navItems.forEach(item => {
       item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
-      item.addEventListener('click', (e) => {
-        navItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        updateIndicator(navIndicator, item);
-      });
     });
 
     if (navLinks) {
@@ -651,9 +653,107 @@
         updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[0]);
       });
     }
+
+    // Language dropdown
+    function toggleLangDropdown(isMobile) {
+      const dd = isMobile ? document.getElementById('langDropdownMobile') : document.getElementById('langDropdown');
+      if (dd) dd.classList.toggle('active');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.lang-dropdown')) {
+        document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+    // Search Logic
+    let searchProducts = [];
+    function initSearchData() {
+      if (typeof Papa !== 'undefined') {
+        Papa.parse("database/produk.csv", {
+          download: true, header: true,
+          complete: (results) => {
+            searchProducts = results.data.filter(p => p.name);
+          },
+          error: () => { searchProducts = []; }
+        });
+      }
+    }
+    initSearchData();
+
+    if (searchToggle) {
+      searchToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = searchContainer.classList.toggle('active');
+        searchToggle.classList.toggle('active');
+        const icon = searchToggle.querySelector('i');
+        if (isActive) {
+          icon.classList.replace('fa-search', 'fa-times');
+          if (searchInput) searchInput.focus();
+        } else {
+          icon.classList.replace('fa-times', 'fa-search');
+          if (searchInput) searchInput.value = '';
+          if (searchResults) searchResults.innerHTML = '';
+        }
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) {
+          searchResults.innerHTML = '';
+          return;
+        }
+        const results = searchProducts.filter(p => 
+          p.name.toLowerCase().includes(query) || 
+          (p.brand && p.brand.toLowerCase().includes(query)) ||
+          (p.category && p.category.toLowerCase().includes(query))
+        ).slice(0, 5);
+
+        searchResults.innerHTML = results.map(p => `
+          <div class="search-result-item" onclick="goToProduct('${p.id}')">
+            <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img" onerror="this.src='assets/images/placeholder.png'">
+            <div class="search-result-info">
+              <span class="search-result-title">${p.name}</span>
+              <span class="search-result-meta">${p.brand || ''} • ${p.category || ''}</span>
+            </div>
+          </div>
+        `).join('');
+      });
+    }
+
+    function goToProduct(id) {
+      window.location.href = `produk.html?search=${id}`;
+    }
+
+    function closeSearch() {
+      if (searchContainer) searchContainer.classList.remove('active');
+      if (searchToggle) {
+        searchToggle.classList.remove('active');
+        const icon = searchToggle.querySelector('i');
+        if (icon) icon.classList.replace('fa-times', 'fa-search');
+      }
+      if (searchInput) searchInput.value = '';
+      if (searchResults) searchResults.innerHTML = '';
+    }
+
+    document.addEventListener('click', (e) => {
+      if (searchWrapper && !searchWrapper.contains(e.target) && searchContainer && searchContainer.classList.contains('active')) {
+        closeSearch();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSearch();
+    });
 </script>
-</body>
+<div id='google_translate_element' style='display:none'></div><script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script></body>
 </html>
+
+
+
+
 
 
 

@@ -1,10 +1,10 @@
 {
   "heroYears": 10,
-  "heroProducts": 1000000,
-  "heroCities": 34,
+  "heroProducts": 100000,
+  "heroCities": 30,
   "distCities": 3,
   "distWarehouse": 40000,
-  "distSKU": 500,
+  "distSKU": 499,
   "distDesc1": "Jaringan kantor kami tersebar di berbagai kota besar, beserta dengan gudang modern dan kendaraan logistik milik perusahaan.",
   "distDesc2": "Fasilitas gudang kami yang aman dan canggih memiliki kapasitas luas untuk penyimpanan makanan kering, ruang pendingin, serta ruang pembeku (freezer). Pengiriman produk dilakukan menggunakan kendaraan khusus yang dilengkapi fasilitas memadai untuk menjaga agar produk tetap dalam kondisi terbaik dan aman selama pengiriman."
 }
