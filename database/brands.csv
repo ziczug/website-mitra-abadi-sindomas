@@ -1,12 +1,12 @@
 id,name,category,logo
 1,"Oriental","snack",assets/logobrands/oriental.jpg
-2,"Jacker","wafer;snack",assets/logobrands/jacker.jpg
+2,"Jacker","wafer,snack",assets/logobrands/jacker.jpg
 3,"Zees","biskuit",assets/logobrands/zess.jpg
 4,"Fudo","kue",assets/logobrands/fudo.jpg
-5,"Win2","snack;kue",assets/logobrands/win2.jpg
+5,"Win2","snack,kue",assets/logobrands/win2.jpg
 6,"Ibu Mie","noodle",assets/logobrands/ibumie.jpg
 7,"Telly","noodle",assets/logobrands/telly.jpg
-8,"A-TASTE","biskuit;kue",assets/logobrands/a-taste.jpg
+8,"A-TASTE","biskuit,kue",assets/logobrands/a-taste.jpg
 9,"HUANG XIAO GU!","snack",assets/logobrands/huang-xiao-gu.jpg
 10,"MASTER JH","permen",assets/logobrands/master-jh.jpg
 11,"VEGGILICIOUS","vegelicious",assets/logobrands/veggilicious.jpg
