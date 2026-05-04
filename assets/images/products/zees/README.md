@@ -24,8 +24,8 @@ Folder ini berisi gambar produk untuk brand **Zees**.
 | 50 | Zees - Choco Chips Cookie Hazalnut 150g | `choco-chips-cookie-hazalnut150gr.png` |
 | 51 | Zees - Choco Chips Cookie Coklat 150g | `choco-chips-cookie-coklat150gr.png` |
 | 52 | Zees - Chocolate Biscuit 148g | `chocolate-biscuit148gr.png` |
-| 53 | Zees - Chocolate Sandwich Biscuit Chocolate 264.gr | `chocolate-sandwich-biscuit-chocolate264gr.png` |
-| 54 | Zees - Chocolate Sandwich Biscuit Vanilla 264.gr | `chocolate-sandwich-biscuit-vanilla264gr.png` |
+| 53 | Zees - Chocolate Sandwich Biscuit Chocolate 264.gr | `chocolate-sandwich-biscuit-chocolate264.gr.png` |
+| 54 | Zees - Chocolate Sandwich Biscuit Vanilla 264.gr | `chocolate-sandwich-biscuit-vanilla264.gr.png` |
 | 55 | Zees - Butter Cookies 115g | `butter-cookies115gr.png` |
 | 56 | Zees - Super Ring Cheese Cracker 75g | `super-ring-cheese-cracker75gr.png` |
 | 57 | Zees - Savory Crackers Original 75g | `savory-crackers-original75gr.png` |

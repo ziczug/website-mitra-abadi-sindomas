@@ -1,6 +1,6 @@
 # 🗂️ Index Gambar Produk — PT Mitra Abadi Sindomas
 
-> Generated: 4/5/2026, 17.07.15
+> Generated: 4/5/2026, 18.12.43
 
 ## Ringkasan Folder Brand
 
@@ -56,19 +56,19 @@ Folder: `assets/images/products/jacker/`
 | 15 | Jacker - Wafer Cube Hazelnut 80g | `wafer-cube-hazelnut80gr.png` |
 | 16 | Jacker - Wafer Cube Tiramisu 80g | `wafer-cube-tiramisu80gr.png` |
 | 17 | Jacker - Original Flavor Potato Crisps 100g | `original-flavor-potato-crisps100gr.png` |
-| 18 | Jacker - Barbecue Flavor Potato Chips 100g | `barbecue-flavor-potato-chips60gr.png` |
-| 19 | Jacker - Hot & Spicy Flavor Potato Chips 100g | `hot-spicy-flavor-potato-chips60gr.png` |
+| 18 | Jacker - Barbecue Flavor Potato Chips 100g | `barbecue-flavor-potato-crisps100gr.png` |
+| 19 | Jacker - Hot & Spicy Flavor Potato Chips 100g | `hot-spicy-flavor-potato-crisps100gr.png` |
 | 20 | Jacker - Cheese Flavor Potato Crisps 100g | `cheese-flavor-potato-crisps100gr.png` |
 | 21 | Jacker - Vegetable Flavor Potato Crisps 100g | `vegetable-flavor-potato-crisps100gr.png` |
 | 22 | Jacker - Sour Cream & Onion Flavor Potato Crisps 100g | `sour-cream-onion-flavor-potato-crisps100gr.png` |
 | 23 | Jacker - Tomato Flavor Potato Crisps 100g | `tomato-flavor-potato-crisps100gr.png` |
 | 24 | Jacker - Cheese Flavor Potato Crisps 60g | `cheese-flavor-potato-crisps60gr.png` |
-| 25 | Jacker - Barbecue Flavor Potato Chips 60g | `barbecue-flavor-potato-chips60gr.png` |
-| 26 | Jacker - Hot & Spicy Flavor Potato Chips 60g | `hot-spicy-flavor-potato-chips60gr.png` |
+| 25 | Jacker - Barbecue Flavor Potato Chips 60g | `barbecue-flavor-potato-crisps60gr.png` |
+| 26 | Jacker - Hot & Spicy Flavor Potato Chips 60g | `hot-spicy-flavor-potato-crisps60gr.png` |
 | 27 | Jacker - Sour Cream & Onion Flavor Potato Crisps 60g | `sour-cream-onion-flavor-potato-crisps60gr.png` |
 | 28 | Jacker - Original Flavor Potato Crisps 60g | `original-flavor-potato-crisps60gr.png` |
 | 29 | Jacker - Wavy Chips Mexican Hot Sauce 60g | `wavy-chips-mexican-hot-sauce60gr.png` |
-| 30 | Jacker - Potato Crisps Wavy Mexican Hot Sauce 110g | `wavy-chips-mexican-hot-sauce60gr.png` |
+| 30 | Jacker - Potato Crisps Wavy Mexican Hot Sauce 110g | `wavy-mexican-crips-hot-sauce-potato-crisps110gr.png` |
 | 31 | Jacker - Hot & Spicy Flavor Potato Chips 60g | `hot-spicy-flavor-potato-chips60gr.png` |
 | 32 | Jacker - Barbecue Flavor Potato Chips 60g | `barbecue-flavor-potato-chips60gr.png` |
 | 33 | Jacker - Natural Flavor Potato Chips 60g | `natural-flavor-potato-chips60gr.png` |
@@ -97,8 +97,8 @@ Folder: `assets/images/products/zees/`
 | 50 | Zees - Choco Chips Cookie Hazalnut 150g | `choco-chips-cookie-hazalnut150gr.png` |
 | 51 | Zees - Choco Chips Cookie Coklat 150g | `choco-chips-cookie-coklat150gr.png` |
 | 52 | Zees - Chocolate Biscuit 148g | `chocolate-biscuit148gr.png` |
-| 53 | Zees - Chocolate Sandwich Biscuit Chocolate 264.gr | `chocolate-sandwich-biscuit-chocolate264gr.png` |
-| 54 | Zees - Chocolate Sandwich Biscuit Vanilla 264.gr | `chocolate-sandwich-biscuit-vanilla264gr.png` |
+| 53 | Zees - Chocolate Sandwich Biscuit Chocolate 264.gr | `chocolate-sandwich-biscuit-chocolate264.gr.png` |
+| 54 | Zees - Chocolate Sandwich Biscuit Vanilla 264.gr | `chocolate-sandwich-biscuit-vanilla264.gr.png` |
 | 55 | Zees - Butter Cookies 115g | `butter-cookies115gr.png` |
 | 56 | Zees - Super Ring Cheese Cracker 75g | `super-ring-cheese-cracker75gr.png` |
 | 57 | Zees - Savory Crackers Original 75g | `savory-crackers-original75gr.png` |
@@ -289,21 +289,21 @@ Folder: `assets/images/products/mikku/`
 
 | ID | Nama Produk | File |
 |----|-------------|------|
-| 179 | MIKKU - Hokaido Fruits Juice Yogurt Flavor 300 ml | `hokaido-fruits-juice-yogurt-flavor300mlgr.png` |
-| 180 | MIKKU - Hokaido Fruits Juice Melon Flavor 300 ml | `hokaido-fruits-juice-melon-flavor300mlgr.png` |
-| 181 | MIKKU - Hokaido Fruits Juice Strawberry Flavor 300 ml | `hokaido-fruits-juice-strawberry-flavor300mlgr.png` |
-| 182 | MIKKU - Hokaido Fruits Juice Blueberry Flavor 300 ml | `hokaido-fruits-juice-blueberry-flavor300mlgr.png` |
-| 183 | MIKKU - Hokaido Fruits Juice White Grape Juice Flavoured Original 100 ml | `hokaido-fruits-juice-white-grape-juice-flavoured-original100mlgr.png` |
+| 179 | MIKKU - Hokaido Fruits Juice Yogurt Flavor 300 ml | `hokaido-fruits-juice-yogurt-flavor300 ml.png` |
+| 180 | MIKKU - Hokaido Fruits Juice Melon Flavor 300 ml | `hokaido-fruits-juice-melon-flavor300 ml.png` |
+| 181 | MIKKU - Hokaido Fruits Juice Strawberry Flavor 300 ml | `hokaido-fruits-juice-strawberry-flavor300 ml.png` |
+| 182 | MIKKU - Hokaido Fruits Juice Blueberry Flavor 300 ml | `hokaido-fruits-juice-blueberry-flavor300 ml.png` |
+| 183 | MIKKU - Hokaido Fruits Juice White Grape Juice Flavoured Original 100 ml | `hokaido-fruits-juice-white-grape-juice-flavoured-original100 ml.png` |
 
 ### 🏷️ XIDUODONG
 Folder: `assets/images/products/xiduodong/`
 
 | ID | Nama Produk | File |
 |----|-------------|------|
-| 184 | XiDuoDong Fruit Flavored Yogurt Old Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-old-yogurt-flavored50gr.png` |
-| 185 | XiDuoDong Fruit Flavored Yogurt Strawberry Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-strawberry-yogurt-flavored50gr.png` |
-| 186 | XiDuoDong Fruit Flavored Yogurt Grape Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-grape-yogurt-flavored50gr.png` |
-| 187 | XiDuoDong Fruit Flavored Yogurt Pineapple Flavored 50 | `xiduodong-fruit-flavored-yogurt-pineapple-flavored50gr.png` |
+| 184 | XiDuoDong Fruit Flavored Yogurt Old Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-old-yogurt-flavored50.png` |
+| 185 | XiDuoDong Fruit Flavored Yogurt Strawberry Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-strawberry-yogurt-flavored50.png` |
+| 186 | XiDuoDong Fruit Flavored Yogurt Grape Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-grape-yogurt-flavored50.png` |
+| 187 | XiDuoDong Fruit Flavored Yogurt Pineapple Flavored 50 | `xiduodong-fruit-flavored-yogurt-pineapple-flavored50.png` |
 
 ### 🏷️ SWECCO
 Folder: `assets/images/products/swecco/`
@@ -363,17 +363,17 @@ Folder: `assets/images/products/yamamoto-kawahiro/`
 
 | ID | Nama Produk | File |
 |----|-------------|------|
-| 223 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Lemon Flavor 16g | `sugar-free-mint-candy-lemon-flavor-16g16gr.png` |
-| 224 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 16g | `sugar-free-mint-candy-peach-flavor-16g16gr.png` |
-| 225 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 16g | `sugar-free-mint-candy-jasmine-green-grape-flavor-16g16gr.png` |
-| 226 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 16g | `sugar-free-mint-candy-watermelon-flavor-16g16gr.png` |
-| 227 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 16g | `sugar-free-mint-candy-rose-lychee-flavor-16g16gr.png` |
-| 228 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Passion Fruit Flavor 16g | `sugar-free-mint-candy-passion-fruit-flavor-16g16gr.png` |
-| 229 | YAMAMOTO KAWAHIRO - Sugar Free MintCandy Lemon Flavor 38g | `sugar-free-mintcandy-lemon-flavor-38g38gr.png` |
-| 230 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 38g | `sugar-free-mint-candy-peach-flavor-38g38gr.png` |
-| 231 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 38g | `sugar-free-mint-candy-jasmine-green-grape-flavor-38g38gr.png` |
-| 232 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 38g | `sugar-free-mint-candy-watermelon-flavor-38g38gr.png` |
-| 233 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 38g | `sugar-free-mint-candy-rose-lychee-flavor-38g38gr.png` |
+| 223 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Lemon Flavor 16g | `sugar-free-mint-candy-lemon-flavor-16g.png` |
+| 224 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 16g | `sugar-free-mint-candy-peach-flavor-16g.png` |
+| 225 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 16g | `sugar-free-mint-candy-jasmine-green-grape-flavor-16g.png` |
+| 226 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 16g | `sugar-free-mint-candy-watermelon-flavor-16g.png` |
+| 227 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 16g | `sugar-free-mint-candy-rose-lychee-flavor-16g.png` |
+| 228 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Passion Fruit Flavor 16g | `sugar-free-mint-candy-passion-fruit-flavor-16g.png` |
+| 229 | YAMAMOTO KAWAHIRO - Sugar Free MintCandy Lemon Flavor 38g | `sugar-free-mintcandy-lemon-flavor-38g.png` |
+| 230 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 38g | `sugar-free-mint-candy-peach-flavor-38g.png` |
+| 231 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 38g | `sugar-free-mint-candy-jasmine-green-grape-flavor-38g.png` |
+| 232 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 38g | `sugar-free-mint-candy-watermelon-flavor-38g.png` |
+| 233 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 38g | `sugar-free-mint-candy-rose-lychee-flavor-38g.png` |
 | 234 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Passion Fruit Flavor 38 38g | `sugar-free-mint-candy-passion-fruit-flavor-3838gr.png` |
 
 ### 🏷️ HUI XIANG ZHAI ZI
