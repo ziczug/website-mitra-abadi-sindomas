@@ -2046,7 +2046,7 @@ document.addEventListener('DOMContentLoaded', initProductCatalog);
         ).slice(0, 5);
 
         searchResults.innerHTML = results.map(p => `
-          <div class="search-result-item" onclick="goToProductGlobal('${p.id}')">
+          <div class="search-result-item" onclick="goToProduct('${p.id}')">
             <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img" onerror="this.src='assets/images/placeholder.png'">
             <div class="search-result-info">
               <span class="search-result-title">${p.name}</span>
@@ -2057,7 +2057,7 @@ document.addEventListener('DOMContentLoaded', initProductCatalog);
       });
     }
 
-    function goToProductGlobal(id) {
+    function goToProduct(id) {
       // In produk.html, we might want to just filter the current view or reload with search
       window.location.href = `produk.html?search=${id}`;
     }
