@@ -1624,6 +1624,307 @@
   }
 })();
 
+// ==========================================
+// PRODUCT CATALOG LOADER
+// ==========================================
+async function initProductCatalog() {
+  console.log('initProductCatalog: Initializing...');
+  const ITEMS_PER_PAGE = 24;
+  let allProducts = [];
+  let filteredProducts = [];
+  let visibleCount = ITEMS_PER_PAGE;
+  let currentFilter = 'all';
+  let contactNumber = '';
+
+  // 1. Fetch Contact Info
+  try {
+    const ciResp = await fetch('database/cms/contact_info.json');
+    if (ciResp.ok) { 
+      const ci = await ciResp.json(); 
+      contactNumber = ci.whatsapp || ''; 
+    }
+  } catch(e) { console.warn('initProductCatalog: Contact info fetch failed'); }
+
+  // 2. Fetch Products Data
+  try {
+    const url = `database/cms/products.json?t=${Date.now()}`;
+    console.log('initProductCatalog: Fetching from', url);
+    let resp = await fetch(url);
+    
+    // Fallback to API if direct fetch fails
+    if (!resp.ok) {
+      console.warn('initProductCatalog: Direct fetch failed, trying API fallback...');
+      resp = await fetch('/api/load?key=products');
+    }
+
+    if (resp.ok) {
+      const data = await resp.json();
+      allProducts = Array.isArray(data) ? data : [];
+      console.log('initProductCatalog: Data loaded, count =', allProducts.length);
+    } else {
+      throw new Error('All fetch attempts failed');
+    }
+  } catch (e) {
+    console.error('initProductCatalog: Load error:', e);
+    // Final fallback: LocalStorage
+    const stored = localStorage.getItem('mas_products');
+    if (stored) {
+      try { 
+        allProducts = JSON.parse(stored);
+        console.log('initProductCatalog: Loaded from localStorage, count =', allProducts.length);
+      } catch(ex) { console.error('initProductCatalog: LocalStorage parse error'); }
+    }
+  }
+
+  // 3. Validation & Persistence
+  if (Array.isArray(allProducts) && allProducts.length > 0) {
+    localStorage.setItem('mas_products', JSON.stringify(allProducts));
+  } else {
+    console.error('initProductCatalog: No products found!');
+    const grid = document.getElementById('catalogGrid');
+    if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#999;"><i class="fas fa-exclamation-circle" style="font-size:40px;margin-bottom:15px;display:block;"></i><p>Gagal memuat katalog produk. Silahkan periksa koneksi atau refresh halaman.</p></div>';
+    return;
+  }
+
+  // 4. UI Building
+  const filterTabs = document.getElementById('filterTabs');
+  if (filterTabs) {
+    const categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))].sort();
+    const existing = filterTabs.querySelectorAll('.filter-tab:not([data-filter="all"])');
+    existing.forEach(t => t.remove());
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-tab';
+      btn.dataset.filter = cat;
+      btn.innerHTML = `<i class="fas fa-tag"></i> ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
+      btn.onclick = () => setFilter(cat, btn);
+      filterTabs.appendChild(btn);
+    });
+  }
+
+  const brandSelect = document.getElementById('brandSelect');
+  if (brandSelect) {
+    const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))].sort();
+    brands.forEach(brand => {
+      const opt = document.createElement('option');
+      opt.value = brand;
+      opt.textContent = brand;
+      brandSelect.appendChild(opt);
+    });
+    brandSelect.onchange = filterProducts;
+  }
+
+  const waProduct = document.getElementById('waProduct');
+  if (waProduct) {
+    allProducts.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.name;
+      opt.dataset.image = p.image || '';
+      opt.textContent = p.name;
+      waProduct.appendChild(opt);
+    });
+  }
+
+  // Check URL params
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlFilter = urlParams.get('filter');
+  const urlSearch = urlParams.get('search');
+  if (urlFilter) currentFilter = urlFilter;
+
+  // 5. Helper Functions (Exposed to window)
+  window.setFilter = function(filterVal, el) {
+    currentFilter = filterVal;
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    if (el) el.classList.add('active');
+    else {
+      const target = document.querySelector(`.filter-tab[data-filter="${filterVal}"]`);
+      if (target) target.classList.add('active');
+    }
+    visibleCount = ITEMS_PER_PAGE;
+    filterProducts();
+    const sidebar = document.querySelector('.filter-sidebar');
+    if (sidebar && sidebar.classList.contains('active')) toggleMobileSidebar();
+  };
+
+  window.filterProducts = function() {
+    const searchInput = document.getElementById('productFilterInput');
+    const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+    const brand = document.getElementById('brandSelect') ? document.getElementById('brandSelect').value : 'all';
+    const sort = document.getElementById('sortSelect') ? document.getElementById('sortSelect').value : 'newest';
+
+    filteredProducts = allProducts.filter(p => {
+      const matchCat = currentFilter === 'all' || p.category === currentFilter;
+      const matchBrand = brand === 'all' || p.brand === brand;
+      const matchSearch = !query ||
+        (p.name && p.name.toLowerCase().includes(query)) ||
+        (p.brand && p.brand.toLowerCase().includes(query)) ||
+        (p.category && p.category.toLowerCase().includes(query));
+      return matchCat && matchBrand && matchSearch;
+    });
+
+    if (sort === 'alpha-asc') filteredProducts.sort((a,b) => (a.name||'').localeCompare(b.name||''));
+    else if (sort === 'alpha-desc') filteredProducts.sort((a,b) => (b.name||'').localeCompare(a.name||''));
+
+    visibleCount = ITEMS_PER_PAGE;
+    renderProducts();
+  };
+
+  window.showMoreProducts = function() {
+    visibleCount += ITEMS_PER_PAGE;
+    renderProducts(true);
+  };
+
+  window.renderProducts = function(append = false) {
+    const grid = document.getElementById('catalogGrid');
+    const noResults = document.getElementById('noResults');
+    const resultsInfo = document.getElementById('resultsInfo');
+    const showMoreContainer = document.getElementById('showMoreContainer');
+    if (!grid) return;
+
+    const toShow = filteredProducts.slice(0, visibleCount);
+    if (resultsInfo) resultsInfo.innerHTML = `<strong>${filteredProducts.length}</strong> produk ditemukan`;
+
+    if (filteredProducts.length === 0) {
+      grid.innerHTML = '';
+      if (noResults) noResults.style.display = 'flex';
+      if (showMoreContainer) showMoreContainer.style.display = 'none';
+      return;
+    }
+
+    if (noResults) noResults.style.display = 'none';
+    
+    grid.innerHTML = toShow.map((p, idx) => {
+      const img = p.image || 'assets/images/placeholder.png';
+      const catBadge = p.category ? `<span class="card-badge badge-${p.category}">${p.category}</span>` : '';
+      const brandEl = p.brand_logo
+        ? `<div class="card-brand"><img src="${p.brand_logo}" alt="${p.brand}" onerror="this.style.display='none'"></div>`
+        : `<div class="card-brand">${(p.brand || '?').charAt(0)}</div>`;
+      
+      return `
+        <div class="catalog-card reveal fade-up" onclick="openProductModal(${p.id})" style="--delay:${(idx % ITEMS_PER_PAGE) * 30}ms">
+          <div class="card-image">
+            ${catBadge}
+            ${brandEl}
+            <img src="${img}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+          </div>
+          <div class="card-body">
+            <h3>${p.name}</h3>
+            <p class="card-desc">${p.desc || ''}</p>
+            <div class="card-footer">
+              <span class="brand-name">${p.brand || ''}</span>
+              <span class="detail-btn"><i class="fas fa-arrow-right"></i> Detail</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    setTimeout(() => {
+      grid.querySelectorAll('.catalog-card').forEach((c, i) => {
+        setTimeout(() => c.classList.add('visible'), i * 30);
+      });
+    }, 50);
+
+    if (showMoreContainer) showMoreContainer.style.display = filteredProducts.length > visibleCount ? 'flex' : 'none';
+  };
+
+  window.openProductModal = function(id) {
+    const p = allProducts.find(x => x.id === id);
+    if (!p) return;
+    const modal = document.getElementById('productModal');
+    if (!modal) return;
+
+    const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || '-'; };
+    const setHTML = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val || '-'; };
+    
+    const logoContainer = document.getElementById('modalBrandLogoContainer');
+    if (logoContainer) logoContainer.innerHTML = p.brand_logo ? `<img src="${p.brand_logo}" alt="${p.brand}" onerror="this.style.display='none'">` : '';
+    
+    const imgContainer = document.getElementById('modalMainImgContainer');
+    if (imgContainer) imgContainer.innerHTML = `<img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" style="max-height:240px;max-width:100%;object-fit:contain;" onerror="this.src='assets/images/placeholder.png'">`;
+
+    const catPill = document.getElementById('modalCategoryPill');
+    if (catPill) catPill.textContent = p.category || '';
+
+    setEl('modalBrandName', p.brand);
+    setHTML('modalDesc', p.desc);
+    setEl('specAsal', p.origin);
+    setEl('specBerat', p.weight);
+    setEl('specSertifikasi', p.cert);
+    setEl('specKategori', p.category);
+    setHTML('modalInfo', p.info);
+
+    const waBtn = document.getElementById('modalWaBtn');
+    if (waBtn) {
+      const num = contactNumber || '6281234567890';
+      const msg = encodeURIComponent(`Halo, saya tertarik dengan produk: ${p.name} (${p.brand}). Mohon info lebih lanjut.`);
+      waBtn.onclick = () => window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeModal = function() {
+    const modal = document.getElementById('productModal');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  window.resetFilters = function() {
+    currentFilter = 'all';
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === 'all'));
+    const bs = document.getElementById('brandSelect'); if (bs) bs.value = 'all';
+    const pi = document.getElementById('productFilterInput'); if (pi) pi.value = '';
+    const ss = document.getElementById('sortSelect'); if (ss) ss.value = 'newest';
+    visibleCount = ITEMS_PER_PAGE;
+    filterProducts();
+  };
+
+  window.updateProductPreview = function() {
+    const sel = document.getElementById('waProduct');
+    const img = document.getElementById('waProductImg');
+    const ph = document.getElementById('waProductPlaceholder');
+    if (!sel || !img || !ph) return;
+    const opt = sel.options[sel.selectedIndex];
+    const src = opt && opt.dataset.image;
+    if (src) { img.src = src; img.style.display = 'block'; ph.style.display = 'none'; }
+    else { img.style.display = 'none'; ph.style.display = 'block'; }
+  };
+
+  window.toggleMobileSidebar = function() {
+    const sidebar = document.querySelector('.filter-sidebar');
+    if (sidebar) sidebar.classList.toggle('active');
+  };
+
+  window.scrollTabs = function(amount) {
+    const tabs = document.getElementById('filterTabs');
+    if (tabs) tabs.scrollBy({ left: amount, behavior: 'smooth' });
+  };
+
+  // Close modal on overlay click
+  const modalEl = document.getElementById('productModal');
+  if (modalEl) modalEl.addEventListener('click', e => { if (e.target === modalEl) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Initial Filter & Search
+  if (urlSearch) {
+    const searchInput = document.getElementById('productFilterInput');
+    if (searchInput) searchInput.value = urlSearch;
+  }
+  
+  if (urlFilter) {
+    setFilter(urlFilter, null);
+  } else {
+    filterProducts();
+  }
+}
+
+// Start Initialization
+document.addEventListener('DOMContentLoaded', initProductCatalog);
+
+
+
 // Elements
 
     // --- NAVBAR & SEARCH LOGIC ---

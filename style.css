@@ -1737,6 +1737,7 @@ section {
   margin: 0 !important;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2786,6 +2787,7 @@ section {
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -7717,3 +7719,28 @@ section {
   .footer-red-content { padding: 50px 30px; } 
   .footer-red-text .fr-title { font-size: 36px; } 
 }
+
+/* ==================== HIDE GOOGLE TRANSLATE BANNER ==================== */
+/* Menghilangkan toolbar Google Translate yang muncul di atas halaman */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-menu-value,
+.goog-te-gadget-icon,
+#google_translate_element {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+

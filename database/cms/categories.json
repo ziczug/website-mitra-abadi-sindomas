@@ -48,14 +48,6 @@
     "imageData": ""
   },
   {
-    "key": "condiments",
-    "title": "Condiments & Sauces",
-    "icon": "fas fa-bottle-droplet",
-    "desc": "Saus, bumbu, dan bahan pelengkap makanan untuk menambah citarasa.",
-    "image": "assets/images/condiments.png",
-    "imageData": ""
-  },
-  {
     "key": "noodle",
     "title": "Instant Noodle",
     "icon": "fas fa-bowl-food",
@@ -77,6 +69,13 @@
     "icon": "fas fa-ice-cream",
     "desc": "Berbagai produk pudding premium dengan rasa yang lezat dan menyegarkan.",
     "image": "assets/images/pudding.png",
+    "imageData": ""
+  },
+  {
+    "key": "condiments",
+    "title": "Snack & Condiments",
+    "desc": "Snack, bumbu, dan bahan pelengkap makanan untuk menambah citarasa.",
+    "image": "assets/images/condiments.png",
     "imageData": ""
   }
 ]

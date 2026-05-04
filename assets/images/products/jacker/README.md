@@ -6,27 +6,27 @@ Folder ini berisi gambar produk untuk brand **Jacker**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 14 | Wafer Cube Coklat | `wafer-cube-coklat80gr.png` |
-| 15 | Wafer Cube Hazelnut | `wafer-cube-hazelnut80gr.png` |
-| 16 | Wafer Cube Tiramisu | `wafer-cube-tiramisu80gr.png` |
-| 17 | Original Flavor Potato Crisps | `original-flavor-potato-crisps100gr.png` |
-| 18 | Barbecue Flavor Potato Crisps | `barbecue-flavor-potato-crisps100gr.png` |
-| 19 | Hot & Spicy Flavor Potato Crisps | `hot-spicy-flavor-potato-crisps100gr.png` |
-| 20 | Cheese Flavor Potato Crisps | `cheese-flavor-potato-crisps100gr.png` |
-| 21 | Vegetable Flavor Potato Crisps | `vegetable-flavor-potato-crisps100gr.png` |
-| 22 | Sour Cream & Onion Flavor Potato Crisps | `sour-cream-onion-flavor-potato-crisps100gr.png` |
-| 23 | Tomato Flavor Potato Crisps | `tomato-flavor-potato-crisps100gr.png` |
-| 24 | Cheese Flavor Potato Crisps | `cheese-flavor-potato-crisps60gr.png` |
-| 25 | Barbecue Flavor Potato Crisps | `barbecue-flavor-potato-crisps60gr.png` |
-| 26 | Hot & Spicy Flavor Potato Crisps | `hot-spicy-flavor-potato-crisps60gr.png` |
-| 27 | Sour Cream & Onion Flavor Potato Crisps | `sour-cream-onion-flavor-potato-crisps60gr.png` |
-| 28 | Original Flavor Potato Crisps | `original-flavor-potato-crisps60gr.png` |
-| 29 | Wavy Chips Mexican Hot Sauce | `wavy-chips-mexican-hot-sauce60gr.png` |
-| 30 | Potato Crisps Wavy Mexican Hot Sauce | `wavy-mexican-crips-hot-sauce-potato-crisps110gr.png` |
-| 31 | Hot & Spicy Flavor Potato Chips | `hot-spicy-flavor-potato-chips60gr.png` |
-| 32 | Barbecue Flavor Potato Chips | `barbecue-flavor-potato-chips60gr.png` |
-| 33 | Natural Flavor Potato Chips | `natural-flavor-potato-chips60gr.png` |
-| 34 | Spicy Mala Hot Pot Flavor Potato Chips | `spicy-mala-hot-pot-flavor-potato-chips60gr.png` |
+| 14 | Jacker - Wafer Cube Coklat 80g | `wafer-cube-coklat80gr.png` |
+| 15 | Jacker - Wafer Cube Hazelnut 80g | `wafer-cube-hazelnut80gr.png` |
+| 16 | Jacker - Wafer Cube Tiramisu 80g | `wafer-cube-tiramisu80gr.png` |
+| 17 | Jacker - Original Flavor Potato Crisps 100g | `original-flavor-potato-crisps100gr.png` |
+| 18 | Jacker - Barbecue Flavor Potato Chips 100g | `barbecue-flavor-potato-chips60gr.png` |
+| 19 | Jacker - Hot & Spicy Flavor Potato Chips 100g | `hot-spicy-flavor-potato-chips60gr.png` |
+| 20 | Jacker - Cheese Flavor Potato Crisps 100g | `cheese-flavor-potato-crisps100gr.png` |
+| 21 | Jacker - Vegetable Flavor Potato Crisps 100g | `vegetable-flavor-potato-crisps100gr.png` |
+| 22 | Jacker - Sour Cream & Onion Flavor Potato Crisps 100g | `sour-cream-onion-flavor-potato-crisps100gr.png` |
+| 23 | Jacker - Tomato Flavor Potato Crisps 100g | `tomato-flavor-potato-crisps100gr.png` |
+| 24 | Jacker - Cheese Flavor Potato Crisps 60g | `cheese-flavor-potato-crisps60gr.png` |
+| 25 | Jacker - Barbecue Flavor Potato Chips 60g | `barbecue-flavor-potato-chips60gr.png` |
+| 26 | Jacker - Hot & Spicy Flavor Potato Chips 60g | `hot-spicy-flavor-potato-chips60gr.png` |
+| 27 | Jacker - Sour Cream & Onion Flavor Potato Crisps 60g | `sour-cream-onion-flavor-potato-crisps60gr.png` |
+| 28 | Jacker - Original Flavor Potato Crisps 60g | `original-flavor-potato-crisps60gr.png` |
+| 29 | Jacker - Wavy Chips Mexican Hot Sauce 60g | `wavy-chips-mexican-hot-sauce60gr.png` |
+| 30 | Jacker - Potato Crisps Wavy Mexican Hot Sauce 110g | `wavy-chips-mexican-hot-sauce60gr.png` |
+| 31 | Jacker - Hot & Spicy Flavor Potato Chips 60g | `hot-spicy-flavor-potato-chips60gr.png` |
+| 32 | Jacker - Barbecue Flavor Potato Chips 60g | `barbecue-flavor-potato-chips60gr.png` |
+| 33 | Jacker - Natural Flavor Potato Chips 60g | `natural-flavor-potato-chips60gr.png` |
+| 34 | Jacker - Spicy Mala Hot Pot Flavor Potato Chips 60g | `spicy-mala-hot-pot-flavor-potato-chips60gr.png` |
 
 ## 📌 Panduan Upload
 

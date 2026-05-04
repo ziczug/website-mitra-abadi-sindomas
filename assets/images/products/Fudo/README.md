@@ -6,16 +6,16 @@ Folder ini berisi gambar produk untuk brand **Fudo**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 58 | Layer Cake Chocolate | `layer-cake-chocolate14gr.png` |
-| 59 | Layer Cake Banana | `layer-cake-banana14gr.png` |
-| 60 | Layer Cake Pandan | `layer-cake-pandan14gr.png` |
-| 61 | Layer Cake Strawberry | `layer-cake-strawberry14gr.png` |
-| 62 | Layer Cake Butter | `layer-cake-butter14gr.png` |
-| 63 | Swissroll Chocolate | `swissroll-chocolate18gr.png` |
-| 64 | Swissroll Pandan | `swissroll-pandan18gr.png` |
-| 65 | Swissroll Strawberry | `swissroll-strawberry18gr.png` |
-| 66 | Swissroll Tiramisu | `swissroll-tiramisu18gr.png` |
-| 67 | Swissroll Butter | `swissroll-butter18gr.png` |
+| 58 | Fudo - Layer Cake Chocolate 14g | `layer-cake-chocolate14gr.png` |
+| 59 | Fudo - Layer Cake Banana 14g | `layer-cake-banana14gr.png` |
+| 60 | Fudo - Layer Cake Pandan 14g | `layer-cake-pandan14gr.png` |
+| 61 | Fudo - Layer Cake Strawberry 14g | `layer-cake-strawberry14gr.png` |
+| 62 | Fudo - Layer Cake Butter 14g | `layer-cake-butter14gr.png` |
+| 63 | Fudo - Swissroll Chocolate 18g | `swissroll-chocolate18gr.png` |
+| 64 | Fudo - Swissroll Pandan 18g | `swissroll-pandan18gr.png` |
+| 65 | Fudo - Swissroll Strawberry 18g | `swissroll-strawberry18gr.png` |
+| 66 | Fudo - Swissroll Tiramisu 18g | `swissroll-tiramisu18gr.png` |
+| 67 | Fudo - Swissroll Butter 18g | `swissroll-butter18gr.png` |
 
 ## 📌 Panduan Upload
 

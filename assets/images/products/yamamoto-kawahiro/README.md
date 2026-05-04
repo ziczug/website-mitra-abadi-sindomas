@@ -6,18 +6,18 @@ Folder ini berisi gambar produk untuk brand **YAMAMOTO KAWAHIRO**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 223 | Sugar Free Mint Candy Lemon Flavor 16g | `sugar-free-mint-candy-lemon-flavor-16g16gr.png` |
-| 224 | Sugar Free Mint Candy Peach Flavor 16g | `sugar-free-mint-candy-peach-flavor-16g16gr.png` |
-| 225 | Sugar Free Mint Candy Jasmine Green Grape Flavor 16g | `sugar-free-mint-candy-jasmine-green-grape-flavor-16g16gr.png` |
-| 226 | Sugar Free Mint Candy Watermelon Flavor 16g | `sugar-free-mint-candy-watermelon-flavor-16g16gr.png` |
-| 227 | Sugar Free Mint Candy Rose Lychee Flavor 16g | `sugar-free-mint-candy-rose-lychee-flavor-16g16gr.png` |
-| 228 | Sugar Free Mint Candy Passion Fruit Flavor 16g | `sugar-free-mint-candy-passion-fruit-flavor-16g16gr.png` |
-| 229 | Sugar Free MintCandy Lemon Flavor 38g | `sugar-free-mintcandy-lemon-flavor-38g38gr.png` |
-| 230 | Sugar Free Mint Candy Peach Flavor 38g | `sugar-free-mint-candy-peach-flavor-38g38gr.png` |
-| 231 | Sugar Free Mint Candy Jasmine Green Grape Flavor 38g | `sugar-free-mint-candy-jasmine-green-grape-flavor-38g38gr.png` |
-| 232 | Sugar Free Mint Candy Watermelon Flavor 38g | `sugar-free-mint-candy-watermelon-flavor-38g38gr.png` |
-| 233 | Sugar Free Mint Candy Rose Lychee Flavor 38g | `sugar-free-mint-candy-rose-lychee-flavor-38g38gr.png` |
-| 234 | Sugar Free Mint Candy Passion Fruit Flavor 38 | `sugar-free-mint-candy-passion-fruit-flavor-3838gr.png` |
+| 223 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Lemon Flavor 16g | `sugar-free-mint-candy-lemon-flavor-16g16gr.png` |
+| 224 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 16g | `sugar-free-mint-candy-peach-flavor-16g16gr.png` |
+| 225 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 16g | `sugar-free-mint-candy-jasmine-green-grape-flavor-16g16gr.png` |
+| 226 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 16g | `sugar-free-mint-candy-watermelon-flavor-16g16gr.png` |
+| 227 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 16g | `sugar-free-mint-candy-rose-lychee-flavor-16g16gr.png` |
+| 228 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Passion Fruit Flavor 16g | `sugar-free-mint-candy-passion-fruit-flavor-16g16gr.png` |
+| 229 | YAMAMOTO KAWAHIRO - Sugar Free MintCandy Lemon Flavor 38g | `sugar-free-mintcandy-lemon-flavor-38g38gr.png` |
+| 230 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Peach Flavor 38g | `sugar-free-mint-candy-peach-flavor-38g38gr.png` |
+| 231 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Jasmine Green Grape Flavor 38g | `sugar-free-mint-candy-jasmine-green-grape-flavor-38g38gr.png` |
+| 232 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Watermelon Flavor 38g | `sugar-free-mint-candy-watermelon-flavor-38g38gr.png` |
+| 233 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Rose Lychee Flavor 38g | `sugar-free-mint-candy-rose-lychee-flavor-38g38gr.png` |
+| 234 | YAMAMOTO KAWAHIRO - Sugar Free Mint Candy Passion Fruit Flavor 38 38g | `sugar-free-mint-candy-passion-fruit-flavor-3838gr.png` |
 
 ## 📌 Panduan Upload
 

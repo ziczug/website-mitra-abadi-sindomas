@@ -6,26 +6,26 @@ Folder ini berisi gambar produk untuk brand **VETRUE**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 148 | Weikesu Cheese Flavor | `weikesu-cheese-flavor66gr.png` |
-| 149 | Waikesu Durian Flavor | `waikesu-durian-flavor66gr.png` |
-| 150 | Waikesu Strawberry Flavor | `waikesu-strawberry-flavor66gr.png` |
-| 151 | Taiwan Rice Cracker Salted Egg Yolk | `taiwan-rice-cracker-salted-egg-yolk116gr.png` |
-| 152 | Taiwan Rice Cracker Salted Cheese Flavor | `taiwan-rice-cracker-salted-cheese-flavor116gr.png` |
-| 153 | Rice Cracker Japanese Salted Egg Yolk Flavor | `rice-cracker-japanese-salted-egg-yolk-flavor300gr.png` |
-| 154 | Rice Cracker Japanese Vegetable Flavor | `rice-cracker-japanese-vegetable-flavor300gr.png` |
-| 155 | Rice Cracker Japanese Spicy Crayfish Flavor | `rice-cracker-japanese-spicy-crayfish-flavor300gr.png` |
-| 156 | Taiwan Rice Crackers Egg Yolk Flavor | `taiwan-rice-crackers-egg-yolk-flavor320gr.png` |
-| 157 | Taiwan Rice Crackers Cheese Flavor | `taiwan-rice-crackers-cheese-flavor320gr.png` |
-| 158 | Rice Cake Vegetable Flavor | `rice-cake-vegetable-flavor65gr.png` |
-| 159 | Rice Cake Egg Yolk Flavor | `rice-cake-egg-yolk-flavor65gr.png` |
-| 160 | Rice Cake Cheese Flavor | `rice-cake-cheese-flavor65gr.png` |
-| 161 | Rice Crackers Cheese Flavor | `rice-crackers-cheese-flavor220gr.png` |
-| 162 | Rice Crackers Salted Egg Flavor | `rice-crackers-salted-egg-flavor220gr.png` |
-| 163 | Rice Crackers Vegetable Flavor | `rice-crackers-vegetable-flavor220gr.png` |
-| 164 | Snow Cracker Original Flavor | `snow-cracker-original-flavor115gr.png` |
-| 165 | Rice Cracker Original Flavor | `rice-cracker-original-flavor108gr.png` |
-| 166 | Rice Cracker Seaweed Flavor | `rice-cracker-seaweed-flavor108gr.png` |
-| 167 | Rice Cracker Cheese Flavor | `rice-cracker-cheese-flavor108gr.png` |
+| 148 | VETRUE - Weikesu Cheese Flavor 66g | `weikesu-cheese-flavor66gr.png` |
+| 149 | VETRUE - Weikesu Durian Flavor 66g | `weikesu-durian-flavor66gr.png` |
+| 150 | VETRUE - Weikesu Strawberry Flavor 66g | `weikesu-strawberry-flavor66gr.png` |
+| 151 | VETRUE - Taiwan Rice Cracker Salted Egg Yolk 116g | `taiwan-rice-cracker-salted-egg-yolk116gr.png` |
+| 152 | VETRUE - Taiwan Rice Cracker Salted Cheese Flavor 116g | `taiwan-rice-cracker-salted-cheese-flavor116gr.png` |
+| 153 | VETRUE - Rice Cracker Japanese Salted Egg Yolk Flavor 300g | `rice-cracker-japanese-salted-egg-yolk-flavor300gr.png` |
+| 154 | VETRUE - Rice Cracker Japanese Vegetable Flavor 300g | `rice-cracker-japanese-vegetable-flavor300gr.png` |
+| 155 | VETRUE - Rice Cracker Japanese Spicy Crayfish Flavor 300g | `rice-cracker-japanese-spicy-crayfish-flavor300gr.png` |
+| 156 | VETRUE - Taiwan Rice Crackers Egg Yolk Flavor 320g | `taiwan-rice-crackers-egg-yolk-flavor320gr.png` |
+| 157 | VETRUE - Taiwan Rice Crackers Cheese Flavor 320g | `taiwan-rice-crackers-cheese-flavor320gr.png` |
+| 158 | VETRUE - Rice Cake Vegetable Flavor 65g | `rice-cake-vegetable-flavor65gr.png` |
+| 159 | VETRUE - Rice Cake Egg Yolk Flavor 65g | `rice-cake-egg-yolk-flavor65gr.png` |
+| 160 | VETRUE - Rice Cake Cheese Flavor 65g | `rice-cake-cheese-flavor65gr.png` |
+| 161 | VETRUE - Rice Crackers Cheese Flavor 220g | `rice-crackers-cheese-flavor220gr.png` |
+| 162 | VETRUE - Rice Crackers Salted Egg Flavor 220g | `rice-crackers-salted-egg-flavor220gr.png` |
+| 163 | VETRUE - Rice Crackers Vegetable Flavor 220g | `rice-crackers-vegetable-flavor220gr.png` |
+| 164 | VETRUE - Snow Cracker Original Flavor 115g | `snow-cracker-original-flavor115gr.png` |
+| 165 | VETRUE - Rice Cracker Original Flavor 108g | `rice-cracker-original-flavor108gr.png` |
+| 166 | VETRUE - Rice Cracker Seaweed Flavor 108g | `rice-cracker-seaweed-flavor108gr.png` |
+| 167 | VETRUE - Rice Cracker Cheese Flavor 108g | `rice-cracker-cheese-flavor108gr.png` |
 
 ## 📌 Panduan Upload
 

@@ -19,7 +19,17 @@ echo %ESC%%cyan%  %ESC%%bold%MITRA ABADI SINDOMAS%ESC%%reset%%ESC%%cyan% - DEVEL
 echo %ESC%%cyan%============================================================%ESC%%reset%
 echo.
 
-:: 1. Verifikasi node_modules
+:: 1. Sinkronisasi Git (Pull terbaru)
+echo %ESC%%cyan%[1/4] Sinkronisasi data dari GitHub...%ESC%%reset%
+git pull origin main
+IF %ERRORLEVEL% NEQ 0 (
+    echo %ESC%%yellow%[!] Warning: Gagal menarik data terbaru. Mungkin ada konflik atau masalah koneksi.%ESC%%reset%
+) ELSE (
+    echo %ESC%%green%[+] Sinkronisasi repository berhasil.%ESC%%reset%
+)
+echo.
+
+:: 2. Verifikasi node_modules
 IF NOT EXIST "node_modules\" (
     echo %ESC%%yellow%[!] node_modules tidak ditemukan. Menginstal dependensi...%ESC%%reset%
     call npm install
@@ -32,8 +42,8 @@ IF NOT EXIST "node_modules\" (
     echo.
 )
 
-:: 2. Otomatisasi Sinkronisasi CMS sebelum Start
-echo %ESC%%cyan%[1/2] Menyiapkan data CMS...%ESC%%reset%
+:: 3. Otomatisasi Sinkronisasi CMS & Folder
+echo %ESC%%cyan%[3/4] Menyiapkan data CMS & Folder Produk...%ESC%%reset%
 IF EXIST "sync_cms.js" (
     node sync_cms.js
     IF %ERRORLEVEL% NEQ 0 (
@@ -41,13 +51,20 @@ IF EXIST "sync_cms.js" (
     ) ELSE (
         echo %ESC%%green%[+] Data CMS terbaru berhasil dimuat.%ESC%%reset%
     )
-) ELSE (
-    echo %ESC%%yellow%[!] sync_cms.js tidak ditemukan, melewati langkah ini...%ESC%%reset%
+)
+
+IF EXIST "setup_brand_folders.js" (
+    node setup_brand_folders.js
+    IF %ERRORLEVEL% NEQ 0 (
+        echo %ESC%%yellow%[!] Tips: Setup folder brand gagal.%ESC%%reset%
+    ) ELSE (
+        echo %ESC%%green%[+] Folder brand sudah siap.%ESC%%reset%
+    )
 )
 echo.
 
-:: 3. Jalankan Server
-echo %ESC%%cyan%[2/2] Menjalankan Vite Server...%ESC%%reset%
+:: 4. Jalankan Server
+echo %ESC%%cyan%[4/4] Menjalankan Vite Server...%ESC%%reset%
 echo %ESC%%cyan%------------------------------------------------------------%ESC%%reset%
 echo.
 
@@ -60,3 +77,4 @@ echo %ESC%%cyan%------------------------------------------------------------%ESC
 echo %ESC%%yellow%[!] Server telah dihentikan.%ESC%%reset%
 echo.
 pause
+

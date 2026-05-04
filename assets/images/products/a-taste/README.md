@@ -6,20 +6,20 @@ Folder ini berisi gambar produk untuk brand **A-TASTE**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 117 | Good Vita Natural Oat Cracker | `good-vita-natural-oat-cracker380gr.png` |
-| 118 | Good Vita Natural Oat Cracker Black Sesame | `good-vita-natural-oat-cracker-black-sesame380gr.png` |
-| 119 | Good Vita Natural Oat Cracker No Sugar | `good-vita-natural-oat-cracker-no-sugar380gr.png` |
-| 120 | Sesame Pastry | `sesame-pastry260gr.png` |
-| 121 | Almond Pastry | `almond-pastry260gr.png` |
-| 122 | Potato Stick Original | `potato-stick-original170gr.png` |
-| 123 | Potato Stick Seaweed | `potato-stick-seaweed170gr.png` |
-| 124 | Soda Health Daily Original | `soda-health-daily-original240gr.png` |
-| 125 | Soda Health Daily Seaweed | `soda-health-daily-seaweed240gr.png` |
-| 126 | Potato Cracker Tomato | `potato-cracker-tomato238gr.png` |
-| 127 | Potato Cracker Original | `potato-cracker-original238gr.png` |
-| 128 | Multi-Grain High Fiber | `multi-grain-high-fiber160gr.png` |
-| 129 | Multi-Grain Sea Salt Flavor | `multi-grain-sea-salt-flavor160gr.png` |
-| 130 | Multi-Grain Chia Seed | `multi-grain-chia-seed160gr.png` |
+| 117 | A-TASTE - Good Vita Natural Oat Cracker 380g | `good-vita-natural-oat-cracker380gr.png` |
+| 118 | A-TASTE - Good Vita Natural Oat Cracker Black Sesame 380g | `good-vita-natural-oat-cracker-black-sesame380gr.png` |
+| 119 | A-TASTE - Good Vita Natural Oat Cracker No Sugar 380g | `good-vita-natural-oat-cracker-no-sugar380gr.png` |
+| 120 | A-TASTE - Sesame Pastry 260g | `sesame-pastry260gr.png` |
+| 121 | A-TASTE - Almond Pastry 260g | `almond-pastry260gr.png` |
+| 122 | A-TASTE - Potato Stick Original 170g | `potato-stick-original170gr.png` |
+| 123 | A-TASTE - Potato Stick Seaweed 170g | `potato-stick-seaweed170gr.png` |
+| 124 | A-TASTE - Soda Health Daily Original 240g | `soda-health-daily-original240gr.png` |
+| 125 | A-TASTE - Soda Health Daily Seaweed 240g | `soda-health-daily-seaweed240gr.png` |
+| 126 | A-TASTE - Potato Cracker Tomato 238g | `potato-cracker-tomato238gr.png` |
+| 127 | A-TASTE - Potato Cracker Original 238g | `potato-cracker-original238gr.png` |
+| 128 | A-TASTE - Multi-Grain High Fiber 160g | `multi-grain-high-fiber160gr.png` |
+| 129 | A-TASTE - Multi-Grain Sea Salt Flavor 160g | `multi-grain-sea-salt-flavor160gr.png` |
+| 130 | A-TASTE - Multi-Grain Chia Seed 160g | `multi-grain-chia-seed160gr.png` |
 
 ## 📌 Panduan Upload
 

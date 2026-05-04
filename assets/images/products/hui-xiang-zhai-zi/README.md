@@ -6,10 +6,10 @@ Folder ini berisi gambar produk untuk brand **HUI XIANG ZHAI ZI**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 241 | Q-Jin Dried Tofu Barbeque Flavor | `q-jin-dried-tofu-barbeque-flavor25gr.png` |
-| 242 | La Si Dried Tofu Barbeque Flavor | `la-si-dried-tofu-barbeque-flavor25gr.png` |
-| 243 | La Si Dried Tofu Spicy Flavor | `la-si-dried-tofu-spicy-flavor25gr.png` |
-| 244 | La Si Dried Tofu Peppercorn Flavor | `la-si-dried-tofu-peppercorn-flavor25gr.png` |
+| 241 | HUI XIANG ZHAI ZI - Q-Jin Dried Tofu Barbeque Flavor 25g | `q-jin-dried-tofu-barbeque-flavor25gr.png` |
+| 242 | HUI XIANG ZHAI ZI - La Si Dried Tofu Barbeque Flavor 25g | `la-si-dried-tofu-barbeque-flavor25gr.png` |
+| 243 | HUI XIANG ZHAI ZI - La Si Dried Tofu Spicy Flavor 25g | `la-si-dried-tofu-spicy-flavor25gr.png` |
+| 244 | HUI XIANG ZHAI ZI - La Si Dried Tofu Peppercorn Flavor 25g | `la-si-dried-tofu-peppercorn-flavor25gr.png` |
 
 ## 📌 Panduan Upload
 
