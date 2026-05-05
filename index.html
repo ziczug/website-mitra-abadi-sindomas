@@ -2378,8 +2378,16 @@
 
       let cats = null;
       try {
-        const resp = await fetch('database/cms/categories.json');
-        if (resp.ok) cats = await resp.json();
+        const apiResp = await fetch(`/api/load-all?t=${Date.now()}`).catch(() => ({ ok: false }));
+        if (apiResp.ok) {
+          const allData = await apiResp.json();
+          cats = Array.isArray(allData.categories) ? allData.categories : null;
+        }
+
+        if (!cats) {
+          const fileResp = await fetch('database/cms/categories.json').catch(() => ({ ok: false }));
+          if (fileResp.ok) cats = await fileResp.json();
+        }
       } catch (e) { }
 
       if (!cats) {

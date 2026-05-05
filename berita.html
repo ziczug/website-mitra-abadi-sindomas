@@ -1666,17 +1666,22 @@
     async function loadNewsData() {
       console.log('loadNewsData started');
       try {
-        const resp = await fetch(`database/cms/news.json?t=${Date.now()}`);
-        console.log('Fetch response status:', resp.status);
-        if (resp.ok) {
-          newsItems = await resp.json();
-          console.log('Loaded newsItems count from JSON:', Array.isArray(newsItems) ? newsItems.length : 'not an array');
-          if (!Array.isArray(newsItems)) newsItems = [];
-        } else {
-          console.warn('Fetch failed with status:', resp.status);
+        const apiResp = await fetch(`/api/load-all?t=${Date.now()}`).catch(() => ({ ok: false }));
+        if (apiResp.ok) {
+          const allData = await apiResp.json();
+          newsItems = Array.isArray(allData.news) ? allData.news : [];
+          console.log('loadNewsData: Loaded from API, count =', newsItems.length);
+        }
+
+        if (!newsItems || newsItems.length === 0) {
+          const fileResp = await fetch(`database/cms/news.json?t=${Date.now()}`).catch(() => ({ ok: false }));
+          if (fileResp.ok) {
+            newsItems = await fileResp.json();
+            console.log('loadNewsData: Loaded from file, count =', newsItems.length);
+          }
         }
       } catch (e) {
-        console.error('Failed to load news from file:', e);
+        console.error('Failed to load news:', e);
       }
 
       // Fallback to localStorage if fetch failed or empty

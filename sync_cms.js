@@ -183,19 +183,31 @@ const products = rawData.map((r, i) => {
     }
   }
 
-  // Fallback: If generated path doesn't exist but Excel path does, check it
-  const excelImgPath = String(r['Gambar'] || '').trim().replace(/\.jpg$/i, '.png');
-  const currentPath = path.join(ROOT, imgPath);
-  if (!fs.existsSync(currentPath) && excelImgPath) {
-    let candidate = '';
-    if (excelImgPath.startsWith('assets/images/products/')) {
-      candidate = excelImgPath;
-    } else {
-      candidate = `assets/images/products/${brandSlug}/${excelImgPath}`;
-    }
-    
-    if (fs.existsSync(path.join(ROOT, candidate))) {
-      imgPath = candidate;
+  // ── Smart Image Discovery ──
+  const excelImgName = String(r['Gambar'] || '').trim().replace(/\.jpg$/i, '.png');
+  const brandSubDir = path.join(ROOT, 'assets', 'images', 'products', brandSlug);
+  
+  if (fs.existsSync(brandSubDir)) {
+    const files = fs.readdirSync(brandSubDir);
+    // 1. Check if the current imgPath exists (most reliable)
+    if (!fs.existsSync(path.join(ROOT, imgPath))) {
+      // 2. Try exact filename match from Excel
+      let match = files.find(f => f.toLowerCase() === excelImgName.toLowerCase());
+      
+      // 3. Try fuzzy/prefix match (e.g., "oriental-super-ring-60g.png")
+      if (!match) {
+        const clean = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '').replace(/gr$/g, 'g').replace(/grams?$/g, 'g');
+        const normalizedExcel = clean(excelImgName.replace(/\.(png|jpg|jpeg)$/i, ''));
+        
+        match = files.find(f => {
+          const nf = clean(f.replace(/\.(png|jpg|jpeg)$/i, ''));
+          return nf.includes(normalizedExcel) || normalizedExcel.includes(nf);
+        });
+      }
+
+      if (match) {
+        imgPath = `assets/images/products/${brandSlug}/${match}`;
+      }
     }
   }
 
