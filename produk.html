@@ -195,7 +195,7 @@
       will-change: transform, filter;
     }
     .catalog-card:hover .card-image img { 
-      transform: scale(1.12) translateY(-5px); 
+      transform: scale(1.1) translateY(-5px); 
       filter: drop-shadow(0 20px 35px rgba(0,0,0,0.15));
     }
     .catalog-card .card-badge {
@@ -214,7 +214,67 @@
     .badge-noodle { background: rgba(121,85,72,0.1); color: #795548; }
     .badge-vegelicious { background: rgba(76,175,80,0.1); color: #4CAF50; }
     .badge-pudding { background: rgba(162,89,255,0.1); color: #A259FF; }
-    
+
+    /* ====== CARD HOVER ACTION OVERLAY (View only) ====== */
+    .card-actions-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 70%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    .catalog-card:hover .card-actions-overlay {
+      opacity: 1;
+    }
+    .card-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      background: var(--accent, #d4a843);
+      color: #1a1a1a;
+      transform: translateY(10px);
+    }
+    .catalog-card:hover .card-action-btn {
+      transform: translateY(0);
+    }
+    .card-action-btn:hover {
+      background: #e8be55;
+      transform: translateY(-2px) scale(1.05);
+    }
+    .card-action-btn i { font-size: 12px; }
+
+    .catalog-card .card-brand {
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      z-index: 2;
+    }
+    #imgZoomLightbox .lbx-close:hover { background: var(--accent, #d4a843); transform: rotate(90deg) scale(1.1); }
+    #imgZoomLightbox .lbx-name {
+      position: absolute;
+      bottom: -48px;
+      left: 0; right: 0;
+      text-align: center;
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
     .catalog-card .card-brand {
       position: absolute; top: 16px; right: 16px;
       width: 44px; height: 44px; border-radius: 50%;
@@ -1795,18 +1855,24 @@ async function initProductCatalog() {
           ? `<div class="card-brand"><img src="${p.brand_logo}" alt="${p.brand}" onerror="this.style.display='none'"></div>`
           : `<div class="card-brand">${(p.brand || '?').charAt(0)}</div>`;
         return `
-          <div class="catalog-card reveal fade-up" onclick="openProductModal(${p.id})" style="--delay:${(idx % 24) * 30}ms">
+          <div class="catalog-card reveal fade-up" style="--delay:${(idx % 24) * 30}ms">
             <div class="card-image">
               <span class="card-badge badge-${p.category}">${p.category}</span>
               ${brandEl}
               <img src="${img}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+              <div class="card-actions-overlay">
+                <button class="card-action-btn" onclick="event.stopPropagation(); openProductModal(${p.id})"
+                  title="Lihat Detail">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </div>
             </div>
             <div class="card-body">
               <h3>${p.name}</h3>
               <p class="card-desc">${p.desc || ''}</p>
               <div class="card-footer">
                 <span class="brand-name">${p.brand || ''}</span>
-                <span class="detail-btn">Detail <i class="fas fa-arrow-right"></i></span>
+                <span class="detail-btn" onclick="openProductModal(${p.id})">Detail <i class="fas fa-arrow-right"></i></span>
               </div>
             </div>
           </div>
@@ -1864,42 +1930,7 @@ async function initProductCatalog() {
       document.body.style.overflow = '';
     };
 
-    const searchInput = document.getElementById('productFilterInput');
-    const logoContainer = document.getElementById('modalBrandLogoContainer');
-    if (logoContainer) logoContainer.innerHTML = p.brand_logo ? `<img src="${p.brand_logo}" alt="${p.brand}" onerror="this.style.display='none'">` : '';
-    
-    const imgContainer = document.getElementById('modalMainImgContainer');
-    if (imgContainer) imgContainer.innerHTML = `<img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" style="max-height:240px;max-width:100%;object-fit:contain;" onerror="this.src='assets/images/placeholder.png'">`;
-
-    const catPill = document.getElementById('modalCategoryPill');
-    if (catPill) catPill.textContent = p.category || '';
-
-    setEl('modalBrandName', p.brand);
-    setHTML('modalDesc', p.desc);
-    setEl('specAsal', p.origin);
-    setEl('specBerat', p.weight);
-    setEl('specSertifikasi', p.cert);
-    setEl('specKategori', p.category);
-    setHTML('modalInfo', p.info);
-
-    const waBtn = document.getElementById('modalWaBtn');
-    if (waBtn) {
-      const num = contactNumber || '6281234567890';
-      const msg = encodeURIComponent(`Halo, saya tertarik dengan produk: ${p.name} (${p.brand}). Mohon info lebih lanjut.`);
-      waBtn.onclick = () => window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
-    }
-
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.closeModal = function() {
-    const modal = document.getElementById('productModal');
-    if (modal) modal.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-
-  window.resetFilters = function() {
+    window.resetFilters = function() {
     currentFilter = 'all';
     document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === 'all'));
     const bs = document.getElementById('brandSelect'); if (bs) bs.value = 'all';
