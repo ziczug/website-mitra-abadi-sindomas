@@ -1939,15 +1939,13 @@
       
       filterBerita();
     }
+  </script>
 
-    // ==========================================
-    // DETAIL VIEW
-    // ==========================================
+  <script>
     function showDetail(id) {
       const article = newsItems.find(n => n.id === id || n.id == id);
       if (!article) return;
 
-      // Update URL
       history.pushState({ newsId: id }, '', `berita.html?id=${id}`);
 
       const imgSrc = article.imageData || article.imagePath || 'assets/images/berita/indonesiatimur.jpg';
@@ -2201,9 +2199,9 @@
     } else {
       loadNewsData();
     }
+  </script>
 
-</script>
-<script>
+  <script>
     // --- CS FORM & SCROLL TOP LOGIC ---
     function toggleContactModal() {
       const modal = document.getElementById('contactModalOverlay');
@@ -2416,7 +2414,7 @@
     <i class="fas fa-chevron-up"></i>
   </div>
 
-
+  <script>
     // --- KATALOG PDF LOGIC ---
     let pdfDoc = null,
         pageNum = 1,
