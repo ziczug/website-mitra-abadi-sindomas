@@ -115,23 +115,40 @@ const products = rawData.map((r, i) => {
   
   const brandSlug = toSlug(brandName);
   const prodSlug = toSlug(originalName);
-
-  // Convert weight for filename: g → gr, ml → mlgr (matching README convention)
-  let fileWeight = weightVal
-    .replace(/(\d+[\d.]*)g$/i, '$1gr')
-    .replace(/(\d+[\d.]*)ml$/i, '$1mlgr');
-
-  // Standard path: brand-folder/product-slug + weight + .png (README convention)
-  let imgPathSuffix = `${prodSlug}${fileWeight}`;
+  const weightSlug = toSlug(weightVal);
   
-  // If slug already contains the weight, don't duplicate it (avoids ...100g100gr.png)
-  const weightSlug = toSlug(fileWeight);
-  const rawWeightSlug = toSlug(weightVal);
-  if (prodSlug.endsWith(weightSlug) || prodSlug.endsWith(rawWeightSlug)) {
-    imgPathSuffix = prodSlug;
+  // Clean product name for slug (remove brand name if it starts with it)
+  let cleanName = originalName;
+  if (cleanName.toLowerCase().startsWith(brandName.toLowerCase())) {
+    cleanName = cleanName.substring(brandName.length).trim();
+    if (cleanName.startsWith('-')) cleanName = cleanName.substring(1).trim();
   }
+  const prodSlugNoBrand = toSlug(cleanName);
+  
+  // Possible image filenames to try
+  const candidates = [
+    `${brandSlug}-${prodSlugNoBrand}-${weightSlug}.png`,
+    `${brandSlug}-${prodSlugNoBrand}${weightSlug}.png`,
+    `${prodSlugNoBrand}${weightSlug}.png`,
+    `${prodSlugNoBrand}-${weightSlug}.png`,
+    `${toSlug(brandName + " " + originalName)}.png`,
+    // Try with 'gr' instead of 'g' for weight
+    `${brandSlug}-${prodSlugNoBrand}-${weightSlug}r.png`,
+    `${brandSlug}-${prodSlugNoBrand}${weightSlug}r.png`,
+    `${prodSlugNoBrand}${weightSlug}r.png`
+  ];
 
-  let imgPath = `assets/images/products/${brandSlug}/${imgPathSuffix}.png`;
+  let imgPath = `assets/images/products/${brandSlug}/${prodSlugNoBrand}${weightSlug.replace(/g$/, 'gr')}.png`; 
+  let found = false;
+
+  for (const cand of candidates) {
+    const checkPath = `assets/images/products/${brandSlug}/${cand}`;
+    if (fs.existsSync(path.join(ROOT, checkPath))) {
+      imgPath = checkPath;
+      found = true;
+      break;
+    }
+  }
 
   // --- FALLBACK LOGIC ---
   const fullPath = path.join(ROOT, imgPath);

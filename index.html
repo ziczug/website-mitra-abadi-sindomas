@@ -32,20 +32,20 @@
         </button>
         <div class="lang-dropdown mobile-only" id="langDropdownMobile">
           <div class="lang-current" onclick="toggleLangDropdown(true)">
-            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" alt="ID" class="flag-icon">
             <span data-i18n="lang-id">Indonesia</span>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+              <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" alt="ID" class="flag-icon"> <span
                 data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
+              <img src="https://flagicons.lipis.dev/flags/4x3/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
-              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
+              <img src="https://flagicons.lipis.dev/flags/4x3/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
             </div>
           </div>
         </div>
@@ -89,20 +89,20 @@
         <!-- Social icons moved to mobile menu only -->
         <div class="lang-dropdown desktop-only" id="langDropdown">
           <div class="lang-current" onclick="toggleLangDropdown()">
-            <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon">
+            <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" alt="ID" class="flag-icon">
             <span data-i18n="lang-id-short">ID</span>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="lang-options">
             <div class="lang-option active" onclick="setLanguage('id')">
-              <img src="https://flagcdn.com/id.svg" alt="ID" class="flag-icon"> <span
+              <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" alt="ID" class="flag-icon"> <span
                 data-i18n="lang-id">Indonesian</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
-              <img src="https://flagcdn.com/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
+              <img src="https://flagicons.lipis.dev/flags/4x3/us.svg" alt="US" class="flag-icon"> <span data-i18n="lang-en">English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('cn')">
-              <img src="https://flagcdn.com/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
+              <img src="https://flagicons.lipis.dev/flags/4x3/cn.svg" alt="CN" class="flag-icon"> <span data-i18n="lang-cn">China</span>
             </div>
           </div>
         </div>
@@ -1321,45 +1321,66 @@
   <!-- ==================== KATALOG MODAL ==================== -->
   <div class="catalog-modal-overlay" id="catalogModal">
     <div class="catalog-modal-container">
-      <div class="catalog-modal-header">
-        <div class="modal-info">
-          <i class="fas fa-file-pdf modal-icon"></i>
+      <!-- Header -->
+      <div class="catalog-modal-header" style="background: #111; color: #fff; padding: 15px 25px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="modal-info" style="display: flex; align-items: center; gap: 15px;">
+          <div style="background: #d4a843; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #000;">
+            <i class="fas fa-file-pdf"></i>
+          </div>
           <div>
-            <h3>Katalog Produk 2026</h3>
-            <p>PT Mitra Abadi Sindomas</p>
+            <h3 style="margin:0; font-size: 16px; letter-spacing: 0.5px;" data-i18n="nav-catalog">Katalog Produk 2026</h3>
+            <p style="margin:0; font-size: 12px; opacity: 0.6;">PT Mitra Abadi Sindomas</p>
           </div>
         </div>
-        <div class="modal-controls">
-          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog"
-            id="btnDownloadKatalog">
-            <i class="fas fa-download"></i> <span class="btn-text">Download Katalog</span>
+        <div class="modal-controls" style="display: flex; align-items: center; gap: 12px;">
+          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog" style="background: #d4a843; color: #000; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.3s;">
+            <i class="fas fa-download"></i> <span data-i18n="catalog-download">Unduh Katalog</span>
           </a>
-          <button class="modal-close-btn" onclick="closeKatalog()" aria-label="Close Modal">
+          <button class="modal-close-btn" onclick="closeKatalog()" style="background: rgba(255,255,255,0.1); color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: 0.3s;">
             <i class="fas fa-times"></i>
           </button>
         </div>
       </div>
-      <div class="catalog-modal-content"
-        style="background:#e5e7eb; overflow:hidden; display:flex; flex-direction:column; contain: content;">
-        <div class="pdf-loading" id="pdfLoading">
-          <div class="loader"></div>
-          <p>Sedang memuat katalog...</p>
+
+      <!-- PDF Content Area -->
+      <div class="catalog-modal-content" style="flex: 1; overflow: hidden; position: relative; background: #222; display: flex; flex-direction: column;">
+        
+        <!-- Premium Nav Bar -->
+        <div class="pdf-nav-bar" style="background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); color: #fff; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10;">
+          <div style="display: flex; gap: 10px;">
+             <button id="pdfPrev" class="pdf-nav-btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+                <i class="fas fa-chevron-left"></i> <span data-i18n="catalog-prev">Sebelumnya</span>
+             </button>
+             <button id="pdfNext" class="pdf-nav-btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+                <span data-i18n="catalog-next">Berikutnya</span> <i class="fas fa-chevron-right"></i>
+             </button>
+          </div>
+          
+          <div style="font-size: 14px; font-weight: 600;">
+            <span data-i18n="catalog-page">Halaman</span>: <span style="color: #d4a843;" id="pdfPageNum">1</span> / <span id="pdfPageCount">?</span>
+          </div>
+
+          <div class="pdf-zoom-bar" style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);">
+            <button id="pdfZoomOut" class="pdf-zoom-btn" style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 5px;" title="Perkecil">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <span id="pdfZoomLevel" style="font-size: 12px; font-weight: 700; min-width: 45px; text-align: center;">100%</span>
+            <button id="pdfZoomIn" class="pdf-zoom-btn" style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 5px;" title="Perbesar">
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </div>
         </div>
-        <div id="pdfViewer" style="display:none; flex-direction:column; height:100%; width:100%;">
-          <div class="pdf-controls"
-            style="display:flex; justify-content:center; align-items:center; gap:15px; padding:12px; background:#111; color:#fff; flex-shrink:0; border-bottom:1px solid #333;">
-            <button id="pdfPrev" class="btn-primary" style="padding:6px 12px; font-size:14px;"><i
-                class="fas fa-chevron-left"></i> Prev</button>
-            <span style="font-weight:600; min-width:100px; text-align:center;">Halaman: <span id="pdfPageNum">1</span> /
-              <span id="pdfPageCount">?</span></span>
-            <button id="pdfNext" class="btn-primary" style="padding:6px 12px; font-size:14px;">Next <i
-                class="fas fa-chevron-right"></i></button>
-          </div>
-          <div
-            style="flex-grow:1; overflow:auto; display:flex; justify-content:center; align-items:flex-start; padding:10px; background:#333;">
-            <canvas id="pdfCanvas"
-              style="box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width:100%; height:auto; display:block;"></canvas>
-          </div>
+
+        <!-- Viewport -->
+        <div style="flex: 1; overflow: auto; display: flex; justify-content: center; padding: 20px; scrollbar-width: thin; scrollbar-color: #444 #222;">
+           <div id="pdfViewport" style="box-shadow: 0 10px 40px rgba(0,0,0,0.5); background: #fff; transform-origin: top center;">
+              <canvas id="pdfCanvas"></canvas>
+           </div>
+        </div>
+
+        <div class="pdf-loading" id="pdfLoading" style="position: absolute; inset: 0; background: #222; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 20;">
+          <div class="loader" style="width: 40px; height: 40px; border: 4px solid rgba(212, 168, 67, 0.1); border-top-color: #d4a843; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <p style="margin-top: 15px; color: #fff; font-size: 14px;" data-i18n="catalog-loading">Sedang memuat katalog...</p>
         </div>
       </div>
     </div>
@@ -1588,11 +1609,11 @@
               ? pData
               : pData.filter(p => p.category === category);
 
-            pGrid.innerHTML = filtered.map(p => {
+            pGrid.innerHTML = filtered.map((p, idx) => {
               const imgSrc = p.imageData || p.image;
               const initials = p.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
               return `
-                <div class="partner-card reveal fade-up visible">
+                <div class="partner-card reveal fade-up visible ${idx === 0 ? 'active' : ''}" onclick="selectPartner(this)">
                   <div class="partner-logo-wrapper">
                     ${imgSrc
                   ? `<img src="${imgSrc}" alt="${p.name}" class="partner-logo">`
@@ -1603,7 +1624,21 @@
                 </div>
               `;
             }).join('');
+            
+            // Auto-scroll to start
+            pGrid.scrollTo({ left: 0, behavior: 'smooth' });
           }
+
+          window.selectPartner = function(el) {
+            document.querySelectorAll('.partner-card').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            
+            // Center the card in the grid
+            const gridRect = pGrid.getBoundingClientRect();
+            const elRect = el.getBoundingClientRect();
+            const scrollLeft = el.offsetLeft - (gridRect.width / 2) + (elRect.width / 2);
+            pGrid.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+          };
 
           if (pGrid) {
             const activeTab = document.querySelector('.partner-tab.active');
@@ -1613,6 +1648,11 @@
                 pTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 renderPartnersSection(tab.dataset.category);
+                
+                // Scroll the grid to center the new content
+                setTimeout(() => {
+                  pGrid.scrollTo({ left: 0, behavior: 'smooth' });
+                }, 100);
               });
             });
           }
@@ -2174,28 +2214,18 @@
     const catalogModal = document.getElementById('catalogModal');
     const pdfLoading = document.getElementById('pdfLoading');
     const pdfViewer = document.getElementById('pdfViewer');
-    const pdfCanvas = document.getElementById('pdfCanvas');
-    const ctx = pdfCanvas.getContext('2d');
-
-    let pdfDoc = null;
-    let pageNum = 1;
-    let pageRendering = false;
-    let pageNumPending = null;
-    const baseScale = 1.5;
+    let pdfDoc = null,
+      pageNum = 1,
+      pageRendering = false,
+      pageNumPending = null,
+      pdfScale = 1.0,
+      pdfCanvas = document.getElementById('pdfCanvas'),
+      ctx = pdfCanvas.getContext('2d');
 
     function renderPage(num) {
       pageRendering = true;
       pdfDoc.getPage(num).then(function (page) {
-        // Auto scale to fit mobile elegantly
-        const parentWidth = pdfCanvas.parentElement.clientWidth - 20;
-        const initialViewport = page.getViewport({ scale: 1 });
-        let scale = baseScale;
-
-        if (initialViewport.width * baseScale > parentWidth) {
-          scale = parentWidth / initialViewport.width;
-        }
-
-        const viewport = page.getViewport({ scale: scale });
+        const viewport = page.getViewport({ scale: pdfScale });
         pdfCanvas.height = viewport.height;
         pdfCanvas.width = viewport.width;
 
@@ -2215,6 +2245,7 @@
       });
 
       document.getElementById('pdfPageNum').textContent = num;
+      document.getElementById('pdfZoomLevel').textContent = Math.round(pdfScale * 100) + '%';
     }
 
     function queueRenderPage(num) {
@@ -2237,6 +2268,18 @@
       pageNum++;
       queueRenderPage(pageNum);
       document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
+    });
+
+    document.getElementById('pdfZoomIn').addEventListener('click', () => {
+      if (pdfScale >= 3.0) return;
+      pdfScale += 0.2;
+      queueRenderPage(pageNum);
+    });
+
+    document.getElementById('pdfZoomOut').addEventListener('click', () => {
+      if (pdfScale <= 0.5) return;
+      pdfScale -= 0.2;
+      queueRenderPage(pageNum);
     });
 
     function openKatalog() {
