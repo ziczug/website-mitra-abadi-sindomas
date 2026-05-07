@@ -6,8 +6,8 @@ Folder ini berisi gambar produk untuk brand **HUANG XIAO GU!**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 131 | HUANG XIAO GU! - Instant Noodle Spicy Flavor 180g | `instant-noodle-spicy-flavor180gr.png` |
-| 132 | HUANG XIAO GU! - Instant Noodle Original 180g | `instant-noodle-original180gr.png` |
+| 131 | HUANG XIAO GU! - Instant Noodle Spicy Flavor 180g | `huang-xiao-gu-instant-noodle-spicy-flavor-180g.png` |
+| 132 | HUANG XIAO GU! - Instant Noodle Original 180g | `huang-xiao-gu-instant-noodle-original-180g.png` |
 
 ## 📌 Panduan Upload
 

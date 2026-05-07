@@ -6,29 +6,29 @@ Folder ini berisi gambar produk untuk brand **Zees**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 35 | Zees - Sandwich Cracker Chocolate 180g | `sandwich-cracker-chocolate180gr.png` |
-| 36 | Zees - Sandwich Cracker Lemon 180g | `sandwich-cracker-lemon180gr.png` |
-| 37 | Zees - Sandwich Cracker Cheese 180g | `sandwich-cracker-cheese180gr.png` |
-| 38 | Zees - Sandwich Cracker Chocolate 90g | `sandwich-cracker-chocolate90gr.png` |
-| 39 | Zees - Sandwich Cracker Lemon 90g | `sandwich-cracker-lemon90gr.png` |
-| 40 | Zees - Sandwich Cracker Cheese 90g | `sandwich-cracker-cheese90gr.png` |
-| 41 | Zees - Sandwich Cracker Chocolate 54g | `sandwich-cracker-chocolate54gr.png` |
-| 42 | Zees - Sandwich Cracker Lemon 54g | `sandwich-cracker-lemon54gr.png` |
-| 43 | Zees - Sandwich Cracker Cheese 54g | `sandwich-cracker-cheese54gr.png` |
-| 44 | Zees - Original Cream Crackers 184g | `original-cream-crackers184gr.png` |
-| 45 | Zees - Original Cream Crackers 380g | `original-cream-crackers380gr.png` |
-| 46 | Zees - Sugar Cream Cracker 192g | `sugar-cream-cracker192gr.png` |
-| 47 | Zees - Cracker Sandwich Cheese 229.5g | `cracker-sandwich-cheese229.5gr.png` |
-| 48 | Zees - Cracker Sandwich Peanut Butter 229.5g | `cracker-sandwich-peanut-butter229.5gr.png` |
-| 49 | Zees - Assorted Biscuit 451.5g | `assorted-biscuit451.5gr.png` |
-| 50 | Zees - Choco Chips Cookie Hazalnut 150g | `choco-chips-cookie-hazalnut150gr.png` |
-| 51 | Zees - Choco Chips Cookie Coklat 150g | `choco-chips-cookie-coklat150gr.png` |
-| 52 | Zees - Chocolate Biscuit 148g | `chocolate-biscuit148gr.png` |
-| 53 | Zees - Chocolate Sandwich Biscuit Chocolate 264.gr | `chocolate-sandwich-biscuit-chocolate264.gr.png` |
-| 54 | Zees - Chocolate Sandwich Biscuit Vanilla 264.gr | `chocolate-sandwich-biscuit-vanilla264.gr.png` |
-| 55 | Zees - Butter Cookies 115g | `butter-cookies115gr.png` |
-| 56 | Zees - Super Ring Cheese Cracker 75g | `super-ring-cheese-cracker75gr.png` |
-| 57 | Zees - Savory Crackers Original 75g | `savory-crackers-original75gr.png` |
+| 35 | Zees - Sandwich Cracker Chocolate 180g | `zees-sandwich-cracker-chocolate-180g.png` |
+| 36 | Zees - Sandwich Cracker Lemon 180g | `zees-sandwich-cracker-lemon-180g.png` |
+| 37 | Zees - Sandwich Cracker Cheese 180g | `zees-sandwich-cracker-cheese-180g.png` |
+| 38 | Zees - Sandwich Cracker Chocolate 90g | `zees-sandwich-cracker-chocolate-90g.png` |
+| 39 | Zees - Sandwich Cracker Lemon 90g | `zees-sandwich-cracker-lemon-90g.png` |
+| 40 | Zees - Sandwich Cracker Cheese 90g | `zees-sandwich-cracker-cheese-90g.png` |
+| 41 | Zees - Sandwich Cracker Chocolate 54g | `zees-sandwich-cracker-chocolate-54g.png` |
+| 42 | Zees - Sandwich Cracker Lemon 54g | `zees-sandwich-cracker-lemon-54g.png` |
+| 43 | Zees - Sandwich Cracker Cheese 54g | `zees-sandwich-cracker-cheese-54g.png` |
+| 44 | Zees - Original Cream Crackers 184g | `zees-original-cream-crackers-184g.png` |
+| 45 | Zees - Original Cream Crackers 380g | `zees-original-cream-crackers-380g.png` |
+| 46 | Zees - Sugar Cream Cracker 192g | `zees-sugar-cream-cracker-192g.png` |
+| 47 | Zees - Cracker Sandwich Cheese 229.5g | `zees-cracker-sandwich-cheese-2295g.png` |
+| 48 | Zees - Cracker Sandwich Peanut Butter 229.5g | `zees-cracker-sandwich-peanut-butter-2295g.png` |
+| 49 | Zees - Assorted Biscuit 451.5g | `zees-assorted-biscuit-4515g.png` |
+| 50 | Zees - Choco Chips Cookie Hazalnut 150g | `zees-choco-chips-cookie-hazalnut-150g.png` |
+| 51 | Zees - Choco Chips Cookie Coklat 150g | `zees-choco-chips-cookie-coklat-150g.png` |
+| 52 | Zees - Chocolate Biscuit 148g | `zees-chocolate-biscuit-148g.png` |
+| 53 | Zees - Chocolate Sandwich Biscuit Chocolate 264.gr | `zees-chocolate-sandwich-biscuit-chocolate-264gr.png` |
+| 54 | Zees - Chocolate Sandwich Biscuit Vanilla 264.gr | `zees-chocolate-sandwich-biscuit-vanilla-264gr.png` |
+| 55 | Zees - Butter Cookies 115g | `zees-butter-cookies-115g.png` |
+| 56 | Zees - Super Ring Cheese Cracker 75g | `zees-super-ring-cheese-cracker-75g.png` |
+| 57 | Zees - Savory Crackers Original 75g | `zees-savory-crackers-original-75g.png` |
 
 ## 📌 Panduan Upload
 

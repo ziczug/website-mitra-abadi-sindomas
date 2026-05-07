@@ -14,6 +14,8 @@
   <script src="assets/js/i18n-engine.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script src="assets/js/image-fallback.js"></script>
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/pdf-katalog.js"></script>
           <style>
     body {
       background: #ffffff;
@@ -253,7 +255,6 @@
             </div>
           </div>
         </div>
-        <!-- Social icons moved to mobile menu only -->
         <div class="lang-dropdown desktop-only" id="langDropdown">
           <div class="lang-current" onclick="toggleLangDropdown()">
             <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" alt="ID" class="flag-icon">
@@ -400,8 +401,8 @@
   <div class="catalog-modal-overlay" id="catalogModal">
     <div class="catalog-modal-container">
       <!-- Header -->
-      <div class="catalog-modal-header" style="background: #111; color: #fff; padding: 15px 25px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-        <div class="modal-info" style="display: flex; align-items: center; gap: 15px;">
+      <div class="catalog-modal-header">
+        <div class="modal-info">
           <div style="background: #d4a843; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #000;">
             <i class="fas fa-file-pdf"></i>
           </div>
@@ -410,55 +411,68 @@
             <p style="margin:0; font-size: 12px; opacity: 0.6;">PT Mitra Abadi Sindomas</p>
           </div>
         </div>
-        <div class="modal-controls" style="display: flex; align-items: center; gap: 12px;">
-          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog" style="background: #d4a843; color: #000; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.3s;">
+        <div class="modal-controls">
+          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog" style="background: #d4a843; color: #000; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 10px 20px rgba(212,168,67,0.2);">
             <i class="fas fa-download"></i> <span data-i18n="catalog-download">Unduh Katalog</span>
           </a>
-          <button class="modal-close-btn" onclick="closeKatalog()" style="background: rgba(255,255,255,0.1); color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: 0.3s;">
+          <button class="modal-close-btn" onclick="closeKatalog()">
             <i class="fas fa-times"></i>
           </button>
         </div>
       </div>
 
       <!-- PDF Content Area -->
-      <div class="catalog-modal-content" style="flex: 1; overflow: hidden; position: relative; background: #222; display: flex; flex-direction: column;">
+      <div class="catalog-modal-content">
         
         <!-- Premium Nav Bar -->
-        <div class="pdf-nav-bar" style="background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); color: #fff; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10;">
-          <div style="display: flex; gap: 10px;">
-             <button id="pdfPrev" class="pdf-nav-btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+        <div class="pdf-nav-bar">
+          <div style="display: flex; gap: 12px;">
+             <button id="pdfPrev" class="pdf-nav-btn">
                 <i class="fas fa-chevron-left"></i> <span data-i18n="catalog-prev">Sebelumnya</span>
              </button>
-             <button id="pdfNext" class="pdf-nav-btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+             <button id="pdfNext" class="pdf-nav-btn">
                 <span data-i18n="catalog-next">Berikutnya</span> <i class="fas fa-chevron-right"></i>
              </button>
           </div>
           
-          <div style="font-size: 14px; font-weight: 600;">
+          <div style="font-size: 14px; font-weight: 600; color: #fff;">
             <span data-i18n="catalog-page">Halaman</span>: <span style="color: #d4a843;" id="pdfPageNum">1</span> / <span id="pdfPageCount">?</span>
           </div>
 
-          <div class="pdf-zoom-bar" style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);">
-            <button id="pdfZoomOut" class="pdf-zoom-btn" style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 5px;" title="Perkecil">
+          <div class="pdf-zoom-bar">
+            <button id="pdfZoomOut" class="pdf-zoom-btn" title="Perkecil">
               <i class="fas fa-search-minus"></i>
             </button>
-            <span id="pdfZoomLevel" style="font-size: 12px; font-weight: 700; min-width: 45px; text-align: center;">100%</span>
-            <button id="pdfZoomIn" class="pdf-zoom-btn" style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 5px;" title="Perbesar">
+            <span id="pdfZoomLevel" style="font-size: 13px; font-weight: 800; min-width: 45px; text-align: center; color: #d4a843;">100%</span>
+            <button id="pdfZoomIn" class="pdf-zoom-btn" title="Perbesar">
               <i class="fas fa-search-plus"></i>
             </button>
           </div>
         </div>
 
         <!-- Viewport -->
-        <div style="flex: 1; overflow: auto; display: flex; justify-content: center; padding: 20px; scrollbar-width: thin; scrollbar-color: #444 #222;">
-           <div id="pdfViewport" style="box-shadow: 0 10px 40px rgba(0,0,0,0.5); background: #fff; transform-origin: top center;">
-              <canvas id="pdfCanvas"></canvas>
+        <div class="pdf-stage">
+           <!-- Previous Page Preview (Yellow Accent) -->
+           <div class="pdf-side-preview prev" id="pdfSidePrev" title="Halaman Sebelumnya">
+              <canvas id="pdfCanvasPrev"></canvas>
+           </div>
+
+           <!-- Main Page -->
+           <div class="pdf-main-container">
+              <div class="pdf-viewport-wrapper">
+                 <canvas id="pdfCanvas"></canvas>
+              </div>
+           </div>
+
+           <!-- Next Page Preview (Green Accent) -->
+           <div class="pdf-side-preview next" id="pdfSideNext" title="Halaman Berikutnya">
+              <canvas id="pdfCanvasNext"></canvas>
            </div>
         </div>
 
-        <div class="pdf-loading" id="pdfLoading" style="position: absolute; inset: 0; background: #222; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 20;">
-          <div class="loader" style="width: 40px; height: 40px; border: 4px solid rgba(212, 168, 67, 0.1); border-top-color: #d4a843; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-          <p style="margin-top: 15px; color: #fff; font-size: 14px;" data-i18n="catalog-loading">Sedang memuat katalog...</p>
+        <div class="pdf-loading" id="pdfLoading" style="position: absolute; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 20;">
+          <div class="loader" style="width: 50px; height: 50px; border: 4px solid rgba(212, 168, 67, 0.1); border-top-color: #d4a843; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <p style="margin-top: 20px; color: #fff; font-size: 16px; font-weight: 600; letter-spacing: 1px;" data-i18n="catalog-loading">MEMUAT KATALOG...</p>
         </div>
       </div>
     </div>
@@ -481,122 +495,7 @@
     reveal(); // Initial check
   </script>
 
-<script>
-    // --- CS FORM & SCROLL TOP LOGIC ---
-    function toggleContactModal() {
-      const modal = document.getElementById('contactModalOverlay');
-      if (modal) {
-        modal.classList.toggle('active');
-        if (modal.classList.contains('active')) {
-          initContactFormProducts();
-        }
-      }
-    }
 
-    async function initContactFormProducts() {
-      const productSelect = document.getElementById('waProduct');
-      if (!productSelect || productSelect.options.length > 1) return;
-
-      let prods = [];
-      // Use global 'products' if available (common in produk.html)
-      if (typeof products !== 'undefined' && products.length > 0) {
-        prods = products;
-      } else {
-        // Fetch if not available (common in index.html)
-        try {
-          const resp = await fetch('database/cms/products.json');
-          if (resp.ok) prods = await resp.json();
-          else {
-            const stored = localStorage.getItem('mas_products');
-            if (stored) prods = JSON.parse(stored);
-          }
-        } catch (e) {
-          console.warn('CS Form fetch error:', e);
-        }
-      }
-
-      if (!prods || prods.length === 0) return;
-
-      const seen = new Set();
-      prods.forEach(p => {
-        // Get category label safely
-        let catLabel = p.category;
-        catLabel = getCategoryLabel(p.category);
-
-        const display = `${p.name} - ${p.brand} - ${catLabel}`;
-        if (!seen.has(display)) {
-          seen.add(display);
-          const opt = document.createElement('option');
-          opt.value = display;
-          opt.textContent = display;
-          opt.dataset.image = p.imageData || p.image || '';
-          productSelect.appendChild(opt);
-        }
-      });
-    }
-
-    function updateProductPreview() {
-      const select = document.getElementById('waProduct');
-      const box = document.getElementById('waProductPreviewBox');
-      const img = document.getElementById('waProductImg');
-      const placeholder = document.getElementById('waProductPlaceholder');
-      if (!select || select.selectedIndex < 0) return;
-      const selectedOption = select.options[select.selectedIndex];
-      const imgSrc = selectedOption.dataset.image;
-
-      if (imgSrc) {
-        img.src = imgSrc;
-        img.classList.add('loaded');
-        placeholder.style.display = 'none';
-        box.classList.add('active');
-      } else {
-        img.src = "";
-        img.classList.remove('loaded');
-        placeholder.style.display = 'block';
-        box.classList.remove('active');
-      }
-    }
-
-    function sendWhatsApp() {
-      const name = document.getElementById('waName').value.trim();
-      const phone = document.getElementById('waPhone').value.trim();
-      const region = document.getElementById('waRegion').value.trim();
-      const outlet = document.getElementById('waOutlet').value.trim();
-      const product = document.getElementById('waProduct').value;
-      const message = document.getElementById('waMessage').value.trim();
-
-      if (!name || !phone) {
-        alert('Mohon isi Nama dan No. WhatsApp Anda.');
-        return;
-      }
-
-      const targetPhone = '6281295001778';
-      const text = `Halo Mitra Abadi, Saya calon customer ${name}, nomer telpon ${phone}, Region ${region}. ` +
-        `nama outlet ${outlet}, tertarik produk ${product || 'Umum'}. \n\n` +
-        `${message}\n\n` +
-        `Setelah saya pelajari di website dan lihat katalog saya cukup tertarik.`;
-
-      const encodedText = encodeURIComponent(text);
-      window.open(`https://wa.me/${targetPhone}?text=${encodedText}`, '_blank');
-    }
-
-    function getCategoryLabel(cat) {
-      if (typeof t === 'function') {
-        const catKey = `cat-${cat}`;
-        const translated = t(catKey);
-        if (translated !== catKey) return translated;
-      }
-      const labels = {
-        snack: 'Snack', biskuit: 'Biskuit', wafer: 'Wafer', kue: 'Kue & Pastry',
-        minuman: 'Minuman', permen: 'Permen', condiments: 'Condiments',
-        noodle: 'Instant Noodle', vegelicious: 'Vegelicious', pudding: 'Pudding'
-      };
-      return labels[cat] || cat;
-    }
-
-    // --- SHARE LOGIC ---
-
-</script>
   <!-- ==================== FLOATING CONTACT FORM ==================== -->
   <div class="contact-floating-btn" id="contactFloatingBtn" onclick="toggleContactModal()">
     <i class="fas fa-headset"></i>
@@ -655,273 +554,15 @@
     </div>
   </div>
 
-
   <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
     <i class="fas fa-chevron-up"></i>
   </div>
 
 
-<script>
-    // --- NAVBAR & SEARCH LOGIC ---
-    const navbar = document.getElementById('navbar');
-    const navLinks = document.getElementById('navLinks');
-    const mobileToggle = document.getElementById('mobileToggle');
-    const navOverlay = document.getElementById('navOverlay');
-    const navItems = document.querySelectorAll('.nav-item');
-    const navIndicator = document.getElementById('navIndicator');
-    const searchWrapper = document.getElementById('searchWrapper');
-    const searchToggle = document.getElementById('searchToggle');
-    const searchContainer = document.getElementById('searchContainer');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const scrollTopBtn = document.getElementById('scrollTop');
+<!-- Navbar, Search, Contact Form logic handled by shared.js -->
 
-    // Scroll handler
-    const checkScroll = () => {
-      const scrolled = window.scrollY > 50;
-      if (navbar) navbar.classList.toggle('scrolled', scrolled);
-      if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-    };
-    window.addEventListener('scroll', checkScroll);
-    window.addEventListener('load', checkScroll);
-    checkScroll();
-
-    // Mobile nav toggle
-    function toggleNav() {
-      if (navLinks) navLinks.classList.toggle('active');
-      if (mobileToggle) mobileToggle.classList.toggle('active');
-      if (navOverlay) navOverlay.classList.toggle('active');
-      document.body.style.overflow = (navLinks && navLinks.classList.contains('active')) ? 'hidden' : '';
-    }
-
-    // Indicator logic
-    function updateIndicator(indicator, el) {
-      if (!indicator || !el || window.innerWidth <= 768) {
-        if (indicator) indicator.style.opacity = '0';
-        return;
-      }
-      indicator.style.opacity = '1';
-      indicator.style.width = el.offsetWidth + 'px';
-      indicator.style.left = el.offsetLeft + 'px';
-    }
-
-    function initIndicators() {
-      const activeNavItem = document.querySelector('.nav-item.active') || navItems[0];
-      updateIndicator(navIndicator, activeNavItem);
-    }
-
-    setTimeout(initIndicators, 300);
-    window.addEventListener('resize', initIndicators);
-
-    navItems.forEach(item => {
-      item.addEventListener('mouseenter', () => updateIndicator(navIndicator, item));
-    });
-
-    if (navLinks) {
-      navLinks.addEventListener('mouseleave', () => {
-        updateIndicator(navIndicator, document.querySelector('.nav-item.active') || navItems[0]);
-      });
-    }
-
-    // Language dropdown
-    function toggleLangDropdown(isMobile) {
-      const dd = isMobile ? document.getElementById('langDropdownMobile') : document.getElementById('langDropdown');
-      if (dd) dd.classList.toggle('active');
-    }
-
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.lang-dropdown')) {
-        document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
-      }
-    });
-
-    // Search Logic
-    let searchProducts = [];
-    function initSearchData() {
-      if (typeof Papa !== 'undefined') {
-        Papa.parse("database/produk.csv", {
-          download: true, header: true,
-          complete: (results) => {
-            searchProducts = results.data.filter(p => p.name);
-          },
-          error: () => { searchProducts = []; }
-        });
-      }
-    }
-    initSearchData();
-
-    if (searchToggle) {
-      searchToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isActive = searchContainer.classList.toggle('active');
-        searchToggle.classList.toggle('active');
-        const icon = searchToggle.querySelector('i');
-        if (isActive) {
-          icon.classList.replace('fa-search', 'fa-times');
-          if (searchInput) searchInput.focus();
-        } else {
-          icon.classList.replace('fa-times', 'fa-search');
-          if (searchInput) searchInput.value = '';
-          if (searchResults) searchResults.innerHTML = '';
-        }
-      });
-    }
-
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        if (!query) {
-          searchResults.innerHTML = '';
-          return;
-        }
-        const results = searchProducts.filter(p => 
-          p.name.toLowerCase().includes(query) || 
-          (p.brand && p.brand.toLowerCase().includes(query)) ||
-          (p.category && p.category.toLowerCase().includes(query))
-        ).slice(0, 5);
-
-        searchResults.innerHTML = results.map(p => `
-          <div class="search-result-item" onclick="goToProduct('${p.id}')">
-            <img src="${p.image || 'assets/images/placeholder.png'}" alt="${p.name}" class="search-result-img" onerror="this.src='assets/images/placeholder.png'">
-            <div class="search-result-info">
-              <span class="search-result-title">${p.name}</span>
-              <span class="search-result-meta">${p.brand || ''} • ${p.category || ''}</span>
-            </div>
-          </div>
-        `).join('');
-      });
-    }
-
-    function goToProduct(id) {
-      window.location.href = `produk.html?search=${id}`;
-    }
-
-    function closeSearch() {
-      if (searchContainer) searchContainer.classList.remove('active');
-      if (searchToggle) {
-        searchToggle.classList.remove('active');
-        const icon = searchToggle.querySelector('i');
-        if (icon) icon.classList.replace('fa-times', 'fa-search');
-      }
-      if (searchInput) searchInput.value = '';
-      if (searchResults) searchResults.innerHTML = '';
-    }
-
-    document.addEventListener('click', (e) => {
-      if (searchWrapper && !searchWrapper.contains(e.target) && searchContainer && searchContainer.classList.contains('active')) {
-        closeSearch();
-      }
-    });
-
-    });
-
-  </script>
-  <script>
     // --- KATALOG PDF LOGIC ---
-    let pdfDoc = null,
-        pageNum = 1,
-        pageIsRendering = false,
-        pageNumIsPending = null,
-        pdfScale = 1.5;
-
-    const canvas = document.getElementById('pdfCanvas'),
-          ctx = canvas.getContext('2d');
-
-    async function openKatalog() {
-      const modal = document.getElementById('catalogModal');
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      
-      if (!pdfDoc) {
-        document.getElementById('pdfLoading').style.display = 'flex';
-        const url = 'database/asset-katalog/Catalog PTMAS 2026_compressed.pdf';
-        
-        try {
-          pdfDoc = await pdfjsLib.getDocument(url).promise;
-          document.getElementById('pdfPageCount').textContent = pdfDoc.numPages;
-          renderPage(pageNum);
-        } catch (err) {
-          console.error('Error loading PDF:', err);
-          alert('Gagal memuat katalog. Silakan coba lagi nanti.');
-          closeKatalog();
-        } finally {
-          document.getElementById('pdfLoading').style.display = 'none';
-        }
-      }
-    }
-
-    function closeKatalog() {
-      document.getElementById('catalogModal').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    const renderPage = num => {
-      pageIsRendering = true;
-      pdfDoc.getPage(num).then(page => {
-        const viewport = page.getViewport({ scale: pdfScale });
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        const renderCtx = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-
-        page.render(renderCtx).promise.then(() => {
-          pageIsRendering = false;
-          if (pageNumIsPending !== null) {
-            renderPage(pageNumIsPending);
-            pageNumIsPending = null;
-          }
-        });
-
-        document.getElementById('pdfPageNum').textContent = num;
-      });
-    };
-
-    const queueRenderPage = num => {
-      if (pageIsRendering) {
-        pageNumIsPending = num;
-      } else {
-        renderPage(num);
-      }
-    };
-
-    document.getElementById('pdfPrev').addEventListener('click', () => {
-      if (pageNum <= 1) return;
-      pageNum--;
-      queueRenderPage(pageNum);
-    });
-
-    document.getElementById('pdfNext').addEventListener('click', () => {
-      if (pageNum >= pdfDoc.numPages) return;
-      pageNum++;
-      queueRenderPage(pageNum);
-    });
-
-    document.getElementById('pdfZoomIn').addEventListener('click', () => {
-      pdfScale += 0.25;
-      if (pdfScale > 3) pdfScale = 3;
-      updateZoom();
-    });
-
-    document.getElementById('pdfZoomOut').addEventListener('click', () => {
-      pdfScale -= 0.25;
-      if (pdfScale < 0.5) pdfScale = 0.5;
-      updateZoom();
-    });
-
-    function updateZoom() {
-      document.getElementById('pdfZoomLevel').textContent = Math.round(pdfScale * 100 / 1.5) + '%';
-      if (pdfDoc) renderPage(pageNum);
-    }
-
-    window.addEventListener('keydown', e => {
-      if (!document.getElementById('catalogModal').classList.contains('active')) return;
-      if (e.key === 'ArrowLeft') document.getElementById('pdfPrev').click();
-      if (e.key === 'ArrowRight') document.getElementById('pdfNext').click();
-      if (e.key === 'Escape') closeKatalog();
-    });
+    // Moved to assets/js/pdf-katalog.js
 </script>
 </body>
 </html>

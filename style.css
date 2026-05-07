@@ -1894,7 +1894,7 @@ section {
 
 .branch-mini-address {
   font-size: 12px;
-  color: rgba(255,255,255,0.5);
+  color: var(--accent);
   margin: 2px 0 0;
   white-space: nowrap;
   overflow: hidden;
@@ -7812,21 +7812,20 @@ body {
   font-weight: 800;
 }
 
-/* ====== I18N LOADER OVERLAY PREMIUM ====== */
+/* ====== I18N LOADER OVERLAY PREMIUM REVAMP ====== */
 #i18n-loader {
   position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.6) 100%);
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
   z-index: 999999;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 #i18n-loader.active {
@@ -7834,57 +7833,338 @@ body {
   visibility: visible;
 }
 
+.i18n-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 400px;
+  width: 90%;
+  padding: 40px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ffffff;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.15);
+  animation: i18nContentPop 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes i18nContentPop {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 .i18n-spinner {
-  width: 60px;
-  height: 60px;
-  border: 3px solid rgba(201, 168, 76, 0.1);
-  border-top: 3px solid #C9A84C;
+  position: relative;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  animation: i18nSpin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  margin-bottom: 30px;
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
+  background: conic-gradient(from 0deg, transparent 0%, var(--accent) 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 0);
+  animation: i18nSpin 1s linear infinite;
 }
 
 @keyframes i18nSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to { transform: rotate(1turn); }
 }
 
 .i18n-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  animation: i18nFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 20px;
 }
 
-@keyframes i18nFadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+.i18n-flag-wrapper {
+  position: relative;
+  width: 84px;
+  height: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border: 2px solid #fff;
+  transition: transform 0.3s ease;
 }
 
 .i18n-flag {
-  width: 80px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-  margin-bottom: 25px;
-  border: 1px solid rgba(0,0,0,0.05);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.i18n-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .i18n-text {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: #0A0A0A;
-  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-600);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.15em;
+  opacity: 0.8;
+}
+
+.i18n-target {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .i18n-native {
   font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  color: #666;
-  font-weight: 500;
+  font-size: 14px;
+  color: var(--accent-dark);
+  font-weight: 600;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+/* ==================== PREMIUM CATALOG MODAL ==================== */
+.catalog-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.catalog-modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.catalog-modal-container {
+  width: 100%;
+  max-width: 1100px;
+  height: 90vh;
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(212, 168, 67, 0.3);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 168, 67, 0.1);
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.catalog-modal-overlay.active .catalog-modal-container {
+  transform: scale(1) translateY(0);
+}
+
+.catalog-modal-header {
+  padding: 20px 30px;
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(212, 168, 67, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.catalog-modal-header h3 {
+  color: #fff !important;
+}
+
+.catalog-modal-header p {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.pdf-nav-bar {
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdf-nav-btn {
+  background: rgba(212, 168, 67, 0.1);
+  color: #d4a843;
+  border: 1px solid rgba(212, 168, 67, 0.3);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pdf-nav-btn:hover {
+  background: #d4a843;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.catalog-modal-content {
+  flex: 1;
+  background: #111;
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: #d4a843 #111;
+}
+
+.pdf-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px 20px;
+  min-height: 100%;
+}
+
+.pdf-main-container {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.pdf-viewport-wrapper {
+  background: transparent;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+}
+
+.pdf-side-preview {
+  flex-shrink: 0;
+  width: 160px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.pdf-side-preview canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transition: all 0.4s ease;
+  background: #fff;
+}
+
+.pdf-side-preview:hover {
+  opacity: 1;
+  transform: scale(1.08) translateY(-5px);
+}
+
+.pdf-side-preview.prev canvas {
+  border: 3px solid #d4a843; /* Yellow/Gold for Previous */
+  box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25);
+}
+
+.pdf-side-preview.next canvas {
+  border: 3px solid #10B981; /* Green for Next */
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+}
+
+/* Label Mini Katalog */
+.pdf-side-preview::before {
+  content: "Mini Katalog Sebelumnya";
+  position: absolute;
+  top: -35px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #d4a843;
+  opacity: 0;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
   letter-spacing: 0.5px;
+  background: rgba(0,0,0,0.6);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.pdf-side-preview.next::before {
+  content: "Mini Katalog Berikutnya";
+  color: #10B981;
+}
+
+.pdf-side-preview:hover::before {
+  opacity: 1;
+  top: -40px;
+}
+
+@media (max-width: 992px) {
+  .pdf-side-preview { display: none; }
+  .pdf-stage { padding: 20px; }
+}
+
+.pdf-zoom-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pdf-zoom-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.pdf-zoom-btn:hover {
+  opacity: 1;
+  color: #d4a843;
+}
+
+.modal-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close-btn:hover {
+  background: #ff4d4d;
+  border-color: #ff4d4d;
+  transform: rotate(90deg);
 }
 
 

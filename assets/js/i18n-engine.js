@@ -34,7 +34,14 @@ function translatePage(lang) {
   const translations = i18nData[lang];
   if (!translations) return;
 
-  // 1. Explicit Translation (Fastest & most reliable)
+  // 1. Head Translation (Title & Description)
+  if (translations['page-title']) document.title = translations['page-title'];
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && translations['page-description']) {
+    metaDesc.setAttribute('content', translations['page-description']);
+  }
+
+  // 2. Explicit Translation (Fastest & most reliable)
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (translations[key]) {
@@ -46,36 +53,35 @@ function translatePage(lang) {
     }
   });
 
-  // 2. Universal Injector (Fallback for missing data-i18n)
-  if (lang !== 'id') {
-     const idDict = i18nData['id'];
-     const phrases = Object.keys(idDict).map(k => ({
-        key: k,
-        text: idDict[k].replace(/<[^>]*>/g, '').trim()
-     })).filter(p => p.text.length > 2);
+  // 3. Universal Injector (Fallback for missing data-i18n)
+  // Use Indonesian as the base dictionary to find matches
+  const idDict = i18nData['id'];
+  const phrases = Object.keys(idDict).map(k => ({
+    key: k,
+    text: idDict[k].replace(/<[^>]*>/g, '').trim()
+  })).filter(p => p.text.length > 1);
 
-     // Function to translate text nodes recursively
-     function scan(node) {
-        if (node.nodeType === 3) { // Text node
-           const content = node.textContent.trim();
-           const match = phrases.find(p => p.text === content);
-           if (match) {
-              node.textContent = translations[match.key].replace(/<[^>]*>/g, '');
-           }
-        } else if (node.nodeType === 1 && !['SCRIPT', 'STYLE', 'IFRAME'].includes(node.tagName)) {
-           // Skip elements that already have data-i18n attribute
-           if (node.hasAttribute('data-i18n') || node.classList.contains('notranslate')) return;
-           node.childNodes.forEach(scan);
-        }
-     }
-     scan(document.body);
+  // Function to translate text nodes recursively
+  function scan(node) {
+    if (node.nodeType === 3) { // Text node
+      const content = node.textContent.trim();
+      if (!content) return;
+
+      // Find match in ID dictionary
+      const match = phrases.find(p => p.text === content);
+      if (match && translations[match.key]) {
+        node.textContent = translations[match.key].replace(/<[^>]*>/g, '');
+      }
+    } else if (node.nodeType === 1 && !['SCRIPT', 'STYLE', 'IFRAME', 'NOSCRIPT'].includes(node.tagName)) {
+      if (node.hasAttribute('data-i18n') || node.classList.contains('notranslate')) return;
+      node.childNodes.forEach(scan);
+    }
   }
-  // 3. Update HTML attribute for CSS scoping
+  scan(document.body);
+
+  // 4. Update HTML attribute for CSS scoping
   document.documentElement.setAttribute('data-lang', lang);
   
-  // Keep original lang for Google Translate engine
-  // document.documentElement.setAttribute('lang', lang); 
-
   updateDynamicContentLabels(lang);
 }
 
@@ -138,7 +144,7 @@ function setLanguage(lang, isInitial = false) {
   // 1. Language Labels for Loader
   const loaderData = {
     'id': { name: 'Indonesia', native: 'Bahasa Indonesia', flag: 'id' },
-    'en': { name: 'English', native: 'English', flag: 'us' },
+    'en': { name: 'English', native: 'English', flag: 'gb' },
     'cn': { name: '\u4e2d\u6587', native: '\u666e\u901a\u8bdd', flag: 'cn' }
   };
   const target = loaderData[lang];
@@ -159,11 +165,18 @@ function setLanguage(lang, isInitial = false) {
   const loadingLabel = loaderLabels[lang] || 'Mengganti Bahasa ke';
 
   loader.innerHTML = `
-    <div class="i18n-spinner"></div>
-    <div class="i18n-status">
-      <img src="https://flagcdn.com/w40/${target.flag}.png" class="i18n-flag">
-      <div class="i18n-text">${loadingLabel} ${target.name.toUpperCase()}</div>
-      <div class="i18n-native">${target.native}</div>
+    <div class="i18n-content">
+      <div class="i18n-spinner"></div>
+      <div class="i18n-status">
+        <div class="i18n-flag-wrapper">
+          <img src="https://flagcdn.com/w80/${target.flag}.png" class="i18n-flag">
+        </div>
+        <div class="i18n-info">
+          <div class="i18n-text">${loadingLabel}</div>
+          <div class="i18n-target">${target.name.toUpperCase()}</div>
+          <div class="i18n-native">${target.native}</div>
+        </div>
+      </div>
     </div>
   `;
 
@@ -195,7 +208,7 @@ function setLanguage(lang, isInitial = false) {
     });
 
     const flags = document.querySelectorAll('.lang-current img, .i18n-flag');
-    const flagUrls = { 'id': 'id', 'en': 'us', 'cn': 'cn' };
+    const flagUrls = { 'id': 'id', 'en': 'gb', 'cn': 'cn' };
     flags.forEach(img => {
       img.src = `https://flagcdn.com/w40/${flagUrls[l]}.png`;
     });
@@ -224,24 +237,29 @@ function setLanguage(lang, isInitial = false) {
   const gLang = (lang === 'cn') ? 'zh-CN' : lang;
   triggerGoogle(gLang);
 
+  // Set Cookie for cross-page persistence (Google Translate standard)
+  const cookieDomain = window.location.hostname === 'localhost' ? '' : `domain=.${window.location.hostname};`;
+  document.cookie = `googtrans=/id/${gLang}; path=/; ${cookieDomain}`;
+  document.cookie = `googtrans=/id/${gLang}; path=/;`; // Fallback for simple paths
+
   localStorage.setItem('preferred_lang', lang);
   window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang } }));
 
-  // 5. Sticky Completion & Hide Loader (only if needed)
+  // 5. Sticky Completion & Hide Loader (Faster response)
   if (!isInitial) {
     let count = 0;
     const sticky = setInterval(() => {
       translatePage(lang);
       updateFlagsAndLabels(lang);
-      if (++count > 4) {
+      if (++count > 2) { // Reduced from 4 to 2 (3 iterations)
         clearInterval(sticky);
         setTimeout(() => {
           if (loader) loader.classList.remove('active');
-        }, 300);
+        }, 100); // Reduced from 300ms
       }
-    }, 300);
+    }, 150); // Reduced from 300ms
     // Fallback safety
-    setTimeout(() => { if(loader) loader.classList.remove('active'); }, 3000);
+    setTimeout(() => { if(loader) loader.classList.remove('active'); }, 1500); // Reduced from 3000ms
   } else {
     // Initial load: Just translate once or twice quietly
     translatePage(lang);
@@ -254,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('preferred_lang') || 'id';
 
   // Instant flag restore - no loader, no delay
-  const flagUrls = { 'id': 'id', 'en': 'us', 'cn': 'cn' };
+  const flagUrls = { 'id': 'id', 'en': 'gb', 'cn': 'cn' };
   document.querySelectorAll('.lang-current img').forEach(img => {
     img.src = `https://flagcdn.com/w40/${flagUrls[saved]}.png`;
   });

@@ -1,5 +1,9 @@
 const i18nData = {
   id: {
+    // Global Head
+    'page-title': 'PT Mitra Abadi Sindomas | Distributor & Importir Makanan',
+    'page-description': 'Distributor dan importir makanan minuman berkualitas tinggi dengan jaminan Halal dan BPOM sejak 2016.',
+    
     // Navbar
     'nav-home': 'Beranda',
     'nav-news': 'Berita',
@@ -73,8 +77,23 @@ const i18nData = {
     'dist-jakarta-title': 'Jakarta',
     'dist-hero-tag': 'JANGKAUAN DISTRIBUSI',
     'dist-hero-title': 'JANGKAUAN &<br>MITRA DISTRIBUSI',
-    'dist-hero-desc': 'Jaringan kami kuat tersebar di berbagai kota besar, bermitra dengan gudang modern dan kendaraan logistik milik perusahaan.',
+    'dist-hero-desc': 'Jaringan kantor kami tersebar di berbagai kota besar, beserta dengan gudang modern dan kendaraan logistik milik perusahaan.',
     'dist-hero-btn': 'Lihat Jangkauan',
+    'dist-stat-cities': 'Wilayah Indonesia',
+    'dist-stat-cities-sub': 'Jaringan distribusi',
+    'dist-stat-warehouse': 'Lokasi Gudang',
+    'dist-stat-warehouse-sub': 'Tersebar di seluruh Indonesia',
+    'dist-stat-sku': 'Produk Lokal & Internasional',
+    'dist-stat-sku-sub': 'Siap memenuhi kebutuhan Anda',
+    'dist-map-title-hero': 'Menghubungkan<br>Seluruh Indonesia',
+    'dist-map-desc': 'Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.',
+    'dist-feat-fast-title': 'Distribusi Cepat',
+    'dist-feat-fast-desc': 'Tepat waktu ke setiap titik',
+    'dist-feat-wide-title': 'Jangkauan Luas',
+    'dist-feat-wide-desc': 'Seluruh wilayah Indonesia',
+    'b2b-tag': 'SOLUSI B2B',
+    'b2b-title': 'SOLUSI DISTRIBUSI B2B<br>UNTUK BISNIS ANDA',
+    'b2b-desc': 'Kami melayani kebutuhan distribusi dalam skala besar melalui jalur darat dengan sistem terintegrasi dan aman.',
     
     // Certifications
     'cert-badge': 'KOMITMEN KUALITAS',
@@ -269,6 +288,10 @@ const i18nData = {
     'dist-truck-4-desc': 'Efisien untuk pengiriman paket kecil dan cepat.'
   },
   en: {
+    // Global Head
+    'page-title': 'PT Mitra Abadi Sindomas | Food Distributor & Importer',
+    'page-description': 'Importer and distributor of high quality food and beverage products with Halal and BPOM guarantees since 2016.',
+    
     // Navbar
     'nav-home': 'Home',
     'nav-news': 'News',
@@ -342,8 +365,24 @@ const i18nData = {
     'dist-jakarta-title': 'Jakarta',
     'dist-hero-tag': 'DISTRIBUTION RANGE',
     'dist-hero-title': 'RANGE &<br>DISTRIBUTION PARTNERS',
-    'dist-hero-desc': 'Our strong network is spread across major cities, partnering with modern warehouses and company-owned logistics vehicles.',
+    'dist-hero-desc': 'Our office network is spread across various major cities, along with modern warehouses and company-owned logistics vehicles.',
     'dist-hero-btn': 'See Range',
+    'dist-stat-cities': 'Indonesian Regions',
+    'dist-stat-cities-sub': 'Distribution network',
+    'dist-stat-warehouse': 'Warehouse Locations',
+    'dist-stat-warehouse-sub': 'Spread across Indonesia',
+    'dist-stat-sku': 'Local & International Products',
+    'dist-stat-sku-sub': 'Ready to meet your needs',
+    'dist-logistik-badge': 'NATIONAL LOGISTICS COVERAGE',
+    'dist-map-title-hero': 'Connecting<br>All of Indonesia',
+    'dist-map-desc': 'Supported by a reliable national logistics network to ensure fast, precise, and safe distribution to all corners of the country.',
+    'dist-feat-fast-title': 'Fast Distribution',
+    'dist-feat-fast-desc': 'On time to every point',
+    'dist-feat-wide-title': 'Wide Range',
+    'dist-feat-wide-desc': 'Across all regions of Indonesia',
+    'b2b-tag': 'B2B SOLUTIONS',
+    'b2b-title': 'B2B DISTRIBUTION SOLUTIONS<br>FOR YOUR BUSINESS',
+    'b2b-desc': 'We serve large-scale distribution needs via land routes with integrated and secure systems.',
 
     // Certifications
     'cert-badge': 'QUALITY COMMITMENT',
@@ -378,20 +417,6 @@ const i18nData = {
 
     // Extra Index Sections
     'dist-stat-warehouse-label': 'Square Meters',
-    'dist-stat-warehouse-sub': 'Warehouse Area',
-    'dist-stat-sku-label': 'SKU',
-    'dist-stat-sku-sub': 'Local & International Products',
-    'dist-logistik-badge': 'NATIONAL LOGISTICS COVERAGE',
-    'dist-map-title-hero': 'Connecting<br>Across Indonesia',
-    'dist-map-desc-hero': 'Supported by a reliable national logistics network to ensure fast, precise, and safe distribution to all corners of the country.',
-    'dist-feat-fast-title': 'Fast Distribution',
-    'dist-feat-fast-desc': 'On time to every point',
-    'dist-feat-wide-title': 'Wide Reach',
-    'dist-feat-wide-desc': 'All regions of Indonesia',
-    'dist-map-desc': 'Integrated distribution system covering major islands in Indonesia, ensuring the availability of quality products wherever you are.',
-    'b2b-tag': 'B2B SOLUTION',
-    'b2b-title': 'B2B DISTRIBUTION SOLUTIONS<br>FOR YOUR BUSINESS',
-    'b2b-desc': 'We serve large-scale distribution needs through land routes with an integrated and secure system.',
     'products-title': 'Featured Product Categories',
     'products-desc': 'We distribute a variety of high-quality food and beverage products from leading international brands.',
     'partners-title': 'Our Strategic Partners',
@@ -536,6 +561,10 @@ const i18nData = {
     'dist-truck-4-desc': 'Efficient for small and fast parcel deliveries.'
   },
   cn: {
+    // Global Head
+    'page-title': 'PT Mitra Abadi Sindomas | 优质食品分销商和进口商',
+    'page-description': '自 2016 年起，高品质食品和饮料产品的进口商和分销商，拥有清真和 BPOM 保障。',
+    
     // Navbar
     'nav-home': '首页',
     'nav-news': '资讯',
@@ -601,16 +630,28 @@ const i18nData = {
     'feat-products-desc': '探索涵盖各个类别的精选产品系列，这些产品已成为我们客户的最爱。',
     'feat-products-btn': '查看所有产品',
 
-    // Distribution
-    'dist-badge': '分销网络',
-    'dist-title': '覆盖全印度尼西亚',
-    'dist-desc': '依靠完善的物流系统以及在巴淡岛和雅加达的战略仓库，我们确保产品供应覆盖印度尼西亚所有地区。',
-    'dist-batam-title': '巴淡岛',
-    'dist-jakarta-title': '雅加达',
+    // Distribution & B2B
+    'dist-tag': '分销网络',
     'dist-hero-tag': '分销范围',
     'dist-hero-title': '范围与<br>分销合作伙伴',
-    'dist-hero-desc': '我们的强大网络遍布各大城市，与现代化的仓库和公司拥有的物流车辆合作。',
+    'dist-hero-desc': '我们的办公网络遍布各大城市，拥有现代化的仓库和公司拥有的物流车辆。',
     'dist-hero-btn': '查看范围',
+    'dist-stat-cities': '印度尼西亚地区',
+    'dist-stat-cities-sub': '分销网络',
+    'dist-stat-warehouse': '仓库地点',
+    'dist-stat-warehouse-sub': '遍布印度尼西亚',
+    'dist-stat-sku': '本地及国际产品',
+    'dist-stat-sku-sub': '随时满足您的需求',
+    'dist-logistik-badge': '国家物流覆盖范围',
+    'dist-map-title-hero': '连接<br>整个印度尼西亚',
+    'dist-map-desc': '依靠可靠的国家物流网络，确保快速、准确、安全地配送到全国各个角落。',
+    'dist-feat-fast-title': '快速分销',
+    'dist-feat-fast-desc': '准时送到每个点',
+    'dist-feat-wide-title': '范围广泛',
+    'dist-feat-wide-desc': '遍及印度尼西亚所有地区',
+    'b2b-tag': 'B2B 解决方案',
+    'b2b-title': '为您的业务提供<br>B2B 分销解决方案',
+    'b2b-desc': '我们通过拥有集成且安全系统的陆路航线，满足大规模的分销需求。',
 
     // Certifications
     'cert-badge': '质量承诺',

@@ -15,6 +15,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script src="assets/js/image-fallback.js"></script>
+  <script src="assets/js/pdf-katalog.js"></script>
 </head>
 
 <body>
@@ -629,9 +630,9 @@
             <span data-i18n="dist-tag">JANGKAUAN DISTRIBUSI</span>
             <i class="fas fa-truck"></i>
           </div>
-        <h2 class="dist-hero-title text-shine">JANGKAUAN &<br>MITRA DISTRIBUSI</h2>
-        <p class="dist-hero-desc">Jaringan kami kuat tersebar di berbagai kota besar, bermitra dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
-        <a href="#distribusi-detail" class="btn-dist-hero"><span>Lihat Jangkauan</span> <i class="fas fa-arrow-right"></i></a>
+        <h2 class="dist-hero-title text-shine" data-i18n="dist-hero-title">JANGKAUAN &<br>MITRA DISTRIBUSI</h2>
+        <p class="dist-hero-desc" data-i18n="dist-hero-desc">Jaringan kami kuat tersebar di berbagai kota besar, bermitra dengan gudang modern dan kendaraan logistik milik perusahaan.</p>
+        <a href="#distribusi-detail" class="btn-dist-hero"><span data-i18n="dist-hero-btn">Lihat Jangkauan</span> <i class="fas fa-arrow-right"></i></a>
 
         <!-- Mini truck slider card -->
         <div class="dist-truck-card">
@@ -713,8 +714,8 @@
           <div class="stat-icon-premium"><i class="fas fa-map-marked-alt"></i></div>
           <div class="stat-info-premium">
             <div class="stat-value-premium">3</div>
-            <div class="label">Wilayah Indonesia</div>
-            <div class="sub-label">Jaringan distribusi</div>
+            <div class="label" data-i18n="dist-stat-cities">Wilayah Indonesia</div>
+            <div class="sub-label" data-i18n="dist-stat-cities-sub">Jaringan distribusi</div>
           </div>
         </div>
         <!-- Stat 2: Gudang -->
@@ -722,8 +723,8 @@
           <div class="stat-icon-premium"><i class="fas fa-warehouse"></i></div>
           <div class="stat-info-premium">
             <div class="stat-value-premium">40.000+</div>
-            <div class="label">Lokasi Gudang</div>
-            <div class="sub-label">Tersebar di seluruh Indonesia</div>
+            <div class="label" data-i18n="dist-stat-warehouse">Lokasi Gudang</div>
+            <div class="sub-label" data-i18n="dist-stat-warehouse-sub">Tersebar di seluruh Indonesia</div>
           </div>
         </div>
         <!-- Stat 3: Produk -->
@@ -731,8 +732,8 @@
           <div class="stat-icon-premium"><i class="fas fa-shopping-bag"></i></div>
           <div class="stat-info-premium">
             <div class="stat-value-premium">500+</div>
-            <div class="label">Produk Lokal & Internasional</div>
-            <div class="sub-label">Siap memenuhi kebutuhan Anda</div>
+            <div class="label" data-i18n="dist-stat-sku">Produk Lokal & Internasional</div>
+            <div class="sub-label" data-i18n="dist-stat-sku-sub">Siap memenuhi kebutuhan Anda</div>
           </div>
         </div>
       </div>
@@ -750,21 +751,21 @@
             <span class="dist-logistik-badge" data-i18n="dist-logistik-badge">JANGKAUAN LOGISTIK NASIONAL</span>
             <i class="fas fa-project-diagram"></i>
           </div>
-          <h3 class="text-shine">Menghubungkan<br>Seluruh Indonesia</h3>
-          <p>Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.</p>
+          <h3 class="text-shine" data-i18n="dist-map-title-hero">Menghubungkan<br>Seluruh Indonesia</h3>
+          <p data-i18n="dist-map-desc">Didukung jaringan logistik nasional yang handal untuk memastikan distribusi cepat, tepat, dan aman ke seluruh penjuru negeri.</p>
           <div class="dist-logistik-features">
             <div class="dist-logistik-feat">
               <i class="fas fa-shipping-fast"></i>
               <div>
-                <strong>Distribusi Cepat</strong>
-                <span>Tepat waktu ke setiap titik</span>
+                <strong data-i18n="dist-feat-fast-title">Distribusi Cepat</strong>
+                <span data-i18n="dist-feat-fast-desc">Tepat waktu ke setiap titik</span>
               </div>
             </div>
             <div class="dist-logistik-feat">
               <i class="fas fa-globe-asia"></i>
               <div>
-                <strong>Jangkauan Luas</strong>
-                <span>Seluruh wilayah Indonesia</span>
+                <strong data-i18n="dist-feat-wide-title">Jangkauan Luas</strong>
+                <span data-i18n="dist-feat-wide-desc">Seluruh wilayah Indonesia</span>
               </div>
             </div>
           </div>
@@ -775,50 +776,98 @@
 
   <!-- ===== PART 4: B2B SECTION (Warehouse Slider) ===== -->
   <section class="dist-b2b-section" id="solusi-b2b">
-        <div class="dist-b2b-wrapper">
-          <!-- Left: Branch/Warehouse Image Slider -->
-          <div class="dist-b2b-image-side">
-            <div class="branch-slider" id="branchSlider">
-              <div style="padding:80px 40px;text-align:center;color:rgba(0,0,0,0.3);font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;">
-                <i class="fas fa-spinner fa-spin" style="font-size:32px;margin-bottom:16px;display:block;color:#c2994a;"></i>
-                Memuat data gudang...
+    <div class="dist-b2b-wrapper">
+      <!-- Left: Branch/Warehouse Image Slider -->
+      <div class="dist-b2b-image-side">
+        <div class="branch-slider" id="branchSlider">
+          <!-- Slide 1: Jakarta -->
+          <div class="branch-slide active">
+            <div class="branch-main-image">
+              <img src="assets/images/branches/jakarta.png" alt="Jakarta Warehouse" loading="lazy" onerror="this.src='assets/images/mas-bangunan.jpg'; this.onerror=null;">
+            </div>
+            <div class="branch-mini-card">
+              <div class="branch-mini-content">
+                <div class="branch-mini-thumb">
+                  <img src="assets/images/branches/jakarta.png" alt="Jakarta Thumb" onerror="this.src='assets/images/mas-bangunan.jpg'; this.onerror=null;">
+                </div>
+                <div class="branch-mini-info">
+                  <div class="branch-mini-counter">1 / 3</div>
+                  <h4 class="branch-mini-name">Jakarta</h4>
+                  <p class="branch-mini-address">Sedayu Bizz Park, Jakarta Barat</p>
+                </div>
               </div>
             </div>
           </div>
-
-          <!-- Right: B2B Content -->
-          <div class="dist-b2b-content-side">
-            <div class="b2b-badge-capsule"><i class="fas fa-handshake"></i> SOLUSI B2B</div>
-            <h3>SOLUSI DISTRIBUSI B2B<br>UNTUK BISNIS ANDA</h3>
-            <p>Kami melayani kebutuhan distribusi dalam skala besar melalui jalur darat dengan sistem terintegrasi dan aman.</p>
-            
-            <div class="dist-b2b-features">
-              <div class="dist-b2b-feat">
-                <div class="dist-b2b-feat-icon"><i class="fas fa-truck-moving"></i></div>
-                <div class="dist-b2b-feat-text">
-                  <strong>Armada Handal</strong>
-                  <span>Efisien & Terpercaya</span>
+          <!-- Slide 2: Surabaya -->
+          <div class="branch-slide">
+            <div class="branch-main-image">
+              <img src="assets/images/branches/surabaya.png" alt="Surabaya Warehouse" loading="lazy" onerror="this.src='assets/images/mas-bangunan.jpg'; this.onerror=null;">
+            </div>
+            <div class="branch-mini-card">
+              <div class="branch-mini-content">
+                <div class="branch-mini-thumb">
+                  <img src="assets/images/branches/surabaya.png" alt="Surabaya Thumb" onerror="this.src='assets/images/mas-bangunan.jpg'; this.onerror=null;">
                 </div>
-              </div>
-              <div class="dist-b2b-feat">
-                <div class="dist-b2b-feat-icon"><i class="fas fa-warehouse"></i></div>
-                <div class="dist-b2b-feat-text">
-                  <strong>Kapasitas Besar</strong>
-                  <span>Untuk Skala Industri</span>
-                </div>
-              </div>
-              <div class="dist-b2b-feat">
-                <div class="dist-b2b-feat-icon"><i class="fas fa-shield-alt"></i></div>
-                <div class="dist-b2b-feat-text">
-                  <strong>Keamanan Terjamin</strong>
-                  <span>Setiap Pengiriman</span>
+                <div class="branch-mini-info">
+                  <div class="branch-mini-counter">2 / 3</div>
+                  <h4 class="branch-mini-name">Surabaya</h4>
+                  <p class="branch-mini-address">Margomulyo, Surabaya</p>
                 </div>
               </div>
             </div>
-
-            <a href="#kontak" class="btn-dist-b2b"><span>Kemitraan B2B</span> <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <!-- Slide 3: Medan -->
+          <div class="branch-slide">
+            <div class="branch-main-image">
+              <img src="assets/images/branches/medan.png" alt="Medan Warehouse" loading="lazy" onerror="this.src='assets/images/mas-bangunan.jpg'; this.onerror=null;">
+            </div>
+            <div class="branch-mini-card">
+              <div class="branch-mini-content">
+                <div class="branch-mini-thumb">
+                  <img src="assets/images/branches/medan.png" alt="Medan Thumb" onerror="this.src='assets/images/mas-bangunan.jpg'; this.onerror=null;">
+                </div>
+                <div class="branch-mini-info">
+                  <div class="branch-mini-counter">3 / 3</div>
+                  <h4 class="branch-mini-name">Medan</h4>
+                  <p class="branch-mini-address">Medan, Sumatera Utara</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
+      <!-- Right: B2B Content -->
+      <div class="dist-b2b-content-side">
+        <div class="b2b-badge-capsule" data-i18n="b2b-tag"><i class="fas fa-handshake"></i> SOLUSI B2B</div>
+        <h3 data-i18n="b2b-title">SOLUSI DISTRIBUSI B2B<br>UNTUK BISNIS ANDA</h3>
+        <p data-i18n="b2b-desc">Kami melayani kebutuhan distribusi dalam skala besar melalui jalur darat dengan sistem terintegrasi dan aman.</p>
+        
+        <div class="dist-b2b-features">
+          <div class="dist-b2b-feat">
+            <div class="dist-b2b-feat-icon"><i class="fas fa-truck-moving"></i></div>
+            <div class="dist-b2b-feat-text">
+              <strong>Armada Handal</strong>
+              <span>Efisien & Terpercaya</span>
+            </div>
+          </div>
+          <div class="dist-b2b-feat">
+            <div class="dist-b2b-feat-icon"><i class="fas fa-warehouse"></i></div>
+            <div class="dist-b2b-feat-text">
+              <strong>Kapasitas Besar</strong>
+              <span>Untuk Skala Industri</span>
+            </div>
+          </div>
+          <div class="dist-b2b-feat">
+            <div class="dist-b2b-feat-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="dist-b2b-feat-text">
+              <strong>Keamanan Terjamin</strong>
+              <span>Setiap Pengiriman</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="#kontak" class="btn-dist-b2b"><span data-i18n="nav-contact">Kemitraan B2B</span> <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -1322,8 +1371,8 @@
   <div class="catalog-modal-overlay" id="catalogModal">
     <div class="catalog-modal-container">
       <!-- Header -->
-      <div class="catalog-modal-header" style="background: #111; color: #fff; padding: 15px 25px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-        <div class="modal-info" style="display: flex; align-items: center; gap: 15px;">
+      <div class="catalog-modal-header">
+        <div class="modal-info">
           <div style="background: #d4a843; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #000;">
             <i class="fas fa-file-pdf"></i>
           </div>
@@ -1332,55 +1381,68 @@
             <p style="margin:0; font-size: 12px; opacity: 0.6;">PT Mitra Abadi Sindomas</p>
           </div>
         </div>
-        <div class="modal-controls" style="display: flex; align-items: center; gap: 12px;">
-          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog" style="background: #d4a843; color: #000; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.3s;">
+        <div class="modal-controls">
+          <a href="database/asset-katalog/Catalog PTMAS 2026_compressed.pdf" download class="btn-download-katalog" style="background: #d4a843; color: #000; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 10px 20px rgba(212,168,67,0.2);">
             <i class="fas fa-download"></i> <span data-i18n="catalog-download">Unduh Katalog</span>
           </a>
-          <button class="modal-close-btn" onclick="closeKatalog()" style="background: rgba(255,255,255,0.1); color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: 0.3s;">
+          <button class="modal-close-btn" onclick="closeKatalog()">
             <i class="fas fa-times"></i>
           </button>
         </div>
       </div>
 
       <!-- PDF Content Area -->
-      <div class="catalog-modal-content" style="flex: 1; overflow: hidden; position: relative; background: #222; display: flex; flex-direction: column;">
+      <div class="catalog-modal-content">
         
         <!-- Premium Nav Bar -->
-        <div class="pdf-nav-bar" style="background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); color: #fff; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10;">
-          <div style="display: flex; gap: 10px;">
-             <button id="pdfPrev" class="pdf-nav-btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+        <div class="pdf-nav-bar">
+          <div style="display: flex; gap: 12px;">
+             <button id="pdfPrev" class="pdf-nav-btn">
                 <i class="fas fa-chevron-left"></i> <span data-i18n="catalog-prev">Sebelumnya</span>
              </button>
-             <button id="pdfNext" class="pdf-nav-btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+             <button id="pdfNext" class="pdf-nav-btn">
                 <span data-i18n="catalog-next">Berikutnya</span> <i class="fas fa-chevron-right"></i>
              </button>
           </div>
           
-          <div style="font-size: 14px; font-weight: 600;">
+          <div style="font-size: 14px; font-weight: 600; color: #fff;">
             <span data-i18n="catalog-page">Halaman</span>: <span style="color: #d4a843;" id="pdfPageNum">1</span> / <span id="pdfPageCount">?</span>
           </div>
 
-          <div class="pdf-zoom-bar" style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);">
-            <button id="pdfZoomOut" class="pdf-zoom-btn" style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 5px;" title="Perkecil">
+          <div class="pdf-zoom-bar">
+            <button id="pdfZoomOut" class="pdf-zoom-btn" title="Perkecil">
               <i class="fas fa-search-minus"></i>
             </button>
-            <span id="pdfZoomLevel" style="font-size: 12px; font-weight: 700; min-width: 45px; text-align: center;">100%</span>
-            <button id="pdfZoomIn" class="pdf-zoom-btn" style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 5px;" title="Perbesar">
+            <span id="pdfZoomLevel" style="font-size: 13px; font-weight: 800; min-width: 45px; text-align: center; color: #d4a843;">100%</span>
+            <button id="pdfZoomIn" class="pdf-zoom-btn" title="Perbesar">
               <i class="fas fa-search-plus"></i>
             </button>
           </div>
         </div>
 
         <!-- Viewport -->
-        <div style="flex: 1; overflow: auto; display: flex; justify-content: center; padding: 20px; scrollbar-width: thin; scrollbar-color: #444 #222;">
-           <div id="pdfViewport" style="box-shadow: 0 10px 40px rgba(0,0,0,0.5); background: #fff; transform-origin: top center;">
-              <canvas id="pdfCanvas"></canvas>
+        <div class="pdf-stage">
+           <!-- Previous Page Preview (Yellow Accent) -->
+           <div class="pdf-side-preview prev" id="pdfSidePrev" title="Halaman Sebelumnya">
+              <canvas id="pdfCanvasPrev"></canvas>
+           </div>
+
+           <!-- Main Page -->
+           <div class="pdf-main-container">
+              <div class="pdf-viewport-wrapper">
+                 <canvas id="pdfCanvas"></canvas>
+              </div>
+           </div>
+
+           <!-- Next Page Preview (Green Accent) -->
+           <div class="pdf-side-preview next" id="pdfSideNext" title="Halaman Berikutnya">
+              <canvas id="pdfCanvasNext"></canvas>
            </div>
         </div>
 
-        <div class="pdf-loading" id="pdfLoading" style="position: absolute; inset: 0; background: #222; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 20;">
-          <div class="loader" style="width: 40px; height: 40px; border: 4px solid rgba(212, 168, 67, 0.1); border-top-color: #d4a843; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-          <p style="margin-top: 15px; color: #fff; font-size: 14px;" data-i18n="catalog-loading">Sedang memuat katalog...</p>
+        <div class="pdf-loading" id="pdfLoading" style="position: absolute; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 20;">
+          <div class="loader" style="width: 50px; height: 50px; border: 4px solid rgba(212, 168, 67, 0.1); border-top-color: #d4a843; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <p style="margin-top: 20px; color: #fff; font-size: 16px; font-weight: 600; letter-spacing: 1px;" data-i18n="catalog-loading">MEMUAT KATALOG...</p>
         </div>
       </div>
     </div>
@@ -2211,119 +2273,9 @@
     });
 
     // --- Katalog Modal Logic (PDF.js) ---
-    const catalogModal = document.getElementById('catalogModal');
-    const pdfLoading = document.getElementById('pdfLoading');
-    const pdfViewer = document.getElementById('pdfViewer');
-    let pdfDoc = null,
-      pageNum = 1,
-      pageRendering = false,
-      pageNumPending = null,
-      pdfScale = 1.0,
-      pdfCanvas = document.getElementById('pdfCanvas'),
-      ctx = pdfCanvas.getContext('2d');
-
-    function renderPage(num) {
-      pageRendering = true;
-      pdfDoc.getPage(num).then(function (page) {
-        const viewport = page.getViewport({ scale: pdfScale });
-        pdfCanvas.height = viewport.height;
-        pdfCanvas.width = viewport.width;
-
-        const renderContext = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-
-        const renderTask = page.render(renderContext);
-        renderTask.promise.then(function () {
-          pageRendering = false;
-          if (pageNumPending !== null) {
-            renderPage(pageNumPending);
-            pageNumPending = null;
-          }
-        });
-      });
-
-      document.getElementById('pdfPageNum').textContent = num;
-      document.getElementById('pdfZoomLevel').textContent = Math.round(pdfScale * 100) + '%';
-    }
-
-    function queueRenderPage(num) {
-      if (pageRendering) {
-        pageNumPending = num;
-      } else {
-        renderPage(num);
-      }
-    }
-
-    document.getElementById('pdfPrev').addEventListener('click', () => {
-      if (pageNum <= 1) return;
-      pageNum--;
-      queueRenderPage(pageNum);
-      document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
-    });
-
-    document.getElementById('pdfNext').addEventListener('click', () => {
-      if (pageNum >= pdfDoc.numPages) return;
-      pageNum++;
-      queueRenderPage(pageNum);
-      document.querySelector('#pdfViewer > div:nth-child(2)').scrollTop = 0;
-    });
-
-    document.getElementById('pdfZoomIn').addEventListener('click', () => {
-      if (pdfScale >= 3.0) return;
-      pdfScale += 0.2;
-      queueRenderPage(pageNum);
-    });
-
-    document.getElementById('pdfZoomOut').addEventListener('click', () => {
-      if (pdfScale <= 0.5) return;
-      pdfScale -= 0.2;
-      queueRenderPage(pageNum);
-    });
-
-    function openKatalog() {
-      catalogModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-
-      if (!pdfDoc) {
-        pdfLoading.style.display = 'flex';
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
-        const savedKatalog = localStorage.getItem('mas_katalog_path') || 'Catalog PTMAS 2026_compressed.pdf';
-        // Update the download link
-        const btnDownload = document.getElementById('btnDownloadKatalog');
-        if (btnDownload) {
-          btnDownload.href = 'database/asset-katalog/' + savedKatalog;
-        }
-
-        const loadingTask = pdfjsLib.getDocument('database/asset-katalog/' + savedKatalog);
-        loadingTask.promise.then(function (pdfDoc_) {
-          pdfDoc = pdfDoc_;
-          document.getElementById('pdfPageCount').textContent = pdfDoc.numPages;
-          pdfLoading.style.display = 'none';
-          pdfViewer.style.display = 'flex';
-          renderPage(pageNum);
-        }).catch(function (err) {
-          console.error("PDFJS Error: ", err);
-          pdfLoading.innerHTML = '<p>Gagal memuat katalog. Pastikan jalur file benar.</p>';
-        });
-      }
-    }
-
-    function closeKatalog() {
-      catalogModal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    catalogModal.addEventListener('click', (e) => {
-      if (e.target === catalogModal) closeKatalog();
-    });
+    // Handled by assets/js/pdf-katalog.js
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && catalogModal.classList.contains('active')) {
-        closeKatalog();
-      }
       if (e.key === 'Escape') {
         const promo = document.getElementById('promoModalOverlay');
         if (promo && promo.classList.contains('active')) closePromoModal();

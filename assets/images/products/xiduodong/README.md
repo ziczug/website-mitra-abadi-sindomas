@@ -6,10 +6,10 @@ Folder ini berisi gambar produk untuk brand **XIDUODONG**.
 
 | ID | Nama Produk | Nama File |
 |----|-------------|-----------|
-| 184 | XiDuoDong Fruit Flavored Yogurt Old Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-old-yogurt-flavored50.png` |
-| 185 | XiDuoDong Fruit Flavored Yogurt Strawberry Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-strawberry-yogurt-flavored50.png` |
-| 186 | XiDuoDong Fruit Flavored Yogurt Grape Yogurt Flavored 50 | `xiduodong-fruit-flavored-yogurt-grape-yogurt-flavored50.png` |
-| 187 | XiDuoDong Fruit Flavored Yogurt Pineapple Flavored 50 | `xiduodong-fruit-flavored-yogurt-pineapple-flavored50.png` |
+| 184 | XiDuoDong Fruit Flavored Yogurt Old Yogurt Flavored 50 | `fruit-flavored-yogurt-old-yogurt-flavored50.png` |
+| 185 | XiDuoDong Fruit Flavored Yogurt Strawberry Yogurt Flavored 50 | `fruit-flavored-yogurt-strawberry-yogurt-flavored50.png` |
+| 186 | XiDuoDong Fruit Flavored Yogurt Grape Yogurt Flavored 50 | `fruit-flavored-yogurt-grape-yogurt-flavored50.png` |
+| 187 | XiDuoDong Fruit Flavored Yogurt Pineapple Flavored 50 | `fruit-flavored-yogurt-pineapple-flavored50.png` |
 
 ## 📌 Panduan Upload
 
