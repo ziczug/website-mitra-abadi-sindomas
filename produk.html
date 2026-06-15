@@ -454,6 +454,43 @@
       filter: brightness(0.8);
     }
     
+    /* Product Detail Modal Overlay & Container */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: modalFadeIn 0.3s ease;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #ffffff;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 550px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      animation: modalScaleUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes modalScaleUp {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
     .modal-header {
       background: #ffffff; height: 350px; display: flex; align-items: center; justify-content: center;
       padding: 40px; position: relative; border-radius: 24px 24px 0 0;
@@ -2011,11 +2048,21 @@ async function initProductCatalog() {
     const sel = document.getElementById('waProduct');
     const img = document.getElementById('waProductImg');
     const ph = document.getElementById('waProductPlaceholder');
+    const box = document.getElementById('waProductPreviewBox');
     if (!sel || !img || !ph) return;
     const opt = sel.options[sel.selectedIndex];
     const src = opt && opt.dataset.image;
-    if (src) { img.src = src; img.style.display = 'block'; ph.style.display = 'none'; }
-    else { img.style.display = 'none'; ph.style.display = 'block'; }
+    if (src) {
+      img.src = src;
+      img.classList.add('loaded');
+      ph.style.display = 'none';
+      if (box) box.classList.add('active');
+    } else {
+      img.src = '';
+      img.classList.remove('loaded');
+      ph.style.display = 'block';
+      if (box) box.classList.remove('active');
+    }
   };
 
   window.toggleMobileSidebar = function() {

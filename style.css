@@ -586,9 +586,9 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     z-index: 1050;
     opacity: 0;
     visibility: hidden;
@@ -603,9 +603,14 @@ section {
   .navbar {
     top: 15px !important;
     /* Jarak dari atas sedikit ditambah */
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: calc(100% - 24px) !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    /* Reset transform, will-change, and transform-style so .nav-links
+       position:fixed is anchored to the viewport, not the navbar */
+    transform: none !important;
+    will-change: auto !important;
+    transform-style: flat !important;
     background: rgba(255, 255, 255, 0.96) !important;
     border-radius: 18px !important;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
@@ -624,8 +629,12 @@ section {
     /* Sama dengan awal agar tidak menyusut */
     height: 70px !important;
     /* Sama dengan awal agar tidak menyusut */
-    width: calc(100% - 24px) !important;
-    /* Tetap ukuran semula */
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    transform: none !important;
+    will-change: auto !important;
+    transform-style: flat !important;
     max-width: none !important;
     padding: 0 16px !important;
     border-radius: 18px !important;
@@ -676,14 +685,15 @@ section {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
+    margin: 0 !important;
     width: 345px !important;
     max-width: 90vw !important;
     height: auto !important;
     min-height: 520px !important;
     max-height: 85vh !important;
     background: #ffffff !important;
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch !important;
@@ -691,7 +701,7 @@ section {
     /* Higher than everything else */
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, -50%) scale(0.95) !important;
+    transform: translate3d(-50%, -50%, 0) scale(0.95) !important;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     overflow-y: auto;
     padding: 30px 24px 50px;
@@ -699,11 +709,13 @@ section {
     border-radius: 40px;
     box-shadow: 0 50px 120px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.8);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .navbar.scrolled .nav-links.active,
   .nav-links.active {
-    transform: translate(-50%, -50%) scale(1) !important;
+    transform: translate3d(-50%, -50%, 0) scale(1) !important;
     opacity: 1 !important;
     visibility: visible !important;
   }
@@ -766,7 +778,12 @@ section {
 
 @media (max-width: 480px) {
   .navbar {
-    width: 90% !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    transform: none !important;
+    will-change: auto !important;
+    transform-style: flat !important;
     height: 52px !important;
     padding: 0 12px !important;
     border-radius: 18px !important;
@@ -778,7 +795,12 @@ section {
   }
 
   .navbar.scrolled {
-    width: 94% !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    transform: none !important;
+    will-change: auto !important;
+    transform-style: flat !important;
     max-width: none !important;
     height: 48px !important;
     padding: 0 10px !important;
@@ -817,13 +839,14 @@ section {
   .navbar .nav-links {
     top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) scale(0.9) !important;
+    margin: 0 !important;
+    transform: translate3d(-50%, -50%, 0) scale(0.9) !important;
     width: 320px !important;
     height: 540px !important;
   }
 
   .navbar .nav-links.active {
-    transform: translate(-50%, -50%) scale(1) !important;
+    transform: translate3d(-50%, -50%, 0) scale(1) !important;
   }
 }
 
@@ -5037,9 +5060,9 @@ section {
   .nav-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     z-index: 1999;
     opacity: 0;
     visibility: hidden;

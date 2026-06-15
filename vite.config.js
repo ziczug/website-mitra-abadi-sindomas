@@ -189,13 +189,65 @@ function adminDataApi() {
   };
 }
 
+function postBuildAssetCopier() {
+  return {
+    name: 'post-build-asset-copier',
+    closeBundle() {
+      try {
+        console.log('[Post-Build] Copying static assets and CMS databases...');
+        const distDir = path.resolve(__dirname, 'dist');
+        const dbCmsSrc = path.resolve(__dirname, 'database/cms');
+        const dbCmsDest = path.resolve(distDir, 'database/cms');
+        const assetsSrc = path.resolve(__dirname, 'assets');
+        const assetsDest = path.resolve(distDir, 'assets');
+        const faviconSrc = path.resolve(__dirname, 'favicon.ico');
+        const faviconDest = path.resolve(distDir, 'favicon.ico');
+
+        // Copy database/cms
+        if (fs.existsSync(dbCmsSrc)) {
+          fs.mkdirSync(dbCmsDest, { recursive: true });
+          fs.cpSync(dbCmsSrc, dbCmsDest, { recursive: true, force: true });
+          console.log('[Post-Build] copied database/cms');
+        }
+
+        // Copy assets
+        if (fs.existsSync(assetsSrc)) {
+          fs.mkdirSync(assetsDest, { recursive: true });
+          fs.cpSync(assetsSrc, assetsDest, { recursive: true, force: true });
+          console.log('[Post-Build] copied assets');
+        }
+
+        // Copy favicon.ico
+        if (fs.existsSync(faviconSrc)) {
+          fs.copyFileSync(faviconSrc, faviconDest);
+          console.log('[Post-Build] copied favicon.ico');
+        }
+        
+        console.log('[Post-Build] ✅ All assets copied successfully.');
+      } catch (err) {
+        console.error('[Post-Build] ❌ Error copying assets:', err.message);
+      }
+    }
+  };
+}
+
 export default defineConfig({
-  plugins: [adminDataApi()],
+  plugins: [adminDataApi(), postBuildAssetCopier()],
   server: {
     port: 3000,
     open: true
   },
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        produk: path.resolve(__dirname, 'produk.html'),
+        berita: path.resolve(__dirname, 'berita.html'),
+        tentang: path.resolve(__dirname, 'tentang.html'),
+        admin: path.resolve(__dirname, 'admin.html')
+      }
+    }
   }
 });
+
